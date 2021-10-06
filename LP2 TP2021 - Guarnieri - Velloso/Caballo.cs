@@ -23,8 +23,43 @@ public class Caballo : Ficha {
 
 	}
 
-	public override void Atacar(){
+	public override void Atacar(Tablero Ataque)
+	{
+		ushort j = Posicion.GetColumna();
+		ushort i = Posicion.GetFila();
 
+		if (i - 2 >= 0)
+        {
+			if(j + 1 < 8)
+				Ataque[i - 2, j + 1].atacada = true;
+
+			if (j - 1 >= 0)
+				Ataque[i - 2, j - 1].atacada = true;
+		}
+
+		if(i+2<8)
+        {
+			if(j-1>=0)
+				Ataque[i + 2, j - 1].atacada = true;
+			if(j+1<8)
+				Ataque[i + 2, j + 1].atacada = true;
+		}
+
+		if(i+1<8)
+        {
+			if (j + 2 < 8)
+				Ataque[i + 1, j + 2].atacada = true;
+			if (j - 2 >= 0)
+				Ataque[i + 1, j - 2].atacada = true;
+		}
+
+		if (i - 1 >= 0)
+		{
+			if (j - 2 >= 0)
+				Ataque[i - 1, j - 2].atacada = true;
+			if (j + 2 < 8)
+				Ataque[i - 1, j + 2].atacada = true;
+		}
 	}
 
 }//end Caballo
