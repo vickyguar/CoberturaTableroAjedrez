@@ -13,7 +13,8 @@ using System.IO;
 
 
 
-public abstract class Ficha {
+public abstract class Ficha
+{
 
     //Struct
     public class Posicion
@@ -24,7 +25,7 @@ public abstract class Ficha {
 
     protected string Nombre;
     protected Posicion Pos;
-	//protected Casilla Posicion;
+    //protected Casilla Posicion;
 
     public Ficha()
     {
@@ -36,19 +37,9 @@ public abstract class Ficha {
 
     }
 
-    //public Casilla GetPosicion() //TODO: como la hago const?
-    //{
-    //    return Posicion;
-    //}
+    public abstract void Atacar(Tablero Ataque);
 
-    //public void SetPosicion(Casilla newPos)
-    //{
-    //    this.Posicion = newPos;
-    //}
-
-	public abstract void Atacar(Tablero Ataque);
-
-    public void Diagonal1(Tablero Ataque)
+    public void Diagonal1(Tablero Ataque) // ↘ 
     {
         uint j = Pos.Columna + 1;
         uint i = Pos.Fila + 1;
@@ -56,25 +47,96 @@ public abstract class Ficha {
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
-        }
-
+            i++;
+            j++;
+        } while (i < 8 || j < 8);
     }
 
- 
-    /*Diagonal1(Ataque);
-       Diagonal2(Ataque);
-       Diagonal3(Ataque);
-       Diagonal4(Ataque);*/
+    public void Diagonal2(Tablero Ataque) // ↗ 
+    {
+        uint j = Pos.Columna + 1;
+        uint i = Pos.Fila - 1;
 
+        do
+        {
+            Ataque.Matriz[i, j].SetAtacada(true);
+            i--;
+            j++;
+        } while (i >= 0 || j < 8);
+    }
 
-    /* Diagonal1(Tablero Ataque) //pinta la diagonal ↘
- Hacer j = Alfil.Casilla.columna + 1
- Hacer i = Alfil.Casilla.fila + 1
- Hacer \math-container{↘}
-     Ataque[i, j].Atacada = true
- i++
- j++
- Mientras que i<8 o j<8 o //Para fatales: Ocupadas[i,j] esta ocupada*/
+    public void Diagonal3(Tablero Ataque) // ↖ 
+    {
+        uint j = Pos.Columna - 1;
+        uint i = Pos.Fila - 1;
 
+        do
+        {
+            Ataque.Matriz[i, j].SetAtacada(true);
+            i--;
+            j--;
+        } while (i >= 0 || j >= 0);
+    }
+
+    public void Diagonal4(Tablero Ataque) // ↙ 
+    {
+        uint j = Pos.Columna - 1;
+        uint i = Pos.Fila + 1;
+
+        do
+        {
+            Ataque.Matriz[i, j].SetAtacada(true);
+            i++;
+            j--;
+        } while (i < 8 || j >= 8);
+    }
+
+    public void Horizontal1(Tablero Ataque) // → 
+    {
+        uint j = Pos.Columna + 1;
+        uint i = Pos.Fila;
+
+        do
+        {
+            Ataque.Matriz[i, j].SetAtacada(true);
+            j++;
+        } while (j < 8);
+    }
+
+    public void Horizontal2(Tablero Ataque) // ← 
+    {
+        uint j = Pos.Columna - 1;
+        uint i = Pos.Fila;
+
+        do
+        {
+            Ataque.Matriz[i, j].SetAtacada(true);
+            j--;
+        } while (j >= 0);
+    }
+
+    public void Vertical1(Tablero Ataque) // ↓ 
+    {
+        uint j = Pos.Columna;
+        uint i = Pos.Fila + 1;
+
+        do
+        {
+            Ataque.Matriz[i, j].SetAtacada(true);
+            i++;
+        } while (i < 8);
+    }
+
+    public void Vertical2(Tablero Ataque) // ↑ 
+    {
+        uint j = Pos.Columna;
+        uint i = Pos.Fila - 1;
+
+        do
+        {
+            Ataque.Matriz[i, j].SetAtacada(true);
+            i--;
+        } while (i >= 0);
+    }
 
 }//end Ficha
