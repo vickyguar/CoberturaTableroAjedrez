@@ -23,8 +23,16 @@ public class Reina : Ficha {
 
 	}
 
-	public override void Atacar(){
-
+	public override void Atacar(Tablero Ataque)
+	{
+		Diagonal1(Ataque);
+		Diagonal2(Ataque);
+		Diagonal3(Ataque);
+		Diagonal4(Ataque);
+		Horizontal1(Ataque);
+		Horizontal2(Ataque);
+		Vertical1(Ataque);
+		Vertical2(Ataque);
 	}
 
 }//end Reina
