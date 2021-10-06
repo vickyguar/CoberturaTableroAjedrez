@@ -46,6 +46,19 @@ public class Tablero {
 
 	}
 
+	public bool VerificarSolucion()
+    {
+		for(int i = 0; i<8; i++)
+        {
+			for(int j=0; j<8; j++)
+            {
+				if (!Matriz[i, j].GetAtacada())
+					return false;
+            }				
+        }
+		return true;
+    }
+
 	/*PintarTablero(ficha), Atacar es "pintar" las casillas, es decir Casilla.me estan tapando = true.
 	Si la ficha es Reina
 	Ataque de Reina
