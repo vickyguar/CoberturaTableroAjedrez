@@ -13,10 +13,10 @@ using System.IO;
 
 
 
-public class Ficha {
+public abstract class Ficha {
 
-	private string Nombre;
-	private Casilla Posicion;
+	protected string Nombre;
+	protected Casilla Posicion;
 	public Tablero m_Tablero;
 
 	public Ficha(){
@@ -27,6 +27,6 @@ public class Ficha {
 
 	}
 
-	public abstract void Atacar();
+	public abstract void Atacar(Tablero Ataque);
 
 }//end Ficha

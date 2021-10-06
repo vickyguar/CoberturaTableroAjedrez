@@ -6,11 +6,11 @@
 //  Original author: vguar
 ///////////////////////////////////////////////////////////
 
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-
 
 
 public class Rey : Ficha {
@@ -23,8 +23,33 @@ public class Rey : Ficha {
 
 	}
 
-	public override void Atacar(){
+	public override void Atacar(Tablero Ataque){
+		ushort i = Posicion.GetColumna();
+		ushort j = Posicion.GetFila();
 
+		if (i + 1 < 8)
+			Ataque[i + 1, j].Atacada = true;
+
+		if (i -1 >=0)
+			Ataque[i - 1, j].Atacada = true;
+
+		if (j + 1 < 8)
+        {
+			Ataque[i, j + 1].Atacada = true;
+			if (i + 1 < 8)
+				Ataque[i + 1, j + 1].Atacada = true;
+			if (i - 1 >= 0)
+				Ataque[i - 1, j - 1].Atacada = true;
+		}
+
+		if (j - 1 >= 0)
+        {
+			Ataque[i, j - 1].Atacada = true;
+			if (i + 1 < 8)
+				Ataque[i + 1, j - 1].Atacada = tru;
+			if (i - 1 >= 0)
+				Ataque[i - 1, j + 1].Atacada = true;
+		}
 	}
 
 }//end Rey

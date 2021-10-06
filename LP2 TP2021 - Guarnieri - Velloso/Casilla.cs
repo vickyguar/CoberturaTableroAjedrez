@@ -38,4 +38,23 @@ public class Casilla {
         return true; //la pude ocupar
     }
 
+	public ushort GetColumna()
+    {
+		return Columna;
+    }
+	public ushort GetFila()
+	{
+		return Fila;
+	}
+
+	public void SetColumna(ushort col)
+    {
+		Columna = col;
+    }
+
+	public void SetFila(ushort fila)
+	{
+		Fila = fila;
+	}
+
 }//end Casilla
