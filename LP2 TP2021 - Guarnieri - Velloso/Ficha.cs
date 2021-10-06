@@ -13,20 +13,32 @@ using System.IO;
 
 
 
-public class Ficha {
+abstract public class Ficha {
 
-	private string Nombre;
-	private Casilla Posicion;
-	public Tablero m_Tablero;
+    private string Nombre;
+    private Casilla Posicion;
+    public Tablero m_Tablero;
 
-	public Ficha(){
+    public Ficha()
+    {
 
-	}
+    }
 
-	~Ficha(){
+    ~Ficha()
+    {
 
-	}
+    }
 
-	public abstract void Atacar();
+    public Casilla GetPosicion() //TODO: como la hago const?
+    {
+        return Posicion;
+    }
+
+    public void SetPosicion(Casilla newPos)
+    {
+        this.Posicion = newPos;
+    }
+
+    public abstract void Atacar();
 
 }//end Ficha
