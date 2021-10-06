@@ -16,7 +16,7 @@ using System.IO;
 public class Caballo : Ficha {
 
 	public Caballo(){
-
+	
 	}
 
 	~Caballo(){
@@ -25,40 +25,40 @@ public class Caballo : Ficha {
 
 	public override void Atacar(Tablero Ataque)
 	{
-		ushort j = Posicion.GetColumna();
-		ushort i = Posicion.GetFila();
+		uint j = Pos.Columna;
+		uint i = Pos.Fila;
 
 		if (i - 2 >= 0)
         {
 			if(j + 1 < 8)
-				Ataque[i - 2, j + 1].atacada = true;
+				Ataque.Matriz[i - 2, j + 1].SetAtacada(true);
 
 			if (j - 1 >= 0)
-				Ataque[i - 2, j - 1].atacada = true;
+				Ataque.Matriz[i - 2, j - 1].SetAtacada(true);
 		}
 
 		if(i+2<8)
         {
-			if(j-1>=0)
-				Ataque[i + 2, j - 1].atacada = true;
-			if(j+1<8)
-				Ataque[i + 2, j + 1].atacada = true;
+			if (j - 1 >= 0)
+				Ataque.Matriz[i + 2, j - 1].SetAtacada(true);
+			if (j+1<8)
+				Ataque.Matriz[i + 2, j + 1].SetAtacada(true);
 		}
 
 		if(i+1<8)
         {
 			if (j + 2 < 8)
-				Ataque[i + 1, j + 2].atacada = true;
+				Ataque.Matriz[i + 1, j + 2].SetAtacada(true);
 			if (j - 2 >= 0)
-				Ataque[i + 1, j - 2].atacada = true;
+				Ataque.Matriz[i + 1, j - 2].SetAtacada(true);
 		}
 
 		if (i - 1 >= 0)
 		{
 			if (j - 2 >= 0)
-				Ataque[i - 1, j - 2].atacada = true;
+				Ataque.Matriz[i - 1, j - 2].SetAtacada(true);
 			if (j + 2 < 8)
-				Ataque[i - 1, j + 2].atacada = true;
+				Ataque.Matriz[i - 1, j + 2].SetAtacada(true);
 		}
 	}
 

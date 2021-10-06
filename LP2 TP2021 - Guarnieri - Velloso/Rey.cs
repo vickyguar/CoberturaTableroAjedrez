@@ -24,31 +24,31 @@ public class Rey : Ficha {
 	}
 
 	public override void Atacar(Tablero Ataque){
-		ushort i = Posicion.GetColumna();
-		ushort j = Posicion.GetFila();
+		uint i = Pos.Columna;
+		uint j = Pos.Fila;
 
 		if (i + 1 < 8)
-			Ataque[i + 1, j].Atacada = true;
+			Ataque.Matriz[i + 1, j].SetAtacada(true);
 
-		if (i -1 >=0)
-			Ataque[i - 1, j].Atacada = true;
+		if (i - 1 >= 0)
+			Ataque.Matriz[i - 1, j].SetAtacada(true);
 
 		if (j + 1 < 8)
         {
-			Ataque[i, j + 1].Atacada = true;
+			Ataque.Matriz[i, j + 1].SetAtacada(true);
 			if (i + 1 < 8)
-				Ataque[i + 1, j + 1].Atacada = true;
+				Ataque.Matriz[i + 1, j + 1].SetAtacada(true);
 			if (i - 1 >= 0)
-				Ataque[i - 1, j - 1].Atacada = true;
+				Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
 		}
 
 		if (j - 1 >= 0)
         {
-			Ataque[i, j - 1].Atacada = true;
+			Ataque.Matriz[i, j - 1].SetAtacada(true);
 			if (i + 1 < 8)
-				Ataque[i + 1, j - 1].Atacada = true;
+				Ataque.Matriz[i + 1, j - 1].SetAtacada(true);
 			if (i - 1 >= 0)
-				Ataque[i - 1, j + 1].Atacada = true;
+				Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
 		}
 	}
 

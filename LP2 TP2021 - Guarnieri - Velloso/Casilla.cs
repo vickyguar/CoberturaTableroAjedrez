@@ -47,19 +47,23 @@ public class Casilla {
 		Atacada = newAtacada;
     }
 
+	public bool GetAtacada()
+	{
+		return Atacada;
+	}
 	//public uint GetColumna()
- //   {
+	//   {
 	//	return Columna;
- //   }
+	//   }
 	//public uint GetFila()
 	//{
 	//	return Fila;
 	//}
 
 	//public void SetColumna(ushort col)
- //   {
+	//   {
 	//	Columna = col;
- //   }
+	//   }
 
 	//public void SetFila(ushort fila)
 	//{
