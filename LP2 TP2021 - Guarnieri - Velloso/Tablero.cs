@@ -17,19 +17,8 @@ public class Tablero {
 
 	private static uint ContSoluciones;
 	private ushort ID;
-	public Casilla m_Casilla;
 
-	//public Casilla[,] Matriz;
-		
-	//LinkedList<Casilla> ListaPosiciones = new LinkedList<Casilla>();
-
-	/*public void InicializarListaPos()
-    {
-		for(uint i =0; i < 8; i++)
-        {
-			
-        }
-    }*/
+	//public Casilla m_Casilla;
 
 	public Tablero(){
 
@@ -56,23 +45,30 @@ public class Tablero {
 
 	}
 
+	/*PintarTablero(ficha), Atacar es "pintar" las casillas, es decir Casilla.me estan tapando = true.
+	Si la ficha es Reina
+	Ataque de Reina
+	Si la ficha es Alfil:
+	Atacar diagonales
+	Si la ficha es Torre:
+	Atacar fila y columna
+	Si la ficha es Caballo
+	Atacar "periferia" 
+	Si la ficha es Rey
+	Atacar alrededores*/
+
 	/// 
 	/// <param name="Ficha"></param>
 	public void Pintar(Ficha Ficha){
-
+		Ficha.Atacar(this); //TODO: this?
+							//TDOO: C# entiende a qué atacar tiene que ir? Al de Reina, Alfil... Cómo hacemos el dynamic
+        
 	}
-
-    /*posiciónar(Ficha Ficha, lista posiciónes, Tablero) → void
-	FIcha. posición = Elegir random posición de lista posiciónes
-	Si Tablero.Ocupar(posición) = false
-	posiciónar(Ficha Ficha, lista posiciónes, Tablero)
-	Tablero.Atacar(ficha)*/
 
     /// 
     /// <param name="Ficha"></param>
     /// <param name="ListaPos"></param>
-    public void Posicionar(Ficha Ficha)
-    {
+    public void Posicionar(Ficha Ficha) {
         //Variables locales
         Random r = new Random();
         Casilla newPos = new Casilla();
@@ -80,11 +76,12 @@ public class Tablero {
         newPos.SetFila(Convert.ToUInt16(r.Next(0, 8)));
         newPos.SetColumna(Convert.ToUInt16(r.Next(0, 8)));
 
-        if (!newPos.Ocupar())
+        if (!newPos.Ocupar()) //Recursividad
             Posicionar(Ficha);
-    }
+		Ficha.Atacar(this); //TODO: this?
+	}
 
-    public Tablero Rotar(){
+    public Tablero Rotar() {
 
 		return null;
 	}
