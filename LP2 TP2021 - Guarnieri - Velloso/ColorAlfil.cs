@@ -13,9 +13,3 @@ using System.IO;
 
 
 
-public enum ColorAlfil : int {
-
-	BLANCO,
-	NEGRO
-
-}//end ColorAlfil

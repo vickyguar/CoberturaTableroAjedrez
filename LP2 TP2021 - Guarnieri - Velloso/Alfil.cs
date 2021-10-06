@@ -11,7 +11,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+public enum ColorAlfil : int
+{
 
+	BLANCO,
+	NEGRO
+
+}//end ColorAlfil
 
 public class Alfil : Ficha {
 
@@ -25,8 +31,12 @@ public class Alfil : Ficha {
 
 	}
 
-	public override void Atacar(){
-
+	public override void Atacar(Tablero Ataque)
+	{
+		Diagonal1(Ataque);
+		Diagonal2(Ataque);
+		Diagonal3(Ataque);
+		Diagonal4(Ataque);
 	}
 
 }//end Alfil
