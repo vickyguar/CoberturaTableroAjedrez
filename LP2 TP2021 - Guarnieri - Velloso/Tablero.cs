@@ -75,10 +75,10 @@ public class Tablero {
     {
         //Variables locales
         Random r = new Random();
-        Casilla newPos;
+        Casilla newPos = new Casilla();
 
-        newPos.SetFila(Convert.ToUInt16(r.Next(0, 8));
-        newPos.SetColumna(Convert.ToUInt16(r.Next(0, 8));
+        newPos.SetFila(Convert.ToUInt16(r.Next(0, 8)));
+        newPos.SetColumna(Convert.ToUInt16(r.Next(0, 8)));
 
         if (!newPos.Ocupar())
             Posicionar(Ficha);
