@@ -23,8 +23,12 @@ public class Torre : Ficha {
 
 	}
 
-	public override void Atacar(){
-
+	public override void Atacar(Tablero Ataque)
+	{
+		Horizontal1(Ataque);
+		Horizontal2(Ataque);
+		Vertical1(Ataque);
+		Vertical2(Ataque);
 	}
 
 }//end Torre
