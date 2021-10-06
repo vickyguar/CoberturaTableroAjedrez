@@ -16,13 +16,17 @@ using System.IO;
 public class Casilla {
 
 	private bool Atacada;
-	private ushort Columna;
-	private ushort Fila;
+	//private uint Columna;
+	//private uint Fila;
 	private bool Ocupada;
-	public Ficha m_Ficha;
+	private string ID;
+	public Ficha Fichita;
 
-	public Casilla(){
-
+	public Casilla(string _ID){
+		ID = _ID;
+		Ocupada = false;
+		Fichita = null;
+		Atacada = false;
 	}
 
 	~Casilla(){
@@ -31,30 +35,35 @@ public class Casilla {
 
     public bool Ocupar()
     {
-        if (!Ocupada && !(m_Ficha is Torre)) //el dynamic_cast en C#
+        if (!Ocupada && !(Fichita is Torre)) //el dynamic_cast en C#
             return false; //si estoy ocupada, no se puede posicionar una ficha
 		
         Ocupada = true; //la casilla estaba desocupada, entonces la ocupo
         return true; //la pude ocupar
     }
 
-	public ushort GetColumna()
+	public void SetAtacada(bool newAtacada)
     {
-		return Columna;
-    }
-	public ushort GetFila()
-	{
-		return Fila;
-	}
-
-	public void SetColumna(ushort col)
-    {
-		Columna = col;
+		Atacada = newAtacada;
     }
 
-	public void SetFila(ushort fila)
-	{
-		Fila = fila;
-	}
+	//public uint GetColumna()
+ //   {
+	//	return Columna;
+ //   }
+	//public uint GetFila()
+	//{
+	//	return Fila;
+	//}
+
+	//public void SetColumna(ushort col)
+ //   {
+	//	Columna = col;
+ //   }
+
+	//public void SetFila(ushort fila)
+	//{
+	//	Fila = fila;
+	//}
 
 }//end Casilla

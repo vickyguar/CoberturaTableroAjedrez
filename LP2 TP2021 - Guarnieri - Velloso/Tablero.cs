@@ -17,6 +17,7 @@ public class Tablero {
 
 	private static uint ContSoluciones;
 	private ushort ID;
+	public Casilla[,] Matriz = new Casilla[8, 8];
 
 	//public Casilla m_Casilla;
 
