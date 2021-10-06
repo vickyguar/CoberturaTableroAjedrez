@@ -31,11 +31,11 @@ public class Casilla {
 
     public bool Ocupar()
     {
-        if (!Ocupada && !(m_Ficha is Torre))
-            return false;
+        if (!Ocupada && !(m_Ficha is Torre)) //el dynamic_cast en C#
+            return false; //si estoy ocupada, no se puede posicionar una ficha
 		
-        Ocupada = true;
-        return true;
+        Ocupada = true; //la casilla estaba desocupada, entonces la ocupo
+        return true; //la pude ocupar
     }
 
 }//end Casilla
