@@ -29,9 +29,13 @@ public class Casilla {
 
 	}
 
-	public bool Ocupar(){
-
-		return false;
-	}
+    public bool Ocupar()
+    {
+        if (!Ocupada && !(m_Ficha is Torre))
+            return false;
+		
+        Ocupada = true;
+        return true;
+    }
 
 }//end Casilla
