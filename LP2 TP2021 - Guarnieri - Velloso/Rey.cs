@@ -46,7 +46,7 @@ public class Rey : Ficha {
         {
 			Ataque[i, j - 1].Atacada = true;
 			if (i + 1 < 8)
-				Ataque[i + 1, j - 1].Atacada = tru;
+				Ataque[i + 1, j - 1].Atacada = true;
 			if (i - 1 >= 0)
 				Ataque[i - 1, j + 1].Atacada = true;
 		}
