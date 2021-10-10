@@ -26,7 +26,7 @@ public class Caballo : Ficha
 
     }
 
-    public override void Atacar(Tablero Ataque)
+    public override void Atacar(Tablero Ataque, bool Fatal)
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila();
