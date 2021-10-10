@@ -21,15 +21,15 @@ public enum Color : int
 public class Tablero
 {
 
-    private static uint ContSoluciones = 0; //Inicializamos en cero el contador static
-    private ushort ID;
+    //private static uint ContSoluciones = 0; //Inicializamos en cero el contador static
+    //private ushort ID;
     public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
     private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
 
 
     public Tablero()
     {
-        ID = Convert.ToUInt16(ContSoluciones);
+        //ID = Convert.ToUInt16(ContSoluciones);
 
         //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
         for (uint i = 0; i < 8; ++i)
@@ -54,9 +54,15 @@ public class Tablero
         return null;
     }
 
-    public void FiltrarFatales()
+    public bool FiltrarFatales() //Si devuelve true, en el main lo agrego a la lista de fatales.
     {
+        //La idea es ir sacando las fichas y ver en donde estan
+        /* TableroFisico.FiltrarFatales()  -> Este tablero fisico no esta "pintado", el que está pintado es el de Ataque
+         * Podríamos hacer una copia de este tablero físico, y llamarlo Tablero filtrado, y pintar a tablero filtrado
+         */
 
+
+        return false;
     }
 
     public void Imprimir()

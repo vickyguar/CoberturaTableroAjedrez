@@ -19,7 +19,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
+            Tablero Juego = new Tablero();
+            Tablero Ataque = new Tablero();
+            Tablero Filtrado = new Tablero();
 
+            #region LISTAS
             //Listas globales
             List<Casilla> Cuadrado1 = new List<Casilla>(4); //5e, 5d, 4e, 4d ROJO
 
@@ -97,6 +101,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
             2 60                   67
             1 70 71 72 73 74 75 76 77
             */
+
+            #endregion
+
         }
     }
 }
