@@ -42,9 +42,9 @@ public abstract class Ficha
 
 
     //TODO: Despues ver cómo ponerlo en la ToolBox
-    public abstract void Atacar(Tablero Ataque);
+    public abstract void Atacar(Tablero Ataque, bool Fatal = false);
 
-    public void Diagonal1(Tablero Ataque) // ↘ 
+    public void Diagonal1(Tablero Ataque, bool Fatal) // ↘ 
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() + 1;
@@ -52,12 +52,16 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             i++;
             j++;
         } while (i < 8 || j < 8);
     }
 
-    public void Diagonal2(Tablero Ataque) // ↗ 
+    public void Diagonal2(Tablero Ataque, bool Fatal) // ↗ 
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() - 1;
@@ -65,12 +69,16 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             i--;
             j++;
         } while (i >= 0 || j < 8);
     }
 
-    public void Diagonal3(Tablero Ataque) // ↖ 
+    public void Diagonal3(Tablero Ataque, bool Fatal) // ↖ 
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila() - 1;
@@ -78,12 +86,16 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             i--;
             j--;
         } while (i >= 0 || j >= 0);
     }
 
-    public void Diagonal4(Tablero Ataque) // ↙ 
+    public void Diagonal4(Tablero Ataque, bool Fatal) // ↙ 
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila() + 1;
@@ -91,12 +103,16 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             i++;
             j--;
         } while (i < 8 || j >= 8);
     }
 
-    public void Horizontal1(Tablero Ataque) // → 
+    public void Horizontal1(Tablero Ataque, bool Fatal) // → 
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila();
@@ -104,11 +120,15 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             j++;
         } while (j < 8);
     }
 
-    public void Horizontal2(Tablero Ataque) // ← 
+    public void Horizontal2(Tablero Ataque, bool Fatal) // ← 
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila();
@@ -116,11 +136,15 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             j--;
         } while (j >= 0);
     }
 
-    public void Vertical1(Tablero Ataque) // ↓ 
+    public void Vertical1(Tablero Ataque, bool Fatal) // ↓ 
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() + 1;
@@ -128,11 +152,15 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             i++;
         } while (i < 8);
     }
 
-    public void Vertical2(Tablero Ataque) // ↑ 
+    public void Vertical2(Tablero Ataque, bool Fatal) // ↑ 
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() - 1;
@@ -140,6 +168,10 @@ public abstract class Ficha
         do
         {
             Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
+                break;
+
             i--;
         } while (i >= 0);
     }
