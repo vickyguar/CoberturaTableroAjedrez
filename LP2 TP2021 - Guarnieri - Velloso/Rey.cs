@@ -24,7 +24,7 @@ public class Rey : Ficha {
 
 	}
 
-	public override void Atacar(Tablero Ataque){
+	public override void Atacar(Tablero Ataque, bool Fatal){
 		uint i = Pos.GetColumna();
 		uint j = Pos.GetFila();
 
