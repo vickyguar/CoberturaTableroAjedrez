@@ -15,17 +15,32 @@ using System.IO;
 
 public class Casilla {
 
-	private bool Atacada;
-	//private uint Columna;
-	//private uint Fila;
-	private bool Ocupada;
-	private string ID;
-	public Ficha Fichita;
 
-	public Casilla(string _ID){
-		ID = _ID;
+	private bool Atacada;
+
+    private uint Columna;
+    private uint Fila;
+
+    private bool Ocupada;
+	//private string ID;
+	
+	//public Ficha Fichita;
+
+	//Struct
+	//public class Posicion
+	//{
+	//	public uint Fila;
+	//	public uint Columna;
+
+	//	public void SetFila(uint newFila) { Fila = newFila; }
+	//	public void SetColumna(uint newColumna) { Columna = newColumna; }
+
+	//}
+
+
+	public Casilla(/*string _ID*/){
+		//ID = _ID;
 		Ocupada = false;
-		Fichita = null;
 		Atacada = false;
 	}
 
@@ -33,41 +48,48 @@ public class Casilla {
 
 	}
 
-    public bool Ocupar()
-    {
-        if (!Ocupada && !(Fichita is Torre)) //el dynamic_cast en C#
-            return false; //si estoy ocupada, no se puede posicionar una ficha
-		
-        Ocupada = true; //la casilla estaba desocupada, entonces la ocupo
-        return true; //la pude ocupar
-    }
-
-	public void SetAtacada(bool newAtacada)
-    {
-		Atacada = newAtacada;
-    }
+	#region GETTERS
+	public bool GetOcupada()
+	{
+		return Ocupada;
+	}
 
 	public bool GetAtacada()
 	{
 		return Atacada;
 	}
-	//public uint GetColumna()
-	//   {
-	//	return Columna;
-	//   }
-	//public uint GetFila()
-	//{
-	//	return Fila;
-	//}
+	public uint GetColumna()
+	{
+		return Columna;
+	}
+	public uint GetFila()
+	{
+		return Fila;
+	}
+	#endregion
 
-	//public void SetColumna(ushort col)
-	//   {
-	//	Columna = col;
-	//   }
+	#region SETTERS
+	public void SetColumna(ushort col)
+	{
+		Columna = col;
+	}
 
-	//public void SetFila(ushort fila)
-	//{
-	//	Fila = fila;
-	//}
+	public void SetFila(ushort fila)
+	{
+		Fila = fila;
+	}
+
+	public void SetAtacada(bool newAtacada)
+	{
+		Atacada = newAtacada;
+	}
+
+	public void SetOcupada(bool newOcupada)
+	{
+		Ocupada = newOcupada;
+	}
+	#endregion
+
+
 
 }//end Casilla

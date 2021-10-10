@@ -15,7 +15,7 @@ using System.IO;
 
 public class Caballo : Ficha {
 
-	public Caballo(){
+	public Caballo(string _Nombre):base(_Nombre){
 	
 	}
 
