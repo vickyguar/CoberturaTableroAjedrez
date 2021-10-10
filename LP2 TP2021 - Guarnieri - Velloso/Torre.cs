@@ -15,7 +15,8 @@ using System.IO;
 
 public class Torre : Ficha {
 
-	public Torre(){
+	public Torre(string _Nombre): base(_Nombre)
+	{
 
 	}
 

@@ -15,7 +15,8 @@ using System.IO;
 
 public class Reina : Ficha {
 
-	public Reina(){
+	public Reina(string _Nombre): base(_Nombre)
+	{
 
 	}
 
