@@ -15,7 +15,7 @@ using System.IO;
 
 public abstract class Ficha
 {
-    protected string Nombre;
+    protected string Name;
     protected Casilla Pos;
     //protected Casilla Posicion;
 
@@ -28,9 +28,9 @@ public abstract class Ficha
         return true; //la pude ocupar
     }
 
-    public Ficha(string _Nombre)
+    public Ficha(string _Name)
     {
-        Nombre = _Nombre;
+        Name = _Name;
         Pos = null; //Inicializamos en NULL
     }
 
@@ -39,6 +39,9 @@ public abstract class Ficha
 
     }
 
+
+
+    //TODO: Despues ver cómo ponerlo en la ToolBox
     public abstract void Atacar(Tablero Ataque);
 
     public void Diagonal1(Tablero Ataque) // ↘ 
@@ -141,6 +144,18 @@ public abstract class Ficha
         } while (i >= 0);
     }
 
-    //public Posicion GetPos() { return Pos; }
+    #region GETTERS
+    public Casilla GetPos() { return Pos; }
+    public string GetName() { return Name; }
+    #endregion
+
+    #region SETTERS
+    public void SetPos(Casilla newPos)
+    {
+        Pos = newPos;
+        Pos.SetOcupada(true); //Si le estamos dando una posicion a una ficha, es porque esta está ocupada
+    }
+    #endregion
+
 
 }//end Ficha

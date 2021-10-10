@@ -11,20 +11,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-public enum ColorAlfil : int
-{
-	BLANCO = 0,
-	NEGRO
 
-}//end ColorAlfil
 
 public class Alfil : Ficha {
 
-	private ColorAlfil Color;
+	private Color Colour;
 
-    public Alfil(ColorAlfil _Color, string _Nombre) : base(_Nombre)
+    public Alfil(Color _Colour, string _Nombre) : base(_Nombre)
     {
-		Color = _Color;
+		Colour = _Colour;
     }
 
     ~Alfil(){

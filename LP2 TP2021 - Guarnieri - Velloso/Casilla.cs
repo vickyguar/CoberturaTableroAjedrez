@@ -13,82 +13,88 @@ using System.IO;
 
 
 
-public class Casilla {
+public class Casilla
+{
+    private Color Colour; //TODO: inicializar! txt!! ToolBox
 
-
-	private bool Atacada;
+    private bool Atacada;
 
     private uint Columna;
     private uint Fila;
 
     private bool Ocupada;
-	//private string ID;
-	
-	//public Ficha Fichita;
+    //private string ID;
 
-	//Struct
-	//public class Posicion
-	//{
-	//	public uint Fila;
-	//	public uint Columna;
+    //public Ficha Fichita;
 
-	//	public void SetFila(uint newFila) { Fila = newFila; }
-	//	public void SetColumna(uint newColumna) { Columna = newColumna; }
+    //Struct
+    //public class Posicion
+    //{
+    //	public uint Fila;
+    //	public uint Columna;
 
-	//}
+    //	public void SetFila(uint newFila) { Fila = newFila; }
+    //	public void SetColumna(uint newColumna) { Columna = newColumna; }
+
+    //}
 
 
-	public Casilla(/*string _ID*/){
-		//ID = _ID;
-		Ocupada = false;
-		Atacada = false;
-	}
+    public Casilla(uint _Columna, uint _Fila)
+    {
+        Columna = _Columna;
+        Fila = _Fila;
+        Ocupada = false;
+        Atacada = false;
+    }
 
-	~Casilla(){
+    ~Casilla()
+    {
 
-	}
+    }
 
-	#region GETTERS
-	public bool GetOcupada()
-	{
-		return Ocupada;
-	}
+    #region GETTERS
+    public bool GetOcupada()
+    {
+        return Ocupada;
+    }
 
-	public bool GetAtacada()
-	{
-		return Atacada;
-	}
-	public uint GetColumna()
-	{
-		return Columna;
-	}
-	public uint GetFila()
-	{
-		return Fila;
-	}
-	#endregion
+    public bool GetAtacada()
+    {
+        return Atacada;
+    }
+    public uint GetColumna()
+    {
+        return Columna;
+    }
+    public uint GetFila()
+    {
+        return Fila;
+    }
 
-	#region SETTERS
-	public void SetColumna(ushort col)
-	{
-		Columna = col;
-	}
+    public Color GetColor() { return Colour; }
+    #endregion
 
-	public void SetFila(ushort fila)
-	{
-		Fila = fila;
-	}
+    #region SETTERS
+    public void SetColumna(ushort col)
+    {
+        Columna = col;
+    }
 
-	public void SetAtacada(bool newAtacada)
-	{
-		Atacada = newAtacada;
-	}
+    public void SetFila(ushort fila)
+    {
+        Fila = fila;
+    }
 
-	public void SetOcupada(bool newOcupada)
-	{
-		Ocupada = newOcupada;
-	}
-	#endregion
+    public void SetAtacada(bool newAtacada)
+    {
+        Atacada = newAtacada;
+    }
+
+    public void SetOcupada(bool newOcupada)
+    {
+        Ocupada = newOcupada;
+    }
+    #endregion
 
 
 

@@ -25,8 +25,8 @@ public class Rey : Ficha {
 	}
 
 	public override void Atacar(Tablero Ataque){
-		uint i = Pos.Columna;
-		uint j = Pos.Fila;
+		uint i = Pos.GetColumna();
+		uint j = Pos.GetFila();
 
 		if (i + 1 < 8)
 			Ataque.Matriz[i + 1, j].SetAtacada(true);

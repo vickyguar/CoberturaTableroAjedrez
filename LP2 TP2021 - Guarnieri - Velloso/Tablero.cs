@@ -11,103 +11,174 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+public enum Color : int
+{
+    BLANCO = 0,
+    NEGRO
 
+}//end ColorAlfil
 
-public class Tablero {
+public class Tablero 
+{
 
-	private static uint ContSoluciones;
-	private ushort ID;
-	public Casilla[,] Matriz = new Casilla[8, 8];
+    private static uint ContSoluciones = 0; //Inicializamos en cero el contador static
+    private ushort ID;
+    private Casilla[,] Matriz = new Casilla[8, 8];
+    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
 
-	//public Casilla m_Casilla;
+    //Listas globales
+    List<Casilla> Cuadrado1 = new List<Casilla>(4); //5e, 5d, 4e, 4d ROJO
 
-	public Tablero(){
+    List<Casilla> Cuadrado2 = new List<Casilla>(12); //6c, 3c, 3f, 6f VIOLETA
 
-	}
+    List<Casilla> Cuadrado3 = new List<Casilla>(20); //7b, 2b, 7g, 2g AZUL
 
-	~Tablero(){
+    List<Casilla> Cuadrado4 = new List<Casilla>(28); //8a, 1a, 8h, 1a VERDE
 
-	}
-
-	public Tablero Espejar(){
-
-		return null;
-	}
-
-	public void FiltrarFatales(){
-
-	}
-
-	public void Imprimir(){
-
-	}
-
-	public void Limpiar(){
-
-	}
-
-	public bool VerificarSolucion()
+    public Tablero()
     {
-		for(int i = 0; i<8; i++)
+        ID = Convert.ToUInt16(ContSoluciones);
+
+        //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
+        for (uint i = 0; i < 8; ++i)
         {
-			for(int j=0; j<8; j++)
+            for (uint j = 0; j < 8; ++j)
             {
-				if (!Matriz[i, j].GetAtacada())
-					return false;
-            }				
+                Matriz[i, j] = new Casilla(i, j);
+            }
         }
-		return true;
     }
 
-	/*PintarTablero(ficha), Atacar es "pintar" las casillas, es decir Casilla.me estan tapando = true.
-	Si la ficha es Reina
-	Ataque de Reina
-	Si la ficha es Alfil:
-	Atacar diagonales
-	Si la ficha es Torre:
-	Atacar fila y columna
-	Si la ficha es Caballo
-	Atacar "periferia" 
-	Si la ficha es Rey
-	Atacar alrededores*/
+    ~Tablero()
+    {
 
-	/// 
-	/// <param name="Ficha"></param>
-	public void Pintar(Ficha Ficha){
-		Ficha.Atacar(this); //TODO: this?
-							//TDOO: C# entiende a qué atacar tiene que ir? Al de Reina, Alfil... Cómo hacemos el dynamic
-        
-	}
+    }
+
+    public Tablero Espejar()
+    {
+
+        return null;
+    }
+
+    public void FiltrarFatales()
+    {
+
+    }
+
+    public void Imprimir()
+    {
+
+    }
+
+    public void Limpiar()
+    {
+
+    }
+
+    public bool VerificarSolucion()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (!Matriz[i, j].GetAtacada())
+                    return false;
+            }
+        }
+        return true;
+    }
 
     /// 
     /// <param name="Ficha"></param>
     /// <param name="ListaPos"></param>
-    public void Posicionar(Ficha Ficha) {
-		//Variables locales
-		Random r = new Random();
-        Casilla newPos = new Casilla("1"); //TODO: wtf
+    public void Posicionar(Ficha Fichita, Tablero Ataque)
+    {
+        //Variable
+        Random r = new Random();
+        int index;
 
-		if(Ficha is Reina)
+        if (Fichita is Reina)
         {
-			newPos.Fichita.GetPos().SetFila(Convert.ToUInt16(r.Next(3, 5)));
-			newPos.Fichita.GetPos().SetColumna(Convert.ToUInt16(r.Next(3, 5)));
-		}
+            index = Convert.ToInt32(r.Next(Cuadrado1.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
 
-		if(Ficha is Alfil)
-        {
+            Fichita.SetPos(Cuadrado1[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
 
+            //while(Fichita.GetPos().GetOcupada()) //Mientras que   --> PENSAMOS QUE ES REDUNDANTE.
+            //    Posicionar(Fichita);                                  Si lo estamos sacando de la lista, entonces no tendría por qué elegir el mismo elemento
+
+            Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
+
+            PilaPosicionadas.Push(Fichita);
+
+            Cuadrado1.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
         }
 
-		
+        if(Fichita is Alfil)
+        {
+            if(Fichita.GetName() == "Alfil1")
+            {
+                index = Convert.ToInt32(r.Next(Cuadrado1.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
 
-		if (!newPos.Ocupar()) //Recursividad
-            Posicionar(Ficha);
-		Ficha.Atacar(this); //TODO: this?
-	}
+                Fichita.SetPos(Cuadrado1[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
 
-    public Tablero Rotar() {
+                Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
-		return null;
-	}
+                PilaPosicionadas.Push(Fichita);
+
+                Cuadrado1.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
+                //TODO: wtf es por copia o puntero?? si borramos se nos borra todo??
+            }
+
+            if (Fichita.GetName() == "Alfil2")
+            {
+                Ficha FichaAux = PilaPosicionadas.Peek();
+
+                index = Convert.ToInt32(r.Next(Cuadrado2.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
+
+                while (Fichita.GetPos().GetColor() == FichaAux.GetPos().GetColor()) //Mientras los dos alfiles sean del mismo color
+                    Posicionar(Fichita, Ataque);
+
+                Fichita.SetPos(Cuadrado2[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
+                
+                Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
+
+                Cuadrado2.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
+            }
+        }
+
+
+
+        ////Variables locales
+        //Random r = new Random();
+        //Casilla newPos = new Casilla(); //TODO: wtf
+
+        //if (Ficha is Reina)
+        //{
+        //    newPos.Fichita.GetPos().SetFila(Convert.ToUInt16(r.Next(3, 5)));
+        //    newPos.Fichita.GetPos().SetColumna(Convert.ToUInt16(r.Next(3, 5)));
+        //}
+
+        //if (Ficha is Alfil)
+        //{
+
+        //}
+
+
+
+        //if (!newPos.Ocupar()) //Recursividad
+        //    Posicionar(Ficha);
+        //Ficha.Atacar(this); //TODO: this?
+    }
+
+    public Tablero Rotar()
+    {
+
+        return null;
+    }
+        
+
+}
+
+
 
 }//end Tablero

@@ -13,53 +13,56 @@ using System.IO;
 
 
 
-public class Caballo : Ficha {
+public class Caballo : Ficha
+{
 
-	public Caballo(string _Nombre):base(_Nombre){
-	
-	}
+    public Caballo(string _Nombre) : base(_Nombre)
+    {
 
-	~Caballo(){
+    }
 
-	}
+    ~Caballo()
+    {
 
-	public override void Atacar(Tablero Ataque)
-	{
-		uint j = Pos.Columna;
-		uint i = Pos.Fila;
+    }
 
-		if (i - 2 >= 0)
+    public override void Atacar(Tablero Ataque)
+    {
+        uint j = Pos.GetColumna();
+        uint i = Pos.GetFila();
+
+        if (i - 2 >= 0)
         {
-			if(j + 1 < 8)
-				Ataque.Matriz[i - 2, j + 1].SetAtacada(true);
+            if (j + 1 < 8)
+                Ataque.Matriz[i - 2, j + 1].SetAtacada(true);
 
-			if (j - 1 >= 0)
-				Ataque.Matriz[i - 2, j - 1].SetAtacada(true);
-		}
+            if (j - 1 >= 0)
+                Ataque.Matriz[i - 2, j - 1].SetAtacada(true);
+        }
 
-		if(i+2<8)
+        if (i + 2 < 8)
         {
-			if (j - 1 >= 0)
-				Ataque.Matriz[i + 2, j - 1].SetAtacada(true);
-			if (j+1<8)
-				Ataque.Matriz[i + 2, j + 1].SetAtacada(true);
-		}
+            if (j - 1 >= 0)
+                Ataque.Matriz[i + 2, j - 1].SetAtacada(true);
+            if (j + 1 < 8)
+                Ataque.Matriz[i + 2, j + 1].SetAtacada(true);
+        }
 
-		if(i+1<8)
+        if (i + 1 < 8)
         {
-			if (j + 2 < 8)
-				Ataque.Matriz[i + 1, j + 2].SetAtacada(true);
-			if (j - 2 >= 0)
-				Ataque.Matriz[i + 1, j - 2].SetAtacada(true);
-		}
+            if (j + 2 < 8)
+                Ataque.Matriz[i + 1, j + 2].SetAtacada(true);
+            if (j - 2 >= 0)
+                Ataque.Matriz[i + 1, j - 2].SetAtacada(true);
+        }
 
-		if (i - 1 >= 0)
-		{
-			if (j - 2 >= 0)
-				Ataque.Matriz[i - 1, j - 2].SetAtacada(true);
-			if (j + 2 < 8)
-				Ataque.Matriz[i - 1, j + 2].SetAtacada(true);
-		}
-	}
+        if (i - 1 >= 0)
+        {
+            if (j - 2 >= 0)
+                Ataque.Matriz[i - 1, j - 2].SetAtacada(true);
+            if (j + 2 < 8)
+                Ataque.Matriz[i - 1, j + 2].SetAtacada(true);
+        }
+    }
 
 }//end Caballo

@@ -19,8 +19,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-            //Listas globales
-            LinkedList<Casilla> CuadradoRojo = new LinkedList<Casilla>(); //5e, 5d, 4e, 4d
             
 
 
