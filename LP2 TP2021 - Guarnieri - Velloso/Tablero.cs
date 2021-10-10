@@ -83,14 +83,24 @@ public class Tablero {
     /// <param name="Ficha"></param>
     /// <param name="ListaPos"></param>
     public void Posicionar(Ficha Ficha) {
-        //Variables locales
-        Random r = new Random();
-        Casilla newPos = new Casilla();
+		//Variables locales
+		Random r = new Random();
+        Casilla newPos = new Casilla("1"); //TODO: wtf
 
-        newPos.SetFila(Convert.ToUInt16(r.Next(0, 8)));
-        newPos.SetColumna(Convert.ToUInt16(r.Next(0, 8)));
+		if(Ficha is Reina)
+        {
+			newPos.Fichita.GetPos().SetFila(Convert.ToUInt16(r.Next(3, 5)));
+			newPos.Fichita.GetPos().SetColumna(Convert.ToUInt16(r.Next(3, 5)));
+		}
 
-        if (!newPos.Ocupar()) //Recursividad
+		if(Ficha is Alfil)
+        {
+
+        }
+
+		
+
+		if (!newPos.Ocupar()) //Recursividad
             Posicionar(Ficha);
 		Ficha.Atacar(this); //TODO: this?
 	}

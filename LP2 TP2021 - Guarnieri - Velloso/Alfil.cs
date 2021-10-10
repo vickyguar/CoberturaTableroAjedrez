@@ -13,8 +13,7 @@ using System.IO;
 
 public enum ColorAlfil : int
 {
-
-	BLANCO,
+	BLANCO = 0,
 	NEGRO
 
 }//end ColorAlfil
@@ -23,11 +22,12 @@ public class Alfil : Ficha {
 
 	private ColorAlfil Color;
 
-	public Alfil(){
+    public Alfil(ColorAlfil _Color, string _Nombre) : base(_Nombre)
+    {
+		Color = _Color;
+    }
 
-	}
-
-	~Alfil(){
+    ~Alfil(){
 
 	}
 

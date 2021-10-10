@@ -15,21 +15,23 @@ using System.IO;
 
 public abstract class Ficha
 {
-
-    //Struct
-    public class Posicion
-    {
-        public uint Fila;
-        public uint Columna;
-    }
-
     protected string Nombre;
-    protected Posicion Pos;
+    protected Casilla Pos;
     //protected Casilla Posicion;
 
-    public Ficha()
+    public bool Ocupar()
     {
+        if (!Pos.GetOcupada() && !(this is Torre)) //el dynamic_cast en C#
+            return false; //si estoy ocupada, no se puede posicionar una ficha
 
+        Pos.SetOcupada(true); //la casilla estaba desocupada, entonces la ocupo
+        return true; //la pude ocupar
+    }
+
+    public Ficha(string _Nombre)
+    {
+        Nombre = _Nombre;
+        Pos = null; //Inicializamos en NULL
     }
 
     ~Ficha()
@@ -41,8 +43,8 @@ public abstract class Ficha
 
     public void Diagonal1(Tablero Ataque) // ↘ 
     {
-        uint j = Pos.Columna + 1;
-        uint i = Pos.Fila + 1;
+        uint j = Pos.GetColumna() + 1;
+        uint i = Pos.GetFila() + 1;
 
         do
         {
@@ -54,8 +56,8 @@ public abstract class Ficha
 
     public void Diagonal2(Tablero Ataque) // ↗ 
     {
-        uint j = Pos.Columna + 1;
-        uint i = Pos.Fila - 1;
+        uint j = Pos.GetColumna() + 1;
+        uint i = Pos.GetFila() - 1;
 
         do
         {
@@ -67,8 +69,8 @@ public abstract class Ficha
 
     public void Diagonal3(Tablero Ataque) // ↖ 
     {
-        uint j = Pos.Columna - 1;
-        uint i = Pos.Fila - 1;
+        uint j = Pos.GetColumna() - 1;
+        uint i = Pos.GetFila() - 1;
 
         do
         {
@@ -80,8 +82,8 @@ public abstract class Ficha
 
     public void Diagonal4(Tablero Ataque) // ↙ 
     {
-        uint j = Pos.Columna - 1;
-        uint i = Pos.Fila + 1;
+        uint j = Pos.GetColumna() - 1;
+        uint i = Pos.GetFila() + 1;
 
         do
         {
@@ -93,8 +95,8 @@ public abstract class Ficha
 
     public void Horizontal1(Tablero Ataque) // → 
     {
-        uint j = Pos.Columna + 1;
-        uint i = Pos.Fila;
+        uint j = Pos.GetColumna() + 1;
+        uint i = Pos.GetFila();
 
         do
         {
@@ -105,8 +107,8 @@ public abstract class Ficha
 
     public void Horizontal2(Tablero Ataque) // ← 
     {
-        uint j = Pos.Columna - 1;
-        uint i = Pos.Fila;
+        uint j = Pos.GetColumna() - 1;
+        uint i = Pos.GetFila();
 
         do
         {
@@ -117,8 +119,8 @@ public abstract class Ficha
 
     public void Vertical1(Tablero Ataque) // ↓ 
     {
-        uint j = Pos.Columna;
-        uint i = Pos.Fila + 1;
+        uint j = Pos.GetColumna();
+        uint i = Pos.GetFila() + 1;
 
         do
         {
@@ -129,8 +131,8 @@ public abstract class Ficha
 
     public void Vertical2(Tablero Ataque) // ↑ 
     {
-        uint j = Pos.Columna;
-        uint i = Pos.Fila - 1;
+        uint j = Pos.GetColumna();
+        uint i = Pos.GetFila() - 1;
 
         do
         {
@@ -138,5 +140,7 @@ public abstract class Ficha
             i--;
         } while (i >= 0);
     }
+
+    //public Posicion GetPos() { return Pos; }
 
 }//end Ficha
