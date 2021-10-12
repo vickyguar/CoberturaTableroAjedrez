@@ -280,7 +280,34 @@ public class Tablero
                     return Matriz[i, j];
         return null;
     }
+
+    public Casilla BuscarXNombre(string Name)
+    {
+        for (int i = 0; i < 8; ++i)
+            for (int j = 0; j < 8; ++j)
+                if (Matriz[i, j].Fichita.GetName() == Name)
+                    return Matriz[i, j];
+        return null;
+    }
     //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
     //TODO: TRY CATCH
+
+    public Tablero IntercambiarTorres()
+    {
+        Tablero Intercambiado = this; //H
+
+        Casilla T1 = Intercambiado.BuscarXNombre("Torre1");
+        Casilla T2 = Intercambiado.BuscarXNombre("Torre2");
+
+        if (T1.GetColumna() != T2.GetColumna())
+        {
+            uint ColAux = T1.GetColumna();
+            T1.SetColumna(T2.GetColumna());
+            T2.SetColumna(ColAux);
+            return Intercambiado;
+        }
+        return null;
+    //TODO: TRY CATCH EN MAIN
+    }
 }
 //end Tablero

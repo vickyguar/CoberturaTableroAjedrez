@@ -77,14 +77,14 @@ public class Casilla
     #endregion
 
     #region SETTERS
-    public void SetColumna(ushort col)
+    public void SetColumna(uint newColumna)
     {
-        Columna = col;
+        Columna = newColumna;
     }
 
-    public void SetFila(ushort fila)
+    public void SetFila(uint newFila)
     {
-        Fila = fila;
+        Fila = newFila;
     }
 
     public void SetAtacada(bool newAtacada)
