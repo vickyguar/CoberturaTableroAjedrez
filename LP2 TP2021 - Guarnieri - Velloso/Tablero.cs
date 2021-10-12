@@ -24,7 +24,7 @@ public class Tablero
     //private static uint ContSoluciones = 0; //Inicializamos en cero el contador static
     //private ushort ID;
     public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
-    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
+    private Stack<Ficha>PilaPosicionadas = new Stack<Ficha>(8);
 
 
     public Tablero()
@@ -48,11 +48,41 @@ public class Tablero
 
     }
 
+    #region GENERADORES SOLUCIONES
     public Tablero Espejar()
+    {
+        Tablero Espejado = this; //copia del tablero original
+        foreach (Ficha fichita in Espejado.PilaPosicionadas)
+        {
+            switch (fichita.GetPos().GetColumna())
+            {
+                case 0:
+                    fichita.GetPos().SetColumna(7); break;
+                case 1:
+                    fichita.GetPos().SetColumna(6); break;
+                case 2:
+                    fichita.GetPos().SetColumna(5); break;
+                case 3:
+                    fichita.GetPos().SetColumna(4); break;
+                case 4:
+                    fichita.GetPos().SetColumna(3); break;
+                case 5:
+                    fichita.GetPos().SetColumna(2); break;
+                case 6:
+                    fichita.GetPos().SetColumna(1); break;
+                case 7:
+                    fichita.GetPos().SetColumna(0); break;
+            }
+        }
+
+        return Espejado;
+    }
+    public Tablero Rotar90()
     {
 
         return null;
     }
+    #endregion
 
     public bool FiltrarFatales() //Si devuelve true, en el main lo agrego a la lista de fatales.
     {
@@ -60,9 +90,11 @@ public class Tablero
         /* TableroFisico.FiltrarFatales()  -> Este tablero fisico no esta "pintado", el que está pintado es el de Ataque
          * Podríamos hacer una copia de este tablero físico, y llamarlo Tablero filtrado, y pintar a tablero filtrado
          */
+        Tablero Filtrado = this; //es una copia del tablero fisico
 
-
-        return false;
+        for (uint i = 0; i < 8; ++i) //recorremos la pila de fichas en el tablero de copia
+            Filtrado.PilaPosicionadas.Pop().Atacar(Filtrado, true); //"pintar casilleros" de forma fatal (true)
+        return (Filtrado.VerificarSolucion()) ? true : false; //si es una solución fatal, devulve true y sino devuelve false
     }
 
     public void Imprimir()
@@ -244,13 +276,6 @@ public class Tablero
         //    }
         #endregion
     }
-
-    public Tablero Rotar()
-    {
-
-        return null;
-    }
-
-
+    //TODO: agregar funcion que intercambie torres Y CABALLOS :)
 }
 //end Tablero
