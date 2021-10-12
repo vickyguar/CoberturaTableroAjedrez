@@ -79,7 +79,18 @@ public class Tablero
     }
     public Tablero Rotar90()
     {
-
+        /*
+         * int t;
+        for (int i = 0; i < fil; i++)
+        {
+            t = 0;
+            for (int j = fil - 1; j >= 0; j--)
+            {
+                mTemp[i][t] = m[j][i];
+                t++;
+            }
+        }
+        */
         return null;
     }
     #endregion
