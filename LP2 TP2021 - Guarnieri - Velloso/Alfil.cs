@@ -15,23 +15,21 @@ using System.IO;
 
 public class Alfil : Ficha {
 
-	private Color Colour;
 
-    public Alfil(Color _Colour, string _Nombre) : base(_Nombre)
+    public Alfil(string _Nombre) : base(_Nombre)
     {
-		Colour = _Colour;
     }
 
     ~Alfil(){
 
 	}
 
-	public override void Atacar(Tablero Ataque, bool Fatal)
+	public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
 	{
-		Diagonal1(Ataque, Fatal);
-		Diagonal2(Ataque, Fatal);
-		Diagonal3(Ataque, Fatal);
-		Diagonal4(Ataque, Fatal);
+		Diagonal1(Ataque, Pos, Fatal);
+		Diagonal2(Ataque, Pos, Fatal);
+		Diagonal3(Ataque, Pos, Fatal);
+		Diagonal4(Ataque, Pos, Fatal);
 	}
 
 }//end Alfil

@@ -24,16 +24,16 @@ public class Reina : Ficha {
 
 	}
 
-	public override void Atacar(Tablero Ataque, bool Fatal)
+	public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
 	{
-		Diagonal1(Ataque, Fatal);
-		Diagonal2(Ataque, Fatal);
-		Diagonal3(Ataque, Fatal);
-		Diagonal4(Ataque, Fatal);
-		Horizontal1(Ataque, Fatal);
-		Horizontal2(Ataque, Fatal);
-		Vertical1(Ataque, Fatal);
-		Vertical2(Ataque, Fatal);
+		Diagonal1(Ataque, Pos, Fatal);
+		Diagonal2(Ataque, Pos, Fatal);
+		Diagonal3(Ataque, Pos, Fatal);
+		Diagonal4(Ataque, Pos, Fatal);
+		Horizontal1(Ataque, Pos, Fatal);
+		Horizontal2(Ataque, Pos, Fatal);
+		Vertical1(Ataque, Pos, Fatal);
+		Vertical2(Ataque, Pos, Fatal);
 	}
 
 }//end Reina

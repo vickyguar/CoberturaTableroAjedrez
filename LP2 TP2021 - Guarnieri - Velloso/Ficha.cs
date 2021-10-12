@@ -16,10 +16,22 @@ using System.IO;
 public abstract class Ficha
 {
     protected string Name;
-    protected Casilla Pos;
+   // protected Casilla Pos;
     //protected Casilla Posicion;
 
-    public bool Ocupar()
+    #region CONSTRUCTOR & DESTRUCTOR
+    public Ficha(string _Name)
+    {
+        Name = _Name;
+    }
+
+    ~Ficha()
+    {
+
+    }
+
+    #endregion
+    public bool Ocupar(Casilla Pos)
     {
         if (!Pos.GetOcupada() && !(this is Torre)) //el dynamic_cast en C#
             return false; //si estoy ocupada, no se puede posicionar una ficha
@@ -28,23 +40,10 @@ public abstract class Ficha
         return true; //la pude ocupar
     }
 
-    public Ficha(string _Name)
-    {
-        Name = _Name;
-        Pos = null; //Inicializamos en NULL
-    }
-
-    ~Ficha()
-    {
-
-    }
-
-
-
     //TODO: Despues ver cómo ponerlo en la ToolBox
-    public abstract void Atacar(Tablero Ataque, bool Fatal = false);
+    public abstract void Atacar(Tablero Ataque, Casilla Pos, bool Fatal = false);
 
-    public void Diagonal1(Tablero Ataque, bool Fatal) // ↘ 
+    public void Diagonal1(Tablero Ataque, Casilla Pos,bool Fatal) // ↘ 
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() + 1;
@@ -61,7 +60,7 @@ public abstract class Ficha
         } while (i < 8 || j < 8);
     }
 
-    public void Diagonal2(Tablero Ataque, bool Fatal) // ↗ 
+    public void Diagonal2(Tablero Ataque, Casilla Pos, bool Fatal) // ↗ 
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() - 1;
@@ -78,7 +77,7 @@ public abstract class Ficha
         } while (i >= 0 || j < 8);
     }
 
-    public void Diagonal3(Tablero Ataque, bool Fatal) // ↖ 
+    public void Diagonal3(Tablero Ataque, Casilla Pos, bool Fatal) // ↖ 
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila() - 1;
@@ -95,7 +94,7 @@ public abstract class Ficha
         } while (i >= 0 || j >= 0);
     }
 
-    public void Diagonal4(Tablero Ataque, bool Fatal) // ↙ 
+    public void Diagonal4(Tablero Ataque, Casilla Pos, bool Fatal) // ↙ 
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila() + 1;
@@ -112,7 +111,7 @@ public abstract class Ficha
         } while (i < 8 || j >= 8);
     }
 
-    public void Horizontal1(Tablero Ataque, bool Fatal) // → 
+    public void Horizontal1(Tablero Ataque, Casilla Pos, bool Fatal) // → 
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila();
@@ -128,7 +127,7 @@ public abstract class Ficha
         } while (j < 8);
     }
 
-    public void Horizontal2(Tablero Ataque, bool Fatal) // ← 
+    public void Horizontal2(Tablero Ataque, Casilla Pos, bool Fatal) // ← 
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila();
@@ -144,7 +143,7 @@ public abstract class Ficha
         } while (j >= 0);
     }
 
-    public void Vertical1(Tablero Ataque, bool Fatal) // ↓ 
+    public void Vertical1(Tablero Ataque, Casilla Pos, bool Fatal) // ↓ 
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() + 1;
@@ -160,7 +159,7 @@ public abstract class Ficha
         } while (i < 8);
     }
 
-    public void Vertical2(Tablero Ataque, bool Fatal) // ↑ 
+    public void Vertical2(Tablero Ataque, Casilla Pos, bool Fatal) // ↑ 
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() - 1;
@@ -177,16 +176,11 @@ public abstract class Ficha
     }
 
     #region GETTERS
-    public Casilla GetPos() { return Pos; }
     public string GetName() { return Name; }
     #endregion
 
     #region SETTERS
-    public void SetPos(Casilla newPos)
-    {
-        Pos = newPos;
-        Pos.SetOcupada(true); //Si le estamos dando una posicion a una ficha, es porque esta está ocupada
-    }
+   
     #endregion
 
 

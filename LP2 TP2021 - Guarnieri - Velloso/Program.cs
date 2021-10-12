@@ -19,15 +19,28 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
+            #region TABLEROS
             Tablero Juego = new Tablero();
             Tablero Ataque = new Tablero();
             Tablero Filtrado = new Tablero();
+            #endregion
+
+            #region FICHAS
+            Ficha Reina = new Reina("Reina");
+            Ficha Rey = new Rey("Rey");
+            Ficha Torre1 = new Torre("Torre1");
+            Ficha Torre2 = new Torre("Torre2");
+            Ficha Alfil1 = new Alfil("Alfil1");
+            Ficha Alfil2 = new Alfil("Alfil2");
+            Ficha Caballo1 = new Caballo("Caballo1");
+            Ficha Caballo2 = new Caballo("Caballo2");
+            #endregion
 
             #region LISTAS
             //Listas globales
             List<Casilla> Cuadrado1 = new List<Casilla>(4); //5e, 5d, 4e, 4d ROJO
 
-            for(uint i = 3; i<=4; i++)
+            for (uint i = 3; i <= 4; i++)
             {
                 for (uint j = 3; j <= 4; j++)
                     Cuadrado1.Add(new Casilla(i, j));
@@ -36,8 +49,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             List<Casilla> Cuadrado2 = new List<Casilla>(12); //6c, 3c, 3f, 6f VIOLETA
             //FILA FIJA
             for (uint i = 2; i <= 5; i++)
-            { 
-                Cuadrado2.Add(new Casilla(2,i));
+            {
+                Cuadrado2.Add(new Casilla(2, i));
                 Cuadrado2.Add(new Casilla(5, i));
             }
 
@@ -64,7 +77,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             }
 
             List<Casilla> Cuadrado4 = new List<Casilla>(28); //8a, 1a, 8h, 1a VERDE
-             //FILA FIJA
+                                                             //FILA FIJA
             for (uint i = 0; i <= 7; i++)
             {
                 Cuadrado3.Add(new Casilla(0, i));
@@ -104,6 +117,52 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             #endregion
 
+            uint ContSoluciones = 0;
+            Random rnd = new Random();
+
+            List<Tablero> ListaSoluciones = new List<Tablero>();
+
+            while (ListaSoluciones.Count <11)
+            {
+                Juego.Posicionar(Reina, Ataque, Cuadrado1);
+                Juego.Posicionar(Alfil1, Ataque, Cuadrado1);
+                Juego.Posicionar(Alfil2, Ataque, Cuadrado2);
+                Juego.Posicionar(Caballo1, Ataque, Cuadrado2);
+                Juego.Posicionar(Rey, Ataque, Cuadrado3);
+                Juego.Posicionar(Torre1, Ataque, Cuadrado4);
+   
+                switch (Convert.ToInt32(rnd.Next(1, 4)))
+                {
+                    case 1:
+                        Juego.Posicionar(Torre2, Ataque, Cuadrado1); break;
+                    case 2:
+                        Juego.Posicionar(Torre2, Ataque, Cuadrado2); break;
+                    case 3:
+                        Juego.Posicionar(Torre2, Ataque, Cuadrado3); break;
+                }
+
+                Juego.Posicionar(Caballo2, Ataque, Cuadrado2);
+
+                if(Juego.VerificarSolucion())
+                {
+                    ListaSoluciones.Add(Juego); 
+                    ListaSoluciones.Add(Juego.Rotar90()); 
+                    ListaSoluciones.Add((Juego.Rotar90()).Rotar90());
+                    ListaSoluciones.Add(((Juego.Rotar90()).Rotar90()).Rotar90());
+
+                    Tablero Espejado = Juego.Espejar();
+                    ListaSoluciones.Add(Espejado);
+                    ListaSoluciones.Add(Espejado.Rotar90());
+                    ListaSoluciones.Add((Espejado.Rotar90()).Rotar90());
+                    ListaSoluciones.Add(((Espejado.Rotar90()).Rotar90()).Rotar90());
+
+                    //verificar soluciones distintas
+                    //filtrar soluciones
+                }
+                Juego.Limpiar();
+                Ataque.Limpiar();
+                Filtrado.Limpiar();
+            }
         }
     }
 }

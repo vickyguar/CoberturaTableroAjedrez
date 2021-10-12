@@ -25,7 +25,7 @@ public class Casilla
     private bool Ocupada;
     //private string ID;
 
-    //public Ficha Fichita;
+    public Ficha Fichita;
 
     //Struct
     //public class Posicion
@@ -39,12 +39,14 @@ public class Casilla
     //}
 
 
-    public Casilla(uint _Columna, uint _Fila)
+    public Casilla(uint _Columna, uint _Fila/*, Color _Color*/)
     {
         Columna = _Columna;
         Fila = _Fila;
         Ocupada = false;
         Atacada = false;
+        Fichita = null;
+        //Colour = _Color;
     }
 
     ~Casilla()
@@ -93,6 +95,10 @@ public class Casilla
     public void SetOcupada(bool newOcupada)
     {
         Ocupada = newOcupada;
+    }
+    public void SetFicha(Ficha newFichita)
+    {
+        Fichita = newFichita;
     }
     #endregion
 
