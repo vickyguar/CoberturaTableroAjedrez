@@ -299,7 +299,7 @@ public class Tablero
         Casilla T1 = Intercambiado.BuscarXNombre("Torre1");
         Casilla T2 = Intercambiado.BuscarXNombre("Torre2");
 
-        if (T1.GetColumna() != T2.GetColumna())
+        if (T1.GetColumna() != T2.GetColumna() || T1.GetFila() != T2.GetFila()) //TODO: MANU AGREGUE ESTOOO
         {
             uint ColAux = T1.GetColumna();
             T1.SetColumna(T2.GetColumna());
