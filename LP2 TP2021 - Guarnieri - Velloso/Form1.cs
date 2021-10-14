@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace LP2_TP2021___Guarnieri___Velloso
 {
-    public partial class Form1 : Form
+    public partial class Soluciones : Form
     {
-        public Form1()
+        public Soluciones()
         {
             InitializeComponent();
         }
-
     }
 }
