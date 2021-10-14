@@ -149,14 +149,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     ListaSoluciones.Add((Juego.Rotar90()).Rotar90());
                     ListaSoluciones.Add(((Juego.Rotar90()).Rotar90()).Rotar90());
 
-                    Tablero Espejado = Juego.Espejar();
+                    Tablero Espejado = new Tablero(Juego.Espejar());
                     ListaSoluciones.Add(Espejado);
                     ListaSoluciones.Add(Espejado.Rotar90());
                     ListaSoluciones.Add((Espejado.Rotar90()).Rotar90());
                     ListaSoluciones.Add(((Espejado.Rotar90()).Rotar90()).Rotar90());
 
 
-                    Tablero Intercambiado = Juego.IntercambiarTorres(); // Tira una excepcion -> como la manejamos?
+                    Tablero Intercambiado = new Tablero(Juego.IntercambiarTorres()); // Tira una excepcion -> como la manejamos?
                     ListaSoluciones.Add(Intercambiado);
                     ListaSoluciones.Add(Intercambiado.Rotar90());
                     ListaSoluciones.Add((Intercambiado.Rotar90()).Rotar90());

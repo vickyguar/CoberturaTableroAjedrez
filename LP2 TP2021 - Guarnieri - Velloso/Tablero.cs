@@ -130,6 +130,25 @@ public class Tablero
         return true;
     }
 
+    public bool VerificarSolucionesDistintas(Tablero T)
+    {
+        for (uint i = 0; i < 8; i++)
+        {
+            for (uint j = 0; j < 8; j++)
+            {
+                if (Matriz[i, j].GetOcupada() && !(T.Matriz[i, j].GetOcupada()) || !(Matriz[i, j].GetOcupada()) && T.Matriz[i, j].GetOcupada())
+                    return true;
+                else if (Matriz[i, j].GetOcupada() && T.Matriz[i, j].GetOcupada())
+                    if (Matriz[i, j].Fichita.GetType() != T.Matriz[i, j].Fichita.GetType()) //TODO: chequear
+                        return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -152,11 +171,12 @@ public class Tablero
             {
                 while (SubLista[index].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
                     Posicionar(Fichita, Ataque, SubLista);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
-         
+
         }
 
         //Ocupamos la casilla con la fichita
@@ -211,7 +231,8 @@ public class Tablero
         {
             T1 = Intercambiado.BuscarXNombre("Torre1");
             T2 = Intercambiado.BuscarXNombre("Torre2");
-        } catch(Exception ex)
+        }
+        catch (Exception ex)
         {
             throw ex; //MessageBox
         }
@@ -225,6 +246,9 @@ public class Tablero
         }
         throw new Exception("\n----- Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ----- ");
     }
+
+
+
 
     //Funcion Caballo
 
