@@ -11,20 +11,31 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-
-
 public abstract class Ficha
 {
+    #region ATRIBUTOS
+
+    /// <summary>
+    /// Nombre de la <see cref="Ficha"/>.
+    /// </summary>
     protected string Name;
-   // protected Casilla Pos;
-    //protected Casilla Posicion;
+
+    #endregion
 
     #region CONSTRUCTOR & DESTRUCTOR
+
+    /// <summary>
+    /// Constructor de la clase <see cref="Ficha"/>.
+    /// </summary>
+    /// <param name="_Name"></param>
     public Ficha(string _Name)
     {
         Name = _Name;
     }
 
+    /// <summary>
+    /// Destructor de la clase <see cref="Ficha"/>.
+    /// </summary>
     ~Ficha()
     {
 
@@ -32,13 +43,23 @@ public abstract class Ficha
 
     #endregion
 
-    //TODO: Despues ver cómo ponerlo en la ToolBox
-
-
     #region ATAQUES
+
+    /// <summary>
+    /// Método polimórfico de la clase <see cref="Ficha"/>. Indica qué Casillas están siendo atacadas. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
     public abstract void Atacar(Tablero Ataque, Casilla Pos, bool Fatal = false);
 
-    public void Diagonal1(Tablero Ataque, Casilla Pos,bool Fatal) // ↘ 
+    /// <summary>
+    /// Ataca la diagonal ↘ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Diagonal1(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() + 1;
@@ -55,7 +76,13 @@ public abstract class Ficha
         } while (i < 8 || j < 8);
     }
 
-    public void Diagonal2(Tablero Ataque, Casilla Pos, bool Fatal) // ↗ 
+    /// <summary>
+    /// Ataca la diagonal ↗ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Diagonal2(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() - 1;
@@ -72,7 +99,13 @@ public abstract class Ficha
         } while (i >= 0 || j < 8);
     }
 
-    public void Diagonal3(Tablero Ataque, Casilla Pos, bool Fatal) // ↖ 
+    /// <summary>
+    /// Ataca la diagonal ↖ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Diagonal3(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila() - 1;
@@ -89,7 +122,13 @@ public abstract class Ficha
         } while (i >= 0 || j >= 0);
     }
 
-    public void Diagonal4(Tablero Ataque, Casilla Pos, bool Fatal) // ↙ 
+    /// <summary>
+    /// Ataca la diagonal ↙ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Diagonal4(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila() + 1;
@@ -106,7 +145,13 @@ public abstract class Ficha
         } while (i < 8 || j >= 8);
     }
 
-    public void Horizontal1(Tablero Ataque, Casilla Pos, bool Fatal) // → 
+    /// <summary>
+    /// Ataca la horizontal → del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Horizontal1(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila();
@@ -122,7 +167,13 @@ public abstract class Ficha
         } while (j < 8);
     }
 
-    public void Horizontal2(Tablero Ataque, Casilla Pos, bool Fatal) // ← 
+    /// <summary>
+    /// Ataca la horizontal ← del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Horizontal2(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna() - 1;
         uint i = Pos.GetFila();
@@ -138,7 +189,13 @@ public abstract class Ficha
         } while (j >= 0);
     }
 
-    public void Vertical1(Tablero Ataque, Casilla Pos, bool Fatal) // ↓ 
+    /// <summary>
+    /// Ataca la vertical ↓ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Vertical1(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() + 1;
@@ -154,7 +211,13 @@ public abstract class Ficha
         } while (i < 8);
     }
 
-    public void Vertical2(Tablero Ataque, Casilla Pos, bool Fatal) // ↑ 
+    /// <summary>
+    /// Ataca la vertical ↑ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public void Vertical2(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() - 1;
@@ -169,11 +232,13 @@ public abstract class Ficha
             i--;
         } while (i >= 0);
     }
+
     #endregion
 
     #region GETTERS
+
     public string GetName() { return Name; }
+
     #endregion
 
-
-}//end Ficha
+} //end Ficha

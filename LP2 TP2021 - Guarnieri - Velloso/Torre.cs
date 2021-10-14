@@ -13,23 +13,46 @@ using System.IO;
 
 
 
-public class Torre : Ficha {
+public class Torre : Ficha
+{
 
-	public Torre(string _Nombre): base(_Nombre)
-	{
+    #region CONSTRUCTOR & DESTRUCTOR
 
-	}
+    /// <summary>
+    /// Constructor de la clase <see cref="Torre"/>.
+    /// </summary>
+    /// <param name="_Nombre"></param>
+    public Torre(string _Nombre) : base(_Nombre)
+    {
 
-	~Torre(){
+    }
 
-	}
+    /// <summary>
+    /// Destructor de la clase <see cref="Torre"/>.
+    /// </summary>
+    ~Torre()
+    {
 
-	public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
-	{
-		Horizontal1(Ataque, Pos, Fatal);
-		Horizontal2(Ataque, Pos, Fatal);
-		Vertical1(Ataque, Pos, Fatal);
-		Vertical2(Ataque, Pos, Fatal);
-	}
+    }
 
-}//end Torre
+    #endregion
+
+    #region ATAQUE 
+
+    /// <summary>
+    /// Ataque de <see cref="Torre"/>.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
+    {
+        Horizontal1(Ataque, Pos, Fatal);
+        Horizontal2(Ataque, Pos, Fatal);
+        Vertical1(Ataque, Pos, Fatal);
+        Vertical2(Ataque, Pos, Fatal);
+    }
+
+    #endregion
+
+} //end Torre

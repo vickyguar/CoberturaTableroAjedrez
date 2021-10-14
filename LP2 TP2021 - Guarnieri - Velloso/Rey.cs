@@ -6,51 +6,72 @@
 //  Original author: vguar
 ///////////////////////////////////////////////////////////
 
-
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+public class Rey : Ficha
+{
+    #region CONSTRUCTOR & DESTRUCTOR
 
-public class Rey : Ficha {
+    /// <summary>
+    /// Constructor de la clase <see cref="Rey"/>.
+    /// </summary>
+    /// <param name="_Nombre"></param>
+    public Rey(string _Nombre) : base(_Nombre)
+    {
 
-	public Rey(string _Nombre): base(_Nombre)
-	{
+    }
 
-	}
+    /// <summary>
+    /// Destructor de la clase <see cref="Rey"/>.
+    /// </summary>
+    ~Rey()
+    {
 
-	~Rey(){
+    }
 
-	}
+    #endregion
 
-	public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal){
-		uint i = Pos.GetColumna();
-		uint j = Pos.GetFila();
+    #region ATAQUE 
 
-		if (i + 1 < 8)
-			Ataque.Matriz[i + 1, j].SetAtacada(true);
+    /// <summary>
+    /// Ataque de <see cref="Rey"/>.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
+    {
+        uint i = Pos.GetColumna();
+        uint j = Pos.GetFila();
 
-		if (i - 1 >= 0)
-			Ataque.Matriz[i - 1, j].SetAtacada(true);
+        if (i + 1 < 8)
+            Ataque.Matriz[i + 1, j].SetAtacada(true);
 
-		if (j + 1 < 8)
+        if (i - 1 >= 0)
+            Ataque.Matriz[i - 1, j].SetAtacada(true);
+
+        if (j + 1 < 8)
         {
-			Ataque.Matriz[i, j + 1].SetAtacada(true);
-			if (i + 1 < 8)
-				Ataque.Matriz[i + 1, j + 1].SetAtacada(true);
-			if (i - 1 >= 0)
-				Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
-		}
+            Ataque.Matriz[i, j + 1].SetAtacada(true);
+            if (i + 1 < 8)
+                Ataque.Matriz[i + 1, j + 1].SetAtacada(true);
+            if (i - 1 >= 0)
+                Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
+        }
 
-		if (j - 1 >= 0)
+        if (j - 1 >= 0)
         {
-			Ataque.Matriz[i, j - 1].SetAtacada(true);
-			if (i + 1 < 8)
-				Ataque.Matriz[i + 1, j - 1].SetAtacada(true);
-			if (i - 1 >= 0)
-				Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
-		}
-	}
+            Ataque.Matriz[i, j - 1].SetAtacada(true);
+            if (i + 1 < 8)
+                Ataque.Matriz[i + 1, j - 1].SetAtacada(true);
+            if (i - 1 >= 0)
+                Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
+        }
+    }
 
-}//end Rey
+    #endregion
+
+} //end Rey

@@ -11,21 +11,37 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
-
-
 public class Caballo : Ficha
 {
+    #region CONSTRUCTOR & DESTRUCTOR
 
+    /// <summary>
+    /// Constructor de la clase <see cref="Caballo"/>.
+    /// </summary>
+    /// <param name="_Nombre"></param>
     public Caballo(string _Nombre) : base(_Nombre)
     {
 
     }
 
+    /// <summary>
+    /// Destructor de la clase <see cref="Caballo"/>.
+    /// </summary>
     ~Caballo()
     {
 
     }
 
+    #endregion
+
+    #region ATAQUE 
+
+    /// <summary>
+    /// Ataque de <see cref="Caballo"/>.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
     public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna();
@@ -65,4 +81,6 @@ public class Caballo : Ficha
         }
     }
 
-}//end Caballo
+    #endregion
+
+} //end Caballo

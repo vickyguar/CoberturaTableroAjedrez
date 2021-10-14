@@ -11,23 +11,74 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+/// <summary>
+/// Enum para definir el Color de las Casillas.
+/// </summary>
 public enum Color : int
 {
     BLANCO = 0,
     NEGRO
 
-}//end ColorAlfil
+} //end Color
 
 public class Tablero
 {
-
-    //private static uint ContSoluciones = 0; //Inicializamos en cero el contador static
-    //private ushort ID;
-    public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
-    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
+    #region ATRIBUTOS
 
     /// <summary>
-    /// Leemos el archivo con 1's y 0's para determinar el color de la casilla del tablero
+    /// Matriz de Casillas del <see cref="Tablero"/>.
+    /// </summary>
+    public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
+
+    /// <summary>
+    /// Pila de Fichas (se llena a medida que se posicionan las Ficha) del <see cref="Tablero"/>.
+    /// </summary>
+    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
+
+    #endregion
+
+    #region CONSTRUCTORES & DESTRUCTORES
+
+    /// <summary>
+    /// Constructor de la clase <see cref="Tablero"/>.: inicializa la Matriz de Casillas.
+    /// </summary>
+    public Tablero()
+    {
+        //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
+        for (uint i = 0; i < 8; ++i)
+        {
+            for (uint j = 0; j < 8; ++j)
+            {
+                Matriz[i, j] = new Casilla(i, j);
+            }
+        }
+        LeerArchivo();
+    }
+
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Tablero"/>..
+    /// </summary>
+    /// <param name="newTablero"></param>
+    public Tablero(Tablero newTablero)
+    {
+        Matriz = newTablero.Matriz;
+        PilaPosicionadas = newTablero.PilaPosicionadas;
+    }
+
+    /// <summary>
+    /// Destructor de la clase <see cref="Tablero"/>..
+    /// </summary>
+    ~Tablero()
+    {
+
+    }
+
+    #endregion
+
+    #region LEER TXT
+
+    /// <summary>
+    /// Leemos el archivo con 1's y 0's para determinar el color de las Casillas del Tablero this.
     /// </summary>
     private void LeerArchivo()
     {
@@ -43,69 +94,15 @@ public class Tablero
         }
     }
 
-    public Tablero()
-    {
-        //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
-        for (uint i = 0; i < 8; ++i)
-        {
-            for (uint j = 0; j < 8; ++j)
-            {
-                Matriz[i, j] = new Casilla(i, j);
-            }
-        }
-        LeerArchivo();
-    }
-
-    public Tablero(Tablero newTablero)
-    {
-        Matriz = newTablero.Matriz;
-        PilaPosicionadas = newTablero.PilaPosicionadas;
-    }
-
-    public Tablero Espejar()
-    {
-        Tablero Espejado = new Tablero(this); //copia del tablero original
-        Casilla aux;
-        for (int i = 0; i < 8; ++i)
-        {
-            for (int j = 0; j < 8; ++j)
-            {
-                aux = Matriz[i, j];
-                Matriz[i, j] = Matriz[7 - i, j];
-                Matriz[7 - i, j] = aux; //TODO: verificar que cuando cambiamos las casillas, se llevan con ellas las fichas
-            }
-        }
-
-        return Espejado;
-    }
-
-    ~Tablero()
-    {
-
-    }
-
-    #region GENERADORES SOLUCIONES
-
-
-    public Tablero Rotar90()
-    {
-        Tablero Rotado = new Tablero(this); //TODO: si esto no nos hace una copia -> sobrecargar el operador =
-        int t;
-        for (int i = 0; i < 8; i++)
-        {
-            t = 0;
-            for (int j = 7; j >= 0; j--)
-            {
-                Rotado.Matriz[i, t] = Matriz[j, i];
-                t++;
-            }
-        }
-
-        return Rotado;
-    }
     #endregion
 
-    public bool FiltrarFatales() //Si devuelve true, en el main lo agrego a la lista de fatales.
+    #region METODOS DE TABLERO
+
+    /// <summary>
+    /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez, con las Fichas atacando de forma fatal.
+    /// </summary>
+    /// <returns></returns>
+    public bool FiltrarFatales() //TODO: Si devuelve true, en el main lo agrego a la lista de fatales.
     {
         //La idea es ir sacando las fichas y ver en donde estan
         /* TableroFisico.FiltrarFatales()  -> Este tablero fisico no esta "pintado", el que está pintado es el de Ataque
@@ -128,11 +125,14 @@ public class Tablero
         //Boton: print
     }
 
+    /// <summary>
+    /// Limpia el Tablero this: Las Casillas no están atacadas, ni ocupadas, y las Fichas son null.
+    /// </summary>
     public void Limpiar()
     {
-        for(uint i=0; i<8; i++)
+        for (uint i = 0; i < 8; i++)
         {
-            for(uint j = 0; j<8; j++)
+            for (uint j = 0; j < 8; j++)
             {
                 Matriz[i, j].SetAtacada(false);
                 Matriz[i, j].SetFicha(null);
@@ -143,40 +143,10 @@ public class Tablero
         //Boton: clear
     }
 
-    public bool VerificarSolucion()
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                if (!Matriz[i, j].GetAtacada())
-                    return false;
-            }
-        }
-        return true;
-    }
-
-    public bool VerificarSolucionesDistintas(Tablero T)
-    {
-        for (uint i = 0; i < 8; i++)
-        {
-            for (uint j = 0; j < 8; j++)
-            {
-                if (Matriz[i, j].GetOcupada() && !(T.Matriz[i, j].GetOcupada()) || !(Matriz[i, j].GetOcupada()) && T.Matriz[i, j].GetOcupada())
-                    return true;
-                else if (Matriz[i, j].GetOcupada() && T.Matriz[i, j].GetOcupada())
-                    if (Matriz[i, j].Fichita.GetType() != T.Matriz[i, j].Fichita.GetType()) //TODO: chequear
-                        return true;
-            }
-        }
-
-        return false;
-    }
-
-
-
     /// <summary>
-    /// 
+    /// Ubica a la Ficha que le llega por parámetro en una Casilla de la SubLista que le llega por parámetro.
+    /// Segun el parámetro booleano "Remove", quita de la SubLista la Casilla donde se ubico la Ficha. //TODO: ACA PUNTERO O COPIA!!
+    /// Llama a la función Ataque de Ficha, con el Tablero Ataque.
     /// </summary>
     /// <param name="Fichita"></param>
     /// <param name="Ataque"></param>
@@ -217,34 +187,55 @@ public class Tablero
 
     }
 
-    /// 
-    /// <param name="Fichita"></param>
-    public Casilla Buscar(Ficha Fichita)
-    {
-        for (int i = 0; i < 8; ++i)
-            for (int j = 0; j < 8; ++j)
-                if (Matriz[i, j].Fichita == Fichita)
-                    return Matriz[i, j];
-        throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + "no está en el Tablero ----- ");
-    }
+    #endregion
+
+    #region MULTIPLICADORES DE SOLUCIONES
 
     /// <summary>
-    /// 
+    /// Retorna un nuevo Tablero, que es igual al Tablero this pero rotado 90°.
     /// </summary>
-    /// <param name="Name"></param>
     /// <returns></returns>
-    public Casilla BuscarXNombre(string Name)
+    public Tablero Rotar90()
     {
-        for (int i = 0; i < 8; ++i)
-            for (int j = 0; j < 8; ++j)
-                if (Matriz[i, j].Fichita.GetName() == Name)
-                    return Matriz[i, j];
-        throw new Exception("\n----- Error en BuscarXNombre: " + Name + "no está en el Tablero ----- ");
+        Tablero Rotado = new Tablero(this); //TODO: si esto no nos hace una copia -> sobrecargar el operador =
+        int t;
+        for (int i = 0; i < 8; i++)
+        {
+            t = 0;
+            for (int j = 7; j >= 0; j--)
+            {
+                Rotado.Matriz[i, t] = Matriz[j, i];
+                t++;
+            }
+        }
+
+        return Rotado;
     }
-    //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
 
     /// <summary>
-    /// 
+    /// Retorna un nuevo Tablero, que es igual al Tablero this pero espejado.
+    /// </summary>
+    /// <returns></returns>
+    public Tablero Espejar()
+    {
+        Tablero Espejado = new Tablero(this); //copia del tablero original
+        Casilla aux;
+        for (int i = 0; i < 8; ++i)
+        {
+            for (int j = 0; j < 8; ++j)
+            {
+                aux = Matriz[i, j];
+                Matriz[i, j] = Matriz[7 - i, j];
+                Matriz[7 - i, j] = aux; //TODO: verificar que cuando cambiamos las casillas, se llevan con ellas las fichas
+            }
+        }
+
+        return Espejado;
+    }
+
+    /// <summary>
+    /// Retorna un nuevo Tablero, que es igual al Tablero this pero con las Torres con las columnas intercambiadas, 
+    /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
     /// </summary>
     /// <returns></returns>
     public Tablero IntercambiarTorres()
@@ -273,10 +264,81 @@ public class Tablero
         throw new Exception("\n----- Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ----- ");
     }
 
+    #endregion
 
+    #region VERIFICACIONES
 
+    /// <summary>
+    /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez.
+    /// </summary>
+    /// <returns></returns>
+    public bool VerificarSolucion()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (!Matriz[i, j].GetAtacada())
+                    return false;
+            }
+        }
+        return true;
+    }
 
-    //Funcion Caballo
+    /// <summary>
+    /// Retorna true si el Tablero que le llega por parámetro es distinto a this, en otro caso retorna false
+    /// </summary>
+    /// <param name="T"></param>
+    /// <returns></returns>
+    public bool VerificarSolucionesDistintas(Tablero T)
+    {
+        for (uint i = 0; i < 8; i++)
+        {
+            for (uint j = 0; j < 8; j++)
+            {
+                if (Matriz[i, j].GetOcupada() && !(T.Matriz[i, j].GetOcupada()) || !(Matriz[i, j].GetOcupada()) && T.Matriz[i, j].GetOcupada())
+                    return true;
+                else if (Matriz[i, j].GetOcupada() && T.Matriz[i, j].GetOcupada())
+                    if (Matriz[i, j].Fichita.GetType() != T.Matriz[i, j].Fichita.GetType()) //TODO: chequear
+                        return true;
+            }
+        }
 
-}
-//end Tablero
+        return false;
+    }
+
+    #endregion
+
+    #region BUSCAR
+
+    /// <summary>
+    /// Retorna la casilla donde está la Ficha que le llega por parámetro.
+    /// </summary>
+    /// <param name="Fichita"></param>
+    /// <returns></returns>
+    public Casilla Buscar(Ficha Fichita)
+    {
+        for (int i = 0; i < 8; ++i)
+            for (int j = 0; j < 8; ++j)
+                if (Matriz[i, j].Fichita == Fichita)
+                    return Matriz[i, j];
+        throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + "no está en el Tablero ----- ");
+    }
+
+    /// <summary>
+    /// Retorna la casilla donde está la Ficha con el nombre que le llega por parámetro.
+    /// </summary>
+    /// <param name="Name"></param>
+    /// <returns></returns>
+    public Casilla BuscarXNombre(string Name)
+    {
+        for (int i = 0; i < 8; ++i)
+            for (int j = 0; j < 8; ++j)
+                if (Matriz[i, j].Fichita.GetName() == Name)
+                    return Matriz[i, j];
+        throw new Exception("\n----- Error en BuscarXNombre: " + Name + "no está en el Tablero ----- ");
+    } //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
+
+    #endregion
+
+} //end Tablero

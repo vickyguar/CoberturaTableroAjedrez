@@ -11,29 +11,50 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+public class Reina : Ficha
+{
 
+    #region CONSTRUCTOR & DESTRUCTOR
 
-public class Reina : Ficha {
+    /// <summary>
+    /// Constructor de la clase <see cref="Reina"/>.
+    /// </summary>
+    /// <param name="_Nombre"></param>
+    public Reina(string _Nombre) : base(_Nombre)
+    {
 
-	public Reina(string _Nombre): base(_Nombre)
-	{
+    }
 
-	}
+    /// <summary>
+    /// Destructor de la clase <see cref="Reina"/>.
+    /// </summary>
+    ~Reina()
+    {
 
-	~Reina(){
+    }
 
-	}
+    #endregion
 
-	public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
-	{
-		Diagonal1(Ataque, Pos, Fatal);
-		Diagonal2(Ataque, Pos, Fatal);
-		Diagonal3(Ataque, Pos, Fatal);
-		Diagonal4(Ataque, Pos, Fatal);
-		Horizontal1(Ataque, Pos, Fatal);
-		Horizontal2(Ataque, Pos, Fatal);
-		Vertical1(Ataque, Pos, Fatal);
-		Vertical2(Ataque, Pos, Fatal);
-	}
+    #region ATAQUE
 
-}//end Reina
+    /// <summary>
+    /// Ataque de <see cref="Reina"/>.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
+    {
+        Diagonal1(Ataque, Pos, Fatal);
+        Diagonal2(Ataque, Pos, Fatal);
+        Diagonal3(Ataque, Pos, Fatal);
+        Diagonal4(Ataque, Pos, Fatal);
+        Horizontal1(Ataque, Pos, Fatal);
+        Horizontal2(Ataque, Pos, Fatal);
+        Vertical1(Ataque, Pos, Fatal);
+        Vertical2(Ataque, Pos, Fatal);
+    }
+
+    #endregion
+
+} //end Reina

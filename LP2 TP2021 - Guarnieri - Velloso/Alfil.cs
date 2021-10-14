@@ -11,25 +11,46 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+public class Alfil : Ficha
+{
 
+    #region CONSTRUCTOR & DESTRUCTOR
 
-public class Alfil : Ficha {
-
-
+    /// <summary>
+    /// Constructor de la clase <see cref="Alfil"/>.
+    /// </summary>
+    /// <param name="_Nombre"></param>
     public Alfil(string _Nombre) : base(_Nombre)
     {
+
     }
 
-    ~Alfil(){
+    /// <summary>
+    /// Destructor de la clase <see cref="Alfil"/>.
+    /// </summary>
+    ~Alfil()
+    {
 
-	}
+    }
 
-	public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
-	{
-		Diagonal1(Ataque, Pos, Fatal);
-		Diagonal2(Ataque, Pos, Fatal);
-		Diagonal3(Ataque, Pos, Fatal);
-		Diagonal4(Ataque, Pos, Fatal);
-	}
+    #endregion
 
-}//end Alfil
+    #region ATAQUE 
+
+    /// <summary>
+    /// Ataque de <see cref="Alfil"/>.
+    /// </summary>
+    /// <param name="Ataque"></param>
+    /// <param name="Pos"></param>
+    /// <param name="Fatal"></param>
+    public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
+    {
+        Diagonal1(Ataque, Pos, Fatal);
+        Diagonal2(Ataque, Pos, Fatal);
+        Diagonal3(Ataque, Pos, Fatal);
+        Diagonal4(Ataque, Pos, Fatal);
+    }
+
+    #endregion
+
+} //end Alfil
