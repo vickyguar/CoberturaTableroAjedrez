@@ -6,7 +6,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 {
     class ToolBox
     {
+        static void 
        
-
-    }
+}
 }

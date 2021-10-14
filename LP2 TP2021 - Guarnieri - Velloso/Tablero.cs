@@ -26,6 +26,20 @@ public class Tablero
     public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
     private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
 
+    private void LeerArchivo()
+    {
+        string[] lines = System.IO.File.ReadAllLines("ColoresTablero.txt"); //Leo el archivo de colores
+        int j = 0;
+
+        foreach (string line in lines) //para cada linea
+        {
+            for (int i = 0; i < line.Length; i++)//recorro los caracteres de cada linea
+                Matriz[j, i].Colour = line[i] == '0' ? Color.BLANCO : Color.NEGRO; //le asigno el color a cada casilla
+
+            j++;
+        }
+    }
+
     public Tablero()
     {
         //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
@@ -36,6 +50,7 @@ public class Tablero
                 Matriz[i, j] = new Casilla(i, j);
             }
         }
+        LeerArchivo();
 
     }
 
