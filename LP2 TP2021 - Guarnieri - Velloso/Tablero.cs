@@ -61,7 +61,7 @@ public class Tablero
     /// <param name="newTablero"></param>
     public Tablero(Tablero newTablero)
     {
-        Matriz = newTablero.Matriz;
+        Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
         PilaPosicionadas = newTablero.PilaPosicionadas;
     }
 

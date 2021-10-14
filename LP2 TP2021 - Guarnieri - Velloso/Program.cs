@@ -20,12 +20,15 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Application.Run(new Soluciones());
 
             #region TABLEROS
+
             Tablero Juego = new Tablero();
             Tablero Ataque = new Tablero();
             Tablero Filtrado = new Tablero();
+
             #endregion
 
             #region FICHAS
+
             Ficha Reina = new Reina("Reina");
             Ficha Rey = new Rey("Rey");
             Ficha Torre1 = new Torre("Torre1");
@@ -34,9 +37,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Ficha Alfil2 = new Alfil("Alfil2");
             Ficha Caballo1 = new Caballo("Caballo1");
             Ficha Caballo2 = new Caballo("Caballo2");
+
             #endregion
 
             #region LISTAS
+
             //Listas globales
             List<Casilla> Cuadrado1 = new List<Casilla>(4); //5e, 5d, 4e, 4d ROJO
 
