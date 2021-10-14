@@ -126,15 +126,17 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             List<Tablero> ListaSoluciones = new List<Tablero>();
 
-            while (ListaSoluciones.Count <11)
+            while (ListaSoluciones.Count < 11)
             {
+                #region ---------- POSICIONAMIENTO DE LAS FICHAS ----------
+
                 Juego.Posicionar(Reina, Ataque, Cuadrado1);
                 Juego.Posicionar(Alfil1, Ataque, Cuadrado1);
                 Juego.Posicionar(Alfil2, Ataque, Cuadrado2);
                 Juego.Posicionar(Caballo1, Ataque, Cuadrado2);
                 Juego.Posicionar(Rey, Ataque, Cuadrado3);
                 Juego.Posicionar(Torre1, Ataque, Cuadrado4);
-   
+
                 switch (Convert.ToInt32(rnd.Next(1, 4)))
                 {
                     case 1:
@@ -147,10 +149,17 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 Juego.Posicionar(Caballo2, Ataque, Cuadrado2);
 
-                if(Juego.VerificarSolucion())
+                #endregion
+
+                #region ------ VERIFICAMOS Y GENERAMOS DE SOLUCIONES ------
+
+                if (Juego.VerificarSolucion())
                 {
-                    ListaSoluciones.Add(Juego); 
-                    ListaSoluciones.Add(Juego.Rotar90()); 
+
+                    //********************************** POSICIONAMOS LAS FICHAS **********************************//
+
+                    ListaSoluciones.Add(Juego);
+                    ListaSoluciones.Add(Juego.Rotar90());
                     ListaSoluciones.Add((Juego.Rotar90()).Rotar90());
                     ListaSoluciones.Add(((Juego.Rotar90()).Rotar90()).Rotar90());
 
@@ -171,9 +180,16 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     //verificar soluciones distintas
                     //filtrar soluciones
                 }
+
+                #endregion
+
+                #region -------------- LIMPIAMOS LOS TABLEROS -------------
+
                 Juego.Limpiar();
                 Ataque.Limpiar();
                 Filtrado.Limpiar();
+
+                #endregion
             }
         }
     }
