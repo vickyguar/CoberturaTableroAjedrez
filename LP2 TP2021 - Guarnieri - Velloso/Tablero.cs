@@ -26,6 +26,9 @@ public class Tablero
     public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
     private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
 
+    /// <summary>
+    /// Leemos el archivo con 1's y 0's para determinar el color de la casilla del tablero
+    /// </summary>
     private void LeerArchivo()
     {
         string[] lines = System.IO.File.ReadAllLines("ColoresTablero.txt"); //Leo el archivo de colores
@@ -51,7 +54,6 @@ public class Tablero
             }
         }
         LeerArchivo();
-
     }
 
     public Tablero(Tablero newTablero)
@@ -76,8 +78,6 @@ public class Tablero
 
         return Espejado;
     }
-
-
 
     ~Tablero()
     {
@@ -124,11 +124,22 @@ public class Tablero
 
     public void Imprimir()
     {
+
         //Boton: print
     }
 
     public void Limpiar()
     {
+        for(uint i=0; i<8; i++)
+        {
+            for(uint j = 0; j<8; j++)
+            {
+                Matriz[i, j].SetAtacada(false);
+                Matriz[i, j].SetFicha(null);
+                Matriz[i, j].SetOcupada(false);
+            }
+        }
+        PilaPosicionadas.Clear();
         //Boton: clear
     }
 
