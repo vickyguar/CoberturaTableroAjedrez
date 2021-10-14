@@ -31,16 +31,11 @@ public abstract class Ficha
     }
 
     #endregion
-    public bool Ocupar(Casilla Pos)
-    {
-        if (!Pos.GetOcupada() && !(this is Torre)) //el dynamic_cast en C#
-            return false; //si estoy ocupada, no se puede posicionar una ficha
-
-        Pos.SetOcupada(true); //la casilla estaba desocupada, entonces la ocupo
-        return true; //la pude ocupar
-    }
 
     //TODO: Despues ver cómo ponerlo en la ToolBox
+
+
+    #region ATAQUES
     public abstract void Atacar(Tablero Ataque, Casilla Pos, bool Fatal = false);
 
     public void Diagonal1(Tablero Ataque, Casilla Pos,bool Fatal) // ↘ 
@@ -174,13 +169,10 @@ public abstract class Ficha
             i--;
         } while (i >= 0);
     }
+    #endregion
 
     #region GETTERS
     public string GetName() { return Name; }
-    #endregion
-
-    #region SETTERS
-   
     #endregion
 
 

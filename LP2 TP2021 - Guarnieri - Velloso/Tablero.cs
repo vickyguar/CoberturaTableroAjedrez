@@ -24,7 +24,7 @@ public class Tablero
     //private static uint ContSoluciones = 0; //Inicializamos en cero el contador static
     //private ushort ID;
     public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
-    private Stack<Ficha>PilaPosicionadas = new Stack<Ficha>(8);
+    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
 
     public Tablero()
     {
@@ -37,8 +37,32 @@ public class Tablero
             }
         }
 
-        //TODO: Se inicializa la pila?
     }
+
+    public Tablero(Tablero newTablero)
+    {
+        Matriz = newTablero.Matriz;
+        PilaPosicionadas = newTablero.PilaPosicionadas;
+    }
+
+    public Tablero Espejar()
+    {
+        Tablero Espejado = new Tablero(this); //copia del tablero original
+        Casilla aux;
+        for (int i = 0; i < 8; ++i)
+        {
+            for (int j = 0; j < 8; ++j)
+            {
+                aux = Matriz[i, j];
+                Matriz[i, j] = Matriz[7 - i, j];
+                Matriz[7 - i, j] = aux; //TODO: verificar que cuando cambiamos las casillas, se llevan con ellas las fichas
+            }
+        }
+
+        return Espejado;
+    }
+
+
 
     ~Tablero()
     {
@@ -46,25 +70,11 @@ public class Tablero
     }
 
     #region GENERADORES SOLUCIONES
-    public Tablero Espejar()
-    {
-        Tablero Espejado = this; //copia del tablero original
-        Casilla aux;
-       for(int i = 0; i<8; ++i)
-        {
-            for(int j=0; j<8; ++j)
-            {
-                aux = Matriz[i, j];
-                Matriz[i, j] = Matriz[7 - i, j];
-                Matriz[7 - i, j] = aux; //TODO: verificar que cuando cambiamos las casillas, se llevan con ellas las fichas
-            }
-        }    
 
-        return Espejado;
-    }
+
     public Tablero Rotar90()
     {
-        Tablero Rotado = this; //TODO: si esto no nos hace una copia -> sobrecargar el operador =
+        Tablero Rotado = new Tablero(this); //TODO: si esto no nos hace una copia -> sobrecargar el operador =
         int t;
         for (int i = 0; i < 8; i++)
         {
@@ -86,7 +96,7 @@ public class Tablero
         /* TableroFisico.FiltrarFatales()  -> Este tablero fisico no esta "pintado", el que está pintado es el de Ataque
          * Podríamos hacer una copia de este tablero físico, y llamarlo Tablero filtrado, y pintar a tablero filtrado
          */
-        Tablero Filtrado = this; //es una copia del tablero fisico
+        Tablero Filtrado = new Tablero(this); //es una copia del tablero fisico
 
         for (uint i = 0; i < 8; ++i) //recorremos la pila de fichas en el tablero de copia
         {
@@ -120,9 +130,13 @@ public class Tablero
         return true;
     }
 
+    /// <summary>
     /// 
-    /// <param name="Ficha"></param>
-    /// <param name="ListaPos"></param>
+    /// </summary>
+    /// <param name="Fichita"></param>
+    /// <param name="Ataque"></param>
+    /// <param name="SubLista"></param>
+    /// <param name="Remove"></param>
     public void Posicionar(Ficha Fichita, Tablero Ataque, List<Casilla> SubLista, bool Remove = true) //Se administra desde el main
     {
         //Variable
@@ -134,10 +148,18 @@ public class Tablero
         if (Fichita.GetName() == "Alfil2")
         {
             Ficha FichaAux = PilaPosicionadas.Peek(); //el ultimo simpre es Alfil1
-            while (SubLista[index].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
-                Posicionar(Fichita, Ataque, SubLista);
+            try
+            {
+                while (SubLista[index].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
+                    Posicionar(Fichita, Ataque, SubLista);
+            }catch(Exception ex)
+            {
+                throw ex;
+            }
+         
         }
 
+        //Ocupamos la casilla con la fichita
         SubLista[index].SetFicha(Fichita);
         SubLista[index].SetOcupada(true);
 
@@ -147,167 +169,64 @@ public class Tablero
         if (Remove)
             SubLista.RemoveAt(index); //Sacamos de la lista al elemento ocupado, para que otros no lo puedan ocupar.
 
-        #region IDEA PREVIA
-        //    //1 REINA
-        //    if (Fichita.GetName() == "Reina")
-        //    {
-        //        index = Convert.ToInt32(r.Next(Cuadrado1.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
-
-        //        Fichita.SetPos(Cuadrado1[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
-
-        //        //while(Fichita.GetPos().GetOcupada()) //Mientras que   --> PENSAMOS QUE ES REDUNDANTE.
-        //        //    Posicionar(Fichita);                                  Si lo estamos sacando de la lista, entonces no tendría por qué elegir el mismo elemento
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        Cuadrado1.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
-        //    }
-
-        //    //2 ALFIL1
-        //    else if (Fichita.GetName() == "Alfil1")
-        //    {
-        //        index = Convert.ToInt32(r.Next(Cuadrado1.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
-
-        //        Fichita.SetPos(Cuadrado1[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        Cuadrado1.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
-        //                                   //TODO: wtf es por copia o puntero?? si borramos se nos borra todo??
-        //    }
-
-        //    //3 ALFIL2
-        //    else if (Fichita.GetName() == "Alfil2")
-        //    {
-        //        Ficha FichaAux = PilaPosicionadas.Peek();
-
-        //        index = Convert.ToInt32(r.Next(Cuadrado2.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
-
-        //        while (Fichita.GetPos().GetColor() == FichaAux.GetPos().GetColor()) //Mientras los dos alfiles sean del mismo color
-        //            Posicionar(Fichita, Ataque);
-
-        //        Fichita.SetPos(Cuadrado2[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        Cuadrado2.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
-        //    }
-
-        //    //4 CABALLO 1
-        //    else if (Fichita.GetName() == "Cabllo1")
-        //    {
-        //        index = Convert.ToInt32(r.Next(Cuadrado2.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
-
-        //        Fichita.SetPos(Cuadrado2[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        Cuadrado2.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
-        //                                   
-        //    }
-
-        //    //5 REY
-        //    else if (Fichita.GetName() == "Rey")
-        //    {
-        //        index = Convert.ToInt32(r.Next(Cuadrado3.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
-
-        //        Fichita.SetPos(Cuadrado3[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        Cuadrado3.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
-        //    }
-
-        //    //6 TORRE1
-        //    else if (Fichita.GetName() == "Torre1")
-        //    {
-        //        index = Convert.ToInt32(r.Next(Cuadrado4.Count)); //Elegimos un índice random de la SubLista "Cuadrado1"
-
-        //        Fichita.SetPos(Cuadrado4[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        Cuadrado4.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
-        //    }
-
-        //    //7 CABALLO2 -> NO BORRO!
-        //    else if (Fichita.GetName() == "Caballo2")
-        //    {
-        //        index = Convert.ToInt32(r.Next(Cuadrado2.Count)); //Elegimos un índice random de la SubLista "Cuadrado2"
-
-        //        Fichita.SetPos(Cuadrado2[index]); //La ficha tiene como Posicion ese nuevo ítem (esa casilla)
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        // No borro, porque puede superponerse con la Torre2, que siempre es la proxima en ubicarse.
-        //        //Cuadrado2.RemoveAt(index); //Sacamos de la lista al elemnto ocupado, para que otros no lo puedan ocupar.
-        //    }
-
-        //    //8 TORRE2 -> NO BORRO!
-        //    else if (Fichita.GetName() == "Torre2")
-        //    {
-        //        
-
-        //        Fichita.Atacar(Ataque); //Es la funcion que "pinta" --> OJO porque no es la filtrada
-
-        //        PilaPosicionadas.Push(Fichita);
-
-        //        //No borro :)
-        //    }
-        #endregion
     }
-    //TODO: agregar funcion que intercambie torres Y CABALLOS :)
 
+    /// 
+    /// <param name="Fichita"></param>
     public Casilla Buscar(Ficha Fichita)
     {
         for (int i = 0; i < 8; ++i)
             for (int j = 0; j < 8; ++j)
                 if (Matriz[i, j].Fichita == Fichita)
                     return Matriz[i, j];
-        return null;
+        throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + "no está en el Tablero ----- ");
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="Name"></param>
+    /// <returns></returns>
     public Casilla BuscarXNombre(string Name)
     {
         for (int i = 0; i < 8; ++i)
             for (int j = 0; j < 8; ++j)
                 if (Matriz[i, j].Fichita.GetName() == Name)
                     return Matriz[i, j];
-        return null;
+        throw new Exception("\n----- Error en BuscarXNombre: " + Name + "no está en el Tablero ----- ");
     }
     //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
-    //TODO: TRY CATCH
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public Tablero IntercambiarTorres()
     {
-        Tablero Intercambiado = this; //H
+        Tablero Intercambiado = new Tablero(this);
+        Casilla T1;
+        Casilla T2;
 
-        Casilla T1 = Intercambiado.BuscarXNombre("Torre1");
-        Casilla T2 = Intercambiado.BuscarXNombre("Torre2");
+        try
+        {
+            T1 = Intercambiado.BuscarXNombre("Torre1");
+            T2 = Intercambiado.BuscarXNombre("Torre2");
+        } catch(Exception ex)
+        {
+            throw ex; //MessageBox
+        }
 
-        if (T1.GetColumna() != T2.GetColumna() || T1.GetFila() != T2.GetFila()) //TODO: MANU AGREGUE ESTOOO
+        if (T1.GetColumna() != T2.GetColumna() || T1.GetFila() != T2.GetFila())
         {
             uint ColAux = T1.GetColumna();
             T1.SetColumna(T2.GetColumna());
             T2.SetColumna(ColAux);
             return Intercambiado;
         }
-        return null;
-    //TODO: TRY CATCH EN MAIN
+        throw new Exception("\n----- Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ----- ");
     }
+
+    //Funcion Caballo
+
 }
 //end Tablero

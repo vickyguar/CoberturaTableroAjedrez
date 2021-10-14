@@ -117,7 +117,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             #endregion
 
-            uint ContSoluciones = 0;
             Random rnd = new Random();
 
             List<Tablero> ListaSoluciones = new List<Tablero>();
@@ -155,6 +154,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     ListaSoluciones.Add(Espejado.Rotar90());
                     ListaSoluciones.Add((Espejado.Rotar90()).Rotar90());
                     ListaSoluciones.Add(((Espejado.Rotar90()).Rotar90()).Rotar90());
+
+
+                    Tablero Intercambiado = Juego.IntercambiarTorres(); // Tira una excepcion -> como la manejamos?
+                    ListaSoluciones.Add(Intercambiado);
+                    ListaSoluciones.Add(Intercambiado.Rotar90());
+                    ListaSoluciones.Add((Intercambiado.Rotar90()).Rotar90());
+                    ListaSoluciones.Add(((Intercambiado.Rotar90()).Rotar90()).Rotar90());
+
 
                     //verificar soluciones distintas
                     //filtrar soluciones
