@@ -15,7 +15,7 @@ using System.IO;
 
 public class Casilla
 {
-    private Color Colour; //TODO: inicializar! txt!! ToolBox
+    public Color Colour; //TODO: inicializar! txt!! ToolBox
 
     private bool Atacada;
 
