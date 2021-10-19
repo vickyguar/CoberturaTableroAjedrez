@@ -1,0 +1,19 @@
+---------- Ideas para el Form ----------
+
+- Van a haber tres Forms: uno para la presentación/ carátula; otro para hacer una sucesión de las soluciones; y el último para mostrar las soluciones con ataques fatales.
+
+- El Form de la presentación va a tener un botón llamado "generar soluciones", que abra el Form de la seguidilla de soluciones.
+
+- El Form de la sucesión de soluciones va a tener un contador (en el caso de la primera entrega contará 1/10, 2/10, ... , 10/10). 
+
+- El Form de la sucesión de soluciones va a imprimir los distintos Tableros, haciendo uso de un botón "Next", que debera presionar el usuario.
+
+- Al finalizar la sucesión aparecera un message box que indicará que se mostraron todas las soluciones.
+
+- Al finalizar la sucesión aparecera un botón que se llame "Mostrar fatales" y se abrira el tercer Form mostrando cuáles de los anteriores ataques fueron fatales utilizando el mismo formato (el boton "Next").
+
+---------- Ideas extras ----------
+
+- En la carátula podemos tener un boton que abra un Form, que muestre cómo atacan las piezas.
+
+- Tener un boton de "Back" para mostrar la solución anterior en la sucesión.
