@@ -19,5 +19,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
         {
 
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

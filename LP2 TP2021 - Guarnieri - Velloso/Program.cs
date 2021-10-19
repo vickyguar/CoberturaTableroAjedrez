@@ -17,7 +17,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Soluciones());
+            Application.Run(new Carátula());
 
             #region TABLEROS
 
