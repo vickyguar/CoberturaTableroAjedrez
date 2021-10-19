@@ -14,5 +14,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
         {
             InitializeComponent();
         }
+
+        private void Carátula_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
