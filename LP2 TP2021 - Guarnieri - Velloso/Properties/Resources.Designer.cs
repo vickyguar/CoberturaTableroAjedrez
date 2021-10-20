@@ -69,5 +69,15 @@ namespace LP2_TP2021___Guarnieri___Velloso.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FONDO1 {
+            get {
+                object obj = ResourceManager.GetObject("FONDO1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
