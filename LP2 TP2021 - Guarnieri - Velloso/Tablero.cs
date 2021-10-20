@@ -62,7 +62,7 @@ public class Tablero
     /// <param name="newTablero"></param>
     public Tablero(Tablero newTablero)
     {
-        Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
+        Matriz = newTablero.Matriz; 
         PilaPosicionadas = newTablero.PilaPosicionadas;
     }
 
@@ -239,10 +239,10 @@ public class Tablero
     {
         Tablero Rotado = new Tablero(this); //TODO: si esto no nos hace una copia -> sobrecargar el operador =
         int t;
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; ++i)
         {
             t = 0;
-            for (int j = 7; j >= 0; j--)
+            for (int j = 7; j >= 0; --j)
             {
                 Rotado.Matriz[i, t] = Matriz[j, i];
                 t++;

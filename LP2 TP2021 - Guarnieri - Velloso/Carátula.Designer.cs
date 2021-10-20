@@ -60,6 +60,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel1.Location = new System.Drawing.Point(677, 0);
             this.panel1.Name = "panel1";
