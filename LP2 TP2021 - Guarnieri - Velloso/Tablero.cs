@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Diagnostics;
 
 /// <summary>
 /// Enum para definir el Color de las Casillas.
@@ -156,9 +157,7 @@ public class Tablero
     {
         //Variable
         Random r = new Random();
-        int index = 0;
-
-        index = Convert.ToInt32(r.Next(SubLista.Count)); //Elegimos un índice random de la SubLista 
+        int index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
         uint i = SubLista[index].GetFila();
         uint j = SubLista[index].GetColumna();
@@ -169,25 +168,22 @@ public class Tablero
             try
             {
                 while (Matriz[i,j].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
-                    Posicionar(Fichita, Ataque, SubLista);
+                {
+                    index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
+
+                    i = SubLista[index].GetFila();
+                    j = SubLista[index].GetColumna();
+                }
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw ex; //TODO: nos tira el error cuando el color de las casillas son iguales
             }
-
         }
-
-        //Ocupamos la casilla con la fichita
-        //SubLista[index].SetFicha(Fichita);
-        //SubLista[index].SetOcupada(true);
-
-
 
         //Ocupamos la casilla con la fichita
         Matriz[i, j].SetFicha(Fichita);
         Matriz[i, j].SetOcupada(true);
-
 
         Fichita.Atacar(Ataque, Matriz[i,j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
@@ -208,24 +204,26 @@ public class Tablero
             {
                 if(Matriz[i,j].Fichita == null)
                 {
-                    Console.Write("  ##   ");
+                    Debug.Write("  ##   ");
                 }
                 else
                 {
                     if (Matriz[i, j].Fichita.GetName() == "Reina")
-                        Console.Write(" Reina  ");
+                        Debug.Write(" Reina  ");
                     if (Matriz[i, j].Fichita.GetName() == "Rey")
-                        Console.Write("  Rey   ");
+                        Debug.Write("  Rey   ");
                     if (Matriz[i, j].Fichita.GetName() == "Torre1" || Matriz[i, j].Fichita.GetName() == "Torre2")
-                        Console.Write(" Torre  ");
+                        Debug.Write(" Torre  ");
                     if (Matriz[i, j].Fichita.GetName() == "Caballo1" || Matriz[i, j].Fichita.GetName() == "Caballo2")
-                        Console.Write("Caballo ");
+                        Debug.Write(" Caballo ");
                     if (Matriz[i, j].Fichita.GetName() == "Alfil1" || Matriz[i, j].Fichita.GetName() == "Alfil2")
-                        Console.Write("Caballo ");
+                        Debug.Write(" Alfil ");
                 }
-                Console.Write("\n");
+                
             }
+            Debug.Write("\n");
         }
+        Debug.Write("\n\n");
 
     }
 
@@ -376,8 +374,12 @@ public class Tablero
     {
         for (int i = 0; i < 8; ++i)
             for (int j = 0; j < 8; ++j)
-                if (Matriz[i, j].Fichita.GetName() == Name)
-                    return Matriz[i, j];
+            {
+                if(Matriz[i,j].Fichita!=null)
+                    if (Matriz[i, j].Fichita.GetName() == Name)
+                        return Matriz[i, j];
+            }
+                
         throw new Exception("\n----- Error en BuscarXNombre: " + Name + "no está en el Tablero ----- ");
     } //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
 

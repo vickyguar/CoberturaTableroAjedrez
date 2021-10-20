@@ -148,17 +148,19 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 }
 
                 Juego.Posicionar(Caballo2, Ataque, Cuadrado2);
+                Juego.ImprimirConsola();
 
                 #endregion
 
                 #region ------ VERIFICAMOS Y GENERAMOS DE SOLUCIONES ------
 
-                Juego.Imprimir();
+                Juego.ImprimirConsola(); //TODO: porque no imprime :(
 
-                if (Juego.VerificarSolucion())
+                if (Ataque.VerificarSolucion())
                 {
 
                     //********************************** POSICIONAMOS LAS FICHAS **********************************//
+                    Juego.ImprimirConsola();
 
                     ListaSoluciones.Add(Juego);
 
@@ -173,11 +175,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     ListaSoluciones.Add(((Espejado.Rotar90()).Rotar90()).Rotar90());
 
 
-                    Tablero Intercambiado = new Tablero(Juego.IntercambiarTorres()); // Tira una excepcion -> como la manejamos?
-                    ListaSoluciones.Add(Intercambiado);
-                    ListaSoluciones.Add(Intercambiado.Rotar90());
-                    ListaSoluciones.Add((Intercambiado.Rotar90()).Rotar90());
-                    ListaSoluciones.Add(((Intercambiado.Rotar90()).Rotar90()).Rotar90());
+                    //Tablero Intercambiado = new Tablero(Juego.IntercambiarTorres()); // Tira una excepcion -> como la manejamos?
+                    //ListaSoluciones.Add(Intercambiado);
+                    //ListaSoluciones.Add(Intercambiado.Rotar90());
+                    //ListaSoluciones.Add((Intercambiado.Rotar90()).Rotar90());
+                    //ListaSoluciones.Add(((Intercambiado.Rotar90()).Rotar90()).Rotar90());
 
 
                     //verificar soluciones distintas
