@@ -59,7 +59,7 @@ public class Rey : Ficha
             if (i + 1 < 8)
                 Ataque.Matriz[i + 1, j + 1].SetAtacada(true);
             if (i - 1 >= 0)
-                Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
+                Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
         }
 
         if (j - 1 >= 0)
@@ -68,7 +68,7 @@ public class Rey : Ficha
             if (i + 1 < 8)
                 Ataque.Matriz[i + 1, j - 1].SetAtacada(true);
             if (i - 1 >= 0)
-                Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
+                Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
         }
     }
 

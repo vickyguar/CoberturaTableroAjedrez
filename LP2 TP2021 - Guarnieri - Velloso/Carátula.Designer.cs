@@ -37,7 +37,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // pictureBox1
             // 
             this.pictureBox1.Image = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.FONDO;
-            this.pictureBox1.Location = new System.Drawing.Point(109, 20);
+            this.pictureBox1.Location = new System.Drawing.Point(107, 31);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(568, 418);
             this.pictureBox1.TabIndex = 0;
@@ -46,9 +46,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // Titulo
             // 
             this.Titulo.AutoSize = true;
-            this.Titulo.Location = new System.Drawing.Point(307, 20);
+            this.Titulo.Font = new System.Drawing.Font("Gill Sans MT", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Titulo.ForeColor = System.Drawing.Color.Crimson;
+            this.Titulo.Location = new System.Drawing.Point(158, 31);
             this.Titulo.Name = "Titulo";
-            this.Titulo.Size = new System.Drawing.Size(177, 15);
+            this.Titulo.Size = new System.Drawing.Size(458, 45);
             this.Titulo.TabIndex = 2;
             this.Titulo.Text = "Cobertura del tablero de Ajedrez";
             // 

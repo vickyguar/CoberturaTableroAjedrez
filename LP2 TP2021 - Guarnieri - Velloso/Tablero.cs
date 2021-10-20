@@ -82,7 +82,7 @@ public class Tablero
     /// </summary>
     private void LeerArchivo()
     {
-        string[] lines = System.IO.File.ReadAllLines("ColoresTablero.txt"); //Leo el archivo de colores
+        string[] lines = System.IO.File.ReadAllLines("ColoresTablero.txt"); //Leo el archivo de colores --> TODO nos tiró un error
         int j = 0;
 
         foreach (string line in lines) //para cada linea
@@ -160,12 +160,15 @@ public class Tablero
 
         index = Convert.ToInt32(r.Next(SubLista.Count)); //Elegimos un índice random de la SubLista 
 
+        uint i = SubLista[index].GetFila();
+        uint j = SubLista[index].GetColumna();
+
         if (Fichita.GetName() == "Alfil2")
         {
             Ficha FichaAux = PilaPosicionadas.Peek(); //el ultimo simpre es Alfil1
             try
             {
-                while (SubLista[index].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
+                while (Matriz[i,j].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
                     Posicionar(Fichita, Ataque, SubLista);
             }
             catch (Exception ex)
@@ -176,14 +179,53 @@ public class Tablero
         }
 
         //Ocupamos la casilla con la fichita
-        SubLista[index].SetFicha(Fichita);
-        SubLista[index].SetOcupada(true);
+        //SubLista[index].SetFicha(Fichita);
+        //SubLista[index].SetOcupada(true);
 
-        Fichita.Atacar(Ataque, SubLista[index]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
+
+
+        //Ocupamos la casilla con la fichita
+        Matriz[i, j].SetFicha(Fichita);
+        Matriz[i, j].SetOcupada(true);
+
+
+        Fichita.Atacar(Ataque, Matriz[i,j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
         PilaPosicionadas.Push(Fichita);
         if (Remove)
             SubLista.RemoveAt(index); //Sacamos de la lista al elemento ocupado, para que otros no lo puedan ocupar.
+
+    }
+
+    /// <summary>
+    /// Imprime en Consola las fichas del Tablero
+    /// </summary>
+    public void ImprimirConsola()
+    {
+        for (uint i =0; i < 8; ++i)
+        {
+            for(uint j =0; j < 8; ++j)
+            {
+                if(Matriz[i,j].Fichita == null)
+                {
+                    Console.Write("  ##   ");
+                }
+                else
+                {
+                    if (Matriz[i, j].Fichita.GetName() == "Reina")
+                        Console.Write(" Reina  ");
+                    if (Matriz[i, j].Fichita.GetName() == "Rey")
+                        Console.Write("  Rey   ");
+                    if (Matriz[i, j].Fichita.GetName() == "Torre1" || Matriz[i, j].Fichita.GetName() == "Torre2")
+                        Console.Write(" Torre  ");
+                    if (Matriz[i, j].Fichita.GetName() == "Caballo1" || Matriz[i, j].Fichita.GetName() == "Caballo2")
+                        Console.Write("Caballo ");
+                    if (Matriz[i, j].Fichita.GetName() == "Alfil1" || Matriz[i, j].Fichita.GetName() == "Alfil2")
+                        Console.Write("Caballo ");
+                }
+                Console.Write("\n");
+            }
+        }
 
     }
 
@@ -322,8 +364,8 @@ public class Tablero
             for (int j = 0; j < 8; ++j)
                 if (Matriz[i, j].Fichita == Fichita)
                     return Matriz[i, j];
-        throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + "no está en el Tablero ----- ");
-    }
+        throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + " no está en el Tablero ----- ");
+    } //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
 
     /// <summary>
     /// Retorna la casilla donde está la Ficha con el nombre que le llega por parámetro.

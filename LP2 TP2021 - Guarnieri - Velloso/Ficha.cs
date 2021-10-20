@@ -64,7 +64,7 @@ public abstract class Ficha
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() + 1;
 
-        do
+        while (i < 8 && j < 8)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -73,7 +73,7 @@ public abstract class Ficha
 
             i++;
             j++;
-        } while (i < 8 || j < 8);
+        }
     }
 
     /// <summary>
@@ -84,19 +84,22 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Diagonal2(Tablero Ataque, Casilla Pos, bool Fatal)
     {
-        uint j = Pos.GetColumna() + 1;
-        uint i = Pos.GetFila() - 1;
+        uint j = Pos.GetColumna() + 1; //No estamos considerando la posición!
+        int i = (int)Pos.GetFila() - 1;
 
-        do
+
+        while (i >= 0 && j < 8)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
             if (Fatal && Ataque.Matriz[i, j].GetOcupada())
                 break;
 
-            i--;
+            i--; //Si i es uint, cuando i = 0 y hace i-- nos devuelve un número ALTÍSIMO (y tiene razón jajaja)
             j++;
-        } while (i >= 0 || j < 8);
+        }
+
+
     }
 
     /// <summary>
@@ -107,10 +110,10 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Diagonal3(Tablero Ataque, Casilla Pos, bool Fatal)
     {
-        uint j = Pos.GetColumna() - 1;
-        uint i = Pos.GetFila() - 1;
+        int j = (int)Pos.GetColumna() - 1;
+        int i = (int)Pos.GetFila() - 1;
 
-        do
+        while (i >= 0 && j >= 0)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -119,7 +122,7 @@ public abstract class Ficha
 
             i--;
             j--;
-        } while (i >= 0 || j >= 0);
+        }
     }
 
     /// <summary>
@@ -130,10 +133,10 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Diagonal4(Tablero Ataque, Casilla Pos, bool Fatal)
     {
-        uint j = Pos.GetColumna() - 1;
+        int j = (int)Pos.GetColumna() - 1;
         uint i = Pos.GetFila() + 1;
 
-        do
+        while (i < 8 && j >= 0)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -142,7 +145,7 @@ public abstract class Ficha
 
             i++;
             j--;
-        } while (i < 8 || j >= 8);
+        }
     }
 
     /// <summary>
@@ -156,7 +159,7 @@ public abstract class Ficha
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila();
 
-        do
+        while (j < 8)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -164,7 +167,7 @@ public abstract class Ficha
                 break;
 
             j++;
-        } while (j < 8);
+        }
     }
 
     /// <summary>
@@ -175,10 +178,10 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Horizontal2(Tablero Ataque, Casilla Pos, bool Fatal)
     {
-        uint j = Pos.GetColumna() - 1;
+        int j = (int)Pos.GetColumna() - 1;
         uint i = Pos.GetFila();
 
-        do
+        while (j >= 0)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -186,7 +189,7 @@ public abstract class Ficha
                 break;
 
             j--;
-        } while (j >= 0);
+        }
     }
 
     /// <summary>
@@ -200,7 +203,7 @@ public abstract class Ficha
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() + 1;
 
-        do
+        while (i < 8)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -208,7 +211,7 @@ public abstract class Ficha
                 break;
 
             i++;
-        } while (i < 8);
+        }
     }
 
     /// <summary>
@@ -220,9 +223,9 @@ public abstract class Ficha
     public void Vertical2(Tablero Ataque, Casilla Pos, bool Fatal)
     {
         uint j = Pos.GetColumna();
-        uint i = Pos.GetFila() - 1;
+        int i = (int)Pos.GetFila() - 1;
 
-        do
+        while (i >= 0)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -230,7 +233,7 @@ public abstract class Ficha
                 break;
 
             i--;
-        } while (i >= 0);
+        }
     }
 
     #endregion
