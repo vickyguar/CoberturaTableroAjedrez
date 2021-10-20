@@ -210,13 +210,14 @@ public class Tablero
                 {
                     if (Matriz[i, j].Fichita.GetName() == "Reina")
                         Debug.Write(" Reina  ");
-                    if (Matriz[i, j].Fichita.GetName() == "Rey")
+                    else if (Matriz[i, j].Fichita.GetName() == "Rey")
                         Debug.Write("  Rey   ");
-                    if (Matriz[i, j].Fichita.GetName() == "Torre1" || Matriz[i, j].Fichita.GetName() == "Torre2")
+                    else if (Matriz[i, j].Fichita.GetName() == "Torre1" || Matriz[i, j].Fichita.GetName() == "Torre2")
                         Debug.Write(" Torre  ");
-                    if (Matriz[i, j].Fichita.GetName() == "Caballo1" || Matriz[i, j].Fichita.GetName() == "Caballo2")
+                    else if (Matriz[i, j].Fichita.GetName() == "Caballo1" || Matriz[i, j].Fichita.GetName() == "Caballo2")
                         Debug.Write(" Caballo ");
-                    if (Matriz[i, j].Fichita.GetName() == "Alfil1" || Matriz[i, j].Fichita.GetName() == "Alfil2")
+                    else
+                        //(Matriz[i, j].Fichita.GetName() == "Alfil1" || Matriz[i, j].Fichita.GetName() == "Alfil2")
                         Debug.Write(" Alfil ");
                 }
                 
