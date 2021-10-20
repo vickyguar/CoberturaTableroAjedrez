@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 
 /// <summary>
 /// Enum para definir el Color de las Casillas.
@@ -238,18 +239,33 @@ public class Tablero
     /// <returns></returns>
     public Tablero Rotar90()
     {
-        Tablero Rotado = new Tablero(this); //TODO: si esto no nos hace una copia -> sobrecargar el operador =
-        int t;
-        for (int i = 0; i < 8; i++)
+        Tablero Rotado = new Tablero(this);
+
+        for (int x = 0; x < 8 / 2; x++)
         {
-            t = 0;
-            for (int j = 7; j >= 0; j--)
+            // Consider elements in group
+            // of 4 in current square
+            for (int y = x; y < 8 - x - 1; y++)
             {
-                Rotado.Matriz[i, t] = Matriz[j, i];
-                t++;
+                // Store current cell in
+                // temp variable
+                Casilla temp = Rotado.Matriz[x, y];
+
+                // Move values from right to top
+                Rotado.Matriz[x, y] = Rotado.Matriz[y, 8 - 1 - x];
+
+                // Move values from bottom to right
+                Rotado.Matriz[y, 8 - 1 - x] = Rotado.Matriz[8 - 1 - x, 8 - 1 - y];
+
+                // Move values from left to bottom
+                Rotado.Matriz[8 - 1 - x, 8 - 1 - y] = Rotado.Matriz[8 - 1 - y, x];
+
+                // Assign temp to left
+                Rotado.Matriz[8 - 1 - y, x] = temp;
             }
         }
 
+        ImprimirConsola();
         return Rotado;
     }
 
@@ -267,9 +283,11 @@ public class Tablero
             {
                 aux = Matriz[i, j];
                 Matriz[i, j] = Matriz[7 - i, j];
-                Matriz[7 - i, j] = aux; //TODO: verificar que cuando cambiamos las casillas, se llevan con ellas las fichas
+                Matriz[7 - i, j] = aux; 
             }
         }
+        this.ImprimirConsola();
+        Espejado.ImprimirConsola();
 
         return Espejado;
     }
