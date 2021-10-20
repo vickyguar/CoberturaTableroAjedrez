@@ -82,7 +82,7 @@ public class Tablero
     /// </summary>
     private void LeerArchivo()
     {
-        string[] lines = System.IO.File.ReadAllLines("ColoresTablero.txt"); //Leo el archivo de colores --> TODO nos tiró un error
+        string[] lines = System.IO.File.ReadAllLines("ColoresTablero.txt"); //Leo el archivo de colores
         int j = 0;
 
         foreach (string line in lines) //para cada linea
