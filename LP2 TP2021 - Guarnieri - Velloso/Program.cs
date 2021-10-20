@@ -12,7 +12,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main() 
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
