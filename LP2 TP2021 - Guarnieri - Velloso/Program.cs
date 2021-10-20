@@ -148,13 +148,13 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 }
 
                 Juego.Posicionar(Caballo2, Ataque, Cuadrado2);
-                Juego.ImprimirConsola();
+                //Juego.ImprimirConsola();
 
                 #endregion
 
                 #region ------ VERIFICAMOS Y GENERAMOS DE SOLUCIONES ------
 
-                Juego.ImprimirConsola(); //TODO: porque no imprime :(
+                //Juego.ImprimirConsola();
 
                 if (Ataque.VerificarSolucion())
                 {
@@ -164,9 +164,13 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     ListaSoluciones.Add(Juego);
 
-                    ListaSoluciones.Add(Juego.Rotar90());
-                    ListaSoluciones.Add((Juego.Rotar90()).Rotar90());
-                    ListaSoluciones.Add(((Juego.Rotar90()).Rotar90()).Rotar90());
+                    Tablero Rotado1 = new Tablero(Juego.Rotar90());
+                    Tablero Rotado2 = new Tablero(Rotado1.Rotar90());
+                    Tablero Rotado3 = new Tablero(Rotado2.Rotar90());
+
+                    ListaSoluciones.Add(Rotado1);
+                    ListaSoluciones.Add(Rotado2);
+                    ListaSoluciones.Add(Rotado3);
 
                     Tablero Espejado = new Tablero(Juego.Espejar());
                     ListaSoluciones.Add(Espejado);
@@ -199,3 +203,13 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
     }
 }
+
+//TODO: COSAS PA HACER
+/*
+ * Invertir de torres
+ * Espajado
+ * Verificar Soluciones distintas
+ * Filtrar soluciones
+ * Sacar doble fors
+ * Buscar algorimos en librerias
+ */
