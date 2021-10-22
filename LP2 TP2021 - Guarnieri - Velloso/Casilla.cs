@@ -91,7 +91,19 @@ public class Casilla
 
     public void SetOcupada(bool newOcupada) { Ocupada = newOcupada; }
 
-    public void SetFicha(Ficha newFichita) { Fichita = newFichita; }
+    public void SetFicha(Ficha newFichita)
+    {
+        if (newFichita != null)
+        {
+            Fichita = newFichita;
+            SetOcupada(true);
+        }
+        else
+        {
+            Fichita = null;
+            SetOcupada(false);
+        }
+    }
 
     #endregion
 
