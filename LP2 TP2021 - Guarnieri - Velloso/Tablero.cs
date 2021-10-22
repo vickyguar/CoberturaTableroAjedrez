@@ -37,6 +37,11 @@ public class Tablero
     /// </summary>
     private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
 
+    /// <summary>
+    /// ID de <see cref="Tablero"/>
+    /// </summary>
+    private int ID;
+
     #endregion
 
     #region CONSTRUCTORES & DESTRUCTORES
@@ -44,7 +49,7 @@ public class Tablero
     /// <summary>
     /// Constructor de la clase <see cref="Tablero"/>.: inicializa la Matriz de Casillas.
     /// </summary>
-    public Tablero()
+    public Tablero(int _ID)
     {
         //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
         for (uint i = 0; i < 8; ++i)
@@ -54,19 +59,22 @@ public class Tablero
                 Matriz[i, j] = new Casilla(i, j);
             }
         }
-        LeerArchivo();
+
+        ID = _ID;
+        
+        LeerArchivo(); //Inicializamos los colores del Tablero
     }
 
     /// <summary>
     /// Constructor por copia de la clase <see cref="Tablero"/>..
     /// </summary>
     /// <param name="newTablero"></param>
-    public Tablero(Tablero newTablero)
+    public Tablero(Tablero newTablero, int _ID)
     {
         //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; ++i)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < 8; ++j)
             {
                 Matriz[i, j] = newTablero.Matriz[i, j];
                 Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
@@ -78,7 +86,7 @@ public class Tablero
             }
         }
         PilaPosicionadas = newTablero.PilaPosicionadas;
-        PilaPosicionadas = newTablero.PilaPosicionadas;
+        ID = _ID;
     }
 
     /// <summary>
@@ -205,31 +213,31 @@ public class Tablero
     }
 
     /// <summary>
-    /// Imprime en Consola las fichas del Tablero
+    /// Imprime en el output las fichas del <see cref="Tablero"/>
     /// </summary>
     public void ImprimirOutput()
     {
         for (uint i =0; i < 8; ++i)
         {
+            Debug.Write("|");
             for(uint j =0; j < 8; ++j)
             {
                 if(Matriz[i,j].Fichita == null)
                 {
-                    Debug.Write("  ##   ");
+                    Debug.Write(" # |");
                 }
                 else
                 {
                     if (Matriz[i, j].Fichita.GetName() == "Reina")
-                        Debug.Write(" Reina  ");
+                        Debug.Write(" Q |");
                     else if (Matriz[i, j].Fichita.GetName() == "Rey")
-                        Debug.Write("  Rey   ");
+                        Debug.Write(" K |");
                     else if (Matriz[i, j].Fichita.GetName() == "Torre1" || Matriz[i, j].Fichita.GetName() == "Torre2")
-                        Debug.Write(" Torre  ");
+                        Debug.Write(" T |");
                     else if (Matriz[i, j].Fichita.GetName() == "Caballo1" || Matriz[i, j].Fichita.GetName() == "Caballo2")
-                        Debug.Write(" Caballo ");
+                        Debug.Write(" C |");
                     else
-                        //(Matriz[i, j].Fichita.GetName() == "Alfil1" || Matriz[i, j].Fichita.GetName() == "Alfil2")
-                        Debug.Write(" Alfil ");
+                        Debug.Write(" A |");
                 }
                 
             }
@@ -370,19 +378,26 @@ public class Tablero
     /// <returns></returns>
     public bool VerificarSolucionesDistintas(Tablero T)
     {
-        foreach (Casilla Pos in Matriz) //Para cada Casilla de la Matriz
-        {
-            if (Pos.Fichita != null) //Me fijo si en esa casilla hay ficha
+        if (ID != T.ID) { //Para no compararme conmigo mismo
+            for (int i = 0; i < 8; ++i)
             {
-                if (T.Matriz[Pos.GetFila(), Pos.GetColumna()].Fichita != null) //Si en la otra matriz hay también una ficha
+                for (int j = 0; j < 8; ++j)
                 {
-                    if (T.Matriz[Pos.GetFila(), Pos.GetColumna()].Fichita.GetType() != Pos.Fichita.GetType()) //Me fijo si son de distinto tipo
-                        return true;
+
+                    if (Matriz[i, j].Fichita != null) //Me fijo si en esa casilla hay ficha //ACA DICE QUE POS ES NULL!
+                    {
+                        if (T.Matriz[i, j].Fichita != null) //Si en la otra matriz hay también una ficha
+                        {
+                            if (T.Matriz[i, j].Fichita.GetType() != Matriz[i, j].Fichita.GetType()) //Me fijo si son de distinto tipo
+                                return true;
+                        }
+                        else //Sino, ya sé que son distintas
+                            return true;
+                    }
                 }
-                else //Sino, ya sé que son distintas
-                    return true;
             }
         }
+
         return false; //Si no entra a ningun return previo, quiere decir que son iguales
     }
     #endregion

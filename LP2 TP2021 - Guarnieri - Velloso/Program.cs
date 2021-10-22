@@ -24,12 +24,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Carátula()); -> por ahora no lo corremos
 
+            int ID = 0;
+
             #region TABLEROS
 
             //Creamos Tableros
-            Tablero Juego = new Tablero();
-            Tablero Ataque = new Tablero();
-            Tablero Filtrado = new Tablero();
+            Tablero Juego = new Tablero(ID);
+            Tablero Ataque = new Tablero(++ID);
+            Tablero Filtrado = new Tablero(++ID);
 
             #endregion
 
@@ -62,6 +64,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             while (ListaSoluciones.Count < 11)
             {
+                
+
                 #region LISTAS
 
                 for (uint i = 3; i <= 4; i++)
@@ -142,24 +146,25 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 if (Ataque.VerificarSolucion())
                 {
                     ListaSoluciones.Add(Juego); //#1
+                    ++ID;
                     Juego.ImprimirOutput(); //Vemos si funciona nuestro código, mirandolo en nuestro Debug
 
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°)
-                    Tablero Rotado1 = new Tablero(Juego); //#2
+                    Tablero Rotado1 = new Tablero(Juego,++ID); //#2
                     Rotado1.Rotar90();
                     ListaSoluciones.Add(Rotado1);
                     Rotado1.ImprimirOutput();
 
                     //TABLERO ROTADO 2 (180°)
-                    Tablero Rotado2 = new Tablero(Rotado1); //#3
+                    Tablero Rotado2 = new Tablero(Rotado1, ++ID); //#3
                     Rotado2.Rotar90();
                     ListaSoluciones.Add(Rotado2);
                     Rotado2.ImprimirOutput();
 
                     //TABLERO ROTADO 3 (270°)
-                    Tablero Rotado3 = new Tablero(Rotado2); //#4
+                    Tablero Rotado3 = new Tablero(Rotado2,++ID); //#4
                     Rotado3.Rotar90();
                     ListaSoluciones.Add(Rotado3);
                     Rotado3.ImprimirOutput();
@@ -168,25 +173,26 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #region ESPEJADO ORIGINAL
                     //ESPEJADO 1
-                    Tablero Espejado = new Tablero(); //#5
+                    Tablero Espejado = new Tablero(++ID); //#5
                     Juego.Espejar(Espejado);
                     ListaSoluciones.Add(Espejado);
                     Espejado.ImprimirOutput();
 
                     //ESPEJADO ROTADO 1 (90)
-                    Tablero EspejadoRotado1 = new Tablero(Espejado); //#6
+                    Tablero EspejadoRotado1 = new Tablero(Espejado, ++ID); //#6
+                    ++ID;
                     EspejadoRotado1.Rotar90();
                     ListaSoluciones.Add(EspejadoRotado1);
                     EspejadoRotado1.ImprimirOutput();
 
                     //ESPEJADO ROTADO 2 (180)
-                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1); //#7
+                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1, ++ID); //#7
                     EspejadoRotado2.Rotar90();
                     ListaSoluciones.Add(EspejadoRotado2);
                     EspejadoRotado2.ImprimirOutput();
 
                     //ESPEJADO ROTADO 3 (270)
-                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2); //#8
+                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2, ++ID); //#8
                     EspejadoRotado3.Rotar90();
                     ListaSoluciones.Add(EspejadoRotado3);
                     EspejadoRotado3.ImprimirOutput();
@@ -195,26 +201,26 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #region INTERCAMBIO TORRES
                     //INTERCAMBIO
-                    Tablero Intercambiado = new Tablero(Juego);  //#9
+                    Tablero Intercambiado = new Tablero(Juego,++ID);  //#9
                     Intercambiado.IntercambiarTorres();
                     ListaSoluciones.Add(Intercambiado);
                     Intercambiado.ImprimirOutput();
 
                     //INTERCAMBIO ROTADO 1 (90)
-                    Tablero IntercambioRotado1 = new Tablero(Intercambiado); //#10
+                    Tablero IntercambioRotado1 = new Tablero(Intercambiado,++ID); //#10
                     IntercambioRotado1.Rotar90();
                     ListaSoluciones.Add(IntercambioRotado1);
                     IntercambioRotado1.ImprimirOutput();
 
                     //INTERCAMBIO ROTADO (180)
-                    Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1); //#11
+                    Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1,++ID); //#11
                     IntercambioRotado2.Rotar90();
                     ListaSoluciones.Add(IntercambioRotado2);
                     IntercambioRotado2.ImprimirOutput();
 
 
                     //INTERCAMBIO ROTADO (270)
-                    Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2); //#12
+                    Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2,++ID); //#12
                     IntercambioRotado3.Rotar90();
                     ListaSoluciones.Add(IntercambioRotado3);
                     IntercambioRotado3.ImprimirOutput();
@@ -223,12 +229,22 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #endregion
 
-                    #region VERIFICAR SOLUCIONES DISTINTAS //TODO: falta terminar
+                    #region VERIFICAR SOLUCIONES DISTINTAS 
 
-                    foreach (Tablero Solucion in ListaSoluciones)
+                    for (int j = 0; j < ListaSoluciones.Count; j++)
+                    {
+                        Tablero Solucion = ListaSoluciones[j];
+
                         for (int i = 0; i < ListaSoluciones.Count; ++i)
+                        {
                             if (!Solucion.VerificarSolucionesDistintas(ListaSoluciones[i]))
+                            {
+                                //Pensar esto esta mal, porque la solución SI va a estar en la lista de soluciones
                                 ListaSoluciones.Remove(Solucion);
+                            }
+                        }
+                            
+                    }
 
                     #endregion
 
