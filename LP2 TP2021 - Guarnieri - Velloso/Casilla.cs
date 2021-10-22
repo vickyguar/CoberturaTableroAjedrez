@@ -19,7 +19,7 @@ public class Casilla
     /// <summary>
     /// <see cref="Color"/> de la <see cref="Casilla"/>.
     /// </summary>
-    public Color Colour; //TODO: inicializar! txt!! ToolBox
+    public Color Colour;
     /// <summary>
     /// <see cref="Ficha"/> que tiene la <see cref="Casilla"/>.
     /// </summary>

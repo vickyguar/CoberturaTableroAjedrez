@@ -118,7 +118,7 @@ public class Tablero
     /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez, con las Fichas atacando de forma fatal.
     /// </summary>
     /// <returns></returns>
-    public bool FiltrarFatales() //TODO: Si devuelve true, en el main lo agrego a la lista de fatales.
+    public bool FiltrarFatales()
     {
         //La idea es ir sacando las fichas y ver en donde estan
         /* TableroFisico.FiltrarFatales()  -> Este tablero fisico no esta "pintado", el que está pintado es el de Ataque
