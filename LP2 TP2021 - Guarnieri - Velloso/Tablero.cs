@@ -302,16 +302,14 @@ public class Tablero
     /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
     /// </summary>
     /// <returns></returns>
-    public Tablero IntercambiarTorres()
+    public void IntercambiarTorres()
     {
-        Tablero Intercambiado = new Tablero(this);
-        Casilla T1;
-        Casilla T2;
+        Casilla T1, T2;
 
         try
         {
-            T1 = Intercambiado.BuscarXNombre("Torre1");
-            T2 = Intercambiado.BuscarXNombre("Torre2");
+            T1 = BuscarXNombre("Torre1");
+            T2 = BuscarXNombre("Torre2");
         }
         catch (Exception ex)
         {
@@ -320,12 +318,31 @@ public class Tablero
 
         if (T1.GetColumna() != T2.GetColumna() || T1.GetFila() != T2.GetFila())
         {
-            uint ColAux = T1.GetColumna();
-            T1.SetColumna(T2.GetColumna());
-            T2.SetColumna(ColAux);
-            return Intercambiado;
+            uint x1 = T1.GetFila();
+            uint y1 = T1.GetColumna();
+            uint x2 = T2.GetFila();
+            uint y2 = T2.GetColumna();
+
+            Ficha Torre1 = Matriz[x1, y1].Fichita;
+            Ficha Torre2 = Matriz[x2, y2].Fichita;
+
+            if (Matriz[x1, y2].Fichita == null)
+            {
+                Matriz[x1, y1].SetFicha(null);
+                Matriz[x1, y2].SetFicha(Torre1);
+            }
+
+
+            if (Matriz[x2, y1].Fichita == null)
+            {
+                Matriz[x2, y2].SetFicha(null);
+                Matriz[x2, y1].SetFicha(Torre2);
+            }
+
+            return;
         }
-        throw new Exception("\n----- Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ----- ");
+
+        throw new Exception("\n Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ");
     }
 
     #endregion
