@@ -128,7 +128,7 @@ public class Tablero
 
         for (uint i = 0; i < 8; ++i) //recorremos la pila de fichas en el tablero de copia
         {
-            Ficha aux = Filtrado.PilaPosicionadas.Pop();
+            Ficha aux = Filtrado.PilaPosicionadas.Pop(); //TODO: TIRA ERROR ACA
             Casilla pos = Buscar(aux);
             aux.Atacar(Filtrado, pos, true);//"pintar casilleros" de forma fatal (true)
         }

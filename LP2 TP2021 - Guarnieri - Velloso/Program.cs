@@ -212,14 +212,18 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     //INTERCAMBIO ROTADO 1 (90)
                     Tablero IntercambioRotado1 = new Tablero(Intercambiado); //#10
                     IntercambioRotado1.Rotar90();
+                    ListaSoluciones.Add(IntercambioRotado1);
 
                     //INTERCAMBIO ROTADO (180)
                     Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1); //#11
                     IntercambioRotado2.Rotar90();
+                    ListaSoluciones.Add(IntercambioRotado2);
 
                     //INTERCAMBIO ROTADO (270)
                     Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2); //#12
                     IntercambioRotado3.Rotar90();
+                    ListaSoluciones.Add(IntercambioRotado3);
+
                     #endregion
 
                     #endregion
