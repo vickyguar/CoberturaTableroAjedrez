@@ -54,7 +54,6 @@ public class Casilla
         Ocupada = false;
         Atacada = false;
         Fichita = null;
-        //Colour = _Color;
     }
 
     /// <summary>
@@ -98,7 +97,7 @@ public class Casilla
             Fichita = newFichita;
             SetOcupada(true);
         }
-        else
+        else //Cuando queremos vaciar la casilla, al SetFicha le pasamos null, por eso hacemos esta consideración.
         {
             Fichita = null;
             SetOcupada(false);

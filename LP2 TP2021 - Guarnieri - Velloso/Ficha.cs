@@ -6,10 +6,10 @@
 //  Original author: vguar
 ///////////////////////////////////////////////////////////
 
-using System;
+/*using System;
 using System.Collections.Generic;
 using System.Text;
-using System.IO;
+using System.IO;*/
 
 public abstract class Ficha
 {

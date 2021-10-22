@@ -8,10 +8,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
+//using System.Text;
+//using System.IO;
 using System.Diagnostics;
-using System.Drawing.Drawing2D;
+//using System.Drawing.Drawing2D;
 
 /// <summary>
 /// Enum para definir el Color de las Casillas.
@@ -188,7 +188,7 @@ public class Tablero
             }
             catch (Exception ex)
             {
-                throw ex; //TODO: nos tira el error cuando el color de las casillas son iguales
+                throw ex; 
             }
         }
 
@@ -207,7 +207,7 @@ public class Tablero
     /// <summary>
     /// Imprime en Consola las fichas del Tablero
     /// </summary>
-    public void ImprimirConsola()
+    public void ImprimirOutput()
     {
         for (uint i =0; i < 8; ++i)
         {
@@ -249,20 +249,21 @@ public class Tablero
     /// <returns></returns>
     public void Rotar90()
     {
-        for (int x = 0; x < 8 / 2; x++)
-        {
-            // Consider elements in group of 4 in current square
-            for (int y = x; y < 8 - x - 1; y++)
+        int N = 8 - 1;
+
+        for (int i = 0; i < 8 / 2; i++)
+        { 
+            for (int j = i; j < 8 - i - 1; j++)
             {
-                Casilla temp = Matriz[x, y]; //variable auxiliar
+                Casilla aux = Matriz[i, j]; //Variable auxiliar
 
-                Matriz[x, y] = Matriz[y, 8 - 1 - x]; // Move values from right to top
+                Matriz[i, j] = Matriz[j, N - i]; // Movemos Casillas de derecha a arriba
 
-                Matriz[y, 8 - 1 - x] = Matriz[8 - 1 - x, 8 - 1 - y]; // Move values from bottom to right
+                Matriz[j, N - i] = Matriz[N - i, N - j]; // Movemos Casillas de abajo a la derecha
                 
-                Matriz[8 - 1 - x, 8 - 1 - y] = Matriz[8 - 1 - y, x]; // Move values from left to bottom
+                Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
 
-                Matriz[8 - 1 - y, x] = temp;  // Assign temp to left
+                Matriz[N - j, i] = aux; 
             }
         }
     }
@@ -375,7 +376,7 @@ public class Tablero
             {
                 if (T.Matriz[Pos.GetFila(), Pos.GetColumna()].Fichita != null) //Si en la otra matriz hay también una ficha
                 {
-                    if (T.Matriz[Pos.GetFila(), Pos.GetColumna()].Fichita.GetType() != Pos.Fichita.GetType()) //Me fijo si son del mismo tipo
+                    if (T.Matriz[Pos.GetFila(), Pos.GetColumna()].Fichita.GetType() != Pos.Fichita.GetType()) //Me fijo si son de distinto tipo
                         return true;
                 }
                 else //Sino, ya sé que son distintas
