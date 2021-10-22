@@ -19,7 +19,7 @@ public class Casilla
     /// <summary>
     /// <see cref="Color"/> de la <see cref="Casilla"/>.
     /// </summary>
-    public Color Colour; //TODO: inicializar! txt!! ToolBox
+    public Color Colour;
     /// <summary>
     /// <see cref="Ficha"/> que tiene la <see cref="Casilla"/>.
     /// </summary>
@@ -47,7 +47,7 @@ public class Casilla
     /// </summary>
     /// <param name="_Columna"></param>
     /// <param name="_Fila"></param>
-    public Casilla(uint _Columna, uint _Fila/*, Color _Color*/)
+    public Casilla(uint _Fila, uint _Columna/*, Color _Color*/)
     {
         Columna = _Columna;
         Fila = _Fila;
@@ -91,7 +91,19 @@ public class Casilla
 
     public void SetOcupada(bool newOcupada) { Ocupada = newOcupada; }
 
-    public void SetFicha(Ficha newFichita) { Fichita = newFichita; }
+    public void SetFicha(Ficha newFichita)
+    {
+        if (newFichita != null)
+        {
+            Fichita = newFichita;
+            SetOcupada(true);
+        }
+        else
+        {
+            Fichita = null;
+            SetOcupada(false);
+        }
+    }
 
     #endregion
 

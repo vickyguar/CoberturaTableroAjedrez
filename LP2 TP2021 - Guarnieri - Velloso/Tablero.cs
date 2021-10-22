@@ -63,7 +63,21 @@ public class Tablero
     /// <param name="newTablero"></param>
     public Tablero(Tablero newTablero)
     {
-        Matriz = newTablero.Matriz; 
+        //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                Matriz[i, j] = newTablero.Matriz[i, j];
+                Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
+                Matriz[i, j].Fichita = newTablero.Matriz[i, j].Fichita;
+                Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
+                Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
+                Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
+                Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
+            }
+        }
+        PilaPosicionadas = newTablero.PilaPosicionadas;
         PilaPosicionadas = newTablero.PilaPosicionadas;
     }
 
@@ -104,7 +118,7 @@ public class Tablero
     /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez, con las Fichas atacando de forma fatal.
     /// </summary>
     /// <returns></returns>
-    public bool FiltrarFatales() //TODO: Si devuelve true, en el main lo agrego a la lista de fatales.
+    public bool FiltrarFatales()
     {
         //La idea es ir sacando las fichas y ver en donde estan
         /* TableroFisico.FiltrarFatales()  -> Este tablero fisico no esta "pintado", el que está pintado es el de Ataque
@@ -114,7 +128,7 @@ public class Tablero
 
         for (uint i = 0; i < 8; ++i) //recorremos la pila de fichas en el tablero de copia
         {
-            Ficha aux = Filtrado.PilaPosicionadas.Pop();
+            Ficha aux = Filtrado.PilaPosicionadas.Pop(); //TODO: TIRA ERROR ACA
             Casilla pos = Buscar(aux);
             aux.Atacar(Filtrado, pos, true);//"pintar casilleros" de forma fatal (true)
         }
@@ -237,59 +251,50 @@ public class Tablero
     /// Retorna un nuevo Tablero, que es igual al Tablero this pero rotado 90°.
     /// </summary>
     /// <returns></returns>
-    public Tablero Rotar90()
+    public void Rotar90()
     {
-        Tablero Rotado = new Tablero(this);
-
         for (int x = 0; x < 8 / 2; x++)
         {
-            // Consider elements in group
-            // of 4 in current square
+            // Consider elements in group of 4 in current square
             for (int y = x; y < 8 - x - 1; y++)
             {
-                // Store current cell in
-                // temp variable
-                Casilla temp = Rotado.Matriz[x, y];
+                Casilla temp = Matriz[x, y]; //variable auxiliar
 
-                // Move values from right to top
-                Rotado.Matriz[x, y] = Rotado.Matriz[y, 8 - 1 - x];
+                Matriz[x, y] = Matriz[y, 8 - 1 - x]; // Move values from right to top
 
-                // Move values from bottom to right
-                Rotado.Matriz[y, 8 - 1 - x] = Rotado.Matriz[8 - 1 - x, 8 - 1 - y];
+                Matriz[y, 8 - 1 - x] = Matriz[8 - 1 - x, 8 - 1 - y]; // Move values from bottom to right
+                
+                Matriz[8 - 1 - x, 8 - 1 - y] = Matriz[8 - 1 - y, x]; // Move values from left to bottom
 
-                // Move values from left to bottom
-                Rotado.Matriz[8 - 1 - x, 8 - 1 - y] = Rotado.Matriz[8 - 1 - y, x];
-
-                // Assign temp to left
-                Rotado.Matriz[8 - 1 - y, x] = temp;
+                Matriz[8 - 1 - y, x] = temp;  // Assign temp to left
             }
         }
-
-        ImprimirConsola();
-        return Rotado;
     }
 
     /// <summary>
     /// Retorna un nuevo Tablero, que es igual al Tablero this pero espejado.
     /// </summary>
     /// <returns></returns>
-    public Tablero Espejar()
+    public Tablero Espejar(Tablero Espejar)
     {
-        Tablero Espejado = new Tablero(this); //copia del tablero original
-        Casilla aux;
-        for (int i = 0; i < 8; ++i)
+        Ficha aux;
+
+        for (int i = 0; i < 8; ++i) //recorro fila
         {
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < 8; ++j) //recorro columna
             {
-                aux = Matriz[i, j];
-                Matriz[i, j] = Matriz[7 - i, j];
-                Matriz[7 - i, j] = aux; 
+                if (Matriz[i, j].Fichita != null) //si hay una ficha en la casilla i,j
+                {
+                    aux = Matriz[i, j].Fichita; //ficha auxiliar
+                    
+                    if (Matriz[i, 7 - j].Fichita != null) //si en la casilla "espejo" hay una ficha
+                        Espejar.Matriz[i, j].SetFicha(Matriz[i, 7 - j].Fichita); //realizo el intercambio
+                    
+                    Espejar.Matriz[i, 7 - j].SetFicha(aux);
+                }
             }
         }
-        this.ImprimirConsola();
-        Espejado.ImprimirConsola();
-
-        return Espejado;
+        return Espejar;
     }
 
     /// <summary>
@@ -297,16 +302,14 @@ public class Tablero
     /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
     /// </summary>
     /// <returns></returns>
-    public Tablero IntercambiarTorres()
+    public void IntercambiarTorres()
     {
-        Tablero Intercambiado = new Tablero(this);
-        Casilla T1;
-        Casilla T2;
+        Casilla T1, T2;
 
         try
         {
-            T1 = Intercambiado.BuscarXNombre("Torre1");
-            T2 = Intercambiado.BuscarXNombre("Torre2");
+            T1 = BuscarXNombre("Torre1");
+            T2 = BuscarXNombre("Torre2");
         }
         catch (Exception ex)
         {
@@ -315,12 +318,31 @@ public class Tablero
 
         if (T1.GetColumna() != T2.GetColumna() || T1.GetFila() != T2.GetFila())
         {
-            uint ColAux = T1.GetColumna();
-            T1.SetColumna(T2.GetColumna());
-            T2.SetColumna(ColAux);
-            return Intercambiado;
+            uint x1 = T1.GetFila();
+            uint y1 = T1.GetColumna();
+            uint x2 = T2.GetFila();
+            uint y2 = T2.GetColumna();
+
+            Ficha Torre1 = Matriz[x1, y1].Fichita;
+            Ficha Torre2 = Matriz[x2, y2].Fichita;
+
+            if (Matriz[x1, y2].Fichita == null)
+            {
+                Matriz[x1, y1].SetFicha(null);
+                Matriz[x1, y2].SetFicha(Torre1);
+            }
+
+
+            if (Matriz[x2, y1].Fichita == null)
+            {
+                Matriz[x2, y2].SetFicha(null);
+                Matriz[x2, y1].SetFicha(Torre2);
+            }
+
+            return;
         }
-        throw new Exception("\n----- Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ----- ");
+
+        throw new Exception("\n Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ");
     }
 
     #endregion
