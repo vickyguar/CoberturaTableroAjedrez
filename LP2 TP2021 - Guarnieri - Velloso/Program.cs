@@ -164,27 +164,39 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     ListaSoluciones.Add(Juego);
 
-                    Tablero Rotado1 = new Tablero(Juego.Rotar90());
-                    Tablero Rotado2 = new Tablero(Rotado1.Rotar90());
-                    Tablero Rotado3 = new Tablero(Rotado2.Rotar90());
-
+                    Tablero Rotado1 = new Tablero(Juego);
+                    Rotado1.Rotar90();
                     ListaSoluciones.Add(Rotado1);
+
+                    Tablero Rotado2 = new Tablero(Rotado1);
+                    Rotado2.Rotar90();
                     ListaSoluciones.Add(Rotado2);
+
+                    Tablero Rotado3 = new Tablero(Rotado2);
+                    Rotado3.Rotar90();
                     ListaSoluciones.Add(Rotado3);
 
-                    Tablero Espejado = new Tablero(Juego.Espejar());
+                    Tablero Espejado = new Tablero();
+                    Juego.Espejar(Espejado);
                     ListaSoluciones.Add(Espejado);
-                    ListaSoluciones.Add(Espejado.Rotar90());
-                    ListaSoluciones.Add((Espejado.Rotar90()).Rotar90());
-                    ListaSoluciones.Add(((Espejado.Rotar90()).Rotar90()).Rotar90());
 
+                    Tablero EspejadoRotado1 = new Tablero(Espejado);
+                    EspejadoRotado1.Rotar90();
+                    ListaSoluciones.Add(EspejadoRotado1);
+
+                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1);
+                    EspejadoRotado2.Rotar90();
+                    ListaSoluciones.Add(EspejadoRotado2);
+
+                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2);
+                    EspejadoRotado3.Rotar90();
+                    ListaSoluciones.Add(EspejadoRotado3);
 
                     //Tablero Intercambiado = new Tablero(Juego.IntercambiarTorres()); // Tira una excepcion -> como la manejamos?
                     //ListaSoluciones.Add(Intercambiado);
                     //ListaSoluciones.Add(Intercambiado.Rotar90());
                     //ListaSoluciones.Add((Intercambiado.Rotar90()).Rotar90());
                     //ListaSoluciones.Add(((Intercambiado.Rotar90()).Rotar90()).Rotar90());
-
 
                     //verificar soluciones distintas
                     //filtrar soluciones
@@ -207,7 +219,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
 //TODO: COSAS PA HACER
 /*
  * Invertir de torres
- * Espajado
  * Verificar Soluciones distintas
  * Filtrar soluciones
  * Sacar doble fors
