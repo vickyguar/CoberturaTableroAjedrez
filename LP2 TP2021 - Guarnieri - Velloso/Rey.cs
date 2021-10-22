@@ -44,32 +44,20 @@ public class Rey : Ficha
     /// <param name="Fatal"></param>
     public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
     {
-        uint i = Pos.GetColumna();
-        uint j = Pos.GetFila();
+        uint i = Pos.GetFila();
+        uint j = Pos.GetColumna();
 
-        if (i + 1 < 8)
-            Ataque.Matriz[i + 1, j].SetAtacada(true);
+        //No verificamos si lo que pinta está fuera del Tablero, porque nosostras le restringimos al Rey a posicionarse en el Cuadrado3 (ver Main)
 
-        if (i - 1 >= 0)
-            Ataque.Matriz[i - 1, j].SetAtacada(true);
+        Ataque.Matriz[i + 1, j].SetAtacada(true);
+        Ataque.Matriz[i - 1, j].SetAtacada(true);
+        Ataque.Matriz[i, j + 1].SetAtacada(true);
+        Ataque.Matriz[i, j - 1].SetAtacada(true);
+        Ataque.Matriz[i + 1, j + 1].SetAtacada(true);
+        Ataque.Matriz[i + 1, j - 1].SetAtacada(true);
+        Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
+        Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
 
-        if (j + 1 < 8)
-        {
-            Ataque.Matriz[i, j + 1].SetAtacada(true);
-            if (i + 1 < 8)
-                Ataque.Matriz[i + 1, j + 1].SetAtacada(true);
-            if (i - 1 >= 0)
-                Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
-        }
-
-        if (j - 1 >= 0)
-        {
-            Ataque.Matriz[i, j - 1].SetAtacada(true);
-            if (i + 1 < 8)
-                Ataque.Matriz[i + 1, j - 1].SetAtacada(true);
-            if (i - 1 >= 0)
-                Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
-        }
     }
 
     #endregion

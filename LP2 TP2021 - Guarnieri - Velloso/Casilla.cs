@@ -47,7 +47,7 @@ public class Casilla
     /// </summary>
     /// <param name="_Columna"></param>
     /// <param name="_Fila"></param>
-    public Casilla(uint _Fila, uint _Columna/*, Color _Color*/)
+    public Casilla(uint _Fila, uint _Columna)
     {
         Columna = _Columna;
         Fila = _Fila;

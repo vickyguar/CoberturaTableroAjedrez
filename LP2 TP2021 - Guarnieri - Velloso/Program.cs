@@ -233,9 +233,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     #endregion
 
                     #region FILTRAR FATALES
-                    foreach (Tablero solucion in ListaSoluciones)
-                        if (solucion.FiltrarFatales())
-                            ListaFatales.Add(solucion);
+                    foreach (Tablero Solucion in ListaSoluciones)
+                        if (Solucion.FiltrarFatales(Filtrado))
+                            ListaFatales.Add(Solucion);
                     #endregion
                 }
 

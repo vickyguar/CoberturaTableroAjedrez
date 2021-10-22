@@ -118,23 +118,19 @@ public class Tablero
     /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez, con las Fichas atacando de forma fatal.
     /// </summary>
     /// <returns></returns>
-    public bool FiltrarFatales()
+    public bool FiltrarFatales(Tablero Filtrado)
     {
-        //La idea es ir sacando las fichas y ver en donde estan
-        /* TableroFisico.FiltrarFatales()  -> Este tablero fisico no esta "pintado", el que está pintado es el de Ataque
-         * Podríamos hacer una copia de este tablero físico, y llamarlo Tablero filtrado, y pintar a tablero filtrado
-         */
-        Tablero Filtrado = new Tablero(this); //es una copia del tablero fisico
-
-        for (uint i = 0; i < 8; ++i) //recorremos la pila de fichas en el tablero de copia
+        foreach (Ficha Fichita in PilaPosicionadas)
         {
-            Ficha aux = Filtrado.PilaPosicionadas.Pop(); //TODO: TIRA ERROR ACA
-            Casilla pos = Buscar(aux);
-            aux.Atacar(Filtrado, pos, true);//"pintar casilleros" de forma fatal (true)
+            Fichita.Atacar(Filtrado, Buscar(Fichita), true);
         }
+
         return (Filtrado.VerificarSolucion()) ? true : false; //si es una solución fatal, devulve true y sino devuelve false
     }
 
+    /// <summary>
+    /// Imprime en Form
+    /// </summary>
     public void Imprimir()
     {
 
@@ -373,21 +369,21 @@ public class Tablero
     /// <returns></returns>
     public bool VerificarSolucionesDistintas(Tablero T)
     {
-        for (uint i = 0; i < 8; i++)
+        foreach (Casilla Pos in Matriz) //Para cada Casilla de la Matriz
         {
-            for (uint j = 0; j < 8; j++)
+            if (Pos.Fichita != null) //Me fijo si en esa casilla hay ficha
             {
-                if (Matriz[i, j].GetOcupada() && !(T.Matriz[i, j].GetOcupada()) || !(Matriz[i, j].GetOcupada()) && T.Matriz[i, j].GetOcupada())
-                    return true;
-                else if (Matriz[i, j].GetOcupada() && T.Matriz[i, j].GetOcupada())
-                    if (Matriz[i, j].Fichita.GetType() != T.Matriz[i, j].Fichita.GetType()) //TODO: chequear
+                if (T.Matriz[Pos.GetFila(), Pos.GetColumna()].Fichita != null) //Si en la otra matriz hay también una ficha
+                {
+                    if (T.Matriz[Pos.GetFila(), Pos.GetColumna()].Fichita.GetType() != Pos.Fichita.GetType()) //Me fijo si son del mismo tipo
                         return true;
+                }
+                else //Sino, ya sé que son distintas
+                    return true;
             }
         }
-
-        return false;
+        return false; //Si no entra a ningun return previo, quiere decir que son iguales
     }
-
     #endregion
 
     #region BUSCAR
