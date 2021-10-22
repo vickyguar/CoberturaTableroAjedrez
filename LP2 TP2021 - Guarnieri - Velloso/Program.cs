@@ -43,6 +43,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Random rnd = new Random();
 
             List<Tablero> ListaSoluciones = new List<Tablero>();
+            List<Tablero> ListaFatales = new List<Tablero>();
 
             while (ListaSoluciones.Count < 11)
             {
@@ -128,7 +129,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 #endregion
 
-                #region ---------- POSICIONAMIENTO DE LAS FICHAS ----------
+                #region POSICIONAMIENTO DE LAS FICHAS
 
                 Juego.Posicionar(Reina, Ataque, Cuadrado1);
                 Juego.Posicionar(Alfil1, Ataque, Cuadrado1);
@@ -148,63 +149,93 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 }
 
                 Juego.Posicionar(Caballo2, Ataque, Cuadrado2);
-                //Juego.ImprimirConsola();
 
                 #endregion
 
-                #region ------ VERIFICAMOS Y GENERAMOS DE SOLUCIONES ------
-
-                //Juego.ImprimirConsola();
+                #region GENERACIÓN DE SOLUCIONES
 
                 if (Ataque.VerificarSolucion())
                 {
 
-                    //********************************** POSICIONAMOS LAS FICHAS **********************************//
                     Juego.ImprimirConsola();
 
-                    ListaSoluciones.Add(Juego);
+                    ListaSoluciones.Add(Juego); //#1
 
-                    Tablero Rotado1 = new Tablero(Juego);
+                    #region ROTADO DE ORIGINAL
+
+                    //TABLERO ROTADO 1 (90)
+                    Tablero Rotado1 = new Tablero(Juego); //#2
                     Rotado1.Rotar90();
                     ListaSoluciones.Add(Rotado1);
 
-                    Tablero Rotado2 = new Tablero(Rotado1);
+                    //TABLERO ROTADO 2 (180)
+                    Tablero Rotado2 = new Tablero(Rotado1); //#3
                     Rotado2.Rotar90();
                     ListaSoluciones.Add(Rotado2);
-
-                    Tablero Rotado3 = new Tablero(Rotado2);
+                     
+                    //TABLERO ROTADO 3 (270)
+                    Tablero Rotado3 = new Tablero(Rotado2); //#4
                     Rotado3.Rotar90();
                     ListaSoluciones.Add(Rotado3);
 
-                    Tablero Espejado = new Tablero();
+                    #endregion
+
+                    #region ESPEJADO ORIGINAL
+                    //ESPEJADO 1
+                    Tablero Espejado = new Tablero(); //#5
                     Juego.Espejar(Espejado);
                     ListaSoluciones.Add(Espejado);
 
-                    Tablero EspejadoRotado1 = new Tablero(Espejado);
+                    //ESPEJADO ROTADO 1 (90)
+                    Tablero EspejadoRotado1 = new Tablero(Espejado); //#6
                     EspejadoRotado1.Rotar90();
                     ListaSoluciones.Add(EspejadoRotado1);
 
-                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1);
+                    //ESPEJADO ROTADO 2 (180)
+                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1); //#7
                     EspejadoRotado2.Rotar90();
                     ListaSoluciones.Add(EspejadoRotado2);
 
-                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2);
+                    //ESPEJADO ROTADO 3 (270)
+                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2); //#8
                     EspejadoRotado3.Rotar90();
                     ListaSoluciones.Add(EspejadoRotado3);
 
-                    //Tablero Intercambiado = new Tablero(Juego.IntercambiarTorres()); // Tira una excepcion -> como la manejamos?
-                    //ListaSoluciones.Add(Intercambiado);
-                    //ListaSoluciones.Add(Intercambiado.Rotar90());
-                    //ListaSoluciones.Add((Intercambiado.Rotar90()).Rotar90());
-                    //ListaSoluciones.Add(((Intercambiado.Rotar90()).Rotar90()).Rotar90());
+                    #endregion
 
-                    //verificar soluciones distintas
-                    //filtrar soluciones
+                    #region INTERCAMBIO TORRES
+                    //INTERCAMBIO
+                    Tablero Intercambiado = new Tablero(Juego);  //#9
+                    Intercambiado.IntercambiarTorres();
+                    ListaSoluciones.Add(Intercambiado);
+
+                    //INTERCAMBIO ROTADO 1 (90)
+                    Tablero IntercambioRotado1 = new Tablero(Intercambiado); //#10
+                    IntercambioRotado1.Rotar90();
+
+                    //INTERCAMBIO ROTADO (180)
+                    Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1); //#11
+                    IntercambioRotado2.Rotar90();
+
+                    //INTERCAMBIO ROTADO (270)
+                    Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2); //#12
+                    IntercambioRotado3.Rotar90();
+                    #endregion
+
+                    #endregion
+
+                    #region VERIFICAR SOLUCIONES DISTINTAS
+                    //Juego.VerificarSolucionesDistintas();
+                    #endregion
+
+                    #region FILTRAR FATALES
+                    foreach (Tablero solucion in ListaSoluciones)
+                        if (solucion.FiltrarFatales())
+                            ListaFatales.Add(solucion);
+                    #endregion
                 }
 
-                #endregion
-
-                #region -------------- LIMPIAMOS LOS TABLEROS -------------
+                #region LIMPIAMOS LOS TABLEROS
 
                 Juego.Limpiar();
                 Ataque.Limpiar();
@@ -218,9 +249,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
 //TODO: COSAS PA HACER
 /*
- * Invertir de torres
  * Verificar Soluciones distintas
- * Filtrar soluciones
  * Sacar doble fors
  * Buscar algorimos en librerias
  */
