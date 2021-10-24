@@ -134,7 +134,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     case 2:
                         Juego.Posicionar(Torre2, Ataque, Cuadrado3); break;
                     case 3:
-                        Juego.Posicionar(Torre2, Ataque, Cuadrado4); break;
+                        Juego.Posicionar(Torre2, Ataque, Cuadrado4); break; 
                 }
 
                 Juego.Posicionar(Caballo2, Ataque, Cuadrado2);
