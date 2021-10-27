@@ -37,6 +37,7 @@ public class Casilla
 
     private bool Ocupada;
     private bool Atacada;
+    private bool AtacadaFatalmente;
 
     #endregion
 
@@ -103,6 +104,8 @@ public class Casilla
             SetOcupada(false);
         }
     }
+
+    public void SetAtacadaFatalmente(bool newAtacadaFatalmente) { AtacadaFatalmente = newAtacadaFatalmente; }
 
     #endregion
 

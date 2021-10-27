@@ -51,7 +51,7 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public abstract void Atacar(Tablero Ataque, Casilla Pos, bool Fatal = false);
+    public abstract void Atacar(Tablero Ataque, Casilla Pos, bool Fatal = false); //El bool fatal ya no lo necesitaríamos
 
     /// <summary>
     /// Ataca la diagonal ↘ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
@@ -66,10 +66,11 @@ public abstract class Ficha
 
         while (i < 8 && j < 8)
         {
+            if (!Ataque.Matriz[i, j].GetOcupada())
+            {
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+            }
             Ataque.Matriz[i, j].SetAtacada(true);
-
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
 
             i++;
             j++;
