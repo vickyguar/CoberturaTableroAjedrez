@@ -19,6 +19,15 @@ public abstract class Ficha
     /// Nombre de la <see cref="Ficha"/>.
     /// </summary>
     protected string Name;
+    /// <summary>
+    /// Columna de la <see cref="Casilla"/>.
+    /// </summary>
+    private uint Columna;
+    /// <summary>
+    /// Fila de la <see cref="Casilla"/>
+    /// </summary>
+    private uint Fila;
+
 
     #endregion
 
@@ -31,6 +40,8 @@ public abstract class Ficha
     public Ficha(string _Name)
     {
         Name = _Name;
+        Fila = 0;
+        Columna = 0;
     }
 
     /// <summary>
@@ -270,6 +281,13 @@ public abstract class Ficha
     #region GETTERS
 
     public string GetName() { return Name; }
+
+    protected uint GetFila() { return Fila; }
+    protected uint GetColumna() { return Columna; }
+
+    public void SetColumna(uint newCol) { Columna = newCol; }
+    public void SetFila(uint newFila) { Fila = newFila; }
+
 
     #endregion
 
