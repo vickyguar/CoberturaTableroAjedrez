@@ -78,6 +78,7 @@ public class Casilla
     public uint GetFila() { return Fila; }
 
     public Color GetColor() { return Colour; }
+    public bool GetAtacadaFatalmente() { return AtacadaFatalmente; }
 
     #endregion
 
@@ -106,6 +107,7 @@ public class Casilla
     }
 
     public void SetAtacadaFatalmente(bool newAtacadaFatalmente) { AtacadaFatalmente = newAtacadaFatalmente; }
+
 
     #endregion
 

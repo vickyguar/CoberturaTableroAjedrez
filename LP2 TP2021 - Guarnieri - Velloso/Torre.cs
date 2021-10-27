@@ -45,12 +45,12 @@ public class Torre : Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
+    public override void Atacar(Tablero Ataque, Casilla Pos)
     {
-        Horizontal1(Ataque, Pos, Fatal);
-        Horizontal2(Ataque, Pos, Fatal);
-        Vertical1(Ataque, Pos, Fatal);
-        Vertical2(Ataque, Pos, Fatal);
+        Horizontal1(Ataque, Pos);
+        Horizontal2(Ataque, Pos);
+        Vertical1(Ataque, Pos);
+        Vertical2(Ataque, Pos);
     }
 
     #endregion

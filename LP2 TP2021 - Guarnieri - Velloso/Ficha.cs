@@ -51,7 +51,7 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public abstract void Atacar(Tablero Ataque, Casilla Pos, bool Fatal = false); //El bool fatal ya no lo necesitaríamos
+    public abstract void Atacar(Tablero Ataque, Casilla Pos); 
 
     /// <summary>
     /// Ataca la diagonal ↘ del Tablero Ataque, desde la Casilla que le llega por parámetro. Por default, el ataque no es Fatal.
@@ -59,18 +59,21 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Diagonal1(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Diagonal1(Tablero Ataque, Casilla Pos)
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() + 1;
+        bool stop = false;
 
         while (i < Global.N_ && j < Global.N_)
         {
-            if (!Ataque.Matriz[i, j].GetOcupada())
-            {
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
+
+            if (!stop)
                 Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
-            }
-            Ataque.Matriz[i, j].SetAtacada(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             i++;
             j++;
@@ -83,24 +86,25 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Diagonal2(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Diagonal2(Tablero Ataque, Casilla Pos)
     {
         uint j = Pos.GetColumna() + 1; //No estamos considerando la posición!
         int i = (int)Pos.GetFila() - 1;
-
+        bool stop = false;
 
         while (i >= 0 && j < Global.N_)
         {
-            Ataque.Matriz[i, j].SetAtacada(true);
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
 
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
+            if (!stop)
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             i--; //Si i es uint, cuando i = 0 y hace i-- nos devuelve un número ALTÍSIMO (y tiene razón jajaja)
             j++;
         }
-
-
     }
 
     /// <summary>
@@ -109,17 +113,21 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Diagonal3(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Diagonal3(Tablero Ataque, Casilla Pos)
     {
         int j = (int)Pos.GetColumna() - 1;
         int i = (int)Pos.GetFila() - 1;
+        bool stop = false;
 
         while (i >= 0 && j >= 0)
         {
-            Ataque.Matriz[i, j].SetAtacada(true);
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
 
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
+            if (!stop)
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             i--;
             j--;
@@ -132,17 +140,21 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Diagonal4(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Diagonal4(Tablero Ataque, Casilla Pos)
     {
         int j = (int)Pos.GetColumna() - 1;
         uint i = Pos.GetFila() + 1;
+        bool stop = false;
 
         while (i < Global.N_ && j >= 0)
         {
-            Ataque.Matriz[i, j].SetAtacada(true);
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
 
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
+            if (!stop)
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             i++;
             j--;
@@ -155,17 +167,21 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Horizontal1(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Horizontal1(Tablero Ataque, Casilla Pos)
     {
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila();
+        bool stop = false;
 
         while (j < Global.N_)
         {
-            Ataque.Matriz[i, j].SetAtacada(true);
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
 
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
+            if (!stop)
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             j++;
         }
@@ -177,17 +193,21 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Horizontal2(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Horizontal2(Tablero Ataque, Casilla Pos)
     {
         int j = (int)Pos.GetColumna() - 1;
         uint i = Pos.GetFila();
+        bool stop = false;
 
         while (j >= 0)
         {
-            Ataque.Matriz[i, j].SetAtacada(true);
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
 
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
+            if (!stop)
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             j--;
         }
@@ -199,17 +219,21 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Vertical1(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Vertical1(Tablero Ataque, Casilla Pos)
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() + 1;
+        bool stop = false;
 
         while (i < Global.N_)
         {
-            Ataque.Matriz[i, j].SetAtacada(true);
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
 
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
+            if (!stop)
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             i++;
         }
@@ -221,17 +245,21 @@ public abstract class Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public void Vertical2(Tablero Ataque, Casilla Pos, bool Fatal)
+    public void Vertical2(Tablero Ataque, Casilla Pos)
     {
         uint j = Pos.GetColumna();
         int i = (int)Pos.GetFila() - 1;
+        bool stop = false;
 
         while (i >= 0)
         {
-            Ataque.Matriz[i, j].SetAtacada(true);
+            Ataque.Matriz[i, j].SetAtacada(true); //Atacamos levemente
 
-            if (Fatal && Ataque.Matriz[i, j].GetOcupada())
-                break;
+            if (!stop)
+                Ataque.Matriz[i, j].SetAtacadaFatalmente(true);
+
+            if (Ataque.Matriz[i, j].GetOcupada())
+                stop = true; //pinto hasta que me encuentre con una ficha (de manera fatal)
 
             i--;
         }

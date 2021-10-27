@@ -42,7 +42,7 @@ public class Caballo : Ficha
     /// <param name="Ataque"></param>
     /// <param name="Pos"></param>
     /// <param name="Fatal"></param>
-    public override void Atacar(Tablero Ataque, Casilla Pos, bool Fatal)
+    public override void Atacar(Tablero Ataque, Casilla Pos)
     {
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila();

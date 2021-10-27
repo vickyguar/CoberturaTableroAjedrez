@@ -23,6 +23,14 @@ public enum Color : int
 
 } //end Color
 
+public enum TipoSolucion : int
+{
+    NO_SOLUCION = 0,
+    LEVE,
+    FATAL
+
+} //end TipoSolucion
+
 public class Tablero
 {
     #region ATRIBUTOS
@@ -41,8 +49,11 @@ public class Tablero
     /// ID de <see cref="Tablero"/>
     /// </summary>
     private int ID;
+    private TipoSolucion type;
+
 
     #endregion
+
 
     #region CONSTRUCTORES & DESTRUCTORES
 
@@ -61,7 +72,7 @@ public class Tablero
         }
 
         ID = _ID;
-        
+        Type = TipoSolucion.NO_SOLUCION;
         LeerArchivo(); //Inicializamos los colores del Tablero
     }
 
@@ -126,11 +137,11 @@ public class Tablero
     /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez, con las Fichas atacando de forma fatal.
     /// </summary>
     /// <returns></returns>
-    public bool FiltrarFatales(Tablero Filtrado)
+    public bool FiltrarFatales(Tablero Filtrado) 
     {
         foreach (Ficha Fichita in PilaPosicionadas)
         {
-            Fichita.Atacar(Filtrado, Buscar(Fichita), true);
+            Fichita.Atacar(Filtrado, Buscar(Fichita));
         }
 
         return (Filtrado.VerificarSolucion()) ? true : false; //si es una solución fatal, devulve true y sino devuelve false
@@ -355,19 +366,27 @@ public class Tablero
     #region VERIFICACIONES
 
     /// <summary>
-    /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez.
+    /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna el tipo (falta o leve).
     /// </summary>
     /// <returns></returns>
     public bool VerificarSolucion()
     {
+        TipoSolucion Type_ = TipoSolucion.FATAL;
+
         for (int i = 0; i < Global.N_; i++)
         {
             for (int j = 0; j < Global.N_; j++)
             {
+                if (!Matriz[i, j].GetAtacadaFatalmente())
+                    Type_ = TipoSolucion.LEVE;
                 if (!Matriz[i, j].GetAtacada())
+                {
+                    Type = TipoSolucion.NO_SOLUCION;
                     return false;
+                }
             }
         }
+        Type = Type_;
         return true;
     }
 
@@ -436,6 +455,10 @@ public class Tablero
         throw new Exception("\n----- Error en BuscarXNombre: " + Name + "no está en el Tablero ----- ");
     } //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
 
+    #endregion
+
+    #region SETTERS & GETTES
+    public TipoSolucion Type { get => type; set => type = value; }
     #endregion
 
 } //end Tablero
