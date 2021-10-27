@@ -74,7 +74,7 @@ public abstract class Ficha
 
             i++;
             j++;
-        }
+        } 
     }
 
     /// <summary>
