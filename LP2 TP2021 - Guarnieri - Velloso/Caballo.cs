@@ -49,24 +49,24 @@ public class Caballo : Ficha
 
         if (i - 2 >= 0)
         {
-            if (j + 1 < 8)
+            if (j + 1 < Global.N_)
                 Ataque.Matriz[i - 2, j + 1].SetAtacada(true);
 
             if (j - 1 >= 0)
                 Ataque.Matriz[i - 2, j - 1].SetAtacada(true);
         }
 
-        if (i + 2 < 8)
+        if (i + 2 < Global.N_)
         {
             if (j - 1 >= 0)
                 Ataque.Matriz[i + 2, j - 1].SetAtacada(true);
-            if (j + 1 < 8)
+            if (j + 1 < Global.N_)
                 Ataque.Matriz[i + 2, j + 1].SetAtacada(true);
         }
 
-        if (i + 1 < 8)
+        if (i + 1 < Global.N_)
         {
-            if (j + 2 < 8)
+            if (j + 2 < Global.N_)
                 Ataque.Matriz[i + 1, j + 2].SetAtacada(true);
             if (j - 2 >= 0)
                 Ataque.Matriz[i + 1, j - 2].SetAtacada(true);
@@ -76,7 +76,7 @@ public class Caballo : Ficha
         {
             if (j - 2 >= 0)
                 Ataque.Matriz[i - 1, j - 2].SetAtacada(true);
-            if (j + 2 < 8)
+            if (j + 2 < Global.N_)
                 Ataque.Matriz[i - 1, j + 2].SetAtacada(true);
         }
     }

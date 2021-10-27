@@ -30,12 +30,12 @@ public class Tablero
     /// <summary>
     /// Matriz de Casillas del <see cref="Tablero"/>.
     /// </summary>
-    public Casilla[,] Matriz = new Casilla[8, 8]; //Acceso publico, para que las fichas se puedan posicionar y atacar
+    public Casilla[,] Matriz = new Casilla[Global.N_, Global.N_]; //Acceso publico, para que las fichas se puedan posicionar y atacar
 
     /// <summary>
     /// Pila de Fichas (se llena a medida que se posicionan las Ficha) del <see cref="Tablero"/>.
     /// </summary>
-    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(8);
+    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(Global.N_);
 
     /// <summary>
     /// ID de <see cref="Tablero"/>
@@ -52,9 +52,9 @@ public class Tablero
     public Tablero(int _ID)
     {
         //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
-        for (uint i = 0; i < 8; ++i)
+        for (uint i = 0; i < Global.N_; ++i)
         {
-            for (uint j = 0; j < 8; ++j)
+            for (uint j = 0; j < Global.N_; ++j)
             {
                 Matriz[i, j] = new Casilla(i, j);
             }
@@ -72,9 +72,9 @@ public class Tablero
     public Tablero(Tablero newTablero, int _ID)
     {
         //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
-        for (int i = 0; i < 8; ++i)
+        for (int i = 0; i < Global.N_; ++i)
         {
-            for (int j = 0; j < 8; ++j)
+            for (int j = 0; j < Global.N_; ++j)
             {
                 Matriz[i, j] = newTablero.Matriz[i, j];
                 Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
@@ -150,9 +150,9 @@ public class Tablero
     /// </summary>
     public void Limpiar()
     {
-        for (uint i = 0; i < 8; i++)
+        for (uint i = 0; i < Global.N_; i++)
         {
-            for (uint j = 0; j < 8; j++)
+            for (uint j = 0; j < Global.N_; j++)
             {
                 Matriz[i, j].SetAtacada(false);
                 Matriz[i, j].SetFicha(null);
@@ -217,10 +217,10 @@ public class Tablero
     /// </summary>
     public void ImprimirOutput()
     {
-        for (uint i =0; i < 8; ++i)
+        for (uint i =0; i < Global.N_; ++i)
         {
             Debug.Write("|");
-            for(uint j =0; j < 8; ++j)
+            for(uint j =0; j < Global.N_; ++j)
             {
                 if(Matriz[i,j].Fichita == null)
                 {
@@ -257,11 +257,11 @@ public class Tablero
     /// <returns></returns>
     public void Rotar90()
     {
-        int N = 8 - 1;
+        int N = Global.N_ - 1;
 
-        for (int i = 0; i < 8 / 2; i++)
+        for (int i = 0; i < Global.N_ / 2; i++)
         { 
-            for (int j = i; j < 8 - i - 1; j++)
+            for (int j = i; j < Global.N_ - i - 1; j++)
             {
                 Casilla aux = Matriz[i, j]; //Variable auxiliar
 
@@ -284,9 +284,9 @@ public class Tablero
     {
         Ficha aux;
 
-        for (int i = 0; i < 8; ++i) //recorro fila
+        for (int i = 0; i < Global.N_; ++i) //recorro fila
         {
-            for (int j = 0; j < 8; ++j) //recorro columna
+            for (int j = 0; j < Global.N_; ++j) //recorro columna
             {
                 if (Matriz[i, j].Fichita != null) //si hay una ficha en la casilla i,j
                 {
@@ -360,9 +360,9 @@ public class Tablero
     /// <returns></returns>
     public bool VerificarSolucion()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < Global.N_; i++)
         {
-            for (int j = 0; j < 8; j++)
+            for (int j = 0; j < Global.N_; j++)
             {
                 if (!Matriz[i, j].GetAtacada())
                     return false;
@@ -379,9 +379,9 @@ public class Tablero
     public bool VerificarSolucionesDistintas(Tablero T)
     {
         if (ID != T.ID) { //Para no compararme conmigo mismo
-            for (int i = 0; i < 8; ++i)
+            for (int i = 0; i < Global.N_; ++i)
             {
-                for (int j = 0; j < 8; ++j)
+                for (int j = 0; j < Global.N_; ++j)
                 {
 
                     if (Matriz[i, j].Fichita != null) //Me fijo si en esa casilla hay ficha //ACA DICE QUE POS ES NULL!
@@ -411,8 +411,8 @@ public class Tablero
     /// <returns></returns>
     public Casilla Buscar(Ficha Fichita)
     {
-        for (int i = 0; i < 8; ++i)
-            for (int j = 0; j < 8; ++j)
+        for (int i = 0; i < Global.N_; ++i)
+            for (int j = 0; j < Global.N_; ++j)
                 if (Matriz[i, j].Fichita == Fichita)
                     return Matriz[i, j];
         throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + " no está en el Tablero ----- ");
@@ -425,8 +425,8 @@ public class Tablero
     /// <returns></returns>
     public Casilla BuscarXNombre(string Name)
     {
-        for (int i = 0; i < 8; ++i)
-            for (int j = 0; j < 8; ++j)
+        for (int i = 0; i < Global.N_; ++i)
+            for (int j = 0; j < Global.N_; ++j)
             {
                 if(Matriz[i,j].Fichita!=null)
                     if (Matriz[i, j].Fichita.GetName() == Name)

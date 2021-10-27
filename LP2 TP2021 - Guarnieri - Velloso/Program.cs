@@ -103,7 +103,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 }
 
                                                                  //FILA FIJA
-                for (uint i = 0; i < 8; i++)
+                for (uint i = 0; i < Global.N_; i++)
                 {
                     Cuadrado4.Add(new Casilla(0, i));
                     Cuadrado4.Add(new Casilla(7, i));

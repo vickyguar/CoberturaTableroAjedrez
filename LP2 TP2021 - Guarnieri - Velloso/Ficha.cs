@@ -64,7 +64,7 @@ public abstract class Ficha
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila() + 1;
 
-        while (i < 8 && j < 8)
+        while (i < Global.N_ && j < Global.N_)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -88,7 +88,7 @@ public abstract class Ficha
         int i = (int)Pos.GetFila() - 1;
 
 
-        while (i >= 0 && j < 8)
+        while (i >= 0 && j < Global.N_)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -136,7 +136,7 @@ public abstract class Ficha
         int j = (int)Pos.GetColumna() - 1;
         uint i = Pos.GetFila() + 1;
 
-        while (i < 8 && j >= 0)
+        while (i < Global.N_ && j >= 0)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -159,7 +159,7 @@ public abstract class Ficha
         uint j = Pos.GetColumna() + 1;
         uint i = Pos.GetFila();
 
-        while (j < 8)
+        while (j < Global.N_)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
@@ -203,7 +203,7 @@ public abstract class Ficha
         uint j = Pos.GetColumna();
         uint i = Pos.GetFila() + 1;
 
-        while (i < 8)
+        while (i < Global.N_)
         {
             Ataque.Matriz[i, j].SetAtacada(true);
 
