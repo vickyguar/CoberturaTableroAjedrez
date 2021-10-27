@@ -30,8 +30,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             //Creamos Tableros
             Tablero Juego = new Tablero(ID);
-            Tablero Ataque = new Tablero(++ID);
-            Tablero Filtrado = new Tablero(++ID);
 
             #endregion
 
@@ -120,30 +118,30 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 #region POSICIONAMIENTO DE LAS FICHAS
 
-                Juego.Posicionar(Reina, Ataque, Cuadrado1);
-                Juego.Posicionar(Alfil1, Ataque, Cuadrado1);
-                Juego.Posicionar(Alfil2, Ataque, Cuadrado2);
-                Juego.Posicionar(Caballo1, Ataque, Cuadrado2);
-                Juego.Posicionar(Rey, Ataque, Cuadrado3);
-                Juego.Posicionar(Torre1, Ataque, Cuadrado4);
+                Juego.Posicionar(Reina, Cuadrado1);
+                Juego.Posicionar(Alfil1, Cuadrado1);
+                Juego.Posicionar(Alfil2, Cuadrado2);
+                Juego.Posicionar(Caballo1, Cuadrado2);
+                Juego.Posicionar(Rey, Cuadrado3);
+                Juego.Posicionar(Torre1, Cuadrado4);
 
                 switch (Convert.ToInt32(rnd.Next(1, 4)))
                 {
                     case 1:
-                        Juego.Posicionar(Torre2, Ataque, Cuadrado2); break;
+                        Juego.Posicionar(Torre2, Cuadrado2); break;
                     case 2:
-                        Juego.Posicionar(Torre2, Ataque, Cuadrado3); break;
+                        Juego.Posicionar(Torre2, Cuadrado3); break;
                     case 3:
-                        Juego.Posicionar(Torre2, Ataque, Cuadrado4); break; 
+                        Juego.Posicionar(Torre2, Cuadrado4); break;
                 }
 
-                Juego.Posicionar(Caballo2, Ataque, Cuadrado2);
+                Juego.Posicionar(Caballo2, Cuadrado2);
 
                 #endregion
 
                 #region GENERACIÓN DE SOLUCIONES
 
-                if (Ataque.VerificarSolucion())
+                if (Juego.VerificarSolucion())
                 {
                     ListaSoluciones.Add(Juego); //#1
                     ++ID;
@@ -259,8 +257,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 #region LIMPIAMOS LOS TABLEROS
 
                 Juego.Limpiar();
-                Ataque.Limpiar();
-                Filtrado.Limpiar();
 
                 #endregion
 

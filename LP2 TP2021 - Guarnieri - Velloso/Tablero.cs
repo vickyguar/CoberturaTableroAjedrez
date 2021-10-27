@@ -137,15 +137,15 @@ public class Tablero
     /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez, con las Fichas atacando de forma fatal.
     /// </summary>
     /// <returns></returns>
-    public bool FiltrarFatales(Tablero Filtrado) 
-    {
-        foreach (Ficha Fichita in PilaPosicionadas)
-        {
-            Fichita.Atacar(Filtrado, Buscar(Fichita));
-        }
+    //public bool FiltrarFatales(Tablero Filtrado) 
+    //{
+    //    foreach (Ficha Fichita in PilaPosicionadas)
+    //    {
+    //        Fichita.Atacar(Filtrado, Buscar(Fichita));
+    //    }
 
-        return (Filtrado.VerificarSolucion()) ? true : false; //si es una solución fatal, devulve true y sino devuelve false
-    }
+    //    return (Filtrado.VerificarSolucion()) ? true : false; //si es una solución fatal, devulve true y sino devuelve false
+    //}
 
     /// <summary>
     /// Imprime en Form
@@ -183,7 +183,7 @@ public class Tablero
     /// <param name="Ataque"></param>
     /// <param name="SubLista"></param>
     /// <param name="Remove"></param>
-    public void Posicionar(Ficha Fichita, Tablero Ataque, List<Casilla> SubLista, bool Remove = true) //Se administra desde el main
+    public void Posicionar(Ficha Fichita, List<Casilla> SubLista, bool Remove = true) //Se administra desde el main
     {
         //Variable
         Random r = new Random();
@@ -215,7 +215,7 @@ public class Tablero
         Matriz[i, j].SetFicha(Fichita);
         Matriz[i, j].SetOcupada(true);
 
-        Fichita.Atacar(Ataque, Matriz[i,j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
+        Fichita.Atacar(this, Matriz[i,j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
         PilaPosicionadas.Push(Fichita);
         if (Remove)
