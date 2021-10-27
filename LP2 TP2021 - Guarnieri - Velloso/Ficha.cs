@@ -20,6 +20,10 @@ public abstract class Ficha
     /// </summary>
     protected string Name;
 
+    protected int Fila;
+
+    protected int Columna;
+
     #endregion
 
     #region CONSTRUCTOR & DESTRUCTOR
