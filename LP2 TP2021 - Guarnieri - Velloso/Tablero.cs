@@ -215,6 +215,10 @@ public class Tablero
         Matriz[i, j].SetFicha(Fichita);
         Matriz[i, j].SetOcupada(true);
 
+        //Le ponemos a la ficha la columna y fila correspondiente
+        Fichita.SetFila(i);
+        Fichita.SetColumna(i);
+
         Fichita.Atacar(this, Matriz[i,j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
         PilaPosicionadas.Push(Fichita);
@@ -285,6 +289,8 @@ public class Tablero
                 Matriz[N - j, i] = aux; 
             }
         }
+        //TODO: hay que ponerle a la ficha la pos
+
     }
 
     /// <summary>
@@ -311,6 +317,8 @@ public class Tablero
             }
         }
         return Espejar;
+        //TODO: hay que ponerle a la ficha la pos
+
     }
 
     /// <summary>
@@ -356,6 +364,8 @@ public class Tablero
             }
 
             return;
+            //TODO: hay que ponerle a la ficha la pos
+
         }
 
         throw new Exception("\n Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ");
@@ -416,6 +426,9 @@ public class Tablero
                 }
             }
         }
+
+        //TODO: cambiar
+
 
         return false; //Si no entra a ningun return previo, quiere decir que son iguales
     }
