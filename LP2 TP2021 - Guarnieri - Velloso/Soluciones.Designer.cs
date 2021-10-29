@@ -29,23 +29,37 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dta_tablero = new System.Windows.Forms.DataGridView();
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_back = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dta_tablero)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dta_tablero
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(189, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(425, 426);
-            this.dataGridView1.TabIndex = 0;
+            this.dta_tablero.AllowUserToAddRows = false;
+            this.dta_tablero.AllowUserToDeleteRows = false;
+            this.dta_tablero.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            this.dta_tablero.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dta_tablero.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dta_tablero.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dta_tablero.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dta_tablero.Cursor = System.Windows.Forms.Cursors.No;
+            this.dta_tablero.EnableHeadersVisualStyles = false;
+            this.dta_tablero.GridColor = System.Drawing.SystemColors.ControlLight;
+            this.dta_tablero.Location = new System.Drawing.Point(189, 12);
+            this.dta_tablero.MultiSelect = false;
+            this.dta_tablero.Name = "dta_tablero";
+            this.dta_tablero.ReadOnly = true;
+            this.dta_tablero.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dta_tablero.RowHeadersVisible = false;
+            this.dta_tablero.RowTemplate.Height = 25;
+            this.dta_tablero.ShowCellErrors = false;
+            this.dta_tablero.ShowCellToolTips = false;
+            this.dta_tablero.ShowEditingIcon = false;
+            this.dta_tablero.ShowRowErrors = false;
+            this.dta_tablero.Size = new System.Drawing.Size(425, 426);
+            this.dta_tablero.TabIndex = 0;
             // 
             // btn_next
             // 
@@ -75,17 +89,17 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_back);
             this.Controls.Add(this.btn_next);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dta_tablero);
             this.Name = "Soluciones";
             this.Text = "Soluciones";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dta_tablero)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dta_tablero;
         private System.Windows.Forms.Button btn_next;
         private System.Windows.Forms.Button btn_back;
     }
