@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <Folder Include="Fichas - Imágenes\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
