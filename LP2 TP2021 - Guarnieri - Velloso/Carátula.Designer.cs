@@ -29,33 +29,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void InitializeComponent()
         {
-            this.Titulo = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.btn_generar = new System.Windows.Forms.Button();
-            this.btn_instru = new System.Windows.Forms.Button();
-            this.panel3.SuspendLayout();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // Titulo
-            // 
-            this.Titulo.AutoSize = true;
-            this.Titulo.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Titulo.ForeColor = System.Drawing.Color.Black;
-            this.Titulo.Location = new System.Drawing.Point(179, 20);
-            this.Titulo.Name = "Titulo";
-            this.Titulo.Size = new System.Drawing.Size(447, 39);
-            this.Titulo.TabIndex = 2;
-            this.Titulo.Text = "Cobertura del tablero de Ajedrez";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.BurlyWood;
-            this.panel3.Controls.Add(this.Titulo);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(800, 76);
-            this.panel3.TabIndex = 5;
             // 
             // btn_generar
             // 
@@ -63,48 +40,42 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.btn_generar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_generar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_generar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_generar.Location = new System.Drawing.Point(558, 219);
+            this.btn_generar.Location = new System.Drawing.Point(304, 467);
             this.btn_generar.Name = "btn_generar";
-            this.btn_generar.Size = new System.Drawing.Size(136, 27);
+            this.btn_generar.Size = new System.Drawing.Size(151, 38);
             this.btn_generar.TabIndex = 6;
             this.btn_generar.Text = "Generar";
             this.btn_generar.UseVisualStyleBackColor = false;
             // 
-            // btn_instru
+            // pictureBox1
             // 
-            this.btn_instru.BackColor = System.Drawing.Color.DimGray;
-            this.btn_instru.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btn_instru.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_instru.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btn_instru.Location = new System.Drawing.Point(558, 262);
-            this.btn_instru.Name = "btn_instru";
-            this.btn_instru.Size = new System.Drawing.Size(136, 27);
-            this.btn_instru.TabIndex = 7;
-            this.btn_instru.Text = "Instrucciones";
-            this.btn_instru.UseVisualStyleBackColor = false;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Caratula;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(757, 542);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // Carátula
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btn_instru);
+            this.ClientSize = new System.Drawing.Size(757, 542);
             this.Controls.Add(this.btn_generar);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Carátula";
             this.Text = "Carátula";
             this.Load += new System.EventHandler(this.Carátula_Load);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Label Titulo;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btn_generar;
-        private System.Windows.Forms.Button btn_instru;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
