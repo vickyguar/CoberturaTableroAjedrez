@@ -219,7 +219,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #region VERIFICAR SOLUCIONES DISTINTAS 
 
-                    for (int j = 0; j < ListaSoluciones.Count; j++)
+                    for (int j = 0; j < ListaSoluciones.Count; ++j)
                     {
                         Tablero Solucion = ListaSoluciones[j];
 
@@ -231,7 +231,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                                 ListaSoluciones.Remove(Solucion);
                             }
                         }
-
                     }
 
                     #endregion

@@ -21,7 +21,7 @@ public class Torre : Ficha
     /// Constructor de la clase <see cref="Torre"/>.
     /// </summary>
     /// <param name="_Nombre"></param>
-    public Torre(Image _img, string _Nombre) : base(_img, _Nombre)
+    public Torre(string _Nombre) : base(_Nombre, Image.FromFile("TORRE ().png"))
     {
 
     }

@@ -10,6 +10,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;*/
+using System.Drawing;
 
 public abstract class Ficha
 {
@@ -29,6 +30,8 @@ public abstract class Ficha
     /// </summary>
     protected int fila;
 
+    protected Image Imagen;
+
     #endregion
 
     #region CONSTRUCTOR & DESTRUCTOR
@@ -37,21 +40,19 @@ public abstract class Ficha
     /// Constructor de la clase <see cref="Ficha"/>.
     /// </summary>
     /// <param name="_Name"></param>
-    public Ficha(string _Name)
+    public Ficha(string _Name, Image _Imagen)
     {
         Name = _Name;
         fila = -1;
         columna = -1;
+        Imagen = _Imagen;
     }
 
     /// <summary>
     /// Destructor de la clase <see cref="Ficha"/>.
     /// </summary>
     ~Ficha()
-    {
-
-    }
-
+    { }
     #endregion
 
     #region ATAQUES
