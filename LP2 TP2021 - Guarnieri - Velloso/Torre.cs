@@ -10,8 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-
-
+using System.Drawing;
 
 public class Torre : Ficha
 {
@@ -22,7 +21,7 @@ public class Torre : Ficha
     /// Constructor de la clase <see cref="Torre"/>.
     /// </summary>
     /// <param name="_Nombre"></param>
-    public Torre(string _Nombre) : base(_Nombre)
+    public Torre(Image _img, string _Nombre) : base(_img, _Nombre)
     {
 
     }
