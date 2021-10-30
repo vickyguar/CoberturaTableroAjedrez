@@ -25,13 +25,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             //Application.Run(new Carátula()); -> por ahora no lo corremos
 
             int ID = 0;
-
-            #region TABLEROS
-
-            //Creamos Tableros
             Tablero Juego = new Tablero(ID);
-
-            #endregion
+            Random rnd = new Random(); //Es un random que usamos para luego elegir qué cuadrado darle a la Torre2
 
             #region FICHAS
 
@@ -47,7 +42,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             #endregion
 
-            
             List<Casilla> Cuadrado1 = new List<Casilla>(4); //5e, 5d, 4e, 4d ROJO
             List<Casilla> Cuadrado2 = new List<Casilla>(12); //6c, 3c, 3f, 6f VIOLETA
             List<Casilla> Cuadrado3 = new List<Casilla>(20); //7b, 2b, 7g, 2g AZUL
@@ -55,15 +49,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             //ROJO, VIOLETA, AZUL, VERDE -> según las regiones del tablero que marcamos en nuestro pseudocódigo
 
-            Random rnd = new Random(); //Es un random que usamos para luego elegir qué cuadrado darle a la Torre2
-
             List<Tablero> ListaSoluciones = new List<Tablero>();
             List<Tablero> ListaFatales = new List<Tablero>();
 
             while (ListaSoluciones.Count < 11)
             {
-                
-
                 #region LISTAS
 
                 for (uint i = 3; i <= 4; i++)
@@ -72,7 +62,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         Cuadrado1.Add(new Casilla(i, j));
                 }
 
-                                                                 //FILA FIJA
+                 //FILA FIJA
                 for (uint i = 2; i <= 5; i++)
                 {
                     Cuadrado2.Add(new Casilla(2, i));

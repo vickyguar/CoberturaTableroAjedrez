@@ -29,87 +29,53 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void InitializeComponent()
         {
+            this.btn_generar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Titulo = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btn_generar
+            // 
+            this.btn_generar.BackColor = System.Drawing.Color.Black;
+            this.btn_generar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btn_generar.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_generar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btn_generar.Location = new System.Drawing.Point(304, 467);
+            this.btn_generar.Name = "btn_generar";
+            this.btn_generar.Size = new System.Drawing.Size(151, 38);
+            this.btn_generar.TabIndex = 6;
+            this.btn_generar.Text = "Generar";
+            this.btn_generar.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.FONDO1;
-            this.pictureBox1.Location = new System.Drawing.Point(116, 32);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Caratula;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(555, 418);
-            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.Size = new System.Drawing.Size(757, 542);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
-            // 
-            // Titulo
-            // 
-            this.Titulo.AutoSize = true;
-            this.Titulo.Font = new System.Drawing.Font("Sitka Banner", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Titulo.ForeColor = System.Drawing.Color.DarkCyan;
-            this.Titulo.Location = new System.Drawing.Point(72, 9);
-            this.Titulo.Name = "Titulo";
-            this.Titulo.Size = new System.Drawing.Size(440, 47);
-            this.Titulo.TabIndex = 2;
-            this.Titulo.Text = "Cobertura del tablero de Ajedrez";
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(677, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(123, 450);
-            this.panel1.TabIndex = 3;
-            // 
-            // panel2
-            // 
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(110, 450);
-            this.panel2.TabIndex = 4;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.Titulo);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(110, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(567, 76);
-            this.panel3.TabIndex = 5;
             // 
             // Carátula
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
+            this.BackColor = System.Drawing.Color.SeaShell;
+            this.ClientSize = new System.Drawing.Size(757, 542);
+            this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.panel1);
             this.Name = "Carátula";
             this.Text = "Carátula";
             this.Load += new System.EventHandler(this.Carátula_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
+        private System.Windows.Forms.Button btn_generar;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label Titulo;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
     }
 }

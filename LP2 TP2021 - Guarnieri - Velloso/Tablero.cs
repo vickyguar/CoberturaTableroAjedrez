@@ -189,20 +189,20 @@ public class Tablero
         Random r = new Random();
         int index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
-        uint i = SubLista[index].GetFila();
-        uint j = SubLista[index].GetColumna();
+        uint i = SubLista[index].GetFila(); //guardamos la fila correspondiente a la casilla
+        uint j = SubLista[index].GetColumna(); //guardamos la columna correspondiente a la casilla
 
-        if (Fichita.GetName() == "Alfil2")
+        if (Fichita.GetName() == "Alfil2") //si estamos posicionando el segundo alfil
         {
-            Ficha FichaAux = PilaPosicionadas.Peek(); //el ultimo simpre es Alfil1
+            Ficha FichaAux = PilaPosicionadas.Peek(); //el ultimo (antes de posicionar el alfil 2) simpre es Alfil1
             try
             {
                 while (Matriz[i,j].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
                 {
                     index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
-                    i = SubLista[index].GetFila();
-                    j = SubLista[index].GetColumna();
+                    i = SubLista[index].GetFila(); //nos guardamos nuevamente la fila
+                    j = SubLista[index].GetColumna(); //nos guardamos nuevamente la columna
                 }
             }
             catch (Exception ex)
@@ -216,15 +216,15 @@ public class Tablero
         Matriz[i, j].SetOcupada(true);
 
         //Le ponemos a la ficha la columna y fila correspondiente
-        Fichita.SetFila(i);
-        Fichita.SetColumna(i);
+        Fichita.Fila = ((int)i);
+        Fichita.Columna = ((int)i);
 
         Fichita.Atacar(this, Matriz[i,j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
-        PilaPosicionadas.Push(Fichita);
+        PilaPosicionadas.Push(Fichita); //agrego a la pila la ficha que posicioné
+
         if (Remove)
             SubLista.RemoveAt(index); //Sacamos de la lista al elemento ocupado, para que otros no lo puedan ocupar.
-
     }
 
     /// <summary>
@@ -290,7 +290,6 @@ public class Tablero
             }
         }
         //TODO: hay que ponerle a la ficha la pos
-
     }
 
     /// <summary>
@@ -408,6 +407,69 @@ public class Tablero
     public bool VerificarSolucionesDistintas(Tablero T)
     {
         if (ID != T.ID) { //Para no compararme conmigo mismo
+
+            #region IDEA
+
+            //Ficha Caballo2 = PilaPosicionadas.Pop();
+            //Ficha Torre2 = PilaPosicionadas.Pop();
+            //Ficha Torre1 = PilaPosicionadas.Pop();
+            //Ficha Rey = PilaPosicionadas.Pop();
+            //Ficha Caballo1 = PilaPosicionadas.Pop();
+            //Ficha Alfil2 = PilaPosicionadas.Pop();
+            //Ficha Alfil1 = PilaPosicionadas.Pop();
+            //Ficha Reina = PilaPosicionadas.Pop();
+
+            //Ficha Caballo2_T = T.PilaPosicionadas.Pop();
+            //Ficha Torre2_T = T.PilaPosicionadas.Pop();
+            //Ficha Torre1_T = T.PilaPosicionadas.Pop();
+            //Ficha Rey_T = T.PilaPosicionadas.Pop();
+            //Ficha Caballo1_T = T.PilaPosicionadas.Pop();
+            //Ficha Alfil2_T = T.PilaPosicionadas.Pop();
+            //Ficha Alfil1_T = T.PilaPosicionadas.Pop();
+            //Ficha Reina_T = T.PilaPosicionadas.Pop();
+
+            ////foreach(Ficha Fichita in PilaPosicionadas)
+            ////{
+            ////    if(Fichita is Torre || Fichita is Alfil || Fichita is Caballo)
+            ////        if (!((Fichita.Columna == T.PilaPosicionadas.Pop().Columna) && (Fichita.Fila == T.PilaPosicionadas.Pop().Fila)))
+            ////            if (!((Fichita.Columna == Torre2_T.Columna) && (Torre1.Columna == Torre2_T.Columna)))
+            ////                return true;
+            ////}
+
+            //if (!((Reina.Columna == Reina_T.Columna) && (Reina.Fila == Reina_T.Fila)))
+            //    return true;
+
+            //if (!((Rey.Columna == Rey_T.Columna) && (Rey.Fila == Rey_T.Fila)))
+            //    return true;
+
+            //if (!((Torre1.Columna == Torre1_T.Columna) && (Torre1.Fila == Torre1_T.Fila)))
+            //    if (!((Torre1.Columna == Torre2_T.Columna) && (Torre1.Columna == Torre2_T.Columna)))
+            //        return true;
+
+            //if (!((Torre2.Columna == Torre2_T.Columna) && (Torre2.Fila == Torre2_T.Fila)))
+            //    if (!((Torre2.Columna == Torre1_T.Columna) && (Torre2.Columna == Torre1_T.Columna)))
+            //        return true;
+
+            //if (!((Caballo1.Columna == Caballo1_T.Columna) && (Caballo1.Fila == Caballo1_T.Fila)))
+            //    if (!((Caballo1.Columna == Caballo2_T.Columna) && (Caballo1.Fila == Caballo2_T.Fila)))
+            //        return true;
+
+            //if (!((Caballo2.Columna == Caballo2_T.Columna) && (Caballo2.Fila == Caballo2_T.Fila)))
+            //    if (!((Caballo2.Columna == Caballo1_T.Columna) && (Caballo2.Fila == Caballo1_T.Fila)))
+            //        return true;
+
+            //if (!((Alfil1.Columna == Alfil1_T.Columna) && (Alfil1.Fila == Alfil1_T.Fila)))
+            //    if (!((Alfil1.Columna == Alfil2_T.Columna) && (Alfil1.Columna == Alfil2_T.Columna)))
+            //        return true;
+
+            //if (!((Alfil2.Columna == Alfil2_T.Columna) && (Alfil2.Fila == Alfil2_T.Fila)))
+            //    if (!((Alfil2.Columna == Alfil1_T.Columna) && (Alfil2.Columna == Alfil1_T.Columna)))
+            //        return true;
+
+            //return false;
+            #endregion
+
+            #region LO VIEJO
             for (int i = 0; i < Global.N_; ++i)
             {
                 for (int j = 0; j < Global.N_; ++j)
@@ -425,6 +487,7 @@ public class Tablero
                     }
                 }
             }
+            #endregion
         }
 
         //TODO: cambiar

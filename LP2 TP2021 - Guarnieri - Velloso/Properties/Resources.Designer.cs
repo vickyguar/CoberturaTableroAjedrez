@@ -63,9 +63,9 @@ namespace LP2_TP2021___Guarnieri___Velloso.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FONDO {
+        internal static System.Drawing.Bitmap ALFIL {
             get {
-                object obj = ResourceManager.GetObject("FONDO", resourceCulture);
+                object obj = ResourceManager.GetObject("ALFIL", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,49 @@ namespace LP2_TP2021___Guarnieri___Velloso.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap FONDO1 {
+        internal static System.Drawing.Bitmap CABALLO {
             get {
-                object obj = ResourceManager.GetObject("FONDO1", resourceCulture);
+                object obj = ResourceManager.GetObject("CABALLO", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Caratula {
+            get {
+                object obj = ResourceManager.GetObject("Caratula", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap REINA {
+            get {
+                object obj = ResourceManager.GetObject("REINA", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap REY {
+            get {
+                object obj = ResourceManager.GetObject("REY", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TORRE {
+            get {
+                object obj = ResourceManager.GetObject("TORRE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
