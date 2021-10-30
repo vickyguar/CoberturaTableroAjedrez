@@ -94,7 +94,9 @@ public class Tablero
                 Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
             }
         }
-        PilaPosicionadas = newTablero.PilaPosicionadas;
+
+        PilaPosicionadas = new Stack<Ficha>(newTablero.PilaPosicionadas);
+
         ID = _ID;
     }
 
