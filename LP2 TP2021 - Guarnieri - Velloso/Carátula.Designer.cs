@@ -46,6 +46,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.btn_generar.TabIndex = 6;
             this.btn_generar.Text = "Generar";
             this.btn_generar.UseVisualStyleBackColor = false;
+            this.btn_generar.Click += new System.EventHandler(this.btn_generar_Click);
             // 
             // pictureBox1
             // 

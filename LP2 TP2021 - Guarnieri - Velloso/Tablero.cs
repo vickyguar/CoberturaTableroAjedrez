@@ -51,9 +51,7 @@ public class Tablero
     private int ID;
     private TipoSolucion type;
 
-
     #endregion
-
 
     #region CONSTRUCTORES & DESTRUCTORES
 
@@ -197,7 +195,7 @@ public class Tablero
             Ficha FichaAux = PilaPosicionadas.Peek(); //el ultimo (antes de posicionar el alfil 2) simpre es Alfil1
             try
             {
-                while (Matriz[i,j].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
+                while (Matriz[i, j].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
                 {
                     index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
@@ -207,7 +205,7 @@ public class Tablero
             }
             catch (Exception ex)
             {
-                throw ex; 
+                throw ex;
             }
         }
 
@@ -217,9 +215,9 @@ public class Tablero
 
         //Le ponemos a la ficha la columna y fila correspondiente
         Fichita.Fila = ((int)i);
-        Fichita.Columna = ((int)i);
+        Fichita.Columna = ((int)j);
 
-        Fichita.Atacar(this, Matriz[i,j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
+        Fichita.Atacar(this, Matriz[i, j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
         PilaPosicionadas.Push(Fichita); //agrego a la pila la ficha que posicioné
 
@@ -232,12 +230,12 @@ public class Tablero
     /// </summary>
     public void ImprimirOutput()
     {
-        for (uint i =0; i < Global.N_; ++i)
+        for (uint i = 0; i < Global.N_; ++i)
         {
             Debug.Write("|");
-            for(uint j =0; j < Global.N_; ++j)
+            for (uint j = 0; j < Global.N_; ++j)
             {
-                if(Matriz[i,j].Fichita == null)
+                if (Matriz[i, j].Fichita == null)
                 {
                     Debug.Write(" # |");
                 }
@@ -254,7 +252,7 @@ public class Tablero
                     else
                         Debug.Write(" A |");
                 }
-                
+
             }
             Debug.Write("\n");
         }
@@ -275,21 +273,43 @@ public class Tablero
         int N = Global.N_ - 1;
 
         for (int i = 0; i < Global.N_ / 2; i++)
-        { 
+        {
             for (int j = i; j < Global.N_ - i - 1; j++)
             {
                 Casilla aux = Matriz[i, j]; //Variable auxiliar
 
                 Matriz[i, j] = Matriz[j, N - i]; // Movemos Casillas de derecha a arriba
+                if (Matriz[i, j].Fichita != null)
+                {
+                    Matriz[i, j].Fichita.Fila = j;
+                    Matriz[i, j].Fichita.Columna = N - i;
+                }
 
                 Matriz[j, N - i] = Matriz[N - i, N - j]; // Movemos Casillas de abajo a la derecha
-                
-                Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
+                if (Matriz[j, N - i].Fichita != null)
+                {
+                    Matriz[j, N - i].Fichita.Fila = N - i;
+                    Matriz[j, N - i].Fichita.Columna = N - j;
+                }
 
-                Matriz[N - j, i] = aux; 
+                Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
+                if (Matriz[N - i, N - j].Fichita != null)
+                {
+                    Matriz[N - i, N - j].Fichita.Fila = N - j;
+                    Matriz[N - i, N - j].Fichita.Columna = i;
+                }
+
+                Matriz[N - j, i] = aux;
+                if (Matriz[N - j, i].Fichita != null)
+                {
+                    Matriz[N - j, i].Fichita.Fila = i;
+                    Matriz[N - j, i].Fichita.Columna = j;
+                }
+
+
             }
         }
-        //TODO: hay que ponerle a la ficha la pos
+
     }
 
     /// <summary>
@@ -307,16 +327,21 @@ public class Tablero
                 if (Matriz[i, j].Fichita != null) //si hay una ficha en la casilla i,j
                 {
                     aux = Matriz[i, j].Fichita; //ficha auxiliar
-                    
+
                     if (Matriz[i, 7 - j].Fichita != null) //si en la casilla "espejo" hay una ficha
+                    {
                         Espejar.Matriz[i, j].SetFicha(Matriz[i, 7 - j].Fichita); //realizo el intercambio
-                    
+                        Espejar.Matriz[i, j].Fichita.Fila = i;
+                        Espejar.Matriz[i, j].Fichita.Columna = 7 - j;
+                    }
+
                     Espejar.Matriz[i, 7 - j].SetFicha(aux);
+                    Espejar.Matriz[i, 7 - j].Fichita.Fila = i;
+                    Espejar.Matriz[i, 7 - j].Fichita.Columna = j;
                 }
             }
         }
         return Espejar;
-        //TODO: hay que ponerle a la ficha la pos
 
     }
 
@@ -352,18 +377,23 @@ public class Tablero
             if (Matriz[x1, y2].Fichita == null)
             {
                 Matriz[x1, y1].SetFicha(null);
+
                 Matriz[x1, y2].SetFicha(Torre1);
+                Matriz[x1, y2].Fichita.Columna = (int)y2;
+                Matriz[x1, y2].Fichita.Fila = (int)x1;
             }
 
 
             if (Matriz[x2, y1].Fichita == null)
             {
                 Matriz[x2, y2].SetFicha(null);
+
                 Matriz[x2, y1].SetFicha(Torre2);
+                Matriz[x2, y1].Fichita.Columna = (int)y1;
+                Matriz[x2, y1].Fichita.Fila = (int)x2;
             }
 
             return;
-            //TODO: hay que ponerle a la ficha la pos
 
         }
 
@@ -406,7 +436,8 @@ public class Tablero
     /// <returns></returns>
     public bool VerificarSolucionesDistintas(Tablero T)
     {
-        if (ID != T.ID) { //Para no compararme conmigo mismo
+        if (ID != T.ID)
+        { //Para no compararme conmigo mismo
 
             #region IDEA
 
@@ -470,28 +501,39 @@ public class Tablero
             #endregion
 
             #region LO VIEJO
+            //for (int i = 0; i < Global.N_; ++i)
+            //{
+            //    for (int j = 0; j < Global.N_; ++j)
+            //    {
+
+            //        if (Matriz[i, j].Fichita != null) //Me fijo si en esa casilla hay ficha //ACA DICE QUE POS ES NULL!
+            //        {
+            //            if (T.Matriz[i, j].Fichita != null) //Si en la otra matriz hay también una ficha
+            //            {
+            //                if (T.Matriz[i, j].Fichita.GetType() != Matriz[i, j].Fichita.GetType()) //Me fijo si son de distinto tipo
+            //                    return true;
+            //            }
+            //            else //Sino, ya sé que son distintas
+            //                return true;
+            //        }
+            //    }
+            //}
+            #endregion
+
+            #region LO NUEVO
+
+            //Creo dos arrays con la PilaPosicionadas de ambos tableros:
+            Ficha[] _THIS = this.PilaPosicionadas.ToArray();
+            Ficha[] _T = T.PilaPosicionadas.ToArray();
+
             for (int i = 0; i < Global.N_; ++i)
             {
-                for (int j = 0; j < Global.N_; ++j)
-                {
-
-                    if (Matriz[i, j].Fichita != null) //Me fijo si en esa casilla hay ficha //ACA DICE QUE POS ES NULL!
-                    {
-                        if (T.Matriz[i, j].Fichita != null) //Si en la otra matriz hay también una ficha
-                        {
-                            if (T.Matriz[i, j].Fichita.GetType() != Matriz[i, j].Fichita.GetType()) //Me fijo si son de distinto tipo
-                                return true;
-                        }
-                        else //Sino, ya sé que son distintas
-                            return true;
-                    }
-                }
+                if (_THIS[i].Columna != _T[i].Columna || _THIS[i].Fila != _T[i].Fila)
+                    return true;
             }
+
             #endregion
         }
-
-        //TODO: cambiar
-
 
         return false; //Si no entra a ningun return previo, quiere decir que son iguales
     }
@@ -523,11 +565,11 @@ public class Tablero
         for (int i = 0; i < Global.N_; ++i)
             for (int j = 0; j < Global.N_; ++j)
             {
-                if(Matriz[i,j].Fichita!=null)
+                if (Matriz[i, j].Fichita != null)
                     if (Matriz[i, j].Fichita.GetName() == Name)
                         return Matriz[i, j];
             }
-                
+
         throw new Exception("\n----- Error en BuscarXNombre: " + Name + "no está en el Tablero ----- ");
     } //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
 

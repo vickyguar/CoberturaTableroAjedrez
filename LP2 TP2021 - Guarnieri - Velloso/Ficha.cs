@@ -22,16 +22,12 @@ public abstract class Ficha
     /// <summary>
     /// Columna de la <see cref="Casilla"/>.
     /// </summary>
-    private int columna;
+    protected int columna;
 
     /// <summary>
     /// Fila de la <see cref="Casilla"/>
     /// </summary>
-    private int fila;
-
-    public int Fila { get => fila; set => fila = value; }
-    public int Columna { get => columna; set => columna = value; }
-
+    protected int fila;
 
     #endregion
 
@@ -282,16 +278,13 @@ public abstract class Ficha
 
     #endregion
 
-    #region GETTERS
+    #region GETTERS & SETTERS
 
     public string GetName() { return Name; }
 
-    public int GetFila() { return Fila; }
-    public int GetColumna() { return Columna; }
+    public int Fila { get => fila; set => fila = value; }
 
-    //public void SetColumna(int newCol) { Columna = newCol; }
-    //public void SetFila(int newFila) { Fila = newFila; }
-
+    public int Columna { get => columna; set => columna = value; }
 
     #endregion
 
