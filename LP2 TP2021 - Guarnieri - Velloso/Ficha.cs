@@ -22,16 +22,11 @@ public abstract class Ficha
     /// <summary>
     /// Columna de la <see cref="Casilla"/>.
     /// </summary>
-    private uint Columna;
+    private uint Columna; //No tienen que ser protected?
     /// <summary>
     /// Fila de la <see cref="Casilla"/>
     /// </summary>
     private uint Fila;
-
-
-    protected int Fila;
-
-    protected int Columna;
 
     #endregion
 

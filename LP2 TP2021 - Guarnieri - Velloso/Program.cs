@@ -227,24 +227,24 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #endregion
 
-                    //#region VERIFICAR SOLUCIONES DISTINTAS 
+                    #region VERIFICAR SOLUCIONES DISTINTAS 
 
-                    //for (int j = 0; j < ListaSoluciones.Count; j++)
-                    //{
-                    //    Tablero Solucion = ListaSoluciones[j];
+                    for (int j = 0; j < ListaSoluciones.Count; j++)
+                    {
+                        Tablero Solucion = ListaSoluciones[j];
 
-                    //    for (int i = 0; i < ListaSoluciones.Count; ++i)
-                    //    {
-                    //        if (!Solucion.VerificarSolucionesDistintas(ListaSoluciones[i]))
-                    //        {
-                    //            //Pensar esto esta mal, porque la solución SI va a estar en la lista de soluciones
-                    //            ListaSoluciones.Remove(Solucion);
-                    //        }
-                    //    }
-                            
-                    //}
+                        for (int i = 0; i < ListaSoluciones.Count; ++i)
+                        {
+                            if (!Solucion.VerificarSolucionesDistintas(ListaSoluciones[i]))
+                            {
+                                //Pensar esto esta mal, porque la solución SI va a estar en la lista de soluciones
+                                ListaSoluciones.Remove(Solucion);
+                            }
+                        }
 
-                    //#endregion
+                    }
+
+                    #endregion
 
                     #region FILTRAR FATALES
 
