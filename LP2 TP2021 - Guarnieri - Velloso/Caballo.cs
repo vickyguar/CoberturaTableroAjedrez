@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Drawing;
 
 public class Caballo : Ficha
 {
@@ -19,7 +20,7 @@ public class Caballo : Ficha
     /// Constructor de la clase <see cref="Caballo"/>.
     /// </summary>
     /// <param name="_Nombre"></param>
-    public Caballo(string _Nombre) : base(_Nombre)
+    public Caballo(string _Nombre) : base(_Nombre, Image.FromFile("CABALLO ().png"))
     {
 
     }
