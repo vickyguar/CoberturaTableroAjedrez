@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Drawing;
 
 public class Reina : Ficha
 {
@@ -20,7 +21,7 @@ public class Reina : Ficha
     /// Constructor de la clase <see cref="Reina"/>.
     /// </summary>
     /// <param name="_Nombre"></param>
-    public Reina(string _Nombre) : base(_Nombre)
+    public Reina(string _Nombre) : base(_Nombre, Image.FromFile("REINA ().png"))
     {
 
     }
