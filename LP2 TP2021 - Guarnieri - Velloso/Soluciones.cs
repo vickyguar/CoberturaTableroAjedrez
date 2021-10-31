@@ -16,5 +16,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
         {
             InitializeComponent();
         }
+
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

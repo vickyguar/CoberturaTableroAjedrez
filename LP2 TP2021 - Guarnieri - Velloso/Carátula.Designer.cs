@@ -54,7 +54,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.pictureBox1.Image = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Caratula;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(757, 542);
+            this.pictureBox1.Size = new System.Drawing.Size(744, 542);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
@@ -64,7 +64,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
-            this.ClientSize = new System.Drawing.Size(757, 542);
+            this.ClientSize = new System.Drawing.Size(744, 542);
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Carátula";
