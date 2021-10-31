@@ -10,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-
+using System.Drawing;
 public class Casilla
 {
     #region ATRIBUTOS
@@ -19,11 +19,12 @@ public class Casilla
     /// <summary>
     /// <see cref="Color"/> de la <see cref="Casilla"/>.
     /// </summary>
-    public Color Colour;
+    public eColor Colour;
     /// <summary>
     /// <see cref="Ficha"/> que tiene la <see cref="Casilla"/>.
     /// </summary>
     public Ficha Fichita;
+    public Image Img;
 
     //PRIVADOS:
     /// <summary>
@@ -55,6 +56,7 @@ public class Casilla
         Ocupada = false;
         Atacada = false;
         Fichita = null;
+        Img = Image.FromFile("Transparente.png");
     }
 
     /// <summary>
@@ -77,7 +79,7 @@ public class Casilla
 
     public uint GetFila() { return Fila; }
 
-    public Color GetColor() { return Colour; }
+    public eColor GetColor() { return Colour; }
     public bool GetAtacadaFatalmente() { return AtacadaFatalmente; }
 
     #endregion

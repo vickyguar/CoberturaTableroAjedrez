@@ -20,7 +20,7 @@ public class Caballo : Ficha
     /// Constructor de la clase <see cref="Caballo"/>.
     /// </summary>
     /// <param name="_Nombre"></param>
-    public Caballo(string _Nombre) : base(_Nombre, Image.FromFile("CABALLO_.png"))
+    public Caballo(string _Nombre) : base(_Nombre, Image.FromFile("Caballo.png"))
     {
 
     }

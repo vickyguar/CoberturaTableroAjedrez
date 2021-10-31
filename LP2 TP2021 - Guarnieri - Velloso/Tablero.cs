@@ -16,12 +16,12 @@ using System.Diagnostics;
 /// <summary>
 /// Enum para definir el Color de las Casillas.
 /// </summary>
-public enum Color : int
+public enum eColor : int
 {
     BLANCO = 0,
     NEGRO
 
-} //end Color
+} //end eColor
 
 public enum TipoSolucion : int
 {
@@ -123,7 +123,7 @@ public class Tablero
         foreach (string line in lines) //para cada linea
         {
             for (int i = 0; i < line.Length; i++)//recorro los caracteres de cada linea
-                Matriz[j, i].Colour = line[i] == '0' ? Color.BLANCO : Color.NEGRO; //le asigno el color a cada casilla
+                Matriz[j, i].Colour = line[i] == '0' ? eColor.BLANCO : eColor.NEGRO; //le asigno el color a cada casilla
 
             j++;
         }

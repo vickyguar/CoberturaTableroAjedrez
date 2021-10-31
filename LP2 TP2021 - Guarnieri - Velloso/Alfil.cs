@@ -20,7 +20,7 @@ public class Alfil : Ficha
     /// Constructor de la clase <see cref="Alfil"/>.
     /// </summary>
     /// <param name="_Nombre"></param>
-    public Alfil(string _Nombre) : base(_Nombre, Image.FromFile("ALFIL_.png"))
+    public Alfil(string _Nombre) : base(_Nombre, Image.FromFile("Alfil.png"))
     {
 
     }

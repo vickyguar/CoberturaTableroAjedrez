@@ -39,6 +39,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Column6 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Barra = new System.Windows.Forms.ProgressBar();
             Dtg = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(Dtg)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +62,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Dtg.EnableHeadersVisualStyles = false;
             Dtg.GridColor = System.Drawing.SystemColors.ControlLight;
             Dtg.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            Dtg.Location = new System.Drawing.Point(195, 12);
+            Dtg.Location = new System.Drawing.Point(187, 75);
             Dtg.MultiSelect = false;
             Dtg.Name = "Dtg";
             Dtg.ReadOnly = true;
@@ -83,7 +84,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // btn_next
             // 
             this.btn_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_next.Location = new System.Drawing.Point(681, 389);
+            this.btn_next.Location = new System.Drawing.Point(663, 452);
             this.btn_next.Name = "btn_next";
             this.btn_next.Size = new System.Drawing.Size(75, 23);
             this.btn_next.TabIndex = 1;
@@ -147,12 +148,23 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
             // 
+            // Barra
+            // 
+            this.Barra.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.Barra.Location = new System.Drawing.Point(187, 30);
+            this.Barra.Maximum = 10;
+            this.Barra.Name = "Barra";
+            this.Barra.Size = new System.Drawing.Size(400, 23);
+            this.Barra.Step = 1;
+            this.Barra.TabIndex = 1;
+            // 
             // Soluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 508);
+            this.Controls.Add(this.Barra);
             this.Controls.Add(this.btn_next);
             this.Controls.Add(Dtg);
             this.Name = "Soluciones";
@@ -174,6 +186,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         private System.Windows.Forms.DataGridViewImageColumn Column6;
         private System.Windows.Forms.DataGridViewImageColumn Column7;
         private System.Windows.Forms.DataGridViewImageColumn Column8;
+        private System.Windows.Forms.ProgressBar Barra;
     }
 }
 

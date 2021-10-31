@@ -21,7 +21,7 @@ public class Reina : Ficha
     /// Constructor de la clase <see cref="Reina"/>.
     /// </summary>
     /// <param name="_Nombre"></param>
-    public Reina(string _Nombre) : base(_Nombre, Image.FromFile("REINA_.png"))
+    public Reina(string _Nombre) : base(_Nombre, Image.FromFile("Reina.png"))
     {
 
     }
