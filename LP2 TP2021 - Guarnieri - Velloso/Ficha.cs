@@ -30,7 +30,7 @@ public abstract class Ficha
     /// </summary>
     protected int fila;
 
-    protected Image Imagen;
+    public Image Imagen;
 
     #endregion
 

@@ -68,6 +68,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Carátula";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carátula";
             this.Load += new System.EventHandler(this.Carátula_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

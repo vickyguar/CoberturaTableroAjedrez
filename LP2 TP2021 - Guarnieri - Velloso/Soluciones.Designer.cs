@@ -168,6 +168,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Controls.Add(this.btn_next);
             this.Controls.Add(Dtg);
             this.Name = "Soluciones";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Soluciones";
             ((System.ComponentModel.ISupportInitialize)(Dtg)).EndInit();
             this.ResumeLayout(false);
