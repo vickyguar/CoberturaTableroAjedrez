@@ -150,7 +150,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             // Barra
             // 
-            this.Barra.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.Barra.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.Barra.Location = new System.Drawing.Point(187, 30);
             this.Barra.Maximum = 10;
             this.Barra.Name = "Barra";
