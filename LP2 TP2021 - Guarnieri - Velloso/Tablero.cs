@@ -95,7 +95,14 @@ public class Tablero
             }
         }
 
-        PilaPosicionadas = new Stack<Ficha>(newTablero.PilaPosicionadas);
+        Ficha[] Aux = newTablero.PilaPosicionadas.ToArray();
+
+        for (int i = 7; i >= 0; --i)
+        {
+            PilaPosicionadas.Push(Aux[i]);
+        }
+
+        // PilaPosicionadas = new Stack<Ficha>(new Stack<Ficha>(newTablero.PilaPosicionadas)); //TODO: si falla algo es ACA TAMBIEN
 
         ID = _ID;
     }
@@ -528,7 +535,7 @@ public class Tablero
             Ficha[] _THIS = this.PilaPosicionadas.ToArray();
             Ficha[] _T = T.PilaPosicionadas.ToArray();
 
-            for (int i = 0; i < Global.N_; ++i)
+            for (int i = 0; i < Global.N_; ++i) //TODO: si falla algo es de aca
             {
                 if (_THIS[i].Columna != _T[i].Columna || _THIS[i].Fila != _T[i].Fila)
                     return true;

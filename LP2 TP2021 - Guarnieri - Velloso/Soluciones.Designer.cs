@@ -40,6 +40,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Column7 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Barra = new System.Windows.Forms.ProgressBar();
+            this.btn_fatales = new System.Windows.Forms.Button();
             Dtg = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(Dtg)).BeginInit();
             this.SuspendLayout();
@@ -158,12 +159,25 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Barra.Step = 1;
             this.Barra.TabIndex = 1;
             // 
+            // btn_fatales
+            // 
+            this.btn_fatales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_fatales.Location = new System.Drawing.Point(663, 413);
+            this.btn_fatales.Name = "btn_fatales";
+            this.btn_fatales.Size = new System.Drawing.Size(75, 23);
+            this.btn_fatales.TabIndex = 2;
+            this.btn_fatales.Text = "Filtrar";
+            this.btn_fatales.UseVisualStyleBackColor = true;
+            this.btn_fatales.Visible = false;
+            this.btn_fatales.Click += new System.EventHandler(this.btn_fatales_Click);
+            // 
             // Soluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(800, 508);
+            this.Controls.Add(this.btn_fatales);
             this.Controls.Add(this.Barra);
             this.Controls.Add(this.btn_next);
             this.Controls.Add(Dtg);
@@ -188,6 +202,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         private System.Windows.Forms.DataGridViewImageColumn Column7;
         private System.Windows.Forms.DataGridViewImageColumn Column8;
         private System.Windows.Forms.ProgressBar Barra;
+        private System.Windows.Forms.Button btn_fatales;
     }
 }
 

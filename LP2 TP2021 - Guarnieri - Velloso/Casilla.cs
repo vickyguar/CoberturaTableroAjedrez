@@ -20,11 +20,13 @@ public class Casilla
     /// <see cref="Color"/> de la <see cref="Casilla"/>.
     /// </summary>
     public eColor Colour;
+
     /// <summary>
     /// <see cref="Ficha"/> que tiene la <see cref="Casilla"/>.
     /// </summary>
     public Ficha Fichita;
-    public Image Img;
+
+   // public Image Img;
 
     //PRIVADOS:
     /// <summary>
@@ -56,7 +58,7 @@ public class Casilla
         Ocupada = false;
         Atacada = false;
         Fichita = null;
-        Img = Image.FromFile("Transparente.png");
+       // Img = Image.FromFile("Transparente.png");
     }
 
     /// <summary>
