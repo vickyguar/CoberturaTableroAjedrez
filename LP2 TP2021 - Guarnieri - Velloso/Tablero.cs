@@ -283,40 +283,35 @@ public class Tablero
         {
             for (int j = i; j < Global.N_ - i - 1; j++)
             {
-                Casilla aux = Matriz[i, j]; //Variable auxiliar
+                Casilla aux = Matriz[i, j]; //Variable auxiliar        
 
                 Matriz[i, j] = Matriz[j, N - i]; // Movemos Casillas de derecha a arriba
-                if (Matriz[i, j].Fichita != null)
-                {
-                    Matriz[i, j].Fichita.Fila = j;
-                    Matriz[i, j].Fichita.Columna = N - i;
-                }
 
                 Matriz[j, N - i] = Matriz[N - i, N - j]; // Movemos Casillas de abajo a la derecha
-                if (Matriz[j, N - i].Fichita != null)
-                {
-                    Matriz[j, N - i].Fichita.Fila = N - i;
-                    Matriz[j, N - i].Fichita.Columna = N - j;
-                }
 
                 Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
-                if (Matriz[N - i, N - j].Fichita != null)
-                {
-                    Matriz[N - i, N - j].Fichita.Fila = N - j;
-                    Matriz[N - i, N - j].Fichita.Columna = i;
-                }
 
                 Matriz[N - j, i] = aux;
-                if (Matriz[N - j, i].Fichita != null)
-                {
-                    Matriz[N - j, i].Fichita.Fila = i;
-                    Matriz[N - j, i].Fichita.Columna = j;
-                }
-
 
             }
         }
 
+        for (int i = 0; i < Global.N_; ++i)
+        {
+            for (int k = 0; k < Global.N_; ++k)
+            {
+                Matriz[i, k].SetFila((uint)i);
+                Matriz[i, k].SetColumna((uint)k);
+
+                if (Matriz[i, k].Fichita != null)
+                {
+                    Matriz[i, k].Fichita.Fila = i;
+                    Matriz[i, k].Fichita.Columna = k;
+
+                    ListaPosicionadas.Add(Matriz[i, k].Fichita);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -340,16 +335,20 @@ public class Tablero
                         Espejar.Matriz[i, j].SetFicha(Matriz[i, 7 - j].Fichita); //realizo el intercambio
                         Espejar.Matriz[i, j].Fichita.Fila = i;
                         Espejar.Matriz[i, j].Fichita.Columna = 7 - j;
+
+
                     }
 
                     Espejar.Matriz[i, 7 - j].SetFicha(aux);
-                    Espejar.Matriz[i, 7 - j].Fichita.Fila = i;
-                    Espejar.Matriz[i, 7 - j].Fichita.Columna = j;
+                    //Espejar.Matriz[i, 7 - j].Fichita.Fila = i;
+                    //Espejar.Matriz[i, 7 - j].Fichita.Columna = j;
                 }
             }
         }
-        return Espejar;
 
+        SetLista(Espejar);
+
+        return Espejar;
     }
 
     /// <summary>
@@ -584,6 +583,14 @@ public class Tablero
 
     #region SETTERS & GETTES
     public TipoSolucion Type { get => type; set => type = value; }
+
+    private void SetLista(Tablero T)
+    {
+        for (int i = 0; i < Global.N_; ++i)
+            for (int k = 0; k < Global.N_; ++k)
+                if (Matriz[i, k].Fichita != null)
+                    T.ListaPosicionadas.Add(Matriz[i, k].Fichita);
+    }
     #endregion
 
 } //end Tablero
