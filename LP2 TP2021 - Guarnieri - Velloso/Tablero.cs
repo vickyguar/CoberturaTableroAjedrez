@@ -353,7 +353,7 @@ public class Tablero
     }
 
     /// <summary>
-    /// Retorna un nuevo Tablero, que es igual al Tablero this pero con las Torres con las columnas intercambiadas, 
+    /// Retorna un nuevo Tablero, que es igual al Tablero this pero con las Torres con las columnas intercambiadas. 
     /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
     /// </summary>
     /// <returns></returns>
@@ -368,7 +368,7 @@ public class Tablero
         }
         catch (Exception ex)
         {
-            throw ex; //MessageBox
+            throw ex; 
         }
 
         if (T1.GetColumna() != T2.GetColumna() || T1.GetFila() != T2.GetFila())
