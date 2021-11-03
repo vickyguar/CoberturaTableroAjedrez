@@ -41,6 +41,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Column8 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Barra = new System.Windows.Forms.ProgressBar();
             this.btn_fatales = new System.Windows.Forms.Button();
+            this.btn_back = new System.Windows.Forms.Button();
+            this.btn_back_fatal = new System.Windows.Forms.Button();
+            this.btn_next_fatal = new System.Windows.Forms.Button();
+            this.btn_exit = new System.Windows.Forms.Button();
             Dtg = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(Dtg)).BeginInit();
             this.SuspendLayout();
@@ -171,12 +175,57 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.btn_fatales.Visible = false;
             this.btn_fatales.Click += new System.EventHandler(this.btn_fatales_Click);
             // 
+            // btn_back
+            // 
+            this.btn_back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_back.Location = new System.Drawing.Point(53, 452);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(75, 23);
+            this.btn_back.TabIndex = 3;
+            this.btn_back.Text = "Back";
+            this.btn_back.UseVisualStyleBackColor = true;
+            // 
+            // btn_back_fatal
+            // 
+            this.btn_back_fatal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_back_fatal.Location = new System.Drawing.Point(53, 452);
+            this.btn_back_fatal.Name = "btn_back_fatal";
+            this.btn_back_fatal.Size = new System.Drawing.Size(75, 23);
+            this.btn_back_fatal.TabIndex = 4;
+            this.btn_back_fatal.Text = "Back";
+            this.btn_back_fatal.UseVisualStyleBackColor = true;
+            // 
+            // btn_next_fatal
+            // 
+            this.btn_next_fatal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_next_fatal.Location = new System.Drawing.Point(663, 452);
+            this.btn_next_fatal.Name = "btn_next_fatal";
+            this.btn_next_fatal.Size = new System.Drawing.Size(75, 23);
+            this.btn_next_fatal.TabIndex = 5;
+            this.btn_next_fatal.Text = "Next";
+            this.btn_next_fatal.UseVisualStyleBackColor = true;
+            // 
+            // btn_exit
+            // 
+            this.btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_exit.Location = new System.Drawing.Point(663, 375);
+            this.btn_exit.Name = "btn_exit";
+            this.btn_exit.Size = new System.Drawing.Size(75, 23);
+            this.btn_exit.TabIndex = 6;
+            this.btn_exit.Text = "Exit";
+            this.btn_exit.UseVisualStyleBackColor = true;
+            this.btn_exit.Visible = false;
+            // 
             // Soluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
             this.ClientSize = new System.Drawing.Size(800, 508);
+            this.Controls.Add(this.btn_exit);
+            this.Controls.Add(this.btn_next_fatal);
+            this.Controls.Add(this.btn_back_fatal);
+            this.Controls.Add(this.btn_back);
             this.Controls.Add(this.btn_fatales);
             this.Controls.Add(this.Barra);
             this.Controls.Add(this.btn_next);
@@ -203,6 +252,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
         private System.Windows.Forms.DataGridViewImageColumn Column8;
         private System.Windows.Forms.ProgressBar Barra;
         private System.Windows.Forms.Button btn_fatales;
+        private System.Windows.Forms.Button btn_back;
+        private System.Windows.Forms.Button btn_back_fatal;
+        private System.Windows.Forms.Button btn_next_fatal;
+        private System.Windows.Forms.Button btn_exit;
     }
 }
 

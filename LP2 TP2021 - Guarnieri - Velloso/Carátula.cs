@@ -27,7 +27,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
             FormSoluciones.Show(); //Abrimos el form de soluciones
             this.Hide(); //Cerramos el Form de Carátula
-
         }
 
         static List<Tablero> Programa()
@@ -225,22 +224,22 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #endregion
 
-                    #region VERIFICAR SOLUCIONES DISTINTAS 
+                    //#region VERIFICAR SOLUCIONES DISTINTAS 
 
-                    for (int j = 0; j < ListaSoluciones.Count; ++j)
-                    {
-                        Tablero Solucion = ListaSoluciones[j];
+                    //for (int j = 0; j < ListaSoluciones.Count; ++j)
+                    //{
+                    //    Tablero Solucion = ListaSoluciones[j];
 
-                        for (int i = 0; i < ListaSoluciones.Count; ++i)
-                        {
-                            if (!Solucion.VerificarSolucionesDistintas(ListaSoluciones[i]))
-                            {
-                                ListaSoluciones.Remove(Solucion);
-                            }
-                        }
-                    }
+                    //    for (int i = 0; i < ListaSoluciones.Count; ++i)
+                    //    {
+                    //        if (!Solucion.VerificarSolucionesDistintas(ListaSoluciones[i]))
+                    //        {
+                    //            ListaSoluciones.Remove(Solucion);
+                    //        }
+                    //    }
+                    //}
 
-                    #endregion
+                    //#endregion
                    
                 }
 

@@ -13,26 +13,46 @@ namespace LP2_TP2021___Guarnieri___Velloso
     public partial class Soluciones : Form
     {
         List<Tablero> ListaSoluciones;
+        List<Tablero> ListaFiltrada;
+
         Carátula Llamado;
         public Soluciones(List<Tablero> ListaSoluciones_, Carátula _Llamado)
         {
             InitializeComponent();
+
             ListaSoluciones = ListaSoluciones_;
             Llamado = _Llamado;
+            ListaFiltrada = Fatales(ListaSoluciones); //filtramos las soluciones obtenidas
 
+            Dtg.InitializeLifetimeService();
+
+            //visibilidad de los botones
+            btn_next.Visible = true;
+            btn_back.Visible = false;
+            
+            btn_fatales.Visible = false;
+            btn_next_fatal.Visible = false;
+            btn_back_fatal.Visible = false;
+
+            ImprimirSiguiente(ListaSoluciones); //se imprime la primera solución
         }
 
-        private void btn_next_Click(object sender, EventArgs e)
+        #region IMPRIMIR DTG
+        private void ImprimirSiguiente(List<Tablero> Lista)
         {
-            if (Barra.Value < ListaSoluciones.Count)
+            if (Barra.Value < Lista.Count)
             {
                 btn_next.Visible = true;
-                btn_fatales.Visible = false;
 
                 //Limpiar tablero
-                Dtg.Rows.Clear();
-                Dtg.Refresh();
+                if(Barra.Value!=0)
+                {
+                    Dtg.Rows.Clear();
+                    Dtg.Refresh();
+                }
+                
 
+                //Asigno la cantidad 
                 Dtg.ColumnCount = Global.N_;
                 Dtg.RowCount = Global.N_;
                 for (int i = 0; i < Global.N_; ++i)
@@ -44,26 +64,119 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         if (ListaSoluciones[Barra.Value].Matriz[i, j].Fichita != null) // Barra.Value esta funcionando como iterador
                             iCell.Value = (Bitmap)ListaSoluciones[Barra.Value].Matriz[i, j].Fichita.Imagen;
                         else
-                            iCell.Value = (Bitmap)Image.FromFile("Transparente.png");//iCell.Value = (Bitmap)ListaSoluciones[Barra.Value].Matriz[i, j].Img;
+                            iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 
                         Dtg[i, j] = iCell;
 
                         if (ListaSoluciones[Barra.Value].Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
-                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Black; //Le cambio el color al Dtg usando "Style.BackColor"
+                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
                     }
                 }
 
-                Barra.Increment(1); //Incrementamos nuestra Progress Bar (iterador)
+                Barra.Increment(1);
 
-                if (Barra.Value == 10)
+
+                if (Barra.Value == Lista.Count) //si ya se imprimieron todas las soluciones
                 {
-                    MessageBox.Show("Ya se imprimieron 10 tableros distintos");
                     btn_next.Visible = false;
                     btn_fatales.Visible = true;
                 }
             }
-           
+            return;
+        }
 
+        private void ImprimirAnterior(List<Tablero> Lista)
+        {
+
+            if (Barra.Value > 1)
+            {
+                Barra.Value = Barra.Value - 2;
+                //Limpiar tablero
+                Dtg.Rows.Clear();
+                Dtg.Refresh();
+
+                Dtg.ColumnCount = 8;
+                Dtg.RowCount = 8;
+
+
+                for (int i = 0; i < 8; ++i)
+                {
+                    for (int j = 0; j < 8; ++j)
+                    {
+                        DataGridViewImageCell iCell = new DataGridViewImageCell();
+
+                        if (Lista[Barra.Value].Matriz[i, j].Fichita != null)
+                            iCell.Value = (Bitmap)Lista[Barra.Value].Matriz[i, j].Fichita.Imagen;
+                        else
+                            iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
+
+
+                        Dtg[i, j] = iCell;
+
+                        if (Lista[Barra.Value].Matriz[i, j].Colour == eColor.NEGRO)
+                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray;
+                    }
+                }
+
+            }
+            Barra.Increment(1);
+            return;
+        }
+
+        #endregion
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+            if (Barra.Value > 0) //si me movi para adelante
+                btn_back.Visible = true; //habilito el botón de back
+            ImprimirSiguiente(ListaSoluciones);
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Llamado.Close();
+        }
+
+        private void btn_back_Click(object sender, EventArgs e)
+        {
+            if (Barra.Value == 2) //si soy la primera solucion
+                btn_back.Visible = false; //no puedo ir para atrás
+
+            if (Barra.Value < ListaSoluciones.Count + 1) //si no llegue al final
+            {
+                btn_fatales.Visible = false; //no muestro el botón de fatales
+                btn_next.Visible = true;
+            }
+
+            ImprimirAnterior(ListaSoluciones);
+        }
+
+        private void btn_fatales_Click(object sender, EventArgs e)
+        {
+            if (btn_fatales.Visible)
+            {
+                Barra.Value = 0;
+
+                Dtg.Rows.Clear();
+                Dtg.Refresh();
+                btn_fatales.Visible = false;
+                btn_back.Visible = false;
+
+                btn_next_fatal.Visible = true;
+                btn_back_fatal.Visible = false;
+
+                if (ListaFiltrada.Count == 0)
+                {
+                    if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                    {
+                        this.Close();
+                        Llamado.Close();
+                    }
+                }
+
+                else
+                    ImprimirSiguiente(ListaFiltrada);
+            }
         }
 
         //Va con el boton de filtrar
@@ -80,11 +193,23 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             return ListaFatales;
         }
-
-        private void btn_fatales_Click(object sender, EventArgs e)
+        private void btn_next_fatal_Click(object sender, EventArgs e)
         {
-            List<Tablero> ListaFatales = Fatales(ListaSoluciones);
+            if (Barra.Value > 0)
+                btn_back_fatal.Visible = true;
 
+            ImprimirSiguiente(ListaFiltrada);
+        }
+
+        private void btn_back_fatal_Click(object sender, EventArgs e)
+        {
+            if (Barra.Value == 2)
+                btn_back_fatal.Visible = false;
+
+            if (Barra.Value < ListaFiltrada.Count + 1)
+                btn_next_fatal.Visible = true;
+
+            ImprimirAnterior(ListaFiltrada);
         }
     }
 }
