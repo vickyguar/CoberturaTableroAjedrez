@@ -146,7 +146,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #region ROTADO DE ORIGINAL
 
-                    //TABLERO ROTADO 1 (90°)
+                    //TABLERO ROTADO 1 (90°) 
                     Tablero Rotado1 = new Tablero(Juego, ++ID); //#2
                     Rotado1.Rotar90();
                     ListaSoluciones.Add(Rotado1);
