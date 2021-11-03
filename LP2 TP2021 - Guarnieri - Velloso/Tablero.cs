@@ -246,6 +246,10 @@ public class Tablero
                 {
                     Debug.Write(" # |");
                 }
+                else if (Matriz[i, j].Superpuesta != null)
+                {
+                    Debug.Write(" S |");
+                }
                 else
                 {
                     if (Matriz[i, j].Fichita.GetName() == "Reina")
