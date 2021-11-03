@@ -40,7 +40,7 @@ public abstract class Ficha
     /// Constructor de la clase <see cref="Ficha"/>.
     /// </summary>
     /// <param name="_Name"></param>
-    public Ficha(string _Name, Image _Imagen)
+    virtual public Ficha(string _Name, Image _Imagen)
     {
         Name = _Name;
         fila = -1;
@@ -290,3 +290,5 @@ public abstract class Ficha
     #endregion
 
 } //end Ficha
+
+//TODO: constructores, virtual, copia a mano de la stack

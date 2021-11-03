@@ -47,62 +47,57 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.btn_back_fatal = new System.Windows.Forms.Button();
             this.btn_next_fatal = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Dtg)).BeginInit();
+            Dtg = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(Dtg)).BeginInit();
             this.SuspendLayout();
             // 
             // Dtg
             // 
-            this.Dtg.AllowUserToAddRows = false;
-            this.Dtg.AllowUserToDeleteRows = false;
-            this.Dtg.AllowUserToResizeColumns = false;
-            this.Dtg.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Dtg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.Dtg.BackgroundColor = System.Drawing.SystemColors.HighlightText;
-            this.Dtg.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.Dtg.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dtg.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.Dtg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dtg.ColumnHeadersVisible = false;
-            this.Dtg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5,
-            this.Column6,
-            this.Column7,
-            this.Column8});
-            this.Dtg.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.Dtg.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.Dtg.Enabled = false;
-            this.Dtg.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Dtg.Location = new System.Drawing.Point(187, 119);
-            this.Dtg.MultiSelect = false;
-            this.Dtg.Name = "Dtg";
-            this.Dtg.ReadOnly = true;
-            this.Dtg.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.Dtg.RowHeadersVisible = false;
-            this.Dtg.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.Dtg.RowTemplate.Height = 50;
-            this.Dtg.RowTemplate.ReadOnly = true;
-            this.Dtg.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dtg.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.Dtg.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect;
-            this.Dtg.ShowCellErrors = false;
-            this.Dtg.ShowCellToolTips = false;
-            this.Dtg.ShowEditingIcon = false;
-            this.Dtg.ShowRowErrors = false;
-            this.Dtg.Size = new System.Drawing.Size(400, 400);
-            this.Dtg.TabIndex = 0;
-            this.Dtg.TabStop = false;
+            Dtg.AllowUserToAddRows = false;
+            Dtg.AllowUserToDeleteRows = false;
+            Dtg.AllowUserToResizeColumns = false;
+            Dtg.AllowUserToResizeRows = false;
+            Dtg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            Dtg.BackgroundColor = System.Drawing.SystemColors.HighlightText;
+            Dtg.CausesValidation = false;
+            Dtg.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            Dtg.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            Dtg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            Dtg.ColumnHeadersVisible = false;
+            Dtg.Cursor = System.Windows.Forms.Cursors.Arrow;
+            Dtg.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            Dtg.EnableHeadersVisualStyles = false;
+            Dtg.GridColor = System.Drawing.SystemColors.ControlLight;
+            Dtg.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            Dtg.Location = new System.Drawing.Point(187, 75);
+            Dtg.MultiSelect = false;
+            Dtg.Name = "Dtg";
+            Dtg.ReadOnly = true;
+            Dtg.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            Dtg.RowHeadersVisible = false;
+            Dtg.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            Dtg.RowTemplate.Height = 50;
+            Dtg.RowTemplate.ReadOnly = true;
+            Dtg.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            Dtg.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            Dtg.ShowCellErrors = false;
+            Dtg.ShowCellToolTips = false;
+            Dtg.ShowEditingIcon = false;
+            Dtg.ShowRowErrors = false;
+            Dtg.Size = new System.Drawing.Size(400, 400);
+            Dtg.TabIndex = 0;
+            Dtg.TabStop = false;
+            // 
+            // btn_next
+            // 
+            this.btn_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_next.Location = new System.Drawing.Point(663, 452);
+            this.btn_next.Name = "btn_next";
+            this.btn_next.Size = new System.Drawing.Size(75, 23);
+            this.btn_next.TabIndex = 1;
+            this.btn_next.Text = "Next";
+            this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
             // 
             // Column1
             // 
@@ -247,12 +242,79 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.btn_exit.UseVisualStyleBackColor = false;
             this.btn_exit.Visible = false;
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.FillWeight = 50F;
+            this.dataGridViewImageColumn1.Frozen = true;
+            this.dataGridViewImageColumn1.HeaderText = "Column1";
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn2
+            // 
+            this.dataGridViewImageColumn2.FillWeight = 50F;
+            this.dataGridViewImageColumn2.HeaderText = "Column2";
+            this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
+            this.dataGridViewImageColumn2.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn3
+            // 
+            this.dataGridViewImageColumn3.FillWeight = 50F;
+            this.dataGridViewImageColumn3.HeaderText = "Column3";
+            this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
+            this.dataGridViewImageColumn3.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn4
+            // 
+            this.dataGridViewImageColumn4.FillWeight = 50F;
+            this.dataGridViewImageColumn4.HeaderText = "Column4";
+            this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
+            this.dataGridViewImageColumn4.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn5
+            // 
+            this.dataGridViewImageColumn5.FillWeight = 50F;
+            this.dataGridViewImageColumn5.HeaderText = "Column5";
+            this.dataGridViewImageColumn5.Name = "dataGridViewImageColumn5";
+            this.dataGridViewImageColumn5.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn6
+            // 
+            this.dataGridViewImageColumn6.FillWeight = 50F;
+            this.dataGridViewImageColumn6.HeaderText = "Column6";
+            this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
+            this.dataGridViewImageColumn6.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn7
+            // 
+            this.dataGridViewImageColumn7.FillWeight = 50F;
+            this.dataGridViewImageColumn7.HeaderText = "Column7";
+            this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
+            this.dataGridViewImageColumn7.ReadOnly = true;
+            // 
+            // dataGridViewImageColumn8
+            // 
+            this.dataGridViewImageColumn8.FillWeight = 50F;
+            this.dataGridViewImageColumn8.HeaderText = "Column8";
+            this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
+            this.dataGridViewImageColumn8.ReadOnly = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(187, 82);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 25;
+            this.dataGridView1.Size = new System.Drawing.Size(400, 393);
+            this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
             // Soluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(800, 580);
+            this.ClientSize = new System.Drawing.Size(800, 508);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.btn_next_fatal);
             this.Controls.Add(this.btn_back_fatal);
@@ -260,19 +322,16 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Controls.Add(this.btn_fatales);
             this.Controls.Add(this.Barra);
             this.Controls.Add(this.btn_next);
-            this.Controls.Add(this.Dtg);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(Dtg);
             this.Name = "Soluciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Soluciones";
-            ((System.ComponentModel.ISupportInitialize)(this.Dtg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(Dtg)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView Dtg;
         private System.Windows.Forms.Button btn_next;
         private System.Windows.Forms.ProgressBar Barra;
         private System.Windows.Forms.Button btn_fatales;
@@ -288,6 +347,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
         private System.Windows.Forms.DataGridViewImageColumn Column6;
         private System.Windows.Forms.DataGridViewImageColumn Column7;
         private System.Windows.Forms.DataGridViewImageColumn Column8;
+        private System.Windows.Forms.ProgressBar Barra;
+        private System.Windows.Forms.Button btn_fatales;
+        private System.Windows.Forms.Button btn_back;
+        private System.Windows.Forms.Button btn_back_fatal;
+        private System.Windows.Forms.Button btn_next_fatal;
+        private System.Windows.Forms.Button btn_exit;
     }
 }
 

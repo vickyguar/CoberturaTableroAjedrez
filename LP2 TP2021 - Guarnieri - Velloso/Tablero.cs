@@ -97,12 +97,12 @@ public class Tablero
 
         Ficha[] Aux = newTablero.PilaPosicionadas.ToArray();
 
-        //for (int i = 7; i >= 0; --i)
-        //{
-        //    PilaPosicionadas.Push(Aux[i]);
-        //}
+        for (int i = 7; i >= 0; --i)
+        {
+            PilaPosicionadas.Push(Aux[i]);
+        }
 
-        PilaPosicionadas = new Stack<Ficha>(newTablero.PilaPosicionadas); //TODO: si falla algo es ACA TAMBIEN
+        PilaPosicionadas = new Stack<Ficha>(new Stack<Ficha>(newTablero.PilaPosicionadas)); //TODO: si falla algo es ACA TAMBIEN
 
         ID = _ID;
     }
