@@ -262,7 +262,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return ListaSoluciones;
         }
 
-        
+
 
         /*
          * Steps para el Form:
