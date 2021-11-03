@@ -24,6 +24,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Llamado = _Llamado;
             ListaFiltrada = Fatales(ListaSoluciones); //filtramos las soluciones obtenidas
 
+            Dtg.InitializeLifetimeService();
 
             //visibilidad de los botones
             btn_next.Visible = true;
@@ -210,6 +211,5 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             ImprimirAnterior(ListaFiltrada);
         }
-
     }
 }
