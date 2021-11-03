@@ -21,6 +21,13 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
         }
 
+        #region BOTON
+
+        /// <summary>
+        /// Evento click en el botón GENERAR de <see cref="Carátula"/>.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
             List<Tablero> ListaSoluciones = Programa();
@@ -29,6 +36,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Hide(); //Cerramos el Form de Carátula
         }
 
+        #endregion
+
+        #region PROGRAMA
+
+        /// <summary>
+        /// Algoritmo
+        /// </summary>
+        /// <returns></returns>
         static List<Tablero> Programa()
         {
             int ID = 0;
@@ -122,17 +137,17 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 Juego.Posicionar(Rey, Cuadrado3);
                 Juego.Posicionar(Torre1, Cuadrado4);
 
-                switch (Convert.ToInt32(rnd.Next(1, 4)))
+                switch (Convert.ToInt32(rnd.Next(1, 4))) //A la torre 2 le paso eliminar
                 {
                     case 1:
-                        Juego.Posicionar(Torre2, Cuadrado2); break;
+                        Juego.Posicionar(Torre2, Cuadrado2, false); break;
                     case 2:
-                        Juego.Posicionar(Torre2, Cuadrado3); break;
+                        Juego.Posicionar(Torre2, Cuadrado3, false); break;
                     case 3:
-                        Juego.Posicionar(Torre2, Cuadrado4); break;
+                        Juego.Posicionar(Torre2, Cuadrado4, false); break;
                 }
 
-                Juego.Posicionar(Caballo2, Cuadrado2);
+                Juego.Posicionar(Caballo2, Cuadrado2, false);
 
                 #endregion
 
@@ -262,7 +277,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return ListaSoluciones;
         }
 
-
+        #endregion
 
         /*
          * Steps para el Form:

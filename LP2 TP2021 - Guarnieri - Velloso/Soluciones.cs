@@ -28,7 +28,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             //visibilidad de los botones
             btn_next.Visible = true;
             btn_back.Visible = false;
-            
+
             btn_fatales.Visible = false;
             btn_next_fatal.Visible = false;
             btn_back_fatal.Visible = false;
@@ -39,17 +39,17 @@ namespace LP2_TP2021___Guarnieri___Velloso
         #region IMPRIMIR DTG
         private void ImprimirSiguiente(List<Tablero> Lista)
         {
-            if (Barra.Value < Lista.Count)
+            if (Barra.Value < Lista.Count) // Barra.Value esta funcionando como iterador
             {
                 btn_next.Visible = true;
 
                 //Limpiar tablero
-                if(Barra.Value!=0)
+                if (Barra.Value != 0)
                 {
                     Dtg.Rows.Clear();
                     Dtg.Refresh();
                 }
-                
+
 
                 //Asigno la cantidad 
                 Dtg.ColumnCount = Global.N_;
@@ -60,8 +60,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     {
                         DataGridViewImageCell iCell = new DataGridViewImageCell();
 
-                        if (ListaSoluciones[Barra.Value].Matriz[i, j].Fichita != null) // Barra.Value esta funcionando como iterador
+                        if (ListaSoluciones[Barra.Value].Matriz[i, j].Superpuesta != null) //Si en esa posición hay fichas superpuestas
+                            iCell.Value = (Bitmap)Image.FromFile("TorreCaballo.png");
+
+                        else if (ListaSoluciones[Barra.Value].Matriz[i, j].Fichita != null) 
                             iCell.Value = (Bitmap)ListaSoluciones[Barra.Value].Matriz[i, j].Fichita.Imagen;
+
                         else
                             iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 
@@ -104,8 +108,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     {
                         DataGridViewImageCell iCell = new DataGridViewImageCell();
 
+                        if (ListaSoluciones[Barra.Value].Matriz[i, j].Superpuesta != null) //Si en esa posición hay fichas superpuestas
+                            iCell.Value = (Bitmap)Image.FromFile("TorreCaballo.png");
+
                         if (Lista[Barra.Value].Matriz[i, j].Fichita != null)
                             iCell.Value = (Bitmap)Lista[Barra.Value].Matriz[i, j].Fichita.Imagen;
+
                         else
                             iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 

@@ -49,15 +49,31 @@ public class Rey : Ficha
         uint j = Pos.GetColumna();
 
         //No verificamos si lo que pinta está fuera del Tablero, porque nosostras le restringimos al Rey a posicionarse en el Cuadrado3 (ver Main)
+        //El Rey siempre ataca de forma fatal.
 
         Ataque.Matriz[i + 1, j].SetAtacada(true);
+        Ataque.Matriz[i + 1, j].SetAtacadaFatalmente(true);
+
         Ataque.Matriz[i - 1, j].SetAtacada(true);
+        Ataque.Matriz[i - 1, j].SetAtacadaFatalmente(true);
+
         Ataque.Matriz[i, j + 1].SetAtacada(true);
+        Ataque.Matriz[i, j + 1].SetAtacadaFatalmente(true);
+
         Ataque.Matriz[i, j - 1].SetAtacada(true);
+        Ataque.Matriz[i, j - 1].SetAtacadaFatalmente(true);
+
         Ataque.Matriz[i + 1, j + 1].SetAtacada(true);
+        Ataque.Matriz[i + 1, j + 1].SetAtacadaFatalmente(true);
+
         Ataque.Matriz[i + 1, j - 1].SetAtacada(true);
+        Ataque.Matriz[i + 1, j - 1].SetAtacadaFatalmente(true);
+
         Ataque.Matriz[i - 1, j + 1].SetAtacada(true);
+        Ataque.Matriz[i - 1, j + 1].SetAtacadaFatalmente(true);
+
         Ataque.Matriz[i - 1, j - 1].SetAtacada(true);
+        Ataque.Matriz[i - 1, j - 1].SetAtacadaFatalmente(true);
 
     }
 

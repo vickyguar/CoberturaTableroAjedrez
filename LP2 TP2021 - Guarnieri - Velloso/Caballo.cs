@@ -45,40 +45,64 @@ public class Caballo : Ficha
     /// <param name="Fatal"></param>
     public override void Atacar(Tablero Ataque, Casilla Pos)
     {
-        uint j = Pos.GetColumna();
-        uint i = Pos.GetFila();
+        int j = (int)Pos.GetColumna();
+        int i = (int)Pos.GetFila();
 
         if (i - 2 >= 0)
         {
-            if (j + 1 < Global.N_)
+            if (j + 1 < 8)
+            {
                 Ataque.Matriz[i - 2, j + 1].SetAtacada(true);
+                Ataque.Matriz[i - 2, j + 1].SetAtacadaFatalmente(true);
+            }
 
             if (j - 1 >= 0)
+            {
                 Ataque.Matriz[i - 2, j - 1].SetAtacada(true);
+                Ataque.Matriz[i - 2, j - 1].SetAtacadaFatalmente(true);
+            }
         }
 
-        if (i + 2 < Global.N_)
+        if (i + 2 < 8)
         {
             if (j - 1 >= 0)
+            {
                 Ataque.Matriz[i + 2, j - 1].SetAtacada(true);
-            if (j + 1 < Global.N_)
+                Ataque.Matriz[i + 2, j - 1].SetAtacadaFatalmente(true);
+            }
+            if (j + 1 < 8)
+            {
                 Ataque.Matriz[i + 2, j + 1].SetAtacada(true);
+                Ataque.Matriz[i + 2, j + 1].SetAtacadaFatalmente(true);
+            }
         }
 
-        if (i + 1 < Global.N_)
+        if (i + 1 < 8)
         {
-            if (j + 2 < Global.N_)
+            if (j + 2 < 8)
+            {
                 Ataque.Matriz[i + 1, j + 2].SetAtacada(true);
+                Ataque.Matriz[i + 1, j + 2].SetAtacadaFatalmente(true);
+            }
             if (j - 2 >= 0)
+            {
                 Ataque.Matriz[i + 1, j - 2].SetAtacada(true);
+                Ataque.Matriz[i + 1, j - 2].SetAtacadaFatalmente(true);
+            }
         }
 
         if (i - 1 >= 0)
         {
             if (j - 2 >= 0)
+            {
                 Ataque.Matriz[i - 1, j - 2].SetAtacada(true);
-            if (j + 2 < Global.N_)
+                Ataque.Matriz[i - 1, j - 2].SetAtacadaFatalmente(true);
+            }
+            if (j + 2 < 8)
+            {
                 Ataque.Matriz[i - 1, j + 2].SetAtacada(true);
+                Ataque.Matriz[i - 1, j + 2].SetAtacadaFatalmente(true);
+            }
         }
     }
 

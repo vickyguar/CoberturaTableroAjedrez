@@ -41,9 +41,9 @@ public class Tablero
     public Casilla[,] Matriz = new Casilla[Global.N_, Global.N_]; //Acceso publico, para que las fichas se puedan posicionar y atacar
 
     /// <summary>
-    /// Pila de Fichas (se llena a medida que se posicionan las Ficha) del <see cref="Tablero"/>.
+    /// Lista de Fichas (se llena a medida que se posicionan las Ficha) del <see cref="Tablero"/>.
     /// </summary>
-    private Stack<Ficha> PilaPosicionadas = new Stack<Ficha>(Global.N_);
+    private List<Ficha> ListaPosicionadas = new List<Ficha>(Global.N_);
 
     /// <summary>
     /// ID de <see cref="Tablero"/>
@@ -95,14 +95,14 @@ public class Tablero
             }
         }
 
-        Ficha[] Aux = newTablero.PilaPosicionadas.ToArray();
+        Ficha[] Aux = newTablero.ListaPosicionadas.ToArray();
 
         //for (int i = 7; i >= 0; --i)
         //{
-        //    PilaPosicionadas.Push(Aux[i]);
+        //    ListaPosicionadas.Push(Aux[i]);
         //}
 
-        PilaPosicionadas = new Stack<Ficha>(newTablero.PilaPosicionadas); //TODO: si falla algo es ACA TAMBIEN
+       // ListaPosicionadas = new Stack<Ficha>(newTablero.ListaPosicionadas); //TODO: si falla algo es ACA TAMBIEN
 
         ID = _ID;
     }
@@ -146,22 +146,13 @@ public class Tablero
     /// <returns></returns>
     //public bool FiltrarFatales(Tablero Filtrado) 
     //{
-    //    foreach (Ficha Fichita in PilaPosicionadas)
+    //    foreach (Ficha Fichita in ListaPosicionadas)
     //    {
     //        Fichita.Atacar(Filtrado, Buscar(Fichita));
     //    }
 
     //    return (Filtrado.VerificarSolucion()) ? true : false; //si es una solución fatal, devulve true y sino devuelve false
     //}
-
-    /// <summary>
-    /// Imprime en Form
-    /// </summary>
-    public void Imprimir()
-    {
-
-        //Boton: print
-    }
 
     /// <summary>
     /// Limpia el Tablero this: Las Casillas no están atacadas, ni ocupadas, y las Fichas son null.
@@ -177,7 +168,7 @@ public class Tablero
                 Matriz[i, j].SetOcupada(false);
             }
         }
-        PilaPosicionadas.Clear();
+        ListaPosicionadas.Clear();
         //Boton: clear
     }
 
@@ -201,10 +192,10 @@ public class Tablero
 
         if (Fichita.GetName() == "Alfil2") //si estamos posicionando el segundo alfil
         {
-            Ficha FichaAux = PilaPosicionadas.Peek(); //el ultimo (antes de posicionar el alfil 2) simpre es Alfil1
+            Ficha FichaAux = ListaPosicionadas[1]; //el ultimo (antes de posicionar el alfil 2) simpre es Alfil1
             try
             {
-                while (Matriz[i, j].GetColor() == Buscar(FichaAux).GetColor()) //Mientras los dos alfiles sean del mismo color
+                while (Matriz[i, j].GetColor() == Matriz[FichaAux.Fila, FichaAux.Columna].GetColor()) //Mientras los dos alfiles sean del mismo color
                 {
                     index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
@@ -219,8 +210,14 @@ public class Tablero
         }
 
         //Ocupamos la casilla con la fichita
-        Matriz[i, j].SetFicha(Fichita);
-        Matriz[i, j].SetOcupada(true);
+        if (Remove)
+        {
+            Matriz[i, j].SetFicha(Fichita);
+            Matriz[i, j].SetOcupada(true);
+        }
+        else if (Fichita is Caballo)
+            Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
+        
 
         //Le ponemos a la ficha la columna y fila correspondiente
         Fichita.Fila = ((int)i);
@@ -228,10 +225,11 @@ public class Tablero
 
         Fichita.Atacar(this, Matriz[i, j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
 
-        PilaPosicionadas.Push(Fichita); //agrego a la pila la ficha que posicioné
+        ListaPosicionadas.Add(Fichita); //agrego a la lista la ficha que posicioné
 
         if (Remove)
             SubLista.RemoveAt(index); //Sacamos de la lista al elemento ocupado, para que otros no lo puedan ocupar.
+        
     }
 
     /// <summary>
@@ -450,28 +448,28 @@ public class Tablero
 
             #region IDEA
 
-            //Ficha Caballo2 = PilaPosicionadas.Pop();
-            //Ficha Torre2 = PilaPosicionadas.Pop();
-            //Ficha Torre1 = PilaPosicionadas.Pop();
-            //Ficha Rey = PilaPosicionadas.Pop();
-            //Ficha Caballo1 = PilaPosicionadas.Pop();
-            //Ficha Alfil2 = PilaPosicionadas.Pop();
-            //Ficha Alfil1 = PilaPosicionadas.Pop();
-            //Ficha Reina = PilaPosicionadas.Pop();
+            //Ficha Caballo2 = ListaPosicionadas.Pop();
+            //Ficha Torre2 = ListaPosicionadas.Pop();
+            //Ficha Torre1 = ListaPosicionadas.Pop();
+            //Ficha Rey = ListaPosicionadas.Pop();
+            //Ficha Caballo1 = ListaPosicionadas.Pop();
+            //Ficha Alfil2 = ListaPosicionadas.Pop();
+            //Ficha Alfil1 = ListaPosicionadas.Pop();
+            //Ficha Reina = ListaPosicionadas.Pop();
 
-            //Ficha Caballo2_T = T.PilaPosicionadas.Pop();
-            //Ficha Torre2_T = T.PilaPosicionadas.Pop();
-            //Ficha Torre1_T = T.PilaPosicionadas.Pop();
-            //Ficha Rey_T = T.PilaPosicionadas.Pop();
-            //Ficha Caballo1_T = T.PilaPosicionadas.Pop();
-            //Ficha Alfil2_T = T.PilaPosicionadas.Pop();
-            //Ficha Alfil1_T = T.PilaPosicionadas.Pop();
-            //Ficha Reina_T = T.PilaPosicionadas.Pop();
+            //Ficha Caballo2_T = T.ListaPosicionadas.Pop();
+            //Ficha Torre2_T = T.ListaPosicionadas.Pop();
+            //Ficha Torre1_T = T.ListaPosicionadas.Pop();
+            //Ficha Rey_T = T.ListaPosicionadas.Pop();
+            //Ficha Caballo1_T = T.ListaPosicionadas.Pop();
+            //Ficha Alfil2_T = T.ListaPosicionadas.Pop();
+            //Ficha Alfil1_T = T.ListaPosicionadas.Pop();
+            //Ficha Reina_T = T.ListaPosicionadas.Pop();
 
-            ////foreach(Ficha Fichita in PilaPosicionadas)
+            ////foreach(Ficha Fichita in ListaPosicionadas)
             ////{
             ////    if(Fichita is Torre || Fichita is Alfil || Fichita is Caballo)
-            ////        if (!((Fichita.Columna == T.PilaPosicionadas.Pop().Columna) && (Fichita.Fila == T.PilaPosicionadas.Pop().Fila)))
+            ////        if (!((Fichita.Columna == T.ListaPosicionadas.Pop().Columna) && (Fichita.Fila == T.ListaPosicionadas.Pop().Fila)))
             ////            if (!((Fichita.Columna == Torre2_T.Columna) && (Torre1.Columna == Torre2_T.Columna)))
             ////                return true;
             ////}
@@ -531,9 +529,9 @@ public class Tablero
 
             #region LO NUEVO
 
-            //Creo dos arrays con la PilaPosicionadas de ambos tableros:
-            Ficha[] _THIS = this.PilaPosicionadas.ToArray();
-            Ficha[] _T = T.PilaPosicionadas.ToArray();
+            //Creo dos arrays con la ListaPosicionadas de ambos tableros:
+            Ficha[] _THIS = this.ListaPosicionadas.ToArray();
+            Ficha[] _T = T.ListaPosicionadas.ToArray();
 
             for (int i = 0; i < Global.N_; ++i) //TODO: si falla algo es de aca
             {
@@ -555,14 +553,14 @@ public class Tablero
     /// </summary>
     /// <param name="Fichita"></param>
     /// <returns></returns>
-    public Casilla Buscar(Ficha Fichita)
-    {
-        for (int i = 0; i < Global.N_; ++i)
-            for (int j = 0; j < Global.N_; ++j)
-                if (Matriz[i, j].Fichita == Fichita)
-                    return Matriz[i, j];
-        throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + " no está en el Tablero ----- ");
-    } //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
+    //public Casilla Buscar(Ficha Fichita)
+    //{
+    //    for (int i = 0; i < Global.N_; ++i)
+    //        for (int j = 0; j < Global.N_; ++j)
+    //            if (Matriz[i, j].Fichita == Fichita)
+    //                return Matriz[i, j];
+    //    throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + " no está en el Tablero ----- ");
+    //} //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
 
     /// <summary>
     /// Retorna la casilla donde está la Ficha con el nombre que le llega por parámetro.

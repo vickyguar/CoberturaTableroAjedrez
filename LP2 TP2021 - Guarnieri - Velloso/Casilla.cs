@@ -26,6 +26,8 @@ public class Casilla
     /// </summary>
     public Ficha Fichita;
 
+    public Ficha Superpuesta;
+
    // public Image Img;
 
     //PRIVADOS:
@@ -58,6 +60,7 @@ public class Casilla
         Ocupada = false;
         Atacada = false;
         Fichita = null;
+        Superpuesta = null;
        // Img = Image.FromFile("Transparente.png");
     }
 
@@ -107,6 +110,19 @@ public class Casilla
         {
             Fichita = null;
             SetOcupada(false);
+        }
+    }
+
+    public void SetSuperpuesta(Ficha newSuperpuesta)
+    {
+        if (newSuperpuesta != null)
+        {
+            Superpuesta = newSuperpuesta;
+            SetOcupada(true);
+        }
+        else //Cuando queremos vaciar la casilla, al SetFicha le pasamos null, por eso hacemos esta consideración.
+        {
+            Superpuesta = null;
         }
     }
 
