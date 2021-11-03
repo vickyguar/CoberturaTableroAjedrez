@@ -25,6 +25,10 @@ public class Caballo : Ficha
 
     }
 
+    public Caballo(Caballo newFichita):base(newFichita)
+    {
+    }
+
     /// <summary>
     /// Destructor de la clase <see cref="Caballo"/>.
     /// </summary>

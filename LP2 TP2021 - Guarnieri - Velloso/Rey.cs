@@ -25,6 +25,10 @@ public class Rey : Ficha
 
     }
 
+    public Rey(Rey newFichita) : base(newFichita)
+    {
+    }
+
     /// <summary>
     /// Destructor de la clase <see cref="Rey"/>.
     /// </summary>

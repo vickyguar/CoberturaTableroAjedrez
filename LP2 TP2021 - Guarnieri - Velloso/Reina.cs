@@ -26,6 +26,10 @@ public class Reina : Ficha
 
     }
 
+    public Reina(Reina newFichita) : base(newFichita)
+    {
+    }
+
     /// <summary>
     /// Destructor de la clase <see cref="Reina"/>.
     /// </summary>

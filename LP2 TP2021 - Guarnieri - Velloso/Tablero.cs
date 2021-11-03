@@ -83,6 +83,8 @@ public class Tablero
     /// <param name="newTablero"></param>
     public Tablero(Tablero newTablero, int _ID)
     {
+        //Variable auxiliar
+
         //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
         for (int i = 0; i < Global.N_; ++i)
         {
@@ -90,14 +92,45 @@ public class Tablero
             {
                 Matriz[i, j] = newTablero.Matriz[i, j];
                 Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
-                Matriz[i, j].Fichita = newTablero.Matriz[i, j].Fichita;
+                Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
                 Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
                 Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
                 Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
                 Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
+
             }
         }
+
+        if (ID % 12 == 0)
+            newListaPosicionadas(newTablero.ListaPosicionadas);
+       
         ID = _ID;
+    }
+
+    public Ficha newFicha(Ficha Fichita)
+    {
+        if (Fichita is Reina)
+            return new Reina((Reina)Fichita);
+        else if (Fichita is Rey)
+            return new Rey((Rey)Fichita);
+        else if (Fichita is Alfil)
+            return new Alfil((Alfil)Fichita);
+        else if (Fichita is Caballo)
+            return new Caballo((Caballo)Fichita);
+        else if (Fichita is Torre)
+            return new Torre((Torre)Fichita);
+        else
+            return null;
+
+    }
+
+    public void newListaPosicionadas(List<Ficha> newListita)
+    {
+
+        for(int i =0; i < newListita.Count; ++i)
+        {
+            ListaPosicionadas.Add(newFicha(newListita[i]));
+        }
     }
 
     /// <summary>
@@ -186,37 +219,36 @@ public class Tablero
         if (Fichita.GetName() == "Alfil2") //si estamos posicionando el segundo alfil
         {
             Ficha FichaAux = ListaPosicionadas[1]; //el ultimo (antes de posicionar el alfil 2) simpre es Alfil1
-            try
-            {
-                while (Matriz[i, j].GetColor() == Matriz[FichaAux.Fila, FichaAux.Columna].GetColor()) //Mientras los dos alfiles sean del mismo color
-                {
-                    index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
-                    i = SubLista[index].GetFila(); //nos guardamos nuevamente la fila
-                    j = SubLista[index].GetColumna(); //nos guardamos nuevamente la columna
-                }
-            }
-            catch (Exception ex)
+            while (Matriz[i, j].GetColor() == Matriz[FichaAux.Fila, FichaAux.Columna].GetColor()) //Mientras los dos alfiles sean del mismo color
             {
-                throw ex;
+                index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
+
+                i = SubLista[index].GetFila(); //nos guardamos nuevamente la fila
+                j = SubLista[index].GetColumna(); //nos guardamos nuevamente la columna
             }
+
+
         }
 
         //Ocupamos la casilla con la fichita
-        if (Remove)
+        Matriz[i, j].SetFicha(Fichita);
+
+        //Condiciones para poder superponer:
+        /* Que !Remove -> no me borraron la posicion del tablero en la lista de los cuadrados
+         * La ficha que se va a superponer es un caballo
+         * Torre2.Fila == i
+         * Torre2.Columna == j
+         */
+
+        if (!Remove && Fichita is Caballo)
         {
-            Matriz[i, j].SetFicha(Fichita);
-            Matriz[i, j].SetOcupada(true);
+            if (ListaPosicionadas[6].Fila == i && ListaPosicionadas[6].Columna == j)
+                Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
         }
-        else if (Fichita is Caballo)
-            Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
-        
 
-        //Le ponemos a la ficha la columna y fila correspondiente
-        Fichita.Fila = ((int)i);
-        Fichita.Columna = ((int)j);
 
-        Fichita.Atacar(this, Matriz[i, j]); //Es la funcion que "pinta" --> OJO porque no es la filtrada
+        Fichita.Atacar(this, Matriz[i, j]); //Llamamos a funcion atacar
 
         ListaPosicionadas.Add(Fichita); //agrego a la lista la ficha que posicioné
 
@@ -386,15 +418,15 @@ public class Tablero
         }
     }
 
-        #endregion
+    #endregion
 
-        #region VERIFICACIONES
+    #region VERIFICACIONES
 
-        /// <summary>
-        /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna el tipo (falta o leve).
-        /// </summary>
-        /// <returns></returns>
-        public bool VerificarSolucion()
+    /// <summary>
+    /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna el tipo (falta o leve).
+    /// </summary>
+    /// <returns></returns>
+    public bool VerificarSolucion()
     {
         TipoSolucion Type_ = TipoSolucion.FATAL;
 

@@ -25,6 +25,10 @@ public class Alfil : Ficha
 
     }
 
+    public Alfil(Alfil newFichita) : base(newFichita)
+    {
+    }
+
     /// <summary>
     /// Destructor de la clase <see cref="Alfil"/>.
     /// </summary>

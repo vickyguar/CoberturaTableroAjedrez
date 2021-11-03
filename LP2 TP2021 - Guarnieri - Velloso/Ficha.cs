@@ -48,6 +48,14 @@ public abstract class Ficha
         Imagen = _Imagen;
     }
 
+    public Ficha(Ficha newFichita)
+    {
+        Name = newFichita.Name;
+        fila = newFichita.Fila;
+        columna = newFichita.columna;
+        Imagen = newFichita.Imagen;
+    }
+
     /// <summary>
     /// Destructor de la clase <see cref="Ficha"/>.
     /// </summary>

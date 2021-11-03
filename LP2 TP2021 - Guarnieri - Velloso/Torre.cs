@@ -26,6 +26,10 @@ public class Torre : Ficha
 
     }
 
+    public Torre(Torre newFichita) : base(newFichita)
+    {
+    }
+
     /// <summary>
     /// Destructor de la clase <see cref="Torre"/>.
     /// </summary>

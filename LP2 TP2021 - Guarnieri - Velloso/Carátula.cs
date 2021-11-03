@@ -46,7 +46,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <returns></returns>
         static List<Tablero> Programa()
         {
-            int ID = 0;
+            int ID = -1;
             Tablero Juego = new Tablero(ID);
             Random rnd = new Random(); //Es un random que usamos para luego elegir qué cuadrado darle a la Torre2
 
@@ -71,7 +71,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             //ROJO, VIOLETA, AZUL, VERDE -> según las regiones del tablero que marcamos en nuestro pseudocódigo
 
-            List<Tablero> ListaSoluciones = new List<Tablero>();
+            List<Tablero> ListaSoluciones = new List<Tablero>(); //Esta es la que se retorna
             
 
             while (ListaSoluciones.Count < 11)
@@ -155,8 +155,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 if (Juego.VerificarSolucion())
                 {
-                    ListaSoluciones.Add(Juego); //#1
-                    ++ID;
+                    ListaSoluciones.Add(new Tablero(Juego, ++ID)); //#1
                     Juego.ImprimirOutput(); //Vemos si funciona nuestro código, mirandolo en nuestro Debug
 
                     #region ROTADO DE ORIGINAL
@@ -239,7 +238,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #endregion
 
-                    //#region VERIFICAR SOLUCIONES DISTINTAS 
+                    #region VERIFICAR SOLUCIONES DISTINTAS 
 
                     //for (int j = 0; j < ListaSoluciones.Count; ++j)
                     //{
@@ -254,7 +253,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     //    }
                     //}
 
-                    //#endregion
+                    #endregion
                    
                 }
 

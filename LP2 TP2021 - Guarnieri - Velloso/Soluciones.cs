@@ -18,6 +18,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         Carátula Llamado;
         public Soluciones(List<Tablero> ListaSoluciones_, Carátula _Llamado)
         {
+           //Dtg.Enabled = false; //No se pueden seleccionar las celdas
+
             InitializeComponent();
 
             ListaSoluciones = ListaSoluciones_;
