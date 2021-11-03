@@ -49,6 +49,9 @@ public class Tablero
     /// ID de <see cref="Tablero"/>
     /// </summary>
     private int ID;
+    /// <summary>
+    /// Tipo de solucion que sea (Leve, Fatal, No Solution)
+    /// </summary>
     private TipoSolucion type;
 
     #endregion
@@ -94,16 +97,6 @@ public class Tablero
                 Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
             }
         }
-
-        Ficha[] Aux = newTablero.ListaPosicionadas.ToArray();
-
-        //for (int i = 7; i >= 0; --i)
-        //{
-        //    ListaPosicionadas.Push(Aux[i]);
-        //}
-
-       // ListaPosicionadas = new Stack<Ficha>(newTablero.ListaPosicionadas); //TODO: si falla algo es ACA TAMBIEN
-
         ID = _ID;
     }
 
@@ -333,21 +326,14 @@ public class Tablero
                     if (Matriz[i, 7 - j].Fichita != null) //si en la casilla "espejo" hay una ficha
                     {
                         Espejar.Matriz[i, j].SetFicha(Matriz[i, 7 - j].Fichita); //realizo el intercambio
-                        Espejar.Matriz[i, j].Fichita.Fila = i;
-                        Espejar.Matriz[i, j].Fichita.Columna = 7 - j;
-
-
+                        Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, j].Fichita); //me guardo la ficha posicionada en la lista
                     }
 
-                    Espejar.Matriz[i, 7 - j].SetFicha(aux);
-                    //Espejar.Matriz[i, 7 - j].Fichita.Fila = i;
-                    //Espejar.Matriz[i, 7 - j].Fichita.Columna = j;
+                    Espejar.Matriz[i, 7 - j].SetFicha(aux); //espejo
+                    Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Fichita); //me guardo la ficha posicionada en la lista
                 }
             }
         }
-
-        SetLista(Espejar);
-
         return Espejar;
     }
 
@@ -358,63 +344,53 @@ public class Tablero
     /// <returns></returns>
     public void IntercambiarTorres()
     {
-        Casilla T1, T2;
+        int T1, T2;
+        SetLista(this);
 
         try
         {
-            T1 = BuscarXNombre("Torre1");
-            T2 = BuscarXNombre("Torre2");
+            T1 = Buscar(ListaPosicionadas, "Torre1");
+            T2 = Buscar(ListaPosicionadas, "Torre2");
         }
         catch (Exception ex)
         {
-            throw ex; 
+            throw ex; //MessageBox
         }
 
-        if (T1.GetColumna() != T2.GetColumna() || T1.GetFila() != T2.GetFila())
+        int x1 = ListaPosicionadas[T1].Fila;
+        int y1 = ListaPosicionadas[T1].Columna;
+
+        int x2 = ListaPosicionadas[T2].Fila;
+        int y2 = ListaPosicionadas[T2].Columna;
+
+        if (x1 != x2)
         {
-            uint x1 = T1.GetFila();
-            uint y1 = T1.GetColumna();
-            uint x2 = T2.GetFila();
-            uint y2 = T2.GetColumna();
-
-            Ficha Torre1 = Matriz[x1, y1].Fichita;
-            Ficha Torre2 = Matriz[x2, y2].Fichita;
-
-            if (Matriz[x1, y2].Fichita == null)
-            {
-                Matriz[x1, y1].SetFicha(null);
-
-                Matriz[x1, y2].SetFicha(Torre1);
-                Matriz[x1, y2].Fichita.Columna = (int)y2;
-                Matriz[x1, y2].Fichita.Fila = (int)x1;
-            }
-
 
             if (Matriz[x2, y1].Fichita == null)
             {
-                Matriz[x2, y2].SetFicha(null);
+                Matriz[x1, y1].SetFicha(null);
+                Matriz[x2, y1].SetFicha(ListaPosicionadas[T1]);
+            }
 
-                Matriz[x2, y1].SetFicha(Torre2);
-                Matriz[x2, y1].Fichita.Columna = (int)y1;
-                Matriz[x2, y1].Fichita.Fila = (int)x2;
+            if (Matriz[x1, y2].Fichita == null)
+            {
+                Matriz[x2, y2].SetFicha(null);
+                Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
             }
 
             return;
-
         }
-
-        throw new Exception("\n Error en IntercambiarTorres: Torre1 y Torre2 están en la misma fila/ columna ");
     }
 
-    #endregion
+        #endregion
 
-    #region VERIFICACIONES
+        #region VERIFICACIONES
 
-    /// <summary>
-    /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna el tipo (falta o leve).
-    /// </summary>
-    /// <returns></returns>
-    public bool VerificarSolucion()
+        /// <summary>
+        /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna el tipo (falta o leve).
+        /// </summary>
+        /// <returns></returns>
+        public bool VerificarSolucion()
     {
         TipoSolucion Type_ = TipoSolucion.FATAL;
 
@@ -548,37 +524,18 @@ public class Tablero
     #region BUSCAR
 
     /// <summary>
-    /// Retorna la casilla donde está la Ficha que le llega por parámetro.
+    /// Retorna el indice de la lista en donde se encuentra la ficha con el nombre pedido
     /// </summary>
-    /// <param name="Fichita"></param>
+    /// <param name="Lista"></param>
+    /// <param name="name"></param>
     /// <returns></returns>
-    //public Casilla Buscar(Ficha Fichita)
-    //{
-    //    for (int i = 0; i < Global.N_; ++i)
-    //        for (int j = 0; j < Global.N_; ++j)
-    //            if (Matriz[i, j].Fichita == Fichita)
-    //                return Matriz[i, j];
-    //    throw new Exception("\n----- Error en buscar: " + Fichita.GetName() + " no está en el Tablero ----- ");
-    //} //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
-
-    /// <summary>
-    /// Retorna la casilla donde está la Ficha con el nombre que le llega por parámetro.
-    /// </summary>
-    /// <param name="Name"></param>
-    /// <returns></returns>
-    public Casilla BuscarXNombre(string Name)
+    private int Buscar(List<Ficha> Lista, string name)
     {
-        for (int i = 0; i < Global.N_; ++i)
-            for (int j = 0; j < Global.N_; ++j)
-            {
-                if (Matriz[i, j].Fichita != null)
-                    if (Matriz[i, j].Fichita.GetName() == Name)
-                        return Matriz[i, j];
-            }
-
-        throw new Exception("\n----- Error en BuscarXNombre: " + Name + "no está en el Tablero ----- ");
-    } //TODO: VER CUAL ALGORITMO DE BUSQUEDA USAR
-
+        for (int i = 0; i < Lista.Count; ++i)
+            if (Lista[i].GetName() == name)
+                return i;
+        throw new Exception("NO EXISTE");
+    }
     #endregion
 
     #region SETTERS & GETTES

@@ -25,12 +25,11 @@ public class Casilla
     /// <see cref="Ficha"/> que tiene la <see cref="Casilla"/>.
     /// </summary>
     public Ficha Fichita;
-
+    /// <summary>
+    /// Ficha que se puede superponer (Caballo-Torre)
+    /// </summary>
     public Ficha Superpuesta;
 
-   // public Image Img;
-
-    //PRIVADOS:
     /// <summary>
     /// Columna de la <see cref="Casilla"/>.
     /// </summary>
@@ -61,7 +60,6 @@ public class Casilla
         Atacada = false;
         Fichita = null;
         Superpuesta = null;
-       // Img = Image.FromFile("Transparente.png");
     }
 
     /// <summary>
@@ -105,6 +103,8 @@ public class Casilla
         {
             Fichita = newFichita;
             SetOcupada(true);
+            Fichita.Fila = (int)Fila;
+            Fichita.Columna = (int)Columna;
         }
         else //Cuando queremos vaciar la casilla, al SetFicha le pasamos null, por eso hacemos esta consideración.
         {
@@ -127,7 +127,6 @@ public class Casilla
     }
 
     public void SetAtacadaFatalmente(bool newAtacadaFatalmente) { AtacadaFatalmente = newAtacadaFatalmente; }
-
 
     #endregion
 
