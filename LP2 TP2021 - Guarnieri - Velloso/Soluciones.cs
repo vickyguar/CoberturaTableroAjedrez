@@ -211,5 +211,15 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             ImprimirAnterior(ListaFiltrada);
         }
+
+        private void Soluciones_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
