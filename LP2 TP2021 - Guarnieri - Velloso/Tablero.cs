@@ -101,9 +101,9 @@ public class Tablero
             }
         }
 
-        if (ID % 12 == 0)
+        if (_ID % 12 == 0)
             newListaPosicionadas(newTablero.ListaPosicionadas);
-       
+        //TipoSolucion = newTablero.
         ID = _ID;
     }
 
@@ -127,7 +127,7 @@ public class Tablero
     public void newListaPosicionadas(List<Ficha> newListita)
     {
 
-        for(int i =0; i < newListita.Count; ++i)
+        for (int i = 0; i < newListita.Count; ++i)
         {
             ListaPosicionadas.Add(newFicha(newListita[i]));
         }
@@ -254,7 +254,7 @@ public class Tablero
 
         if (Remove)
             SubLista.RemoveAt(index); //Sacamos de la lista al elemento ocupado, para que otros no lo puedan ocupar.
-        
+
     }
 
     /// <summary>
@@ -262,6 +262,10 @@ public class Tablero
     /// </summary>
     public void ImprimirOutput()
     {
+        Debug.Write("-----------------------------------------------------------------   ");
+        Debug.Write(ID);
+        Debug.Write("\n\n");
+
         for (uint i = 0; i < Global.N_; ++i)
         {
             Debug.Write("|");
@@ -304,7 +308,7 @@ public class Tablero
     /// Retorna un nuevo Tablero, que es igual al Tablero this pero rotado 90°.
     /// </summary>
     /// <returns></returns>
-    public void Rotar90()
+    public void Rotar90(Tablero Rotado)
     {
         int N = Global.N_ - 1;
 
@@ -314,13 +318,13 @@ public class Tablero
             {
                 Casilla aux = Matriz[i, j]; //Variable auxiliar        
 
-                Matriz[i, j] = Matriz[j, N - i]; // Movemos Casillas de derecha a arriba
+                Rotado.Matriz[i, j] = Matriz[j, N - i]; // Movemos Casillas de derecha a arriba
 
-                Matriz[j, N - i] = Matriz[N - i, N - j]; // Movemos Casillas de abajo a la derecha
+                Rotado.Matriz[j, N - i] = Matriz[N - i, N - j]; // Movemos Casillas de abajo a la derecha
 
-                Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
+                Rotado.Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
 
-                Matriz[N - j, i] = aux;
+                Rotado.Matriz[N - j, i] = aux;
 
             }
         }
@@ -329,15 +333,25 @@ public class Tablero
         {
             for (int k = 0; k < Global.N_; ++k)
             {
-                Matriz[i, k].SetFila((uint)i);
-                Matriz[i, k].SetColumna((uint)k);
+                Rotado.Matriz[i, k].SetFila((uint)i);
+                Rotado.Matriz[i, k].SetColumna((uint)k);
 
-                if (Matriz[i, k].Fichita != null)
+                if (Rotado.Matriz[i, k].Fichita != null)
                 {
-                    Matriz[i, k].Fichita.Fila = i;
-                    Matriz[i, k].Fichita.Columna = k;
+                    Rotado.Matriz[i, k].Fichita.Fila = i;
+                    Rotado.Matriz[i, k].Fichita.Columna = k;
 
-                    ListaPosicionadas.Add(Matriz[i, k].Fichita);
+                    //Si la casilla tiene dos fichas -> tengo qye mover las 2 ##################
+                    if (Rotado.Matriz[i, k].Superpuesta != null)
+                    {
+                        Rotado.Matriz[i, k].Superpuesta.Fila = i;
+                        Rotado.Matriz[i, k].Superpuesta.Columna = k;
+                        ListaPosicionadas.Add(Rotado.Matriz[i, k].Superpuesta);
+
+                    }
+                    //##########################################################################
+
+                    ListaPosicionadas.Add(Rotado.Matriz[i, k].Fichita);
                 }
             }
         }
@@ -349,7 +363,7 @@ public class Tablero
     /// <returns></returns>
     public Tablero Espejar(Tablero Espejar)
     {
-        Ficha aux;
+        Ficha aux, auxSup;
 
         for (int i = 0; i < Global.N_; ++i) //recorro fila
         {
@@ -363,7 +377,27 @@ public class Tablero
                     {
                         Espejar.Matriz[i, j].SetFicha(Matriz[i, 7 - j].Fichita); //realizo el intercambio
                         Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, j].Fichita); //me guardo la ficha posicionada en la lista
+
+
+
+
+                        if (Matriz[i, 7 - j].Superpuesta != null) //#####################################################################
+                        {
+                            Espejar.Matriz[i, j].SetSuperpuesta(Matriz[i, 7 - j].Superpuesta); //realizo el intercambio
+                            Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, j].Superpuesta); //me guardo la ficha posicionada en la lista
+                        }
+                        //##############################################################################################################
                     }
+
+
+
+
+                    if (Matriz[i, j].Superpuesta != null) //############################################################################
+                    {
+                        auxSup = Matriz[i, j].Superpuesta;
+                        Espejar.Matriz[i, 7 - j].SetSuperpuesta(auxSup); //espejo
+                        Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Superpuesta); //me guardo la ficha posicionada en la lista
+                    }//#################################################################################################################
 
                     Espejar.Matriz[i, 7 - j].SetFicha(aux); //espejo
                     Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Fichita); //me guardo la ficha posicionada en la lista
@@ -378,7 +412,7 @@ public class Tablero
     /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
     /// </summary>
     /// <returns></returns>
-    public void IntercambiarTorres()
+    public void IntercambiarTorres(Tablero Intercambiado)
     {
         int T1, T2;
         SetLista(this);
@@ -390,7 +424,7 @@ public class Tablero
         }
         catch (Exception ex)
         {
-            throw ex; //MessageBox
+            throw ex;
         }
 
         int x1 = ListaPosicionadas[T1].Fila;
@@ -401,17 +435,37 @@ public class Tablero
 
         if (x1 != x2)
         {
+            Casilla aux = Matriz[x2, y2];
 
-            if (Matriz[x2, y1].Fichita == null)
+
+            if (Matriz[x2, y1].Fichita == null) //Muevo a T1
             {
                 Matriz[x1, y1].SetFicha(null);
                 Matriz[x2, y1].SetFicha(ListaPosicionadas[T1]);
             }
 
-            if (Matriz[x1, y2].Fichita == null)
+            if (Matriz[x1, y2].Fichita == null) //Muevo a T2
             {
-                Matriz[x2, y2].SetFicha(null);
-                Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+                if (aux.Superpuesta != null)
+                {
+                    Intercambiado.Matriz[x2, y2].SetFicha(aux.Superpuesta);
+                    //Matriz[x2, y2].SetSuperpuesta(null); //Está de más
+                    Intercambiado.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+
+                }
+                else
+                {
+                    Intercambiado.Matriz[x2, y2].SetFicha(null);
+                    Intercambiado.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+                }
+            }
+            else if (Intercambiado.Matriz[x1, y2].Fichita.GetName() == "Caballo2")
+            {
+                Intercambiado.Matriz[x2, y2].SetFicha(null);
+                Intercambiado.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+
+                Ficha auxSup = Matriz[x1, y2].Fichita;
+                Intercambiado.Matriz[x1, y2].SetSuperpuesta(auxSup);
             }
 
             return;
@@ -572,6 +626,20 @@ public class Tablero
                 return i;
         throw new Exception("NO EXISTE");
     }
+
+    private Casilla BuscarCasilla(List<Ficha> Lista, string name)
+    {
+        for (int i = 0; i < Global.N_; ++i)
+        {
+            for (int j = 0; j < Global.N_; ++j)
+            {
+                if (Matriz[i, j].Fichita.GetName() == name)
+                    return Matriz[i, j];
+            }
+        }
+        throw new Exception("NO EXISTE");
+    }
+
     #endregion
 
     #region SETTERS & GETTES

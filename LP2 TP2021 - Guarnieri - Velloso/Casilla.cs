@@ -101,16 +101,19 @@ public class Casilla
     {
         if (newFichita != null)
         {
+            SetSuperpuesta(null); //SIEMPRE se pone primero la ficha y despues se superpone. Si estoy poniendo la ficha ==> las superpuesta es null
             Fichita = newFichita;
             SetOcupada(true);
             Fichita.Fila = (int)Fila;
             Fichita.Columna = (int)Columna;
         }
-        else //Cuando queremos vaciar la casilla, al SetFicha le pasamos null, por eso hacemos esta consideración.
+        else  //Cuando queremos vaciar la casilla, al SetFicha le pasamos null, por eso hacemos esta consideración.
         {
             Fichita = null;
+            SetSuperpuesta(null);
             SetOcupada(false);
         }
+
     }
 
     public void SetSuperpuesta(Ficha newSuperpuesta)
