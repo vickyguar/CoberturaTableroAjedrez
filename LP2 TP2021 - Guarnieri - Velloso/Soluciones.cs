@@ -13,16 +13,18 @@ namespace LP2_TP2021___Guarnieri___Velloso
     public partial class Soluciones : Form
     {
         List<Tablero> ListaSoluciones;
+        List<List<Ficha>> ListaSoluciones_;
+
         List<Tablero> ListaFiltrada;
 
         Carátula Llamado;
-        public Soluciones(List<Tablero> ListaSoluciones_, Carátula _Llamado)
+        public Soluciones(List<List<Ficha>> ListaSoluciones1, Carátula _Llamado)
         {
            //Dtg.Enabled = false; //No se pueden seleccionar las celdas
 
             InitializeComponent();
 
-            ListaSoluciones = ListaSoluciones_;
+            ListaSoluciones_ = ListaSoluciones1;
             Llamado = _Llamado;
             ListaFiltrada = Fatales(ListaSoluciones); //filtramos las soluciones obtenidas
 

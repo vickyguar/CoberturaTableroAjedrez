@@ -26,7 +26,7 @@ public class Reina : Ficha
 
     }
 
-    public Reina(Reina newFichita) : base(newFichita)
+    public Reina(Ficha newFichita) : base(newFichita)
     {
     }
 

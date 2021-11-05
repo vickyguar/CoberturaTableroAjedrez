@@ -25,7 +25,7 @@ public class Alfil : Ficha
 
     }
 
-    public Alfil(Alfil newFichita) : base(newFichita)
+    public Alfil(Ficha newFichita) : base(newFichita)
     {
     }
 

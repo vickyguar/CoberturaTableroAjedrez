@@ -30,8 +30,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
-            List<Tablero> ListaSoluciones = Programa();
-            Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
+
+            List<Tablero> ListaSoluciones = new List<Tablero>();
+            List<List<Ficha>> Posiciones = Programa();
+            Soluciones FormSoluciones = new Soluciones(Posiciones, this);
             FormSoluciones.Show(); //Abrimos el form de soluciones
             this.Hide(); //Cerramos el Form de Carátula
         }
@@ -44,7 +46,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// Algoritmo
         /// </summary>
         /// <returns></returns>
-        static List<Tablero> Programa()
+        static List<List<Ficha>> Programa()
         {
             int ID = -1;
             Tablero Juego = new Tablero(ID);
@@ -71,7 +73,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             //ROJO, VIOLETA, AZUL, VERDE -> según las regiones del tablero que marcamos en nuestro pseudocódigo
 
-            List<Tablero> ListaSoluciones = new List<Tablero>(); //Esta es la que se retorna
+            List<List<Ficha>> ListaSoluciones = new List<List<Ficha>>(); //Esta es la que se retorna
             
 
             while (ListaSoluciones.Count < 11)
@@ -140,14 +142,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 switch (Convert.ToInt32(rnd.Next(1, 4))) //A la torre 2 le paso eliminar
                 {
                     case 1:
-                        Juego.Posicionar(Torre2, Cuadrado2, false); break;
+                        Juego.Posicionar(Torre2, Cuadrado2); break;
                     case 2:
-                        Juego.Posicionar(Torre2, Cuadrado3, false); break;
+                        Juego.Posicionar(Torre2, Cuadrado3); break;
                     case 3:
-                        Juego.Posicionar(Torre2, Cuadrado4, false); break;
+                        Juego.Posicionar(Torre2, Cuadrado4); break;
                 }
 
-                Juego.Posicionar(Caballo2, Cuadrado2, false);
+                Juego.Posicionar(Caballo2, Cuadrado2);
 
                 #endregion
 
@@ -155,28 +157,26 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 if (Juego.VerificarSolucion())
                 {
-                    ListaSoluciones.Add(new Tablero(Juego, ++ID)); //#1
-                    Juego.ImprimirOutput(); //Vemos si funciona nuestro código, mirandolo en nuestro Debug
+                    ListaSoluciones.Add(CopiaLista(Juego.ListaPosicionadas_)); //#1 -> me copia (con objetos nuevos) la lista que tiene las fichas de la solución
 
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°) 
-                    Tablero Rotado1 = new Tablero(Juego, ++ID); //#2
+                    Tablero Rotado1 = new Tablero(Juego,++ID); //#2
                     Rotado1.Rotar90();
-                    ListaSoluciones.Add(Rotado1);
-                    Rotado1.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(Rotado1.ListaPosicionadas_));
 
                     //TABLERO ROTADO 2 (180°)
                     Tablero Rotado2 = new Tablero(Rotado1, ++ID); //#3
                     Rotado2.Rotar90();
-                    ListaSoluciones.Add(Rotado2);
-                    Rotado2.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(Rotado2.ListaPosicionadas_));
+
 
                     //TABLERO ROTADO 3 (270°)
                     Tablero Rotado3 = new Tablero(Rotado2, ++ID); //#4
                     Rotado3.Rotar90();
-                    ListaSoluciones.Add(Rotado3);
-                    Rotado3.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(Rotado3.ListaPosicionadas_));
+
 
                     #endregion
 
@@ -184,27 +184,22 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     //ESPEJADO 1
                     Tablero Espejado = new Tablero(++ID); //#5
                     Juego.Espejar(Espejado);
-                    ListaSoluciones.Add(Espejado);
-                    Espejado.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(Espejado.ListaPosicionadas_));
 
                     //ESPEJADO ROTADO 1 (90)
                     Tablero EspejadoRotado1 = new Tablero(Espejado, ++ID); //#6
-                    ++ID;
                     EspejadoRotado1.Rotar90();
-                    ListaSoluciones.Add(EspejadoRotado1);
-                    EspejadoRotado1.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(EspejadoRotado1.ListaPosicionadas_));
 
                     //ESPEJADO ROTADO 2 (180)
                     Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1, ++ID); //#7
                     EspejadoRotado2.Rotar90();
-                    ListaSoluciones.Add(EspejadoRotado2);
-                    EspejadoRotado2.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(EspejadoRotado2.ListaPosicionadas_));
 
                     //ESPEJADO ROTADO 3 (270)
                     Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2, ++ID); //#8
                     EspejadoRotado3.Rotar90();
-                    ListaSoluciones.Add(EspejadoRotado3);
-                    EspejadoRotado3.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(EspejadoRotado3.ListaPosicionadas_));
 
                     #endregion
 
@@ -212,27 +207,22 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     //INTERCAMBIO
                     Tablero Intercambiado = new Tablero(Juego, ++ID);  //#9
                     Intercambiado.IntercambiarTorres();
-                    ListaSoluciones.Add(Intercambiado);
-                    Intercambiado.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(Intercambiado.ListaPosicionadas_));
 
                     //INTERCAMBIO ROTADO 1 (90)
                     Tablero IntercambioRotado1 = new Tablero(Intercambiado, ++ID); //#10
                     IntercambioRotado1.Rotar90();
-                    ListaSoluciones.Add(IntercambioRotado1);
-                    IntercambioRotado1.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(IntercambioRotado1.ListaPosicionadas_));
 
                     //INTERCAMBIO ROTADO (180)
                     Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1, ++ID); //#11
                     IntercambioRotado2.Rotar90();
-                    ListaSoluciones.Add(IntercambioRotado2);
-                    IntercambioRotado2.ImprimirOutput();
-
+                    ListaSoluciones.Add(CopiaLista(IntercambioRotado2.ListaPosicionadas_));
 
                     //INTERCAMBIO ROTADO (270)
                     Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2, ++ID); //#12
                     IntercambioRotado3.Rotar90();
-                    ListaSoluciones.Add(IntercambioRotado3);
-                    IntercambioRotado3.ImprimirOutput();
+                    ListaSoluciones.Add(CopiaLista(IntercambioRotado3.ListaPosicionadas_));
 
                     #endregion
 
@@ -254,7 +244,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     //}
 
                     #endregion
-                   
+
                 }
 
                 #region LIMPIAMOS LOS TABLEROS
@@ -277,6 +267,29 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
 
         #endregion
+
+        static List<Ficha> CopiaLista(List<Ficha> OldList)
+        {
+            List<Ficha> Nueva = new List<Ficha>();
+            foreach (Ficha Fichita in OldList)
+            {
+                if (Fichita is Reina)
+                    Nueva.Add(new Reina(Fichita));
+                else if (Fichita is Rey)
+                    Nueva.Add(new Rey(Fichita));
+                else if (Fichita is Alfil)
+                    Nueva.Add(new Alfil(Fichita));
+                else if (Fichita is Torre)
+                    Nueva.Add(new Torre(Fichita));
+                else if (Fichita is Caballo)
+                    Nueva.Add(new Caballo(Fichita));
+                else
+                    Nueva.Add(null);
+            }
+
+            return Nueva;
+
+        }
 
         /*
          * Steps para el Form:

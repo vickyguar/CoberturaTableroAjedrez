@@ -26,7 +26,7 @@ public class Torre : Ficha
 
     }
 
-    public Torre(Torre newFichita) : base(newFichita)
+    public Torre(Ficha newFichita) : base(newFichita)
     {
     }
 

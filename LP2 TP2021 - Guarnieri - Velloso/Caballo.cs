@@ -25,7 +25,7 @@ public class Caballo : Ficha
 
     }
 
-    public Caballo(Caballo newFichita):base(newFichita)
+    public Caballo(Ficha newFichita):base(newFichita)
     {
     }
 

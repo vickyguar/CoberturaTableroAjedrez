@@ -241,11 +241,11 @@ public class Tablero
          * Torre2.Columna == j
          */
 
-        if (!Remove && Fichita is Caballo)
-        {
-            if (ListaPosicionadas[6].Fila == i && ListaPosicionadas[6].Columna == j)
-                Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
-        }
+        //if (!Remove && Fichita is Caballo)
+        //{
+        //    if (ListaPosicionadas[6].Fila == i && ListaPosicionadas[6].Columna == j)
+        //        Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
+        //}
 
 
         Fichita.Atacar(this, Matriz[i, j]); //Llamamos a funcion atacar
@@ -306,6 +306,7 @@ public class Tablero
     /// <returns></returns>
     public void Rotar90()
     {
+        List<Ficha> Solucion = new List<Ficha>(8);
         int N = Global.N_ - 1;
 
         for (int i = 0; i < Global.N_ / 2; i++)
@@ -576,6 +577,7 @@ public class Tablero
 
     #region SETTERS & GETTES
     public TipoSolucion Type { get => type; set => type = value; }
+    public List<Ficha> ListaPosicionadas_ { get => ListaPosicionadas; set => ListaPosicionadas = value; }
 
     private void SetLista(Tablero T)
     {
