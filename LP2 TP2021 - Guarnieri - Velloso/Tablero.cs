@@ -43,7 +43,7 @@ public class Tablero
     /// <summary>
     /// Lista de Fichas (se llena a medida que se posicionan las Ficha) del <see cref="Tablero"/>.
     /// </summary>
-    private List<Ficha> ListaPosicionadas = new List<Ficha>(Global.N_);
+    private SortedList<uint,Ficha> ListaPosicionadas = new SortedList<uint, Ficha>(Global.N_);
 
     /// <summary>
     /// ID de <see cref="Tablero"/>
@@ -247,10 +247,10 @@ public class Tablero
                 Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
         }
 
-
         Fichita.Atacar(this, Matriz[i, j]); //Llamamos a funcion atacar
 
-        ListaPosicionadas.Add(Fichita); //agrego a la lista la ficha que posicioné
+        //ListaPosicionadas.Add(Fichita); //agrego a la lista la ficha que posicioné
+        Agregar(Fichita, ListaPosicionadas);
 
         if (Remove)
             SubLista.RemoveAt(index); //Sacamos de la lista al elemento ocupado, para que otros no lo puedan ocupar.
@@ -346,12 +346,18 @@ public class Tablero
                     {
                         Matriz[i, k].Superpuesta.Fila = i;
                         Matriz[i, k].Superpuesta.Columna = k;
-                        ListaPosicionadas.Add(Matriz[i, k].Superpuesta);
+                        //ListaPosicionadas.Add(Matriz[i, k].Superpuesta);
+                        Agregar(Matriz[i, k].Superpuesta, ListaPosicionadas);
+
 
                     }
                     //##########################################################################
 
-                    ListaPosicionadas.Add(Matriz[i, k].Fichita);
+                    //ListaPosicionadas.Add(Matriz[i, k].Fichita);
+                    //Agregar(Espejar.Matriz[i, j].Superpuesta, Espejar.ListaPosicionadas);
+                    Agregar(Matriz[i, k].Fichita, ListaPosicionadas);
+
+
                 }
             }
         }
@@ -376,15 +382,15 @@ public class Tablero
                     if (Matriz[i, 7 - j].Fichita != null) //si en la casilla "espejo" hay una ficha
                     {
                         Espejar.Matriz[i, j].SetFicha(Matriz[i, 7 - j].Fichita); //realizo el intercambio
-                        Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, j].Fichita); //me guardo la ficha posicionada en la lista
-
-
-
+                        //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, j].Fichita); //me guardo la ficha posicionada en la lista
+                        Espejar.Agregar(Espejar.Matriz[i, j].Fichita, Espejar.ListaPosicionadas);
 
                         if (Matriz[i, 7 - j].Superpuesta != null) //#####################################################################
                         {
                             Espejar.Matriz[i, j].SetSuperpuesta(Matriz[i, 7 - j].Superpuesta); //realizo el intercambio
-                            Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, j].Superpuesta); //me guardo la ficha posicionada en la lista
+                            Espejar.Agregar(Espejar.Matriz[i, j].Superpuesta, Espejar.ListaPosicionadas);
+
+                            //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, j].Superpuesta); //me guardo la ficha posicionada en la lista
                         }
                         //##############################################################################################################
                     }
@@ -393,11 +399,14 @@ public class Tablero
                     {
                         auxSup = Matriz[i, j].Superpuesta;
                         Espejar.Matriz[i, 7 - j].SetSuperpuesta(auxSup); //espejo
-                        Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Superpuesta); //me guardo la ficha posicionada en la lista
+                        //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Superpuesta); //me guardo la ficha posicionada en la lista
+                        Espejar.Agregar(Espejar.Matriz[i, 7 - j].Superpuesta, Espejar.ListaPosicionadas);
+
                     }//#################################################################################################################
 
                     Espejar.Matriz[i, 7 - j].SetFicha(aux); //espejo
-                    Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Fichita); //me guardo la ficha posicionada en la lista
+                    Espejar.Agregar(Espejar.Matriz[i, 7 - j].Fichita, Espejar.ListaPosicionadas);
+                    //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Fichita); //me guardo la ficha posicionada en la lista
                 }
             }
         }
@@ -410,15 +419,15 @@ public class Tablero
     /// <returns></returns>
     public void IntercambiarTorres(Tablero Intercambio)
     {
-        int T1, T2, C2;
+        uint T1=5, T2=6, C2=7;
         //SetLista();
         Intercambio.ListaPosicionadas = CopiaLista(this.ListaPosicionadas);
         
         try
         {
-            T1 = Buscar(Intercambio.ListaPosicionadas, "Torre1"); //buscamos las torres en la lista
-            T2 = Buscar(Intercambio.ListaPosicionadas, "Torre2");
-            C2 = Buscar(Intercambio.ListaPosicionadas, "Caballo2");
+            //T1 = Buscar(Intercambio.ListaPosicionadas, "Torre1"); //buscamos las torres en la lista
+            //T2 = Buscar(Intercambio.ListaPosicionadas, "Torre2");
+            //C2 = Buscar(Intercambio.ListaPosicionadas, "Caballo2");
         }
         catch (Exception ex)
         {
@@ -558,53 +567,60 @@ public class Tablero
 
     #region SETTERS & GETTES
     public TipoSolucion Type { get => type; set => type = value; }
-    public List<Ficha> ListaPosicionadas_ { get => ListaPosicionadas; set => ListaPosicionadas = value; }
+    public SortedList<uint, Ficha> ListaPosicionadas_ { get => ListaPosicionadas; set => ListaPosicionadas = value; }
 
-    private void SetLista(Tablero T)
-    {
-        for (int i = 0; i < Global.N_; ++i)
-            for (int k = 0; k < Global.N_; ++k)
-                if (Matriz[i, k].Fichita != null)
-                    T.ListaPosicionadas.Add(Matriz[i, k].Fichita);
-    }
+    //private void SetLista(Tablero T)
+    //{
+    //    for (int i = 0; i < Global.N_; ++i)
+    //        for (int k = 0; k < Global.N_; ++k)
+    //            if (Matriz[i, k].Fichita != null)
+    //                T.ListaPosicionadas.Add(Matriz[i, k].Fichita);
+    //}
     #endregion
 
-    public List<Ficha> CopiaLista(List<Ficha> OldList)
+    public SortedList<uint,Ficha> CopiaLista(SortedList<uint, Ficha> OldList)
     {
-        List<Ficha> Nueva = new List<Ficha>();
-        foreach (Ficha Fichita in OldList)
-        {
-            if (!Nueva.Contains(Fichita))
-            {
-                if (Fichita is Reina)
-                    Nueva.Add(new Reina((Reina)Fichita));
-                else if (Fichita is Rey)
-                    Nueva.Insert(4, new Rey((Rey)Fichita));
-                else if (Fichita is Alfil)
-                {
-                    if (Fichita.GetName() == "Alfil1")
-                        Nueva.Insert(1, new Alfil((Alfil)Fichita));
-                    else
-                        Nueva.Insert(2, new Alfil((Alfil)Fichita));
-                }
-                else if (Fichita is Torre)
-                {
-                    if (Fichita.GetName() == "Torre1")
-                        Nueva.Insert(5, new Torre((Torre)Fichita));
-                    else
-                        Nueva.Insert(6, new Torre((Torre)Fichita));
-                }
-                else if (Fichita is Caballo)
-                {
-                    if (Fichita.GetName() == "Caballo1")
-                        Nueva.Insert(3, new Caballo((Caballo)Fichita));
-                    else
-                        Nueva.Insert(7, new Caballo((Caballo)Fichita));
-                }
-            }
-        }
+        SortedList<uint, Ficha> Nueva = new SortedList<uint, Ficha>(8);
+
+        for(uint i = 0; i<OldList.Count; i++)
+            Agregar(OldList[i], Nueva);
 
         return Nueva;
     }
 
-} //end Tablero
+    public void Agregar(Ficha Fichita, SortedList<uint, Ficha> Lista)
+    {
+        if (Fichita is Reina)
+            Lista.Add(1, new Reina((Reina)Fichita));
+
+        else if (Fichita is Rey)
+            Lista.Add(4, new Rey((Rey)Fichita));
+
+        else if (Fichita is Alfil)
+        {
+            if (Fichita.GetName() == "Alfil1")
+                Lista.Add(1, new Alfil((Alfil)Fichita));
+            else
+                Lista.Add(2, new Alfil((Alfil)Fichita));
+        }
+
+        else if (Fichita is Torre)
+        {
+            if (Fichita.GetName() == "Torre1")
+                Lista.Add(5, new Torre((Torre)Fichita));
+            else
+                Lista.Add(6, new Torre((Torre)Fichita));
+        }
+
+        else if (Fichita is Caballo)
+        {
+            if (Fichita.GetName() == "Caballo1")
+                Lista.Add(3, new Caballo((Caballo)Fichita));
+            else
+                Lista.Add(7, new Caballo((Caballo)Fichita));
+        }
+
+    }
+}
+
+//end Tablero
