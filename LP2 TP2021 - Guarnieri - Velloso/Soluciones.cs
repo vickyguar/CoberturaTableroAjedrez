@@ -161,26 +161,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             ImprimirSiguiente(ListaSoluciones);
         }
 
-        private void btn_exit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Llamado.Close();
-        }
-
-        private void btn_back_Click(object sender, EventArgs e)
-        {
-            if (Barra.Value == 2) //si soy la primera solucion
-                btn_back.Visible = false; //no puedo ir para atrás
-
-            if (Barra.Value < ListaSoluciones.Count + 1) //si no llegue al final
-            {
-                btn_fatales.Visible = false; //no muestro el botón de fatales
-                btn_next.Visible = true;
-            }
-
-            ImprimirAnterior();
-        }
-
         private void btn_fatales_Click(object sender, EventArgs e)
         {
             if (btn_fatales.Visible)
@@ -223,15 +203,22 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             return ListaFatales;
         }
-        private void btn_next_fatal_Click(object sender, EventArgs e)
-        {
-            if (Barra.Value > 0)
-                btn_back_fatal.Visible = true;
 
-            ImprimirSiguiente(ListaFiltrada);
+        private void btn_back_Click_1(object sender, EventArgs e)
+        {
+            if (Barra.Value == 2) //si soy la primera solucion
+                btn_back.Visible = false; //no puedo ir para atrás
+
+            if (Barra.Value < ListaSoluciones.Count + 1) //si no llegue al final
+            {
+                btn_fatales.Visible = false; //no muestro el botón de fatales
+                btn_next.Visible = true;
+            }
+
+            ImprimirAnterior();
         }
 
-        private void btn_back_fatal_Click(object sender, EventArgs e)
+        private void btn_back_fatal_Click_1(object sender, EventArgs e)
         {
             if (Barra.Value == 2)
                 btn_back_fatal.Visible = false;
@@ -240,6 +227,20 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 btn_next_fatal.Visible = true;
 
             ImprimirAnterior();
+        }
+
+        private void btn_exit_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            Llamado.Close();
+        }
+
+        private void btn_next_fatal_Click_1(object sender, EventArgs e)
+        {
+            if (Barra.Value > 0)
+                btn_back_fatal.Visible = true;
+
+            ImprimirSiguiente(ListaFiltrada);
         }
     }
 }
