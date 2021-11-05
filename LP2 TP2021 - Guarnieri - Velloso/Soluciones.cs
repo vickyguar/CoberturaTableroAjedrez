@@ -12,22 +12,23 @@ namespace LP2_TP2021___Guarnieri___Velloso
 {
     public partial class Soluciones : Form
     {
-        List<Tablero> ListaSoluciones;
-        List<Tablero> ListaFiltrada;
+        
+        List<Solucion> ListaSoluciones;
+        List<Solucion> ListaFiltrada;
+
+        Tablero Plantilla;
         Carátula Llamado;
 
         #region CONSTRUCTOR
 
-        public Soluciones(List<Tablero> ListaSoluciones_, Carátula _Llamado)
+        public Soluciones(List<Solucion> ListaSoluciones_, Carátula _Llamado)
         {
-           //Dtg.Enabled = false; //No se pueden seleccionar las celdas
-
             InitializeComponent();
 
             ListaSoluciones = ListaSoluciones_;
             Llamado = _Llamado;
             ListaFiltrada = Fatales(ListaSoluciones); //filtramos las soluciones obtenidas
-
+            Plantilla = new Tablero(0);
 
             //visibilidad de los botones
             btn_next.Visible = true;
@@ -36,6 +37,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             btn_fatales.Visible = false;
             btn_next_fatal.Visible = false;
             btn_back_fatal.Visible = false;
+
+            //TODO:Habría que encontrar la forma de ver como settear el upper bound
 
             ImprimirSiguiente(ListaSoluciones); //se imprime la primera solución
         }
@@ -48,7 +51,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
 
         #region IMPRIMIR DTG
-        private void ImprimirSiguiente(List<Tablero> Lista)
+
+        private void ImprimirSiguiente(List<Solucion> Lista)
         {
             if (Barra.Value < Lista.Count) // Barra.Value esta funcionando como iterador
             {
@@ -70,25 +74,32 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     for (int j = 0; j < Global.N_; ++j)
                     {
                         DataGridViewImageCell iCell = new DataGridViewImageCell();
-
-                        if (ListaSoluciones[Barra.Value].Matriz[i, j].Superpuesta != null) //Si en esa posición hay fichas superpuestas
-                            iCell.Value = (Bitmap)Image.FromFile("TorreCaballo.png");
-
-                        else if (ListaSoluciones[Barra.Value].Matriz[i, j].Fichita != null) 
-                            iCell.Value = (Bitmap)ListaSoluciones[Barra.Value].Matriz[i, j].Fichita.Imagen;
-
-                        else
-                            iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
+                        iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 
                         Dtg[i, j] = iCell;
 
-                        if (ListaSoluciones[Barra.Value].Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                        if (Plantilla.Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
                             Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
                     }
                 }
 
+
+                List<Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
+                foreach (Ficha Fichita in Piezas)
+                {
+                    DataGridViewImageCell iCell = new DataGridViewImageCell();
+                    iCell.Value = (Bitmap)Fichita.Imagen;
+
+                    Dtg[Fichita.Fila, Fichita.Columna] = iCell;
+
+                    if (Plantilla.Matriz[Fichita.Fila, Fichita.Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                        Dtg.Rows[Fichita.Columna].Cells[Fichita.Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
+                }
+
                 Barra.Increment(1);
 
+                if (Barra.Value > 0) //si me movi para adelante
+                    btn_back.Visible = true; //habilito el botón de back
 
                 if (Barra.Value == Lista.Count) //si ya se imprimieron todas las soluciones
                 {
@@ -99,9 +110,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return;
         }
 
-        private void ImprimirAnterior(List<Tablero> Lista)
+        private void ImprimirAnterior()
         {
-
             if (Barra.Value > 1)
             {
                 Barra.Value = Barra.Value - 2;
@@ -118,25 +128,28 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     for (int j = 0; j < 8; ++j)
                     {
                         DataGridViewImageCell iCell = new DataGridViewImageCell();
-
-                        if (ListaSoluciones[Barra.Value].Matriz[i, j].Superpuesta != null) //Si en esa posición hay fichas superpuestas
-                            iCell.Value = (Bitmap)Image.FromFile("TorreCaballo.png");
-
-                        if (Lista[Barra.Value].Matriz[i, j].Fichita != null)
-                            iCell.Value = (Bitmap)Lista[Barra.Value].Matriz[i, j].Fichita.Imagen;
-
-                        else
-                            iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
-
+                        iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 
                         Dtg[i, j] = iCell;
 
-                        if (Lista[Barra.Value].Matriz[i, j].Colour == eColor.NEGRO)
-                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray;
+                        if (Plantilla.Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
                     }
                 }
 
             }
+
+            List<Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
+            foreach (Ficha Fichita in Piezas)
+            {
+                DataGridViewImageCell iCell = new DataGridViewImageCell();
+                iCell.Value = (Bitmap)Fichita.Imagen;
+                Dtg[Fichita.Fila, Fichita.Columna] = iCell;
+
+                if (Plantilla.Matriz[Fichita.Fila, Fichita.Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                    Dtg.Rows[Fichita.Columna].Cells[Fichita.Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
+            }
+
             Barra.Increment(1);
             return;
         }
@@ -166,7 +179,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 btn_next.Visible = true;
             }
 
-            ImprimirAnterior(ListaSoluciones);
+            ImprimirAnterior();
         }
 
         private void btn_fatales_Click(object sender, EventArgs e)
@@ -198,15 +211,15 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
 
         //Va con el boton de filtrar
-        static List<Tablero> Fatales(List<Tablero> ListaSoluciones)
+        static List<Solucion> Fatales(List<Solucion> ListaSoluciones)
         {
-            List<Tablero> ListaFatales = new List<Tablero>();
+            List<Solucion> ListaFatales = new List<Solucion>();
 
             #region FILTRAR FATALES
 
-            foreach (Tablero Solucion in ListaSoluciones)
-                if (Solucion.Type == TipoSolucion.FATAL)
-                    ListaFatales.Add(Solucion);
+            foreach (Solucion Solution in ListaSoluciones)
+                if (Solution.Tipo_ == TipoSolucion.FATAL)
+                    ListaFatales.Add(Solution);
             #endregion
 
             return ListaFatales;
@@ -227,8 +240,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             if (Barra.Value < ListaFiltrada.Count + 1)
                 btn_next_fatal.Visible = true;
 
-            ImprimirAnterior(ListaFiltrada);
+            ImprimirAnterior();
         }
-
     }
 }
+
