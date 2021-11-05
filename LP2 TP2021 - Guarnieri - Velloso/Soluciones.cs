@@ -65,7 +65,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Dtg.Refresh();
                 }
 
-
                 //Asigno la cantidad 
                 Dtg.ColumnCount = Global.N_;
                 Dtg.RowCount = Global.N_;

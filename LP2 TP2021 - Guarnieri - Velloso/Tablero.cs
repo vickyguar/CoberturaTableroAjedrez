@@ -81,49 +81,49 @@ public class Tablero
     /// Constructor por copia de la clase <see cref="Tablero"/>..
     /// </summary>
     /// <param name="newTablero"></param>
-    
-    //public Tablero(Tablero newTablero, int _ID)
-    //{
-    //    //Variable auxiliar
 
-    //    //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
-    //    for (int i = 0; i < Global.N_; ++i)
-    //    {
-    //        for (int j = 0; j < Global.N_; ++j)
-    //        {
-    //            Matriz[i, j] = newTablero.Matriz[i, j];
-    //            Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
-    //            Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
-    //            Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
-    //            Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
-    //            Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
-    //            Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
+    public Tablero(Tablero newTablero, int _ID)
+    {
+        //Variable auxiliar
 
-    //        }
-    //    }
+        //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
+        for (int i = 0; i < Global.N_; ++i)
+        {
+            for (int j = 0; j < Global.N_; ++j)
+            {
+                Matriz[i, j] = newTablero.Matriz[i, j];
+                Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
+                Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
+                Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
+                Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
+                Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
+                Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
 
-    //    if (_ID % 12 == 0)
-    //        newListaPosicionadas(newTablero.ListaPosicionadas);
-    //    //TipoSolucion = newTablero.
-    //    ID = _ID;
-    //}
+            }
+        }
 
-    //public Ficha newFicha(Ficha Fichita)
-    //{
-    //    if (Fichita is Reina)
-    //        return new Reina((Reina)Fichita);
-    //    else if (Fichita is Rey)
-    //        return new Rey((Rey)Fichita);
-    //    else if (Fichita is Alfil)
-    //        return new Alfil((Alfil)Fichita);
-    //    else if (Fichita is Caballo)
-    //        return new Caballo((Caballo)Fichita);
-    //    else if (Fichita is Torre)
-    //        return new Torre((Torre)Fichita);
-    //    else
-    //        return null;
+        //if (_ID % 12 == 0)
+        //    newListaPosicionadas(newTablero.ListaPosicionadas);
+        //TipoSolucion = newTablero.
+        ID = _ID;
+    }
 
-    //}
+    public Ficha newFicha(Ficha Fichita)
+    {
+        if (Fichita is Reina)
+            return new Reina((Reina)Fichita);
+        else if (Fichita is Rey)
+            return new Rey((Rey)Fichita);
+        else if (Fichita is Alfil)
+            return new Alfil((Alfil)Fichita);
+        else if (Fichita is Caballo)
+            return new Caballo((Caballo)Fichita);
+        else if (Fichita is Torre)
+            return new Torre((Torre)Fichita);
+        else
+            return null;
+
+    }
 
     //public void newListaPosicionadas(List<Ficha> newListita)
     //{
@@ -308,7 +308,7 @@ public class Tablero
     /// Retorna un nuevo Tablero, que es igual al Tablero this pero rotado 90°.
     /// </summary>
     /// <returns></returns>
-    public void Rotar90(Tablero Rotado)
+    public void Rotar90()
     {
         int N = Global.N_ - 1;
 
@@ -318,13 +318,13 @@ public class Tablero
             {
                 Casilla aux = Matriz[i, j]; //Variable auxiliar        
 
-                Rotado.Matriz[i, j] = Matriz[j, N - i]; // Movemos Casillas de derecha a arriba
+                Matriz[i, j] = Matriz[j, N - i]; // Movemos Casillas de derecha a arriba
 
-                Rotado.Matriz[j, N - i] = Matriz[N - i, N - j]; // Movemos Casillas de abajo a la derecha
+                Matriz[j, N - i] = Matriz[N - i, N - j]; // Movemos Casillas de abajo a la derecha
 
-                Rotado.Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
+                Matriz[N - i, N - j] = Matriz[N - j, i]; // Movemos Casillas de izquierda a abajo
 
-                Rotado.Matriz[N - j, i] = aux;
+                Matriz[N - j, i] = aux;
 
             }
         }
@@ -333,25 +333,25 @@ public class Tablero
         {
             for (int k = 0; k < Global.N_; ++k)
             {
-                Rotado.Matriz[i, k].SetFila((uint)i);
-                Rotado.Matriz[i, k].SetColumna((uint)k);
+                Matriz[i, k].SetFila((uint)i);
+                Matriz[i, k].SetColumna((uint)k);
 
-                if (Rotado.Matriz[i, k].Fichita != null)
+                if (Matriz[i, k].Fichita != null)
                 {
-                    Rotado.Matriz[i, k].Fichita.Fila = i;
-                    Rotado.Matriz[i, k].Fichita.Columna = k;
+                    Matriz[i, k].Fichita.Fila = i;
+                    Matriz[i, k].Fichita.Columna = k;
 
                     //Si la casilla tiene dos fichas -> tengo qye mover las 2 ##################
-                    if (Rotado.Matriz[i, k].Superpuesta != null)
+                    if (Matriz[i, k].Superpuesta != null)
                     {
-                        Rotado.Matriz[i, k].Superpuesta.Fila = i;
-                        Rotado.Matriz[i, k].Superpuesta.Columna = k;
-                        ListaPosicionadas.Add(Rotado.Matriz[i, k].Superpuesta);
+                        Matriz[i, k].Superpuesta.Fila = i;
+                        Matriz[i, k].Superpuesta.Columna = k;
+                        ListaPosicionadas.Add(Matriz[i, k].Superpuesta);
 
                     }
                     //##########################################################################
 
-                    ListaPosicionadas.Add(Rotado.Matriz[i, k].Fichita);
+                    ListaPosicionadas.Add(Matriz[i, k].Fichita);
                 }
             }
         }
@@ -361,7 +361,7 @@ public class Tablero
     /// Retorna un nuevo Tablero, que es igual al Tablero this pero espejado.
     /// </summary>
     /// <returns></returns>
-    public Tablero Espejar(Tablero Espejar)
+    public void Espejar(Tablero Espejar)
     {
         Ficha aux, auxSup;
 
@@ -401,7 +401,6 @@ public class Tablero
                 }
             }
         }
-        return Espejar;
     }
 
     /// <summary>
@@ -409,58 +408,67 @@ public class Tablero
     /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
     /// </summary>
     /// <returns></returns>
-    public void IntercambiarTorres()
+    public void IntercambiarTorres(Tablero Intercambio)
     {
-        int T1, T2;
-        SetLista(this);
-
+        int T1, T2, C2;
+        //SetLista();
+        Intercambio.ListaPosicionadas = CopiaLista(this.ListaPosicionadas);
+        
         try
         {
-            T1 = Buscar(ListaPosicionadas, "Torre1");
-            T2 = Buscar(ListaPosicionadas, "Torre2");
+            T1 = Buscar(Intercambio.ListaPosicionadas, "Torre1"); //buscamos las torres en la lista
+            T2 = Buscar(Intercambio.ListaPosicionadas, "Torre2");
+            C2 = Buscar(Intercambio.ListaPosicionadas, "Caballo2");
         }
         catch (Exception ex)
         {
             throw ex;
         }
 
-        int x1 = ListaPosicionadas[T1].Fila;
-        int y1 = ListaPosicionadas[T1].Columna;
+        int x1 = Intercambio.ListaPosicionadas[T1].Fila;
+        int y1 = Intercambio.ListaPosicionadas[T1].Columna;
 
-        int x2 = ListaPosicionadas[T2].Fila;
-        int y2 = ListaPosicionadas[T2].Columna;
+        int x2 = Intercambio.ListaPosicionadas[T2].Fila;
+        int y2 = Intercambio.ListaPosicionadas[T2].Columna;
 
         if (x1 != x2)
         {
             Casilla aux = Matriz[x2, y2];
 
-
-            if (Matriz[x2, y1].Fichita == null) //Muevo a T1
+            if (Matriz[x2, y1].Fichita == null) //Muevo a T2
             {
-                Matriz[x1, y1].SetFicha(null);
-                Matriz[x2, y1].SetFicha(ListaPosicionadas[T1]);
+                //Intercambio.Matriz[x1, y1].SetFicha(null);
+                Intercambio.ListaPosicionadas[T2].Columna = y1;
+                //Intercambio.Matriz[x2, y1].SetFicha(ListaPosicionadas[T1]);
             }
 
-            if (Matriz[x1, y2].Fichita == null) //Muevo a T2
+            if (Matriz[x1, y2].Fichita == null) //Muevo a T1
             {
+                Intercambio.ListaPosicionadas[T1].Columna = y2;
+
                 if (aux.Superpuesta != null)
                 {
-                    Matriz[x2, y2].SetFicha(aux.Superpuesta);
+                    Intercambio.Matriz[x2, y2].SetFicha(aux.Superpuesta);
                     //Matriz[x2, y2].SetSuperpuesta(null); //Está de más
-                    Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+                    Intercambio.ListaPosicionadas[C2].Fila = x2;
+                    Intercambio.ListaPosicionadas[C2].Columna = y2;
 
+                    //Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
                 }
-                else
-                {
-                    Matriz[x2, y2].SetFicha(null);
-                    Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
-                }
+                //else
+                //{
+                //    //Intercambio.Matriz[x2, y2].SetFicha(null);
+                //    Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+                //    Intercambio.ListaPosicionadas[T1].Columna = y2;
+                //}
             }
             else if (Matriz[x1, y2].Fichita.GetName() == "Caballo2")
             {
-                Matriz[x2, y2].SetFicha(null); //pongo la ficha en null
-                Matriz[x1, y2].SetSuperpuesta(Matriz[x1, y2].Fichita); //primero setteo la superpuesta (el caballo)
-                Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]); //Asignamos fichita
+                //Intercambio.Matriz[x2, y2].SetFicha(null); //pongo la ficha en null
+                Ficha aux2 = Matriz[x1, y2].Fichita;
+                Intercambio.ListaPosicionadas[T2].Columna = y2;
+                Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]); //Asignamos fichita
+                Intercambio.Matriz[x1, y2].SetSuperpuesta(aux2); //primero setteo la superpuesta (el caballo)
                 //TODO: arreglar
             }
 
@@ -650,5 +658,30 @@ public class Tablero
                     T.ListaPosicionadas.Add(Matriz[i, k].Fichita);
     }
     #endregion
+
+    public List<Ficha> CopiaLista(List<Ficha> OldList)
+    {
+        List<Ficha> Nueva = new List<Ficha>();
+        foreach (Ficha Fichita in OldList)
+        {
+            if (!Nueva.Contains(Fichita))
+            {
+                if (Fichita is Reina)
+                    Nueva.Add(new Reina((Reina)Fichita));
+                else if (Fichita is Rey)
+                    Nueva.Add(new Rey((Rey)Fichita));
+                else if (Fichita is Alfil)
+                    Nueva.Add(new Alfil((Alfil)Fichita));
+                else if (Fichita is Torre)
+                    Nueva.Add(new Torre((Torre)Fichita));
+                else if (Fichita is Caballo)
+                    Nueva.Add(new Caballo((Caballo)Fichita));
+                else
+                    Nueva.Add(null);
+            }
+        }
+
+        return Nueva;
+    }
 
 } //end Tablero

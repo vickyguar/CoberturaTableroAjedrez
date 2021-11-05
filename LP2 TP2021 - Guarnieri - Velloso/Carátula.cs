@@ -169,107 +169,90 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 if (Juego.VerificarSolucion())
                 {
-                    //Tablero Table = new Tablero( ++ID); //#1 //////////////////////////////////////////////////// CONSTRUCTOR POR COPIA
-                    Solutions.Add(new Solucion(CopiaLista(Juego.ListaPosicionadas_), Juego.Type));
-
-                    //Table.ImprimirOutput(); //Vemos si funciona nuestro código, mirandolo en nuestro Debug
-                   // ListaSoluciones.Add(Table);
-
+                    //ListaSoluciones.Add(CopiaLista(Juego.ListaPosicionadas_)); //#1 -> me copia (con objetos nuevos) la lista que tiene las fichas de la solución
+                    Solutions.Add(new Solucion(Juego.CopiaLista(Juego.ListaPosicionadas_), Juego.Type));
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°) 
-                    Tablero Rotado1 = new Tablero(++ID); //#2
-                    Juego.Rotar90();
-                    //ListaSoluciones.Add(Rotado1);
-                    Solutions.Add(new Solucion(CopiaLista(Rotado1.ListaPosicionadas_), Rotado1.Type));
+                    Tablero Rotado1 = new Tablero(Juego, ++ID); //#2
+                    Rotado1.Rotar90();
+                    Solutions.Add(new Solucion(Rotado1.CopiaLista(Rotado1.ListaPosicionadas_), Rotado1.Type));
+
+                    //ListaSoluciones.Add());
 
                     //TABLERO ROTADO 2 (180°)
-                    Tablero Rotado2 = new Tablero(++ID); //#3
-                    Rotado1.Rotar90();
-                    Solutions.Add(new Solucion(CopiaLista(Rotado2.ListaPosicionadas_), Rotado2.Type));
+                    Tablero Rotado2 = new Tablero(Rotado1, ++ID); //#3
+                    Rotado2.Rotar90();
+                    Solutions.Add(new Solucion(Rotado2.CopiaLista(Rotado2.ListaPosicionadas_), Rotado2.Type));
 
-                    //ListaSoluciones.Add(Rotado2);
-                   // Rotado2.ImprimirOutput();
+                    //ListaSoluciones.Add(CopiaLista(Rotado2.ListaPosicionadas_));
+
 
                     //TABLERO ROTADO 3 (270°)
-                    Tablero Rotado3 = new Tablero(++ID); //#4
-                    Rotado2.Rotar90();
-                    Solutions.Add(new Solucion(CopiaLista(Rotado3.ListaPosicionadas_), Rotado3.Type));
+                    Tablero Rotado3 = new Tablero(Rotado2, ++ID); //#4
+                    Rotado3.Rotar90();
+                    Solutions.Add(new Solucion(Rotado3.CopiaLista(Rotado3.ListaPosicionadas_), Rotado3.Type));
 
-                    //ListaSoluciones.Add(Rotado3);
-                    //Rotado3.ImprimirOutput();
-
+                    //ListaSoluciones.Add(CopiaLista(Rotado3.ListaPosicionadas_));
                     #endregion
 
                     #region ESPEJADO ORIGINAL
                     //ESPEJADO 1
                     Tablero Espejado = new Tablero(++ID); //#5
-                    Juego.Espejar(Espejado);////////////////////////////////////////////////////////// ACA SE ESTA USANDO JUEGO
-                    Solutions.Add(new Solucion(CopiaLista(Espejado.ListaPosicionadas_), Espejado.Type));
-
-                    //ListaSoluciones.Add(Espejado);
-                    //Espejado.ImprimirOutput();
+                    Juego.Espejar(Espejado);
+                    Solutions.Add(new Solucion(Espejado.CopiaLista(Espejado.ListaPosicionadas_), Espejado.Type));
+                    //ListaSoluciones.Add(CopiaLista(Espejado.ListaPosicionadas_));
 
                     //ESPEJADO ROTADO 1 (90)
-                    Tablero EspejadoRotado1 = new Tablero( ++ID); //#6
-                    Espejado.Rotar90(EspejadoRotado1);
-                    Solutions.Add(new Solucion(CopiaLista(EspejadoRotado1.ListaPosicionadas_), EspejadoRotado1.Type));
+                    Tablero EspejadoRotado1 = new Tablero(Espejado, ++ID); //#6
+                    EspejadoRotado1.Rotar90();
+                    Solutions.Add(new Solucion(EspejadoRotado1.CopiaLista(EspejadoRotado1.ListaPosicionadas_), EspejadoRotado1.Type));
 
-                   // ListaSoluciones.Add(EspejadoRotado1);
-                   // EspejadoRotado1.ImprimirOutput();
+                    //ListaSoluciones.Add(CopiaLista(EspejadoRotado1.ListaPosicionadas_));
 
                     //ESPEJADO ROTADO 2 (180)
-                    Tablero EspejadoRotado2 = new Tablero( ++ID); //#7
-                    EspejadoRotado1.Rotar90();
-                    Solutions.Add(new Solucion(CopiaLista(EspejadoRotado2.ListaPosicionadas_), EspejadoRotado2.Type));
+                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1, ++ID); //#7
+                    EspejadoRotado2.Rotar90();
+                    Solutions.Add(new Solucion(EspejadoRotado2.CopiaLista(EspejadoRotado2.ListaPosicionadas_), EspejadoRotado2.Type));
 
-                    //ListaSoluciones.Add(EspejadoRotado2);
-                   // EspejadoRotado2.ImprimirOutput();
+                    //ListaSoluciones.Add(CopiaLista(EspejadoRotado2.ListaPosicionadas_));
 
                     //ESPEJADO ROTADO 3 (270)
-                    Tablero EspejadoRotado3 = new Tablero( ++ID); //#8
-                    EspejadoRotado2.Rotar90();
-                    Solutions.Add(new Solucion(CopiaLista(EspejadoRotado3.ListaPosicionadas_), EspejadoRotado3.Type));
+                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2, ++ID); //#8
+                    EspejadoRotado3.Rotar90();
+                    Solutions.Add(new Solucion(EspejadoRotado3.CopiaLista(EspejadoRotado3.ListaPosicionadas_), EspejadoRotado3.Type));
 
-                   // ListaSoluciones.Add(EspejadoRotado3);
-                    //EspejadoRotado3.ImprimirOutput();
+                    //ListaSoluciones.Add(CopiaLista(EspejadoRotado3.ListaPosicionadas_));
 
                     #endregion
 
                     #region INTERCAMBIO TORRES
                     //INTERCAMBIO
                     Tablero Intercambiado = new Tablero(++ID);  //#9
-                    Juego.IntercambiarTorres();
-                    Solutions.Add(new Solucion(CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type));
+                    Juego.IntercambiarTorres(Intercambiado);
+                    //Intercambiado.IntercambiarTorres();
+                    Solutions.Add(new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type));
 
-                    //ListaSoluciones.Add(Intercambiado);
-                  //  Intercambiado.ImprimirOutput();
+                    //ListaSoluciones.Add(CopiaLista(Intercambiado.ListaPosicionadas_));
 
                     //INTERCAMBIO ROTADO 1 (90)
-                    Tablero IntercambioRotado1 = new Tablero(++ID); //#10
-                    Intercambiado.Rotar90(IntercambioRotado1);
-                    Solutions.Add(new Solucion(CopiaLista(IntercambioRotado1.ListaPosicionadas_), IntercambioRotado1.Type));
+                    Tablero IntercambioRotado1 = new Tablero(Intercambiado, ++ID); //#10
+                    IntercambioRotado1.Rotar90();
+                    Solutions.Add(new Solucion(IntercambioRotado1.CopiaLista(IntercambioRotado1.ListaPosicionadas_), IntercambioRotado1.Type));
 
-                   // ListaSoluciones.Add(IntercambioRotado1);
-                   // IntercambioRotado1.ImprimirOutput();
+                    //ListaSoluciones.Add(CopiaLista(IntercambioRotado1.ListaPosicionadas_));
 
                     //INTERCAMBIO ROTADO (180)
-                    Tablero IntercambioRotado2 = new Tablero(++ID); //#11
-                    IntercambioRotado1.Rotar90(IntercambioRotado2);
-                    Solutions.Add(new Solucion(CopiaLista(IntercambioRotado2.ListaPosicionadas_), IntercambioRotado2.Type));
+                    Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1, ++ID); //#11
+                    IntercambioRotado2.Rotar90();
+                    Solutions.Add(new Solucion(IntercambioRotado2.CopiaLista(IntercambioRotado2.ListaPosicionadas_), IntercambioRotado2.Type));
 
-                    //ListaSoluciones.Add(IntercambioRotado2);
-                   // IntercambioRotado2.ImprimirOutput();
-
+                    //ListaSoluciones.Add(CopiaLista(IntercambioRotado2.ListaPosicionadas_));
 
                     //INTERCAMBIO ROTADO (270)
-                    Tablero IntercambioRotado3 = new Tablero( ++ID); //#12
-                    IntercambioRotado2.Rotar90(IntercambioRotado3);
-                    Solutions.Add(new Solucion(CopiaLista(IntercambioRotado3.ListaPosicionadas_), IntercambioRotado3.Type));
-
-                   // ListaSoluciones.Add(IntercambioRotado3);
-                   // IntercambioRotado3.ImprimirOutput();
-
+                    Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2, ++ID); //#12
+                    IntercambioRotado3.Rotar90();
+                    Solutions.Add(new Solucion(IntercambioRotado3.CopiaLista(IntercambioRotado3.ListaPosicionadas_), IntercambioRotado3.Type));
                     #endregion
 
                     #endregion
@@ -326,30 +309,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
          * Se tiene que abrir un form con un boton de next con las soluciones
          */
 
-        static List<Ficha> CopiaLista(List<Ficha> OldList)
-        {
-            List<Ficha> Nueva = new List<Ficha>();
-            foreach (Ficha Fichita in OldList)
-            {
-                if (!Nueva.Contains(Fichita))
-                {
-                    if (Fichita is Reina)
-                        Nueva.Add(new Reina((Reina)Fichita));
-                    else if (Fichita is Rey)
-                        Nueva.Add(new Rey((Rey)Fichita));
-                    else if (Fichita is Alfil)
-                        Nueva.Add(new Alfil((Alfil)Fichita));
-                    else if (Fichita is Torre)
-                        Nueva.Add(new Torre((Torre)Fichita));
-                    else if (Fichita is Caballo)
-                        Nueva.Add(new Caballo((Caballo)Fichita));
-                    else
-                        Nueva.Add(null);
-                }
-            }
-
-            return Nueva;
-        }
+      
 
     }
 }
