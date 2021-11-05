@@ -505,114 +505,24 @@ public class Tablero
         return true;
     }
 
-    /// <summary>
-    /// Retorna true si el Tablero que le llega por parámetro es distinto a this, en otro caso retorna false
-    /// </summary>
-    /// <param name="T"></param>
-    /// <returns></returns>
-    public bool VerificarSolucionesDistintas(Tablero T)
-    {
-        if (ID != T.ID)
-        { //Para no compararme conmigo mismo
+    ///// <summary>
+    ///// Retorna true si el Tablero que le llega por parámetro es distinto a this, en otro caso retorna false
+    ///// </summary>
+    ///// <param name="T"></param>
+    ///// <returns></returns>
+    //public bool VerificarSolucionesDistintas(Tablero T)
+    //{
+    //    if (ID != T.ID) //Para no compararme conmigo mismo
+    //    {
+    //        for (int i = 0; i < ListaPosicionadas.Count; ++i)
+    //        {
+    //            if (ListaPosicionadas[i].Columna != T.ListaPosicionadas[i].Columna && ListaPosicionadas[i].Fila != T.ListaPosicionadas[i].Fila)
+    //                return true;
+    //        }
+    //    }
 
-            #region IDEA
-
-            //Ficha Caballo2 = ListaPosicionadas.Pop();
-            //Ficha Torre2 = ListaPosicionadas.Pop();
-            //Ficha Torre1 = ListaPosicionadas.Pop();
-            //Ficha Rey = ListaPosicionadas.Pop();
-            //Ficha Caballo1 = ListaPosicionadas.Pop();
-            //Ficha Alfil2 = ListaPosicionadas.Pop();
-            //Ficha Alfil1 = ListaPosicionadas.Pop();
-            //Ficha Reina = ListaPosicionadas.Pop();
-
-            //Ficha Caballo2_T = T.ListaPosicionadas.Pop();
-            //Ficha Torre2_T = T.ListaPosicionadas.Pop();
-            //Ficha Torre1_T = T.ListaPosicionadas.Pop();
-            //Ficha Rey_T = T.ListaPosicionadas.Pop();
-            //Ficha Caballo1_T = T.ListaPosicionadas.Pop();
-            //Ficha Alfil2_T = T.ListaPosicionadas.Pop();
-            //Ficha Alfil1_T = T.ListaPosicionadas.Pop();
-            //Ficha Reina_T = T.ListaPosicionadas.Pop();
-
-            ////foreach(Ficha Fichita in ListaPosicionadas)
-            ////{
-            ////    if(Fichita is Torre || Fichita is Alfil || Fichita is Caballo)
-            ////        if (!((Fichita.Columna == T.ListaPosicionadas.Pop().Columna) && (Fichita.Fila == T.ListaPosicionadas.Pop().Fila)))
-            ////            if (!((Fichita.Columna == Torre2_T.Columna) && (Torre1.Columna == Torre2_T.Columna)))
-            ////                return true;
-            ////}
-
-            //if (!((Reina.Columna == Reina_T.Columna) && (Reina.Fila == Reina_T.Fila)))
-            //    return true;
-
-            //if (!((Rey.Columna == Rey_T.Columna) && (Rey.Fila == Rey_T.Fila)))
-            //    return true;
-
-            //if (!((Torre1.Columna == Torre1_T.Columna) && (Torre1.Fila == Torre1_T.Fila)))
-            //    if (!((Torre1.Columna == Torre2_T.Columna) && (Torre1.Columna == Torre2_T.Columna)))
-            //        return true;
-
-            //if (!((Torre2.Columna == Torre2_T.Columna) && (Torre2.Fila == Torre2_T.Fila)))
-            //    if (!((Torre2.Columna == Torre1_T.Columna) && (Torre2.Columna == Torre1_T.Columna)))
-            //        return true;
-
-            //if (!((Caballo1.Columna == Caballo1_T.Columna) && (Caballo1.Fila == Caballo1_T.Fila)))
-            //    if (!((Caballo1.Columna == Caballo2_T.Columna) && (Caballo1.Fila == Caballo2_T.Fila)))
-            //        return true;
-
-            //if (!((Caballo2.Columna == Caballo2_T.Columna) && (Caballo2.Fila == Caballo2_T.Fila)))
-            //    if (!((Caballo2.Columna == Caballo1_T.Columna) && (Caballo2.Fila == Caballo1_T.Fila)))
-            //        return true;
-
-            //if (!((Alfil1.Columna == Alfil1_T.Columna) && (Alfil1.Fila == Alfil1_T.Fila)))
-            //    if (!((Alfil1.Columna == Alfil2_T.Columna) && (Alfil1.Columna == Alfil2_T.Columna)))
-            //        return true;
-
-            //if (!((Alfil2.Columna == Alfil2_T.Columna) && (Alfil2.Fila == Alfil2_T.Fila)))
-            //    if (!((Alfil2.Columna == Alfil1_T.Columna) && (Alfil2.Columna == Alfil1_T.Columna)))
-            //        return true;
-
-            //return false;
-            #endregion
-
-            #region LO VIEJO
-            //for (int i = 0; i < Global.N_; ++i)
-            //{
-            //    for (int j = 0; j < Global.N_; ++j)
-            //    {
-
-            //        if (Matriz[i, j].Fichita != null) //Me fijo si en esa casilla hay ficha //ACA DICE QUE POS ES NULL!
-            //        {
-            //            if (T.Matriz[i, j].Fichita != null) //Si en la otra matriz hay también una ficha
-            //            {
-            //                if (T.Matriz[i, j].Fichita.GetType() != Matriz[i, j].Fichita.GetType()) //Me fijo si son de distinto tipo
-            //                    return true;
-            //            }
-            //            else //Sino, ya sé que son distintas
-            //                return true;
-            //        }
-            //    }
-            //}
-            #endregion
-
-            #region LO NUEVO
-
-            //Creo dos arrays con la ListaPosicionadas de ambos tableros:
-            Ficha[] _THIS = this.ListaPosicionadas.ToArray();
-            Ficha[] _T = T.ListaPosicionadas.ToArray();
-
-            for (int i = 0; i < Global.N_; ++i) //TODO: si falla algo es de aca
-            {
-                if (_THIS[i].Columna != _T[i].Columna || _THIS[i].Fila != _T[i].Fila)
-                    return true;
-            }
-
-            #endregion
-        }
-
-        return false; //Si no entra a ningun return previo, quiere decir que son iguales
-    }
+    //    return false; //Si no entra a ningun return previo, quiere decir que son iguales
+    //}
     #endregion
 
     #region BUSCAR
@@ -669,15 +579,28 @@ public class Tablero
                 if (Fichita is Reina)
                     Nueva.Add(new Reina((Reina)Fichita));
                 else if (Fichita is Rey)
-                    Nueva.Add(new Rey((Rey)Fichita));
+                    Nueva.Insert(4, new Rey((Rey)Fichita));
                 else if (Fichita is Alfil)
-                    Nueva.Add(new Alfil((Alfil)Fichita));
+                {
+                    if (Fichita.GetName() == "Alfil1")
+                        Nueva.Insert(1, new Alfil((Alfil)Fichita));
+                    else
+                        Nueva.Insert(2, new Alfil((Alfil)Fichita));
+                }
                 else if (Fichita is Torre)
-                    Nueva.Add(new Torre((Torre)Fichita));
+                {
+                    if (Fichita.GetName() == "Torre1")
+                        Nueva.Insert(5, new Torre((Torre)Fichita));
+                    else
+                        Nueva.Insert(6, new Torre((Torre)Fichita));
+                }
                 else if (Fichita is Caballo)
-                    Nueva.Add(new Caballo((Caballo)Fichita));
-                else
-                    Nueva.Add(null);
+                {
+                    if (Fichita.GetName() == "Caballo1")
+                        Nueva.Insert(3, new Caballo((Caballo)Fichita));
+                    else
+                        Nueva.Insert(7, new Caballo((Caballo)Fichita));
+                }
             }
         }
 
