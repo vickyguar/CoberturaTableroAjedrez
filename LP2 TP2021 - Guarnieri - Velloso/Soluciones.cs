@@ -33,12 +33,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
             //visibilidad de los botones
             btn_next.Visible = true;
             btn_back.Visible = false;
+            btn_exit.Visible = true;
+                
+            btn_back_fatal.Visible = false;
 
             btn_fatales.Visible = false;
             btn_next_fatal.Visible = false;
-            btn_back_fatal.Visible = false;
 
-            //TODO:Habría que encontrar la forma de ver como settear el upper bound
+            Barra.Maximum = ListaSoluciones.Count;
 
             ImprimirSiguiente(ListaSoluciones); //se imprime la primera solución
         }
@@ -57,6 +59,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
             if (Barra.Value < Lista.Count) // Barra.Value esta funcionando como iterador
             {
                 btn_next.Visible = true;
+
+                if (Barra.Value == 0)
+                    btn_back.Visible = false;
 
                 //Limpiar tablero
                 if (Barra.Value != 0)
@@ -97,7 +102,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 Barra.Increment(1);
 
-                if (Barra.Value > 0) //si me movi para adelante
+                if (Barra.Value > 1) //si me movi para adelante
                     btn_back.Visible = true; //habilito el botón de back
 
                 if (Barra.Value == Lista.Count) //si ya se imprimieron todas las soluciones
