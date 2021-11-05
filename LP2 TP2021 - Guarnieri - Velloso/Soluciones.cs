@@ -92,7 +92,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 {
                     DataGridViewImageCell iCell = new DataGridViewImageCell();
                     iCell.Value = (Bitmap)Fichita.Imagen;
+
                     Dtg[Fichita.Fila, Fichita.Columna] = iCell;
+
+                    if (Plantilla.Matriz[Fichita.Fila, Fichita.Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                        Dtg.Rows[Fichita.Columna].Cells[Fichita.Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
                 }
 
                 Barra.Increment(1);
@@ -155,6 +159,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 DataGridViewImageCell iCell = new DataGridViewImageCell();
                 iCell.Value = (Bitmap)Fichita.Imagen;
                 Dtg[Fichita.Fila, Fichita.Columna] = iCell;
+
+                if (Plantilla.Matriz[Fichita.Fila, Fichita.Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                    Dtg.Rows[Fichita.Columna].Cells[Fichita.Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
             }
 
             Barra.Increment(1);
