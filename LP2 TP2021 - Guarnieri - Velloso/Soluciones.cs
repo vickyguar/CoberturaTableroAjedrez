@@ -101,6 +101,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 Barra.Increment(1);
 
+                if (Barra.Value > 0) //si me movi para adelante
+                    btn_back.Visible = true; //habilito el botón de back
 
                 if (Barra.Value == Lista.Count) //si ya se imprimieron todas las soluciones
                 {
@@ -171,8 +173,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
         #endregion
         private void btn_next_Click(object sender, EventArgs e)
         {
-            if (Barra.Value > 0) //si me movi para adelante
-                btn_back.Visible = true; //habilito el botón de back
             ImprimirSiguiente(ListaSoluciones);
         }
 
