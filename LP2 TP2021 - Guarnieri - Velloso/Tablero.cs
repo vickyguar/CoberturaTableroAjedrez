@@ -81,57 +81,58 @@ public class Tablero
     /// Constructor por copia de la clase <see cref="Tablero"/>..
     /// </summary>
     /// <param name="newTablero"></param>
-    public Tablero(Tablero newTablero, int _ID)
-    {
-        //Variable auxiliar
+    
+    //public Tablero(Tablero newTablero, int _ID)
+    //{
+    //    //Variable auxiliar
 
-        //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
-        for (int i = 0; i < Global.N_; ++i)
-        {
-            for (int j = 0; j < Global.N_; ++j)
-            {
-                Matriz[i, j] = newTablero.Matriz[i, j];
-                Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
-                Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
-                Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
-                Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
-                Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
-                Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
+    //    //Matriz = newTablero.Matriz; //TODO: preguntar si esto es válido
+    //    for (int i = 0; i < Global.N_; ++i)
+    //    {
+    //        for (int j = 0; j < Global.N_; ++j)
+    //        {
+    //            Matriz[i, j] = newTablero.Matriz[i, j];
+    //            Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
+    //            Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
+    //            Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
+    //            Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
+    //            Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
+    //            Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
 
-            }
-        }
+    //        }
+    //    }
 
-        if (_ID % 12 == 0)
-            newListaPosicionadas(newTablero.ListaPosicionadas);
-        //TipoSolucion = newTablero.
-        ID = _ID;
-    }
+    //    if (_ID % 12 == 0)
+    //        newListaPosicionadas(newTablero.ListaPosicionadas);
+    //    //TipoSolucion = newTablero.
+    //    ID = _ID;
+    //}
 
-    public Ficha newFicha(Ficha Fichita)
-    {
-        if (Fichita is Reina)
-            return new Reina((Reina)Fichita);
-        else if (Fichita is Rey)
-            return new Rey((Rey)Fichita);
-        else if (Fichita is Alfil)
-            return new Alfil((Alfil)Fichita);
-        else if (Fichita is Caballo)
-            return new Caballo((Caballo)Fichita);
-        else if (Fichita is Torre)
-            return new Torre((Torre)Fichita);
-        else
-            return null;
+    //public Ficha newFicha(Ficha Fichita)
+    //{
+    //    if (Fichita is Reina)
+    //        return new Reina((Reina)Fichita);
+    //    else if (Fichita is Rey)
+    //        return new Rey((Rey)Fichita);
+    //    else if (Fichita is Alfil)
+    //        return new Alfil((Alfil)Fichita);
+    //    else if (Fichita is Caballo)
+    //        return new Caballo((Caballo)Fichita);
+    //    else if (Fichita is Torre)
+    //        return new Torre((Torre)Fichita);
+    //    else
+    //        return null;
 
-    }
+    //}
 
-    public void newListaPosicionadas(List<Ficha> newListita)
-    {
+    //public void newListaPosicionadas(List<Ficha> newListita)
+    //{
 
-        for (int i = 0; i < newListita.Count; ++i)
-        {
-            ListaPosicionadas.Add(newFicha(newListita[i]));
-        }
-    }
+    //    for (int i = 0; i < newListita.Count; ++i)
+    //    {
+    //        ListaPosicionadas.Add(newFicha(newListita[i]));
+    //    }
+    //}
 
     /// <summary>
     /// Destructor de la clase <see cref="Tablero"/>..
@@ -195,7 +196,6 @@ public class Tablero
             }
         }
         ListaPosicionadas.Clear();
-        //Boton: clear
     }
 
     /// <summary>
@@ -389,9 +389,6 @@ public class Tablero
                         //##############################################################################################################
                     }
 
-
-
-
                     if (Matriz[i, j].Superpuesta != null) //############################################################################
                     {
                         auxSup = Matriz[i, j].Superpuesta;
@@ -412,7 +409,7 @@ public class Tablero
     /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
     /// </summary>
     /// <returns></returns>
-    public void IntercambiarTorres(Tablero Intercambiado)
+    public void IntercambiarTorres()
     {
         int T1, T2;
         SetLista(this);
@@ -448,24 +445,23 @@ public class Tablero
             {
                 if (aux.Superpuesta != null)
                 {
-                    Intercambiado.Matriz[x2, y2].SetFicha(aux.Superpuesta);
+                    Matriz[x2, y2].SetFicha(aux.Superpuesta);
                     //Matriz[x2, y2].SetSuperpuesta(null); //Está de más
-                    Intercambiado.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+                    Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
 
                 }
                 else
                 {
-                    Intercambiado.Matriz[x2, y2].SetFicha(null);
-                    Intercambiado.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
+                    Matriz[x2, y2].SetFicha(null);
+                    Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
                 }
             }
-            else if (Intercambiado.Matriz[x1, y2].Fichita.GetName() == "Caballo2")
+            else if (Matriz[x1, y2].Fichita.GetName() == "Caballo2")
             {
-                Intercambiado.Matriz[x2, y2].SetFicha(null);
-                Intercambiado.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
-
-                Ficha auxSup = Matriz[x1, y2].Fichita;
-                Intercambiado.Matriz[x1, y2].SetSuperpuesta(auxSup);
+                Matriz[x2, y2].SetFicha(null); //pongo la ficha en null
+                Matriz[x1, y2].SetSuperpuesta(Matriz[x1, y2].Fichita); //primero setteo la superpuesta (el caballo)
+                Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]); //Asignamos fichita
+                //TODO: arreglar
             }
 
             return;

@@ -88,8 +88,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             //ROJO, VIOLETA, AZUL, VERDE -> según las regiones del tablero que marcamos en nuestro pseudocódigo
 
-            List<Tablero> ListaSoluciones = new List<Tablero>(); //Esta es la que se retorna
-
             while (Solutions.Count < 11)
             {
                 #region LISTAS
@@ -171,37 +169,34 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 if (Juego.VerificarSolucion())
                 {
-                    Tablero Table = new Tablero( ++ID); //#1 //////////////////////////////////////////////////// CONSTRUCTOR POR COPIA
+                    //Tablero Table = new Tablero( ++ID); //#1 //////////////////////////////////////////////////// CONSTRUCTOR POR COPIA
                     Solutions.Add(new Solucion(CopiaLista(Juego.ListaPosicionadas_), Juego.Type));
 
-                    Table.ImprimirOutput(); //Vemos si funciona nuestro código, mirandolo en nuestro Debug
+                    //Table.ImprimirOutput(); //Vemos si funciona nuestro código, mirandolo en nuestro Debug
                    // ListaSoluciones.Add(Table);
 
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°) 
                     Tablero Rotado1 = new Tablero(++ID); //#2
-                    //Tablero Rotado1 = new Tablero(++ID); //#2
-                    Table.Rotar90(Rotado1);
-                    ListaSoluciones.Add(Rotado1);
+                    Juego.Rotar90();
+                    //ListaSoluciones.Add(Rotado1);
                     Solutions.Add(new Solucion(CopiaLista(Rotado1.ListaPosicionadas_), Rotado1.Type));
-
-                    Rotado1.ImprimirOutput();
 
                     //TABLERO ROTADO 2 (180°)
                     Tablero Rotado2 = new Tablero(++ID); //#3
-                    Rotado1.Rotar90(Rotado2);
+                    Rotado1.Rotar90();
                     Solutions.Add(new Solucion(CopiaLista(Rotado2.ListaPosicionadas_), Rotado2.Type));
 
-                    ListaSoluciones.Add(Rotado2);
+                    //ListaSoluciones.Add(Rotado2);
                    // Rotado2.ImprimirOutput();
 
                     //TABLERO ROTADO 3 (270°)
                     Tablero Rotado3 = new Tablero(++ID); //#4
-                    Rotado2.Rotar90(Rotado3);
+                    Rotado2.Rotar90();
                     Solutions.Add(new Solucion(CopiaLista(Rotado3.ListaPosicionadas_), Rotado3.Type));
 
-                    ListaSoluciones.Add(Rotado3);
+                    //ListaSoluciones.Add(Rotado3);
                     //Rotado3.ImprimirOutput();
 
                     #endregion
@@ -209,10 +204,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     #region ESPEJADO ORIGINAL
                     //ESPEJADO 1
                     Tablero Espejado = new Tablero(++ID); //#5
-                    Table.Espejar(Espejado);////////////////////////////////////////////////////////// ACA SE ESTA USANDO JUEGO
+                    Juego.Espejar(Espejado);////////////////////////////////////////////////////////// ACA SE ESTA USANDO JUEGO
                     Solutions.Add(new Solucion(CopiaLista(Espejado.ListaPosicionadas_), Espejado.Type));
 
-                    ListaSoluciones.Add(Espejado);
+                    //ListaSoluciones.Add(Espejado);
                     //Espejado.ImprimirOutput();
 
                     //ESPEJADO ROTADO 1 (90)
@@ -220,34 +215,34 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Espejado.Rotar90(EspejadoRotado1);
                     Solutions.Add(new Solucion(CopiaLista(EspejadoRotado1.ListaPosicionadas_), EspejadoRotado1.Type));
 
-                    ListaSoluciones.Add(EspejadoRotado1);
+                   // ListaSoluciones.Add(EspejadoRotado1);
                    // EspejadoRotado1.ImprimirOutput();
 
                     //ESPEJADO ROTADO 2 (180)
                     Tablero EspejadoRotado2 = new Tablero( ++ID); //#7
-                    EspejadoRotado1.Rotar90(EspejadoRotado2);
+                    EspejadoRotado1.Rotar90();
                     Solutions.Add(new Solucion(CopiaLista(EspejadoRotado2.ListaPosicionadas_), EspejadoRotado2.Type));
 
-                    ListaSoluciones.Add(EspejadoRotado2);
+                    //ListaSoluciones.Add(EspejadoRotado2);
                    // EspejadoRotado2.ImprimirOutput();
 
                     //ESPEJADO ROTADO 3 (270)
                     Tablero EspejadoRotado3 = new Tablero( ++ID); //#8
-                    EspejadoRotado2.Rotar90(EspejadoRotado3);
+                    EspejadoRotado2.Rotar90();
                     Solutions.Add(new Solucion(CopiaLista(EspejadoRotado3.ListaPosicionadas_), EspejadoRotado3.Type));
 
-                    ListaSoluciones.Add(EspejadoRotado3);
+                   // ListaSoluciones.Add(EspejadoRotado3);
                     //EspejadoRotado3.ImprimirOutput();
 
                     #endregion
 
                     #region INTERCAMBIO TORRES
                     //INTERCAMBIO
-                    Tablero Intercambiado = new Tablero( ++ID);  //#9
-                    Table.IntercambiarTorres(Intercambiado);
+                    Tablero Intercambiado = new Tablero(++ID);  //#9
+                    Juego.IntercambiarTorres();
                     Solutions.Add(new Solucion(CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type));
 
-                    ListaSoluciones.Add(Intercambiado);
+                    //ListaSoluciones.Add(Intercambiado);
                   //  Intercambiado.ImprimirOutput();
 
                     //INTERCAMBIO ROTADO 1 (90)
@@ -255,7 +250,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Intercambiado.Rotar90(IntercambioRotado1);
                     Solutions.Add(new Solucion(CopiaLista(IntercambioRotado1.ListaPosicionadas_), IntercambioRotado1.Type));
 
-                    ListaSoluciones.Add(IntercambioRotado1);
+                   // ListaSoluciones.Add(IntercambioRotado1);
                    // IntercambioRotado1.ImprimirOutput();
 
                     //INTERCAMBIO ROTADO (180)
@@ -263,7 +258,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     IntercambioRotado1.Rotar90(IntercambioRotado2);
                     Solutions.Add(new Solucion(CopiaLista(IntercambioRotado2.ListaPosicionadas_), IntercambioRotado2.Type));
 
-                    ListaSoluciones.Add(IntercambioRotado2);
+                    //ListaSoluciones.Add(IntercambioRotado2);
                    // IntercambioRotado2.ImprimirOutput();
 
 
@@ -272,7 +267,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     IntercambioRotado2.Rotar90(IntercambioRotado3);
                     Solutions.Add(new Solucion(CopiaLista(IntercambioRotado3.ListaPosicionadas_), IntercambioRotado3.Type));
 
-                    ListaSoluciones.Add(IntercambioRotado3);
+                   // ListaSoluciones.Add(IntercambioRotado3);
                    // IntercambioRotado3.ImprimirOutput();
 
                     #endregion
@@ -313,10 +308,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 #endregion
             }
 
-            for (int i = 0; i < ListaSoluciones.Count; ++i)
-            {
-                ListaSoluciones[i].ImprimirOutput();
-            }
+            //for (int i = 0; i < ListaSoluciones.Count; ++i)
+            //{
+            //    ListaSoluciones[i].ImprimirOutput();
+            //}
 
             return Solutions;
 
