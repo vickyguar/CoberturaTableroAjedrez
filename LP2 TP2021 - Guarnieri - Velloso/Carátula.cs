@@ -10,32 +10,33 @@ namespace LP2_TP2021___Guarnieri___Velloso
 {
     public class Solucion
     {
-        List<Ficha> Posiciones;
+        SortedList<uint, Ficha> Posiciones;
         TipoSolucion Tipo;
       //  int ID;
 
-        public List<Ficha> Posiciones_ { get => Posiciones; set => Posiciones = value; }
+        public SortedList<uint,Ficha> Posiciones_ { get => Posiciones; set => Posiciones = value; }
         public TipoSolucion Tipo_ { get => Tipo; set => Tipo = value; }
 
         //public int ID_ { get => ID; set => ID = value; }
 
-        public Solucion(List<Ficha> Lista, TipoSolucion type_ /*int ID_*/)
+        public Solucion(SortedList<uint, Ficha> Lista, TipoSolucion type_ /*int ID_*/)
         {
             Posiciones = Lista;
             Tipo = type_;
            // ID = ID_;
         }
-
-
-
     }
 
     public partial class Carátula : Form
     {
-      
+        Soluciones FormSoluciones;
         public Carátula()
         {
             InitializeComponent();
+            this.Show();
+            List<Solucion> ListaSoluciones = Programa();
+            FormSoluciones = new Soluciones(ListaSoluciones, this);
+
         }
 
         private void Carátula_Load(object sender, EventArgs e)
@@ -52,8 +53,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
-            List<Solucion> ListaSoluciones = Programa();
-            Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
             FormSoluciones.Show(); //Abrimos el form de soluciones
             this.Hide(); //Cerramos el Form de Carátula
         }
@@ -252,40 +251,42 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     #endregion
 
                     #region INTERCAMBIO TORRES
-                    //INTERCAMBIO
-                    Tablero Intercambiado = new Tablero(++ID);  //#9
-                    Juego.IntercambiarTorres(Intercambiado);
-                    //Intercambiado.IntercambiarTorres();
-                    Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
-                    if (!Solutions.Contains(SolIntercambiado))
-                        Solutions.Add(SolIntercambiado);
+                    ////INTERCAMBIO
+                    //Tablero Intercambiado = new Tablero(++ID);  //#9
+                    //Juego.IntercambiarTorres(Intercambiado);
+                    ////Intercambiado.IntercambiarTorres();
+                    //Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
+                    //if (!Solutions.Contains(SolIntercambiado))
+                    //    Solutions.Add(SolIntercambiado);
 
-                    //ListaSoluciones.Add(CopiaLista(Intercambiado.ListaPosicionadas_));
+                    ////ListaSoluciones.Add(CopiaLista(Intercambiado.ListaPosicionadas_));
+                    //#region ROTADO TORRE
+                    ////INTERCAMBIO ROTADO 1 (90)
+                    //Tablero IntercambioRotado1 = new Tablero(Intercambiado, ++ID); //#10
+                    //IntercambioRotado1.Rotar90();
+                    //Solucion SolIntercambiadoRotado1 = new Solucion(IntercambioRotado1.CopiaLista(IntercambioRotado1.ListaPosicionadas_), IntercambioRotado1.Type);
+                    //if (!Solutions.Contains(SolIntercambiadoRotado1))
+                    //    Solutions.Add(SolIntercambiadoRotado1);
 
-                    //INTERCAMBIO ROTADO 1 (90)
-                    Tablero IntercambioRotado1 = new Tablero(Intercambiado, ++ID); //#10
-                    IntercambioRotado1.Rotar90();
-                    Solucion SolIntercambiadoRotado1 = new Solucion(IntercambioRotado1.CopiaLista(IntercambioRotado1.ListaPosicionadas_), IntercambioRotado1.Type);
-                    if (!Solutions.Contains(SolIntercambiadoRotado1))
-                        Solutions.Add(SolIntercambiadoRotado1);
+                    ////ListaSoluciones.Add(CopiaLista(IntercambioRotado1.ListaPosicionadas_));
 
-                    //ListaSoluciones.Add(CopiaLista(IntercambioRotado1.ListaPosicionadas_));
+                    ////INTERCAMBIO ROTADO (180)
+                    //Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1, ++ID); //#11
+                    //IntercambioRotado2.Rotar90();
+                    //Solucion SolIntercambiadoRotado2 = new Solucion(IntercambioRotado2.CopiaLista(IntercambioRotado2.ListaPosicionadas_), IntercambioRotado2.Type);
+                    //if (!Solutions.Contains(SolIntercambiadoRotado2))
+                    //    Solutions.Add(SolIntercambiadoRotado2);
 
-                    //INTERCAMBIO ROTADO (180)
-                    Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1, ++ID); //#11
-                    IntercambioRotado2.Rotar90();
-                    Solucion SolIntercambiadoRotado2 = new Solucion(IntercambioRotado2.CopiaLista(IntercambioRotado2.ListaPosicionadas_), IntercambioRotado2.Type);
-                    if (!Solutions.Contains(SolIntercambiadoRotado2))
-                        Solutions.Add(SolIntercambiadoRotado2);
+                    ////ListaSoluciones.Add(CopiaLista(IntercambioRotado2.ListaPosicionadas_));
 
-                    //ListaSoluciones.Add(CopiaLista(IntercambioRotado2.ListaPosicionadas_));
+                    ////INTERCAMBIO ROTADO (270)
+                    //Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2, ++ID); //#12
+                    //IntercambioRotado3.Rotar90();
+                    //Solucion SolIntercambiadoRotado3 = new Solucion(IntercambioRotado3.CopiaLista(IntercambioRotado3.ListaPosicionadas_), IntercambioRotado3.Type);
+                    //if (!Solutions.Contains(SolIntercambiadoRotado3))
+                    //    Solutions.Add(SolIntercambiadoRotado3);
+                    #endregion
 
-                    //INTERCAMBIO ROTADO (270)
-                    Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2, ++ID); //#12
-                    IntercambioRotado3.Rotar90();
-                    Solucion SolIntercambiadoRotado3 = new Solucion(IntercambioRotado3.CopiaLista(IntercambioRotado3.ListaPosicionadas_), IntercambioRotado3.Type);
-                    if (!Solutions.Contains(SolIntercambiadoRotado3))
-                        Solutions.Add(SolIntercambiadoRotado3);
                     #endregion
 
                     #endregion
@@ -316,8 +317,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return Solutions;
 
         }
-
-        #endregion
 
         /*
          * Steps para el Form:

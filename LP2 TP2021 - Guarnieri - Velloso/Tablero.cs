@@ -378,6 +378,7 @@ public class Tablero
                 if (Matriz[i, j].Fichita != null) //si hay una ficha en la casilla i,j
                 {
                     aux = Matriz[i, j].Fichita; //ficha auxiliar
+                    auxSup = Matriz[i, j].Superpuesta;
 
                     if (Matriz[i, 7 - j].Fichita != null) //si en la casilla "espejo" hay una ficha
                     {
@@ -394,18 +395,20 @@ public class Tablero
                         }
                         //##############################################################################################################
                     }
+                    else
+                    {
+                        Espejar.Matriz[i, 7 - j].SetFicha(aux); //espejo
+                        Espejar.Agregar(Espejar.Matriz[i, 7 - j].Fichita, Espejar.ListaPosicionadas);
+                    }
 
                     if (Matriz[i, j].Superpuesta != null) //############################################################################
                     {
-                        auxSup = Matriz[i, j].Superpuesta;
                         Espejar.Matriz[i, 7 - j].SetSuperpuesta(auxSup); //espejo
-                        //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Superpuesta); //me guardo la ficha posicionada en la lista
+                                                                         //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Superpuesta); //me guardo la ficha posicionada en la lista
                         Espejar.Agregar(Espejar.Matriz[i, 7 - j].Superpuesta, Espejar.ListaPosicionadas);
 
                     }//#################################################################################################################
 
-                    Espejar.Matriz[i, 7 - j].SetFicha(aux); //espejo
-                    Espejar.Agregar(Espejar.Matriz[i, 7 - j].Fichita, Espejar.ListaPosicionadas);
                     //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Fichita); //me guardo la ficha posicionada en la lista
                 }
             }
@@ -534,37 +537,6 @@ public class Tablero
     //}
     #endregion
 
-    #region BUSCAR
-
-    /// <summary>
-    /// Retorna el indice de la lista en donde se encuentra la ficha con el nombre pedido
-    /// </summary>
-    /// <param name="Lista"></param>
-    /// <param name="name"></param>
-    /// <returns></returns>
-    private int Buscar(List<Ficha> Lista, string name)
-    {
-        for (int i = 0; i < Lista.Count; ++i)
-            if (Lista[i].GetName() == name)
-                return i;
-        throw new Exception("NO EXISTE");
-    }
-
-    private Casilla BuscarCasilla(List<Ficha> Lista, string name)
-    {
-        for (int i = 0; i < Global.N_; ++i)
-        {
-            for (int j = 0; j < Global.N_; ++j)
-            {
-                if (Matriz[i, j].Fichita.GetName() == name)
-                    return Matriz[i, j];
-            }
-        }
-        throw new Exception("NO EXISTE");
-    }
-
-    #endregion
-
     #region SETTERS & GETTES
     public TipoSolucion Type { get => type; set => type = value; }
     public SortedList<uint, Ficha> ListaPosicionadas_ { get => ListaPosicionadas; set => ListaPosicionadas = value; }
@@ -591,7 +563,7 @@ public class Tablero
     public void Agregar(Ficha Fichita, SortedList<uint, Ficha> Lista)
     {
         if (Fichita is Reina)
-            Lista.Add(1, new Reina((Reina)Fichita));
+            Lista.Add(0, new Reina((Reina)Fichita));
 
         else if (Fichita is Rey)
             Lista.Add(4, new Rey((Rey)Fichita));

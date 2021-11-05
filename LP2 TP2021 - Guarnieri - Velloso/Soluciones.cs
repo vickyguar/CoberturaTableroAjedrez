@@ -88,16 +88,16 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 }
 
 
-                List<Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
-                foreach (Ficha Fichita in Piezas)
+                SortedList<uint,Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
+                for(uint i = 0; i<Piezas.Count; i++)
                 {
                     DataGridViewImageCell iCell = new DataGridViewImageCell();
-                    iCell.Value = (Bitmap)Fichita.Imagen;
+                    iCell.Value = (Bitmap)Piezas[i].Imagen;
 
-                    Dtg[Fichita.Fila, Fichita.Columna] = iCell;
+                    Dtg[Piezas[i].Fila, Piezas[i].Columna] = iCell;
 
-                    if (Plantilla.Matriz[Fichita.Fila, Fichita.Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
-                        Dtg.Rows[Fichita.Columna].Cells[Fichita.Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
+                    if (Plantilla.Matriz[Piezas[i].Fila, Piezas[i].Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                        Dtg.Rows[Piezas[i].Columna].Cells[Piezas[i].Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
                 }
 
                 Barra.Increment(1);
@@ -143,15 +143,16 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             }
 
-            List<Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
-            foreach (Ficha Fichita in Piezas)
+            SortedList<uint, Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
+            for (uint i = 0; i < Piezas.Count; i++)
             {
                 DataGridViewImageCell iCell = new DataGridViewImageCell();
-                iCell.Value = (Bitmap)Fichita.Imagen;
-                Dtg[Fichita.Fila, Fichita.Columna] = iCell;
+                iCell.Value = (Bitmap)Piezas[i].Imagen;
 
-                if (Plantilla.Matriz[Fichita.Fila, Fichita.Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
-                    Dtg.Rows[Fichita.Columna].Cells[Fichita.Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
+                Dtg[Piezas[i].Fila, Piezas[i].Columna] = iCell;
+
+                if (Plantilla.Matriz[Piezas[i].Fila, Piezas[i].Columna].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                    Dtg.Rows[Piezas[i].Columna].Cells[Piezas[i].Fila].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
             }
 
             Barra.Increment(1);
