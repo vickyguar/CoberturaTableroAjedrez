@@ -644,6 +644,7 @@ public class Tablero
 
     #region SETTERS & GETTES
     public TipoSolucion Type { get => type; set => type = value; }
+    public List<Ficha> ListaPosicionadas_ { get => ListaPosicionadas; set => ListaPosicionadas = value; }
 
     private void SetLista(Tablero T)
     {

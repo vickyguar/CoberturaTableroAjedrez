@@ -46,7 +46,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
-            List<Tablero> ListaSoluciones = Programa();
+            List<Solucion> ListaSoluciones = Programa();
             Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
             FormSoluciones.Show(); //Abrimos el form de soluciones
             this.Hide(); //Cerramos el Form de Carátula
