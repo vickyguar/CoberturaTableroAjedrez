@@ -223,5 +223,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
             ImprimirAnterior(ListaFiltrada);
         }
 
+        private void Dtg_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

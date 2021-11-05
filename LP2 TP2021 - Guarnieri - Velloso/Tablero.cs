@@ -101,8 +101,8 @@ public class Tablero
             }
         }
 
-        if (ID % 12 == 0)
-            newListaPosicionadas(newTablero.ListaPosicionadas);
+        //if (ID % 12 == 0)
+        //    newListaPosicionadas(newTablero.ListaPosicionadas);
        
         ID = _ID;
     }
