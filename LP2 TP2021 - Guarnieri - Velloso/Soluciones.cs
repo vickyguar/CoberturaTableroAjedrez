@@ -35,9 +35,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
             btn_back.Visible = false;
             btn_exit.Visible = true;
                 
-            btn_back_fatal.Visible = false;
-            btn_fatales.Visible = false;
-            btn_next_fatal.Visible = false;
+            //btn_back_fatal.Visible = false;
+            //btn_fatales.Visible = false;
+            //btn_next_fatal.Visible = false;
 
             Barra.Maximum = ListaSoluciones.Count;
             Dtg.ClearSelection();
@@ -47,10 +47,56 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
         #endregion
 
-        //private void myDataGridView_SelectionChanged(Object sender, EventArgs e)
-        //{
-        //    Dtg.ClearSelection();
-        //}
+        #region BOTONES
+        private void btn_next_Click(object sender, EventArgs e)
+        {
+            if (Barra.Value > 0) //si me movi para adelante
+                btn_back.Visible = true; //habilito el botón de back
+
+            if (rbtn_fatales.Checked)
+            {
+                Dtg.Rows.Clear();
+                Dtg.Refresh();
+
+                if (ListaFiltrada.Count == 0)
+                {
+                    if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                    {
+                        this.Close();
+                        Llamado.Close();
+                    }
+                    else
+                        ImprimirSiguiente(ListaFiltrada);
+                }
+                else
+                {
+                    rbtn_fatales.Checked = false;
+                    rbtn_leves.Checked = true;
+                    ImprimirSiguiente(ListaSoluciones);
+                }
+            }
+        }
+
+        private void btn_back_Click_1(object sender, EventArgs e)
+        {
+            if (Barra.Value == 2) //si soy la primera solucion
+                btn_back.Visible = false; //no puedo ir para atrás
+
+            if (Barra.Value < ListaSoluciones.Count + 1) //si no llegue al final
+            {
+                //btn_fatales.Visible = false; //no muestro el botón de fatales
+                btn_next.Visible = true;
+            }
+
+            ImprimirAnterior();
+        }
+
+        private void btn_exit_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+            Llamado.Close();
+        }
+        #endregion
 
         #region IMPRIMIR DTG
 
@@ -109,7 +155,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 if (Barra.Value == Lista.Count) //si ya se imprimieron todas las soluciones
                 {
                     btn_next.Visible = false;
-                    btn_fatales.Visible = true;
+                    //btn_fatales.Visible = true;
                 }
             }
             return;
@@ -161,41 +207,34 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
 
         #endregion
-        private void btn_next_Click(object sender, EventArgs e)
-        {
-            if (Barra.Value > 0) //si me movi para adelante
-                btn_back.Visible = true; //habilito el botón de back
 
-            ImprimirSiguiente(ListaSoluciones);
-        }
+        //private void btn_fatales_Click(object sender, EventArgs e)
+        //{
+        //    if (btn_fatales.Visible)
+        //    {
+        //        Barra.Value = 0;
 
-        private void btn_fatales_Click(object sender, EventArgs e)
-        {
-            if (btn_fatales.Visible)
-            {
-                Barra.Value = 0;
+        //        Dtg.Rows.Clear();
+        //        Dtg.Refresh();
+        //        btn_fatales.Visible = false;
+        //        btn_back.Visible = false;
 
-                Dtg.Rows.Clear();
-                Dtg.Refresh();
-                btn_fatales.Visible = false;
-                btn_back.Visible = false;
+        //        btn_next_fatal.Visible = true;
+        //        btn_back_fatal.Visible = false;
 
-                btn_next_fatal.Visible = true;
-                btn_back_fatal.Visible = false;
+        //        if (ListaFiltrada.Count == 0)
+        //        {
+        //            if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+        //            {
+        //                this.Close();
+        //                Llamado.Close();
+        //            }
+        //        }
 
-                if (ListaFiltrada.Count == 0)
-                {
-                    if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
-                    {
-                        this.Close();
-                        Llamado.Close();
-                    }
-                }
-
-                else
-                    ImprimirSiguiente(ListaFiltrada);
-            }
-        }
+        //        else
+        //            ImprimirSiguiente(ListaFiltrada);
+        //    }
+        //}
 
         //Va con el boton de filtrar
         static List<Solucion> Fatales(List<Solucion> ListaSoluciones)
@@ -212,46 +251,39 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return ListaFatales;
         }
 
-        private void btn_back_Click_1(object sender, EventArgs e)
+        private void btn_back_fatal_Click(object sender, EventArgs e)
         {
-            if (Barra.Value == 2) //si soy la primera solucion
-                btn_back.Visible = false; //no puedo ir para atrás
 
-            if (Barra.Value < ListaSoluciones.Count + 1) //si no llegue al final
-            {
-                btn_fatales.Visible = false; //no muestro el botón de fatales
-                btn_next.Visible = true;
-            }
-
-            ImprimirAnterior();
         }
 
-        private void btn_back_fatal_Click_1(object sender, EventArgs e)
+        private void btn_next_fatal_Click(object sender, EventArgs e)
         {
-            if (Barra.Value == 2)
-                btn_back_fatal.Visible = false;
 
-            if (Barra.Value < ListaFiltrada.Count + 1)
-                btn_next_fatal.Visible = true;
-
-            ImprimirAnterior();
         }
 
-        private void btn_exit_Click_1(object sender, EventArgs e)
-        {
-            this.Close();
-            Llamado.Close();
-        }
+        //private void btn_back_fatal_Click_1(object sender, EventArgs e)
+        //{
+        //    if (Barra.Value == 2)
+        //        btn_back_fatal.Visible = false;
 
-        private void btn_next_fatal_Click_1(object sender, EventArgs e)
-        {
-            if (Barra.Value > 0)
-                btn_back_fatal.Visible = true;
+        //    if (Barra.Value < ListaFiltrada.Count + 1)
+        //        btn_next_fatal.Visible = true;
 
-            ImprimirSiguiente(ListaFiltrada);
-        }
+        //    ImprimirAnterior();
+        //}
 
-       
+        //private void btn_next_fatal_Click_1(object sender, EventArgs e)
+        //{
+        //    if (Barra.Value > 0)
+        //        btn_back_fatal.Visible = true;
+
+        //    ImprimirSiguiente(ListaFiltrada);
+        //}
+
+        //private void rbtn_leves_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    ImprimirSiguiente(ListaSoluciones);
+        //}
     }
 }
 

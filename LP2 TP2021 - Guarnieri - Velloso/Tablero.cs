@@ -136,15 +136,6 @@ public class Tablero
 
     }
 
-    //public void newListaPosicionadas(List<Ficha> newListita)
-    //{
-
-    //    for (int i = 0; i < newListita.Count; ++i)
-    //    {
-    //        ListaPosicionadas.Add(newFicha(newListita[i]));
-    //    }
-    //}
-
     /// <summary>
     /// Destructor de la clase <see cref="Tablero"/>..
     /// </summary>
