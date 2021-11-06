@@ -23,6 +23,9 @@ public enum eColor : int
 
 } //end eColor
 
+/// <summary>
+/// Enum para definir el tipo de Solucion que es un <see cref="Tablero"/>.
+/// </summary>
 public enum TipoSolucion : int
 {
     NO_SOLUCION = 0,

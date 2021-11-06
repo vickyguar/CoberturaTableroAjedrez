@@ -25,6 +25,10 @@ public class Caballo : Ficha
 
     }
 
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Caballo"/>.
+    /// </summary>
+    /// <param name="newFichita"></param>
     public Caballo(Caballo newFichita):base(newFichita)
     {
     }
