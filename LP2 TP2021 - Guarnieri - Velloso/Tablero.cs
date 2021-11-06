@@ -63,7 +63,6 @@ public class Tablero
     /// </summary>
     public Tablero(int _ID)
     {
-        //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
         for (uint i = 0; i < Global.N_; ++i)
         {
             for (uint j = 0; j < Global.N_; ++j)
