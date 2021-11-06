@@ -239,8 +239,17 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
         private void btn_time_Click(object sender, EventArgs e)
         {
+            string output = "\nDescripción cualitativa O(n):\n" +
+                "• Resulta dificil determinar la cota superior del tiempo de ejecución de nuestro programa, ya que tiene muchas instancias donde se juega con la aleatoriedad.\n"+
+                "• Se le ha dado mucha libertad a la computadora, con lo cual, en un muy mal caso, puede llegar a ser imposible que encuentre una solución.\n" +
+                "• Sin embargo, hemos calculado un promedio de 30 realizaciones, θ(n) ≈  \n" + //TERMINAR
+                "Ω(n) = cte\n"+
+                ""
 
-            MessageBox.Show("TIEMPO: " + Global.timeMeasure.Elapsed.Seconds.ToString(), "Tiempo de ejecución", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("TIEMPO: " + Global.timeMeasure.Elapsed.Minutes.ToString() + ":" 
+                + Global.timeMeasure.Elapsed.Seconds.ToString() + ":" 
+                + Global.timeMeasure.Elapsed.Milliseconds.ToString() + output, 
+                "Tiempo de ejecución", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
     }
