@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace LP2_TP2021___Guarnieri___Velloso
 {
@@ -25,6 +26,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         {
             InitializeComponent();
 
+            Global.timeMeasure.Stop();
+
             ListaSoluciones = ListaSoluciones_;
             Llamado = _Llamado;
             ListaFiltrada = Fatales(ListaSoluciones); //filtramos las soluciones obtenidas
@@ -34,6 +37,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             btn_next.Visible = true;
             btn_back.Visible = false;
             btn_exit.Visible = true;
+            btn_time.Visible = true;
                 
             Barra.Maximum = ListaSoluciones.Count;
             Dtg.ClearSelection();
@@ -231,6 +235,13 @@ namespace LP2_TP2021___Guarnieri___Velloso
             rbtn_fatales.Checked = false;
             rbtn_leves.Checked = true;
             ImprimirSiguiente(ListaSoluciones);
+        }
+
+        private void btn_time_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("TIEMPO: " + Global.timeMeasure.Elapsed.Seconds.ToString(), "Tiempo de ejecución", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
     }
 }
