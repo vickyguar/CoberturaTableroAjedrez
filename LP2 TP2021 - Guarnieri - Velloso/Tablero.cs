@@ -90,24 +90,12 @@ public class Tablero
         {
             for (int j = 0; j < Global.N_; ++j)
             {
-                Matriz[i, j] = newTablero.Matriz[i, j];
-                Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
 
-                Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
-                Matriz[i, j].Superpuesta = newFicha(newTablero.Matriz[i, j].Superpuesta);
-
-                Matriz[i, j].SetAtacadaFatalmente(newTablero.Matriz[i, j].GetAtacadaFatalmente()); //TODO:TAMBIEN ESTOOOOO
-                Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
-
-                Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
-                Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
-
-                Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
+                Matriz[i, j] = new Casilla(newTablero.Matriz[i, j], newFicha(newTablero.Matriz[i, j].Fichita), newFicha(newTablero.Matriz[i, j].Superpuesta));
             }
         }
 
         this.Type = newTablero.Type;
-
         ID = _ID;
     }
 
