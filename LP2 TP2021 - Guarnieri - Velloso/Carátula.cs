@@ -34,7 +34,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Carátula()
         {
             InitializeComponent();
-            
+            this.Icon = new Icon("Icono.ico");
+            //This.Icon = tuAplicacion.Propiedades.Recursos.ElNombreDelIcono;
         }
 
         private void Carátula_Load(object sender, EventArgs e)

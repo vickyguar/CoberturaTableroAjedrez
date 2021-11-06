@@ -25,6 +25,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Soluciones(List<Solucion> ListaSoluciones_, Carátula _Llamado)
         {
             InitializeComponent();
+            this.Icon = new Icon("Icono.ico");
 
             Global.timeMeasure.Stop();
 
