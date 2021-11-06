@@ -227,7 +227,7 @@ public class Tablero
             
             //Matriz[i, j].SetFicha(Fichita);
 
-            while (Matriz[i, j].Colour == Matriz[Fichita.Fila, Fichita.Columna].Colour) //Mientras los dos alfiles sean del mismo color
+            while (Matriz[i, j].Colour == Matriz[FichaAux.Fila, FichaAux.Columna].Colour) //Mientras los dos alfiles sean del mismo color
             {
                 index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
@@ -235,7 +235,6 @@ public class Tablero
                 j = SubLista[index].GetColumna(); //nos guardamos nuevamente la columna
             }
         }
-
         
         //Ocupamos la casilla con la fichita
         
