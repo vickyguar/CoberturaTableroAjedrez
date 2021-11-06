@@ -238,7 +238,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.rbtn_leves.TabStop = true;
             this.rbtn_leves.Text = "Leves";
             this.rbtn_leves.UseVisualStyleBackColor = true;
-            this.rbtn_leves.CheckedChanged += new System.EventHandler(this.rbtn_leves_CheckedChanged);
             // 
             // btn_time
             // 

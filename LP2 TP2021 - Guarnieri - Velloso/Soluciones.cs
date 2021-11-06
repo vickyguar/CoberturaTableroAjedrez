@@ -39,6 +39,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             btn_exit.Visible = true;
             btn_time.Visible = true;
                 
+            rbtn_fatales.Checked = false;
+            rbtn_leves.Checked = true;
             Barra.Maximum = ListaSoluciones.Count;
             Dtg.ClearSelection();
 
@@ -46,6 +48,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
 
         #endregion
+
+       
 
         #region BOTONES
         private void btn_next_Click(object sender, EventArgs e)
@@ -218,23 +222,16 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 {
                     if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
                     {
-                        this.Close();
-                        Llamado.Close();
+                        rbtn_fatales.Checked = false;
+                        rbtn_leves.Checked = true;
+                        ImprimirSiguiente(ListaSoluciones);
                     }
-                    else
-                    {
-                        
-                    }
-                        ImprimirSiguiente(ListaFiltrada);
+                }
+                else
+                {
+                    ImprimirSiguiente(ListaFiltrada);
                 }
             }
-        }
-
-        private void rbtn_leves_CheckedChanged(object sender, EventArgs e)
-        {
-            rbtn_fatales.Checked = false;
-            rbtn_leves.Checked = true;
-            ImprimirSiguiente(ListaSoluciones);
         }
 
         private void btn_time_Click(object sender, EventArgs e)
