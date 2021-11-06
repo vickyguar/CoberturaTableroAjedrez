@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace LP2_TP2021___Guarnieri___Velloso
+﻿namespace LP2_TP2021___Guarnieri___Velloso
 {
     public partial class Soluciones : Form
     {
-        
+
         List<Solucion> ListaSoluciones;
         List<Solucion> ListaFiltrada;
 
@@ -34,7 +24,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             btn_next.Visible = true;
             btn_back.Visible = false;
             btn_exit.Visible = true;
-                
+
             btn_back_fatal.Visible = false;
             btn_fatales.Visible = false;
             btn_next_fatal.Visible = false;
@@ -42,7 +32,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Barra.Maximum = ListaSoluciones.Count;
             Dtg.ClearSelection();
 
-            ImprimirSiguiente(ListaSoluciones); //se imprime la primera solución
+            ImprimirSiguiente(ListaSoluciones, false); //se imprime la primera solución
         }
 
         #endregion
@@ -54,17 +44,18 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
         #region IMPRIMIR DTG
 
-        private void ImprimirSiguiente(List<Solucion> Lista)
+        private void ImprimirSiguiente(List<Solucion> Lista, bool Fatal)
         {
+
             if (Barra.Value < Lista.Count) // Barra.Value esta funcionando como iterador
             {
-                btn_next.Visible = true;
+                //btn_next.Visible = true;
 
                 if (Barra.Value == 0)
                     btn_back.Visible = false;
 
                 //Limpiar tablero
-                if (Barra.Value != 0)
+                if (Barra.Value != 0) //edito algo 
                 {
                     Dtg.Rows.Clear();
                     Dtg.Refresh();
@@ -89,8 +80,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 }
 
 
-                SortedList<uint,Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
-                for(uint i = 0; i<Piezas.Count; i++)
+                SortedList<uint, Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
+                for (uint i = 0; i < Piezas.Count; i++)
                 {
                     DataGridViewImageCell iCell = new DataGridViewImageCell();
                     iCell.Value = (Bitmap)Piezas[i].Imagen;
@@ -103,8 +94,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 Barra.Increment(1);
 
-                if (Barra.Value > 1) //si me movi para adelante
+                if (Barra.Value > 1 && !Fatal) //si me movi para adelante
                     btn_back.Visible = true; //habilito el botón de back
+                else if (Barra.Value > 1 && Fatal)
+                    btn_back_fatal.Visible = true;
 
                 if (Barra.Value == Lista.Count) //si ya se imprimieron todas las soluciones
                 {
@@ -166,35 +159,37 @@ namespace LP2_TP2021___Guarnieri___Velloso
             if (Barra.Value > 0) //si me movi para adelante
                 btn_back.Visible = true; //habilito el botón de back
 
-            ImprimirSiguiente(ListaSoluciones);
+            ImprimirSiguiente(ListaSoluciones, false);
         }
 
         private void btn_fatales_Click(object sender, EventArgs e)
         {
-            if (btn_fatales.Visible)
+
+
+            Barra.Value = 0;
+
+            Dtg.Rows.Clear();
+            Dtg.Refresh();
+
+            btn_fatales.Visible = false;
+            btn_back.Visible = false;
+            btn_next.Visible = false;
+
+            btn_next_fatal.Visible = true;
+            btn_back_fatal.Visible = false;
+
+            if (ListaFiltrada.Count == 0)
             {
-                Barra.Value = 0;
-
-                Dtg.Rows.Clear();
-                Dtg.Refresh();
-                btn_fatales.Visible = false;
-                btn_back.Visible = false;
-
-                btn_next_fatal.Visible = true;
-                btn_back_fatal.Visible = false;
-
-                if (ListaFiltrada.Count == 0)
+                if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
                 {
-                    if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
-                    {
-                        this.Close();
-                        Llamado.Close();
-                    }
+                    this.Close();
+                    Llamado.Close();
                 }
-
-                else
-                    ImprimirSiguiente(ListaFiltrada);
             }
+
+            else
+                ImprimirSiguiente(ListaFiltrada, true);
+
         }
 
         //Va con el boton de filtrar
@@ -248,10 +243,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
             if (Barra.Value > 0)
                 btn_back_fatal.Visible = true;
 
-            ImprimirSiguiente(ListaFiltrada);
+            ImprimirSiguiente(ListaFiltrada, true);
         }
 
-       
+
     }
 }
-

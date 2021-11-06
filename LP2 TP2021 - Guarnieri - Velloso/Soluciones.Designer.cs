@@ -208,7 +208,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             this.btn_back.BackColor = System.Drawing.Color.CadetBlue;
             this.btn_back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_back.Location = new System.Drawing.Point(53, 496);
+            this.btn_back.Location = new System.Drawing.Point(53, 467);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(75, 23);
             this.btn_back.TabIndex = 3;
@@ -220,7 +220,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             this.btn_back_fatal.BackColor = System.Drawing.Color.CadetBlue;
             this.btn_back_fatal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_back_fatal.Location = new System.Drawing.Point(53, 467);
+            this.btn_back_fatal.Location = new System.Drawing.Point(53, 496);
             this.btn_back_fatal.Name = "btn_back_fatal";
             this.btn_back_fatal.Size = new System.Drawing.Size(75, 23);
             this.btn_back_fatal.TabIndex = 4;
