@@ -118,7 +118,7 @@ public class Tablero
         else if (Fichita is Alfil)
         {
             Alfil A = (Alfil)Fichita;
-            return new Alfil((Alfil)Fichita, A.AlfilColor_);
+            return new Alfil((Alfil)Fichita);
         }
         else if (Fichita is Caballo)
             return new Caballo((Caballo)Fichita);
@@ -226,7 +226,7 @@ public class Tablero
             
             //Matriz[i, j].SetFicha(Fichita);
 
-            while (Matriz[i, j].Colour == FichaAux.AlfilColor_) //Mientras los dos alfiles sean del mismo color
+            while (Matriz[i, j].Colour == Matriz[Fichita.Fila, Fichita.Columna].Colour) //Mientras los dos alfiles sean del mismo color
             {
                 index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
@@ -235,12 +235,7 @@ public class Tablero
             }
         }
 
-        if(Fichita is Alfil)
-        {
-            Alfil Alf = (Alfil)Fichita;
-            Alf.AlfilColor_ = Matriz[i, j].Colour;
-        }
-
+        
         //Ocupamos la casilla con la fichita
         
         Matriz[i, j].SetFicha(Fichita);
@@ -514,8 +509,8 @@ public class Tablero
         Alfil A1 = (Alfil)ListaPosicionadas[1];
         Alfil A2 = (Alfil)ListaPosicionadas[2];
 
-        if (A1.AlfilColor_ == A2.AlfilColor_)
-            return false;
+        //if (A1.AlfilColor_ == A2.AlfilColor_)
+        //    return false;
 
         for (int i = 0; i < Global.N_; i++)
         {
@@ -597,12 +592,10 @@ public class Tablero
 
         else if (Fichita is Alfil)
         {
-            Alfil A = (Alfil)Fichita;
-
             if (Fichita.GetName() == "Alfil1" && !Lista.ContainsKey(1))
-                Lista.Add(1, new Alfil((Alfil)Fichita, A.AlfilColor_));
+                Lista.Add(1, new Alfil((Alfil)Fichita));
             else if (!Lista.ContainsKey(2))
-                Lista.Add(2, new Alfil((Alfil)Fichita, A.AlfilColor_));
+                Lista.Add(2, new Alfil((Alfil)Fichita));
         }
 
         else if (Fichita is Torre)

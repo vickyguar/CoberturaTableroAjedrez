@@ -13,7 +13,6 @@ using System.IO;
 using System.Drawing;
 public class Alfil : Ficha
 {
-    eColor AlfilColor;
     #region CONSTRUCTOR & DESTRUCTOR
 
     /// <summary>
@@ -22,12 +21,10 @@ public class Alfil : Ficha
     /// <param name="_Nombre"></param>
     public Alfil(string _Nombre) : base(_Nombre, Image.FromFile("Alfil.png"))
     {
-        AlfilColor = eColor.BLANCO; //se pone en blanco por default
     }
 
-    public Alfil(Alfil newFichita, eColor C_) : base(newFichita)
+    public Alfil(Alfil newFichita) : base(newFichita)
     {
-        AlfilColor_ = C_;
     }
 
     /// <summary>
@@ -37,8 +34,6 @@ public class Alfil : Ficha
     {
 
     }
-
-    public eColor AlfilColor_ { get => AlfilColor; set => AlfilColor = value; }
 
     #endregion
 
