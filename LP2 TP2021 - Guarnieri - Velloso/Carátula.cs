@@ -5,6 +5,8 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.Diagnostics;
+
 
 namespace LP2_TP2021___Guarnieri___Velloso
 {
@@ -32,6 +34,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Carátula()
         {
             InitializeComponent();
+            
         }
 
         private void Carátula_Load(object sender, EventArgs e)
@@ -48,6 +51,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
+            Global.timeMeasure = Stopwatch.StartNew();
+
             List<Solucion> ListaSoluciones = Programa();
             Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
 

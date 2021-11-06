@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 static class Global
 {
@@ -11,5 +12,7 @@ static class Global
         get { return N; }
         set { N = value; }
     }
+
+    public static Stopwatch timeMeasure = new Stopwatch();
 
 }
