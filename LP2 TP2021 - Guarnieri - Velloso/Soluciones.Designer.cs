@@ -29,8 +29,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Dtg = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -55,19 +55,19 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Dtg.AllowUserToDeleteRows = false;
             this.Dtg.AllowUserToResizeColumns = false;
             this.Dtg.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Dtg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Dtg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.Dtg.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.Dtg.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.Dtg.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dtg.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dtg.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.Dtg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dtg.ColumnHeadersVisible = false;
             this.Dtg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -225,6 +225,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.rbtn_fatales.TabStop = true;
             this.rbtn_fatales.Text = "Fatales";
             this.rbtn_fatales.UseVisualStyleBackColor = true;
+            this.rbtn_fatales.CheckedChanged += new System.EventHandler(this.rbtn_fatales_CheckedChanged);
             // 
             // rbtn_leves
             // 
@@ -236,6 +237,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.rbtn_leves.TabStop = true;
             this.rbtn_leves.Text = "Leves";
             this.rbtn_leves.UseVisualStyleBackColor = true;
+            this.rbtn_leves.CheckedChanged += new System.EventHandler(this.rbtn_leves_CheckedChanged);
             // 
             // Soluciones
             // 

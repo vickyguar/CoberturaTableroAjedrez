@@ -35,10 +35,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             btn_back.Visible = false;
             btn_exit.Visible = true;
                 
-            //btn_back_fatal.Visible = false;
-            //btn_fatales.Visible = false;
-            //btn_next_fatal.Visible = false;
-
             Barra.Maximum = ListaSoluciones.Count;
             Dtg.ClearSelection();
 
@@ -53,23 +49,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             if (Barra.Value > 0) //si me movi para adelante
                 btn_back.Visible = true; //habilito el botón de back
 
-            if (rbtn_fatales.Checked)
-            {
-                Dtg.Rows.Clear();
-                Dtg.Refresh();
-
-                if (ListaFiltrada.Count == 0)
-                {
-                    if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
-                    {
-                        this.Close();
-                        Llamado.Close();
-                    }
-                    else
-                        ImprimirSiguiente(ListaFiltrada);
-                }
-            }
-            else
+            if(!rbtn_fatales.Checked)
             {
                 rbtn_fatales.Checked = false;
                 rbtn_leves.Checked = true;
@@ -155,7 +135,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 if (Barra.Value == Lista.Count) //si ya se imprimieron todas las soluciones
                 {
                     btn_next.Visible = false;
-                    //btn_fatales.Visible = true;
                 }
             }
             return;
@@ -222,6 +201,37 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return ListaFatales;
         }
 
+        private void rbtn_fatales_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rbtn_fatales.Checked)
+            {
+                Dtg.Rows.Clear();
+                Dtg.Refresh();
+
+                Barra.Value = 0;
+
+                if (ListaFiltrada.Count == 0)
+                {
+                    if (MessageBox.Show("No se encontró ningun tablero fatal", "Exit mode", MessageBoxButtons.OK, MessageBoxIcon.Exclamation) == DialogResult.OK)
+                    {
+                        this.Close();
+                        Llamado.Close();
+                    }
+                    else
+                    {
+                        
+                    }
+                        ImprimirSiguiente(ListaFiltrada);
+                }
+            }
+        }
+
+        private void rbtn_leves_CheckedChanged(object sender, EventArgs e)
+        {
+            rbtn_fatales.Checked = false;
+            rbtn_leves.Checked = true;
+            ImprimirSiguiente(ListaSoluciones);
+        }
     }
 }
 
