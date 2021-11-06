@@ -549,7 +549,7 @@ public class Tablero
     //    return false; //Si no entra a ningun return previo, quiere decir que son iguales
     //}
     #endregion
-
+     
     #region SETTERS & GETTES
     public TipoSolucion Type { get => type; set => type = value; }
     public SortedList<uint, Ficha> ListaPosicionadas_ { get => ListaPosicionadas; set => ListaPosicionadas = value; }
