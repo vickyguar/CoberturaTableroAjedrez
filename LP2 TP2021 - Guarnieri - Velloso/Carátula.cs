@@ -95,54 +95,75 @@ namespace LP2_TP2021___Guarnieri___Velloso
             while (Solutions.Count < 11)
             {
                 #region LISTAS
-
-                for (uint i = 3; i <= 4; i++)
+                //----------------------------------------------------
+                for (int i = 3; i <= 4; i++)
                 {
-                    for (uint j = 3; j <= 4; j++)
+                    for (int j = 3; j <= 4; j++)
                         Cuadrado1.Add(new Casilla(i, j));
                 }
 
-                //FILA FIJA
-                for (uint i = 2; i <= 5; i++)
+                for(int k=0; k < Cuadrado1.Count; ++k)
                 {
-                    Cuadrado2.Add(new Casilla(2, i));
-                    Cuadrado2.Add(new Casilla(5, i));
+                    if (Cuadrado1[k].GetFila() - Cuadrado1[k].GetColumna() % 2 == 0)
+                        Cuadrado1[k].Colour = eColor.NEGRO;
                 }
 
-                //COLUMNA FIJA
-                for (uint i = 3; i < 5; i++)
+                //----------------------------------------------------
+                for (int j = 2; j <= 5; j++)
+                {
+                    Cuadrado2.Add(new Casilla(2, j));
+                    Cuadrado2.Add(new Casilla(5, j));
+                }
+
+
+                for (int i = 3; i < 5; i++)
                 {
                     Cuadrado2.Add(new Casilla(i, 2));
                     Cuadrado2.Add(new Casilla(i, 5));
                 }
 
-                //FILA FIJA
-                for (uint i = 1; i <= 6; i++)
+                for (int k = 0; k < Cuadrado2.Count; ++k)
+                {
+                    if (Cuadrado2[k].GetFila() - Cuadrado2[k].GetColumna() % 2 == 0)
+                        Cuadrado2[k].Colour = eColor.NEGRO;
+                }
+                //----------------------------------------------------
+                for (int i = 1; i <= 6; i++)
                 {
                     Cuadrado3.Add(new Casilla(1, i));
                     Cuadrado3.Add(new Casilla(6, i));
                 }
 
-                //COLUMNA FIJA
-                for (uint i = 2; i < 6; i++)
+                for (int i = 2; i < 6; i++)
                 {
                     Cuadrado3.Add(new Casilla(i, 1));
                     Cuadrado3.Add(new Casilla(i, 6));
                 }
 
-                //FILA FIJA
-                for (uint i = 0; i < Global.N_; i++)
+                for (int k = 0; k < Cuadrado3.Count; ++k)
+                {
+                    if (Cuadrado3[k].GetFila() - Cuadrado3[k].GetColumna() % 2 == 0)
+                        Cuadrado3[k].Colour = eColor.NEGRO;
+                }
+                //----------------------------------------------------
+                for (int i = 0; i < Global.N_; i++)
                 {
                     Cuadrado4.Add(new Casilla(0, i));
                     Cuadrado4.Add(new Casilla(7, i));
                 }
 
-                //COLUMNA FIJA
-                for (uint i = 1; i < 7; i++)
+                for (int i = 1; i < 7; i++)
                 {
                     Cuadrado4.Add(new Casilla(i, 0));
                     Cuadrado4.Add(new Casilla(i, 7));
                 }
+
+                for (int k = 0; k < Cuadrado4.Count; ++k)
+                {
+                    if (Cuadrado4[k].GetFila() - Cuadrado4[k].GetColumna() % 2 == 0)
+                        Cuadrado4[k].Colour = eColor.NEGRO;
+                }
+                //----------------------------------------------------
 
                 #endregion
 
@@ -175,9 +196,15 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 {
                     //ListaSoluciones.Add(CopiaLista(Juego.ListaPosicionadas_)); //#1 -> me copia (con objetos nuevos) la lista que tiene las fichas de la solución
                     Solucion Table = new Solucion(Juego.CopiaLista(Juego.ListaPosicionadas_), Juego.Type);
-
                     if (!Solutions.Contains(Table))
                         Solutions.Add(Table);
+                    Juego.ImprimirOutput();
+
+                   // Juego.ListaPosicionadas_[0].Atacar(Juego, Juego.Matriz[1, 4]); //No me deja hacer esto :( 
+                   //Quería probar porque quiero ver cuándo es que se pone todo fatal.
+
+
+                    Juego.VerificarSolucion();
 
                     #region ROTADO DE ORIGINAL
 
@@ -187,6 +214,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Solucion SolRotado1 = new Solucion(Rotado1.CopiaLista(Rotado1.ListaPosicionadas_), Rotado1.Type);
                     if (!Solutions.Contains(SolRotado1))
                         Solutions.Add(SolRotado1);
+                    Rotado1.ImprimirOutput();
 
                     //TABLERO ROTADO 2 (180°)
                     Tablero Rotado2 = new Tablero(Rotado1, ++ID); //#3

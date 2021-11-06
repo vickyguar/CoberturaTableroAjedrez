@@ -33,11 +33,11 @@ public class Casilla
     /// <summary>
     /// Columna de la <see cref="Casilla"/>.
     /// </summary>
-    private uint Columna;
+    private int Columna;
     /// <summary>
     /// Fila de la <see cref="Casilla"/>
     /// </summary>
-    private uint Fila;
+    private int Fila;
 
     private bool Ocupada;
     private bool Atacada;
@@ -52,14 +52,16 @@ public class Casilla
     /// </summary>
     /// <param name="_Columna"></param>
     /// <param name="_Fila"></param>
-    public Casilla(uint _Fila, uint _Columna)
+    public Casilla(int _Fila, int _Columna)
     {
         Columna = _Columna;
         Fila = _Fila;
         Ocupada = false;
         Atacada = false;
+        AtacadaFatalmente = false; 
         Fichita = null;
         Superpuesta = null;
+        Colour = eColor.NEGRO; //Inicializo en blanco
     }
 
     /// <summary>
@@ -78,22 +80,25 @@ public class Casilla
 
     public bool GetAtacada() { return Atacada; }
 
-    public uint GetColumna() { return Columna; }
+    public bool GetAtacadaFatalmente() { return AtacadaFatalmente; }
 
-    public uint GetFila() { return Fila; }
+    public int GetColumna() { return Columna; }
+
+    public int GetFila() { return Fila; }
 
     public eColor GetColor() { return Colour; }
-    public bool GetAtacadaFatalmente() { return AtacadaFatalmente; }
 
     #endregion
 
     #region SETTERS
 
-    public void SetColumna(uint newColumna) { Columna = newColumna; }
+    public void SetColumna(int newColumna) { Columna = newColumna; }
 
-    public void SetFila(uint newFila) { Fila = newFila; }
+    public void SetFila(int newFila) { Fila = newFila; }
 
     public void SetAtacada(bool newAtacada) { Atacada = newAtacada; }
+
+    public void SetAtacadaFatalmente(bool newAtacadaFatalmente) { AtacadaFatalmente = newAtacadaFatalmente; }
 
     public void SetOcupada(bool newOcupada) { Ocupada = newOcupada; }
 
@@ -129,7 +134,6 @@ public class Casilla
         }
     }
 
-    public void SetAtacadaFatalmente(bool newAtacadaFatalmente) { AtacadaFatalmente = newAtacadaFatalmente; }
 
     #endregion
 

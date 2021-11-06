@@ -49,8 +49,8 @@ public class Rey : Ficha
     /// <param name="Fatal"></param>
     public override void Atacar(Tablero Ataque, Casilla Pos)
     {
-        uint i = Pos.GetFila();
-        uint j = Pos.GetColumna();
+        int i = Pos.GetFila();
+        int j = Pos.GetColumna();
 
         //No verificamos si lo que pinta está fuera del Tablero, porque nosostras le restringimos al Rey a posicionarse en el Cuadrado3 (ver Main)
         //El Rey siempre ataca de forma fatal.

@@ -81,8 +81,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Diagonal1(Tablero Ataque, Casilla Pos)
     {
-        uint j = Pos.GetColumna() + 1;
-        uint i = Pos.GetFila() + 1;
+        int j = Pos.GetColumna() + 1;
+        int i = Pos.GetFila() + 1;
         bool stop = false;
 
         while (i < Global.N_ && j < Global.N_)
@@ -108,8 +108,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Diagonal2(Tablero Ataque, Casilla Pos)
     {
-        uint j = Pos.GetColumna() + 1; //No estamos considerando la posición!
-        int i = (int)Pos.GetFila() - 1;
+        int j = Pos.GetColumna() + 1; //No estamos considerando la posición!
+        int i = Pos.GetFila() - 1;
         bool stop = false;
 
         while (i >= 0 && j < Global.N_)
@@ -135,8 +135,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Diagonal3(Tablero Ataque, Casilla Pos)
     {
-        int j = (int)Pos.GetColumna() - 1;
-        int i = (int)Pos.GetFila() - 1;
+        int j = Pos.GetColumna() - 1;
+        int i = Pos.GetFila() - 1;
         bool stop = false;
 
         while (i >= 0 && j >= 0)
@@ -162,8 +162,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Diagonal4(Tablero Ataque, Casilla Pos)
     {
-        int j = (int)Pos.GetColumna() - 1;
-        uint i = Pos.GetFila() + 1;
+        int j = Pos.GetColumna() - 1;
+        int i = Pos.GetFila() + 1;
         bool stop = false;
 
         while (i < Global.N_ && j >= 0)
@@ -189,8 +189,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Horizontal1(Tablero Ataque, Casilla Pos)
     {
-        uint j = Pos.GetColumna() + 1;
-        uint i = Pos.GetFila();
+        int j = Pos.GetColumna() + 1;
+        int i = Pos.GetFila();
         bool stop = false;
 
         while (j < Global.N_)
@@ -215,8 +215,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Horizontal2(Tablero Ataque, Casilla Pos)
     {
-        int j = (int)Pos.GetColumna() - 1;
-        uint i = Pos.GetFila();
+        int j = Pos.GetColumna() - 1;
+        int i = Pos.GetFila();
         bool stop = false;
 
         while (j >= 0)
@@ -241,8 +241,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Vertical1(Tablero Ataque, Casilla Pos)
     {
-        uint j = Pos.GetColumna();
-        uint i = Pos.GetFila() + 1;
+        int j = Pos.GetColumna();
+        int i = Pos.GetFila() + 1;
         bool stop = false;
 
         while (i < Global.N_)
@@ -267,8 +267,8 @@ public abstract class Ficha
     /// <param name="Fatal"></param>
     public void Vertical2(Tablero Ataque, Casilla Pos)
     {
-        uint j = Pos.GetColumna();
-        int i = (int)Pos.GetFila() - 1;
+        int j = Pos.GetColumna();
+        int i = Pos.GetFila() - 1;
         bool stop = false;
 
         while (i >= 0)

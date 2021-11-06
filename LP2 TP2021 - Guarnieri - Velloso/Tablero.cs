@@ -64,9 +64,9 @@ public class Tablero
     public Tablero(int _ID)
     {
         //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
-        for (uint i = 0; i < Global.N_; ++i)
+        for (int i = 0; i < Global.N_; ++i)
         {
-            for (uint j = 0; j < Global.N_; ++j)
+            for (int j = 0; j < Global.N_; ++j)
             {
                 Matriz[i, j] = new Casilla(i, j);
             }
@@ -92,10 +92,16 @@ public class Tablero
             {
                 Matriz[i, j] = newTablero.Matriz[i, j];
                 Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
+
                 Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
+                Matriz[i, j].Superpuesta = newFicha(newTablero.Matriz[i, j].Superpuesta);
+
+                Matriz[i, j].SetAtacadaFatalmente(newTablero.Matriz[i, j].GetAtacadaFatalmente()); //TODO:TAMBIEN ESTOOOOO
                 Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
+
                 Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
                 Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
+
                 Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
             }
         }
@@ -195,11 +201,16 @@ public class Tablero
         {
             for (uint j = 0; j < Global.N_; j++)
             {
-                Matriz[i, j].SetAtacada(false);
-                Matriz[i, j].SetFicha(null);
                 Matriz[i, j].SetOcupada(false);
+
+                Matriz[i, j].SetAtacada(false);
+                Matriz[i, j].SetAtacadaFatalmente(false);
+
+                Matriz[i, j].SetFicha(null);
+                Matriz[i, j].SetSuperpuesta(null);
             }
         }
+        Type = TipoSolucion.NO_SOLUCION; 
         ListaPosicionadas.Clear();
     }
 
@@ -218,8 +229,8 @@ public class Tablero
         Random r = new Random();
         int index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
-        uint i = SubLista[index].GetFila(); //guardamos la fila correspondiente a la casilla
-        uint j = SubLista[index].GetColumna(); //guardamos la columna correspondiente a la casilla
+        int i = SubLista[index].GetFila(); //guardamos la fila correspondiente a la casilla
+        int j = SubLista[index].GetColumna(); //guardamos la columna correspondiente a la casilla
 
         if (Fichita.GetName() == "Alfil2") //si estamos posicionando el segundo alfil
         {
@@ -227,7 +238,7 @@ public class Tablero
             
             //Matriz[i, j].SetFicha(Fichita);
 
-            while (Matriz[i, j].Colour == Matriz[FichaAux.Fila, FichaAux.Columna].Colour) //Mientras los dos alfiles sean del mismo color
+            while (SubLista[index].Colour == Matriz[FichaAux.Fila, FichaAux.Columna].Colour) //Mientras los dos alfiles sean del mismo color
             {
                 index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
@@ -340,8 +351,8 @@ public class Tablero
         {
             for (int k = 0; k < Global.N_; ++k)
             {
-                Matriz[i, k].SetFila((uint)i);
-                Matriz[i, k].SetColumna((uint)k);
+                Matriz[i, k].SetFila(i);
+                Matriz[i, k].SetColumna(k);
 
                 if (Matriz[i, k].Fichita != null)
                 {
@@ -499,12 +510,14 @@ public class Tablero
     #region VERIFICACIONES
 
     /// <summary>
-    /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna true. Además esxplica cuál es el tipo de la solución.
+    /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna true. 
+    /// Además explica cuál es el tipo de la solución.
     /// </summary>
     /// <returns></returns>
     public bool VerificarSolucion()
     {
         TipoSolucion Type_ = TipoSolucion.FATAL;
+       
 
         for (int i = 0; i < Global.N_; i++)
         {
@@ -523,24 +536,6 @@ public class Tablero
         return true;
     }
 
-    ///// <summary>
-    ///// Retorna true si el Tablero que le llega por parámetro es distinto a this, en otro caso retorna false
-    ///// </summary>
-    ///// <param name="T"></param>
-    ///// <returns></returns>
-    //public bool VerificarSolucionesDistintas(Tablero T)
-    //{
-    //    if (ID != T.ID) //Para no compararme conmigo mismo
-    //    {
-    //        for (int i = 0; i < ListaPosicionadas.Count; ++i)
-    //        {
-    //            if (ListaPosicionadas[i].Columna != T.ListaPosicionadas[i].Columna && ListaPosicionadas[i].Fila != T.ListaPosicionadas[i].Fila)
-    //                return true;
-    //        }
-    //    }
-
-    //    return false; //Si no entra a ningun return previo, quiere decir que son iguales
-    //}
     #endregion
      
     #region SETTERS & GETTES
@@ -555,6 +550,8 @@ public class Tablero
     //                T.ListaPosicionadas.Add(Matriz[i, k].Fichita);
     //}
     #endregion
+
+    #region METODOS PARA LA LISTA DE FICHAS
 
     /// <summary>
     /// Retorna una copia de la lista que le llega por parámetro
@@ -613,6 +610,8 @@ public class Tablero
         }
 
     }
+
+    #endregion
 }
 
 //end Tablero
