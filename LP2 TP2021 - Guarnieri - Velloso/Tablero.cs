@@ -598,10 +598,12 @@ public class Tablero
 
         else if (Fichita is Alfil)
         {
+            Alfil A = (Alfil)Fichita;
+
             if (Fichita.GetName() == "Alfil1" && !Lista.ContainsKey(1))
-                Lista.Add(1, new Alfil((Alfil)Fichita));
+                Lista.Add(1, new Alfil((Alfil)Fichita, A.AlfilColor_));
             else if (!Lista.ContainsKey(2))
-                Lista.Add(2, new Alfil((Alfil)Fichita));
+                Lista.Add(2, new Alfil((Alfil)Fichita, A.AlfilColor_));
         }
 
         else if (Fichita is Torre)
