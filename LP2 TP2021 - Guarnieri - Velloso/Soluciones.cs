@@ -236,15 +236,23 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
         private void btn_time_Click(object sender, EventArgs e)
         {
+
+
+            string output_omega = "\nDescripción cuantitativa Ω(n):\n" + "\nΩ(n) = n\n" + "\nEl tiempo de ejecución del algoritmo depende tanto del tamaño de la entrada (la cantidad de tebleros solicitados por el usuario) " +
+                "como de algunas caracteristicas de la entrada, como por ejemplo si el tablero queda completamente atacado. Esto se debe a que el posicionamiento de las fichas en el tablero" +
+                "se hace de forma aleatoria en, con lo cual dependemos de esta aleatoriedad para definir si es solución o no. Al mismo tiempo, con un tablero que encuentre, visto que lo espejamos, " +
+                "lo rotamos e intercambiamos las torres, obtenemos 9 soluciones distintas. Con lo cual, si se quieren generar 18 soluciones, el algorimo solo tendra que encontrar 2 soluciones y luego aplicarle las trasnformaciones." +
+                "Es por esto que la cota inferior de nuestro algoritmo es Ω(n) = n, dejando de lado las constantes a (gradiente) y b (ordenada al origen) si n toma valores muy grandes";
+
+
             string output = "\nDescripción cualitativa O(n):\n" +
                 "• Resulta dificil determinar la cota superior del tiempo de ejecución de nuestro programa, ya que tiene muchas instancias donde se juega con la aleatoriedad.\n" +
                 "• Se le ha dado mucha libertad a la computadora, con lo cual, en un muy mal caso, puede llegar a ser imposible que encuentre una solución.\n" +
-                "• Sin embargo, hemos calculado un promedio de 30 realizaciones, para encontrar 10 tableros de 62 ± 19 segundos\n" +
-                "Ω(n) = cte\n";
+                "• Sin embargo, hemos calculado un promedio de 30 realizaciones, para encontrar 10 tableros de 62 ± 19 segundos\n";
 
             MessageBox.Show("TIEMPO: " + Global.timeMeasure.Elapsed.Minutes.ToString() + ":" 
                 + Global.timeMeasure.Elapsed.Seconds.ToString() + ":" 
-                + Global.timeMeasure.Elapsed.Milliseconds.ToString() + output, 
+                + Global.timeMeasure.Elapsed.Milliseconds.ToString() + output_omega + output, 
                 "Tiempo de ejecución", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
