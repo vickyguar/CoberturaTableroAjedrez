@@ -101,11 +101,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         Cuadrado1.Add(new Casilla(i, j));
                 }
 
-                for(int k=0; k < Cuadrado1.Count; ++k)
-                {
-                    if (Cuadrado1[k].GetFila() - Cuadrado1[k].GetColumna() % 2 == 0)
-                        Cuadrado1[k].Colour = eColor.NEGRO;
-                }
+                //for(int k=0; k < Cuadrado1.Count; ++k)
+                //{
+                //    if (Cuadrado1[k].GetFila() - Cuadrado1[k].GetColumna() % 2 == 0)
+                //        Cuadrado1[k].Colour = eColor.NEGRO;
+                //}
 
                 //----------------------------------------------------
                 for (int j = 2; j <= 5; j++)
@@ -121,11 +121,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Cuadrado2.Add(new Casilla(i, 5));
                 }
 
-                for (int k = 0; k < Cuadrado2.Count; ++k)
-                {
-                    if (Cuadrado2[k].GetFila() - Cuadrado2[k].GetColumna() % 2 == 0)
-                        Cuadrado2[k].Colour = eColor.NEGRO;
-                }
+                //for (int k = 0; k < Cuadrado2.Count; ++k)
+                //{
+                //    if (Cuadrado2[k].GetFila() - Cuadrado2[k].GetColumna() % 2 == 0)
+                //        Cuadrado2[k].Colour = eColor.NEGRO;
+                //}
                 //----------------------------------------------------
                 for (int i = 1; i <= 6; i++)
                 {
@@ -139,11 +139,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Cuadrado3.Add(new Casilla(i, 6));
                 }
 
-                for (int k = 0; k < Cuadrado3.Count; ++k)
-                {
-                    if (Cuadrado3[k].GetFila() - Cuadrado3[k].GetColumna() % 2 == 0)
-                        Cuadrado3[k].Colour = eColor.NEGRO;
-                }
+                //for (int k = 0; k < Cuadrado3.Count; ++k)
+                //{
+                //    if (Cuadrado3[k].GetFila() - Cuadrado3[k].GetColumna() % 2 == 0)
+                //        Cuadrado3[k].Colour = eColor.NEGRO;
+                //}
                 //----------------------------------------------------
                 for (int i = 0; i < Global.N_; i++)
                 {
@@ -157,11 +157,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Cuadrado4.Add(new Casilla(i, 7));
                 }
 
-                for (int k = 0; k < Cuadrado4.Count; ++k)
-                {
-                    if (Cuadrado4[k].GetFila() - Cuadrado4[k].GetColumna() % 2 == 0)
-                        Cuadrado4[k].Colour = eColor.NEGRO;
-                }
+                //for (int k = 0; k < Cuadrado4.Count; ++k)
+                //{
+                //    if (Cuadrado4[k].GetFila() - Cuadrado4[k].GetColumna() % 2 == 0)
+                //        Cuadrado4[k].Colour = eColor.NEGRO;
+                //}
                 //----------------------------------------------------
 
                 #endregion
@@ -187,7 +187,18 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 Juego.Posicionar(Caballo2, Cuadrado2, false);
 
+
                 #endregion
+
+                #region LAS FICHAS ATACAN
+
+                for(uint i =0; i < Global.N_; ++i)
+                {
+                    Juego.ListaPosicionadas_[i].Atacar(Juego, Juego.Matriz[Juego.ListaPosicionadas_[i].Fila, Juego.ListaPosicionadas_[i].Columna]);
+                }
+
+                #endregion
+
 
                 #region GENERACIÓN DE SOLUCIONES
 

@@ -229,7 +229,7 @@ public class Tablero
             
             //Matriz[i, j].SetFicha(Fichita);
 
-            while (SubLista[index].Colour == Matriz[FichaAux.Fila, FichaAux.Columna].Colour) //Mientras los dos alfiles sean del mismo color
+            while (Matriz[i,j].Colour == Matriz[FichaAux.Fila, FichaAux.Columna].Colour) //Mientras los dos alfiles sean del mismo color
             {
                 index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
@@ -256,7 +256,6 @@ public class Tablero
                 Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
         }
 
-        Fichita.Atacar(this, Matriz[i, j]); //Llamamos a funcion atacar
 
         //ListaPosicionadas.Add(Fichita); //agrego a la lista la ficha que posicioné
         Agregar(Fichita, ListaPosicionadas);
