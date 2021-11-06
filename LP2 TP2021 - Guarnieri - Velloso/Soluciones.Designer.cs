@@ -29,8 +29,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Dtg = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
@@ -56,19 +56,19 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Dtg.AllowUserToDeleteRows = false;
             this.Dtg.AllowUserToResizeColumns = false;
             this.Dtg.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Dtg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Dtg.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.Dtg.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.Dtg.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
             this.Dtg.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dtg.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dtg.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.Dtg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dtg.ColumnHeadersVisible = false;
             this.Dtg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -103,6 +103,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Dtg.Size = new System.Drawing.Size(400, 400);
             this.Dtg.TabIndex = 0;
             this.Dtg.TabStop = false;
+            this.Dtg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dtg_CellContentClick);
             // 
             // Column1
             // 
@@ -170,13 +171,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             // btn_next
             // 
+            this.btn_next.BackColor = System.Drawing.Color.CadetBlue;
             this.btn_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_next.Location = new System.Drawing.Point(663, 496);
+            this.btn_next.Location = new System.Drawing.Point(649, 496);
             this.btn_next.Name = "btn_next";
             this.btn_next.Size = new System.Drawing.Size(75, 23);
             this.btn_next.TabIndex = 1;
             this.btn_next.Text = "Next";
-            this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_next.UseVisualStyleBackColor = false;
             this.btn_next.Click += new System.EventHandler(this.btn_next_Click);
             // 
             // Barra
@@ -188,13 +190,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Barra.Name = "Barra";
             this.Barra.Size = new System.Drawing.Size(400, 23);
             this.Barra.Step = 1;
+            this.Barra.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.Barra.TabIndex = 1;
             // 
             // btn_fatales
             // 
             this.btn_fatales.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btn_fatales.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_fatales.Location = new System.Drawing.Point(663, 457);
+            this.btn_fatales.Location = new System.Drawing.Point(649, 409);
             this.btn_fatales.Name = "btn_fatales";
             this.btn_fatales.Size = new System.Drawing.Size(75, 23);
             this.btn_fatales.TabIndex = 2;
@@ -205,13 +208,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             // btn_back
             // 
+            this.btn_back.BackColor = System.Drawing.Color.CadetBlue;
             this.btn_back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_back.Location = new System.Drawing.Point(53, 496);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(75, 23);
             this.btn_back.TabIndex = 3;
             this.btn_back.Text = "Back";
-            this.btn_back.UseVisualStyleBackColor = true;
+            this.btn_back.UseVisualStyleBackColor = false;
             this.btn_back.Click += new System.EventHandler(this.btn_back_Click_1);
             // 
             // btn_back_fatal
@@ -230,7 +234,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             this.btn_next_fatal.BackColor = System.Drawing.Color.CadetBlue;
             this.btn_next_fatal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_next_fatal.Location = new System.Drawing.Point(663, 390);
+            this.btn_next_fatal.Location = new System.Drawing.Point(649, 467);
             this.btn_next_fatal.Name = "btn_next_fatal";
             this.btn_next_fatal.Size = new System.Drawing.Size(75, 23);
             this.btn_next_fatal.TabIndex = 5;
@@ -242,7 +246,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             this.btn_exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_exit.Location = new System.Drawing.Point(663, 419);
+            this.btn_exit.Location = new System.Drawing.Point(649, 438);
             this.btn_exit.Name = "btn_exit";
             this.btn_exit.Size = new System.Drawing.Size(75, 23);
             this.btn_exit.TabIndex = 6;

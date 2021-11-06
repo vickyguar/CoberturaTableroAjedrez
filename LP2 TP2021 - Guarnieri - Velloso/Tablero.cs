@@ -101,6 +101,7 @@ public class Tablero
 
             }
         }
+        this.Type = newTablero.Type;
 
         //if (_ID % 12 == 0)
         //    newListaPosicionadas(newTablero.ListaPosicionadas);
@@ -121,7 +122,7 @@ public class Tablero
         else if (Fichita is Torre)
             return new Torre((Torre)Fichita);
         else
-            return null;
+            return null; //Just in case
 
     }
 

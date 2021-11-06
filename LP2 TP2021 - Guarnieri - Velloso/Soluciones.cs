@@ -36,21 +36,21 @@ namespace LP2_TP2021___Guarnieri___Velloso
             btn_exit.Visible = true;
                 
             btn_back_fatal.Visible = false;
-
             btn_fatales.Visible = false;
             btn_next_fatal.Visible = false;
 
             Barra.Maximum = ListaSoluciones.Count;
+            Dtg.ClearSelection();
 
             ImprimirSiguiente(ListaSoluciones); //se imprime la primera solución
         }
 
         #endregion
 
-        private void myDataGridView_SelectionChanged(Object sender, EventArgs e)
-        {
-            Dtg.ClearSelection();
-        }
+        //private void myDataGridView_SelectionChanged(Object sender, EventArgs e)
+        //{
+        //    Dtg.ClearSelection();
+        //}
 
         #region IMPRIMIR DTG
 
@@ -73,12 +73,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 //Asigno la cantidad 
                 Dtg.ColumnCount = Global.N_;
                 Dtg.RowCount = Global.N_;
+
                 for (int i = 0; i < Global.N_; ++i)
                 {
                     for (int j = 0; j < Global.N_; ++j)
                     {
                         DataGridViewImageCell iCell = new DataGridViewImageCell();
                         iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
+
 
                         Dtg[i, j] = iCell;
 
@@ -248,6 +250,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             ImprimirSiguiente(ListaFiltrada);
         }
+
+       
     }
 }
 
