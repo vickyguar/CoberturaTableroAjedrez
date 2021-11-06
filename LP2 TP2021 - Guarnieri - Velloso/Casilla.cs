@@ -61,9 +61,20 @@ public class Casilla
         AtacadaFatalmente = false; 
         Fichita = null;
         Superpuesta = null;
-        Colour = eColor.NEGRO; //Inicializo en blanco
+        Colour = eColor.NEGRO; //Inicializo en Negro
     }
 
+    public Casilla(Casilla newCasilla, Ficha Fichita_, Ficha Sup_ = null)
+    {
+        Columna = newCasilla.Columna;
+        Fila = newCasilla.Fila;
+        Ocupada = newCasilla.Ocupada;
+        Atacada = newCasilla.Atacada;
+        AtacadaFatalmente = newCasilla.AtacadaFatalmente;
+        Fichita = Fichita_;
+        Superpuesta = Sup_;
+        Colour = newCasilla.Colour;
+    }
     /// <summary>
     /// Destructor de la clase <see cref="Casilla"/>.
     /// </summary>

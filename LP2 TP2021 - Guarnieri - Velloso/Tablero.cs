@@ -8,10 +8,10 @@
 
 using System;
 using System.Collections.Generic;
-//using System.Text;
-//using System.IO;
+using System.Text;
+using System.IO;
 using System.Diagnostics;
-//using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;
 
 /// <summary>
 /// Enum para definir el Color de las Casillas.
@@ -46,10 +46,6 @@ public class Tablero
     private SortedList<uint,Ficha> ListaPosicionadas = new SortedList<uint, Ficha>(Global.N_);
 
     /// <summary>
-    /// ID de <see cref="Tablero"/>
-    /// </summary>
-    private int ID;
-    /// <summary>
     /// Tipo de solucion que sea (Leve, Fatal, No Solution)
     /// </summary>
     private TipoSolucion type;
@@ -72,7 +68,6 @@ public class Tablero
             }
         }
 
-        ID = _ID;
         Type = TipoSolucion.NO_SOLUCION;
         LeerArchivo(); //Inicializamos los colores del Tablero
     }
@@ -90,25 +85,12 @@ public class Tablero
         {
             for (int j = 0; j < Global.N_; ++j)
             {
-                Matriz[i, j] = newTablero.Matriz[i, j];
-                Matriz[i, j].Colour = newTablero.Matriz[i, j].Colour;
 
-                Matriz[i, j].Fichita = newFicha(newTablero.Matriz[i, j].Fichita);
-                Matriz[i, j].Superpuesta = newFicha(newTablero.Matriz[i, j].Superpuesta);
-
-                Matriz[i, j].SetAtacadaFatalmente(newTablero.Matriz[i, j].GetAtacadaFatalmente()); //TODO:TAMBIEN ESTOOOOO
-                Matriz[i, j].SetAtacada(newTablero.Matriz[i, j].GetAtacada());
-
-                Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
-                Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
-
-                Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
+                Matriz[i, j] = new Casilla(newTablero.Matriz[i, j], newFicha(newTablero.Matriz[i, j].Fichita), newFicha(newTablero.Matriz[i, j].Superpuesta));
             }
         }
 
         this.Type = newTablero.Type;
-
-        ID = _ID;
     }
 
     /// <summary>
@@ -270,8 +252,6 @@ public class Tablero
     /// </summary>
     public void ImprimirOutput()
     {
-        Debug.Write("-----------------------------------------------------------------   ");
-        Debug.Write(ID);
         Debug.Write("\n\n");
 
         for (uint i = 0; i < Global.N_; ++i)
