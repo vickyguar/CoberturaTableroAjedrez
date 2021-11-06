@@ -81,7 +81,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         DataGridViewImageCell iCell = new DataGridViewImageCell();
                         iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 
-
                         Dtg[i, j] = iCell;
 
                         if (Plantilla.Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
@@ -166,6 +165,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         {
             if (Barra.Value > 0) //si me movi para adelante
                 btn_back.Visible = true; //habilito el botón de back
+
             ImprimirSiguiente(ListaSoluciones);
         }
 

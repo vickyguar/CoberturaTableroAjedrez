@@ -26,6 +26,10 @@ public class Torre : Ficha
 
     }
 
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Torre"/>.
+    /// </summary>
+    /// <param name="newFichita"></param>
     public Torre(Torre newFichita) : base(newFichita)
     {
     }

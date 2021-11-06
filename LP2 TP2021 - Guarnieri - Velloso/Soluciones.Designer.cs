@@ -103,7 +103,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Dtg.Size = new System.Drawing.Size(400, 400);
             this.Dtg.TabIndex = 0;
             this.Dtg.TabStop = false;
-            this.Dtg.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dtg_CellContentClick);
             // 
             // Column1
             // 
@@ -173,7 +172,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             this.btn_next.BackColor = System.Drawing.Color.CadetBlue;
             this.btn_next.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_next.Location = new System.Drawing.Point(649, 496);
+            this.btn_next.Location = new System.Drawing.Point(649, 467);
             this.btn_next.Name = "btn_next";
             this.btn_next.Size = new System.Drawing.Size(75, 23);
             this.btn_next.TabIndex = 1;
@@ -190,7 +189,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Barra.Name = "Barra";
             this.Barra.Size = new System.Drawing.Size(400, 23);
             this.Barra.Step = 1;
-            this.Barra.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.Barra.TabIndex = 1;
             // 
             // btn_fatales
@@ -234,7 +232,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             this.btn_next_fatal.BackColor = System.Drawing.Color.CadetBlue;
             this.btn_next_fatal.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_next_fatal.Location = new System.Drawing.Point(649, 467);
+            this.btn_next_fatal.Location = new System.Drawing.Point(649, 496);
             this.btn_next_fatal.Name = "btn_next_fatal";
             this.btn_next_fatal.Size = new System.Drawing.Size(75, 23);
             this.btn_next_fatal.TabIndex = 5;

@@ -81,7 +81,6 @@ public class Tablero
     /// Constructor por copia de la clase <see cref="Tablero"/>..
     /// </summary>
     /// <param name="newTablero"></param>
-
     public Tablero(Tablero newTablero, int _ID)
     {
         //Variable auxiliar
@@ -98,17 +97,19 @@ public class Tablero
                 Matriz[i, j].SetColumna(newTablero.Matriz[i, j].GetColumna());
                 Matriz[i, j].SetFila(newTablero.Matriz[i, j].GetFila());
                 Matriz[i, j].SetOcupada(newTablero.Matriz[i, j].GetOcupada());
-
             }
         }
+
         this.Type = newTablero.Type;
 
-        //if (_ID % 12 == 0)
-        //    newListaPosicionadas(newTablero.ListaPosicionadas);
-        //TipoSolucion = newTablero.
         ID = _ID;
     }
 
+    /// <summary>
+    /// Retorna una nueva Ficha del tipo de la Fichita que le llega por parámetro.
+    /// </summary>
+    /// <param name="Fichita"></param>
+    /// <returns></returns>
     public Ficha newFicha(Ficha Fichita)
     {
         if (Fichita is Reina)
@@ -196,13 +197,13 @@ public class Tablero
                 Matriz[i, j].SetOcupada(false);
             }
         }
-        LeerArchivo();
+       // LeerArchivo();
         ListaPosicionadas.Clear();
     }
 
     /// <summary>
     /// Ubica a la Ficha que le llega por parámetro en una Casilla de la SubLista que le llega por parámetro.
-    /// Segun el parámetro booleano "Remove", quita de la SubLista la Casilla donde se ubico la Ficha. //TODO: ACA PUNTERO O COPIA!!
+    /// Segun el parámetro booleano "Remove", quita de la SubLista la Casilla donde se ubico la Ficha.
     /// Llama a la función Ataque de Ficha, con el Tablero Ataque.
     /// </summary>
     /// <param name="Fichita"></param>
@@ -309,7 +310,7 @@ public class Tablero
     #region MULTIPLICADORES DE SOLUCIONES
 
     /// <summary>
-    /// Retorna un nuevo Tablero, que es igual al Tablero this pero rotado 90°.
+    /// Rota 90° el tablero.
     /// </summary>
     /// <returns></returns>
     public void Rotar90()
@@ -368,7 +369,7 @@ public class Tablero
     }
 
     /// <summary>
-    /// Retorna un nuevo Tablero, que es igual al Tablero this pero espejado.
+    /// Espeja un tablero.
     /// </summary>
     /// <returns></returns>
     public void Espejar(Tablero Espejar)
@@ -420,8 +421,7 @@ public class Tablero
     }
 
     /// <summary>
-    /// Retorna un nuevo Tablero, que es igual al Tablero this pero con las Torres con las columnas intercambiadas. 
-    /// siempre que se ubiquen en Casillas con distinta Columna o Fila. 
+    /// Intercambia las columnas de las torres.
     /// </summary>
     /// <returns></returns>
     public void IntercambiarTorres(Tablero Intercambio)
@@ -497,7 +497,7 @@ public class Tablero
     #region VERIFICACIONES
 
     /// <summary>
-    /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna el tipo (falta o leve).
+    /// Retorna si es una solución  al problema de la cobertura total del Tablero de Ajedrez y si lo es, retorna true. Además esxplica cuál es el tipo de la solución.
     /// </summary>
     /// <returns></returns>
     public bool VerificarSolucion()
@@ -556,6 +556,11 @@ public class Tablero
     //}
     #endregion
 
+    /// <summary>
+    /// Retorna una copia de la lista que le llega por parámetro
+    /// </summary>
+    /// <param name="OldList"></param>
+    /// <returns></returns>
     public SortedList<uint,Ficha> CopiaLista(SortedList<uint, Ficha> OldList)
     {
         SortedList<uint, Ficha> Nueva = new SortedList<uint, Ficha>(8);
@@ -566,36 +571,45 @@ public class Tablero
         return Nueva;
     }
 
+    /// <summary>
+    /// Agrega a la SortedList la Ficha que le llega por parámetro
+    /// </summary>
+    /// <param name="Fichita"></param>
+    /// <param name="Lista"></param>
     public void Agregar(Ficha Fichita, SortedList<uint, Ficha> Lista)
     {
-        if (Fichita is Reina)
+        if (Fichita is Reina && !Lista.ContainsKey(0))
             Lista.Add(0, new Reina((Reina)Fichita));
 
-        else if (Fichita is Rey)
+        else if (Fichita is Rey && !Lista.ContainsKey(4))
             Lista.Add(4, new Rey((Rey)Fichita));
 
         else if (Fichita is Alfil)
         {
-            if (Fichita.GetName() == "Alfil1")
+            if (Fichita.GetName() == "Alfil1" && !Lista.ContainsKey(1))
                 Lista.Add(1, new Alfil((Alfil)Fichita));
-            else
+            else if (!Lista.ContainsKey(2))
                 Lista.Add(2, new Alfil((Alfil)Fichita));
         }
 
         else if (Fichita is Torre)
         {
-            if (Fichita.GetName() == "Torre1")
+            if (Fichita.GetName() == "Torre1" && !Lista.ContainsKey(5))
                 Lista.Add(5, new Torre((Torre)Fichita));
-            else
+            else if (!Lista.ContainsKey(6))
                 Lista.Add(6, new Torre((Torre)Fichita));
         }
 
         else if (Fichita is Caballo)
         {
-            if (Fichita.GetName() == "Caballo1")
+            if (Fichita.GetName() == "Caballo1" && !Lista.ContainsKey(3))
+            {
                 Lista.Add(3, new Caballo((Caballo)Fichita));
-            else
+            }
+            else if (!Lista.ContainsKey(7))
+            {
                 Lista.Add(7, new Caballo((Caballo)Fichita));
+            }
         }
 
     }
