@@ -20,6 +20,7 @@ public abstract class Ficha
     /// Nombre de la <see cref="Ficha"/>.
     /// </summary>
     protected string Name;
+
     /// <summary>
     /// Columna de la <see cref="Casilla"/>.
     /// </summary>
@@ -30,6 +31,9 @@ public abstract class Ficha
     /// </summary>
     protected int fila;
 
+    /// <summary>
+    /// Imagen de <see cref="Ficha"/>.
+    /// </summary>
     public Image Imagen;
 
     #endregion
@@ -48,6 +52,10 @@ public abstract class Ficha
         Imagen = _Imagen;
     }
 
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Ficha"/>.
+    /// </summary>
+    /// <param name="newFichita"></param>
     public Ficha(Ficha newFichita)
     {
         Name = newFichita.Name;

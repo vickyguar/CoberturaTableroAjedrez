@@ -29,6 +29,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Carátula));
             this.btn_generar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -67,10 +68,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.ClientSize = new System.Drawing.Size(784, 541);
             this.Controls.Add(this.btn_generar);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Carátula";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carátula";
-            this.Load += new System.EventHandler(this.Carátula_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

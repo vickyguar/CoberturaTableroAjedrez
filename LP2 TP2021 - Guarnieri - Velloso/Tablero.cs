@@ -94,32 +94,7 @@ public class Tablero
     }
 
     /// <summary>
-    /// Retorna una nueva Ficha del tipo de la Fichita que le llega por parámetro.
-    /// </summary>
-    /// <param name="Fichita"></param>
-    /// <returns></returns>
-    public Ficha newFicha(Ficha Fichita)
-    {
-        if (Fichita is Reina)
-            return new Reina((Reina)Fichita);
-        else if (Fichita is Rey)
-            return new Rey((Rey)Fichita);
-        else if (Fichita is Alfil)
-        {
-            Alfil A = (Alfil)Fichita;
-            return new Alfil((Alfil)Fichita);
-        }
-        else if (Fichita is Caballo)
-            return new Caballo((Caballo)Fichita);
-        else if (Fichita is Torre)
-            return new Torre((Torre)Fichita);
-        else
-            return null; //Just in case
-
-    }
-
-    /// <summary>
-    /// Destructor de la clase <see cref="Tablero"/>..
+    /// Destructor de la clase <see cref="Tablero"/>.
     /// </summary>
     ~Tablero()
     {
@@ -150,20 +125,6 @@ public class Tablero
     #endregion
 
     #region METODOS DE TABLERO
-
-    /// <summary>
-    /// Retorna true si el Tablero this es una solución al problema de la cobertura total del Tablero de Ajedrez, con las Fichas atacando de forma fatal.
-    /// </summary>
-    /// <returns></returns>
-    //public bool FiltrarFatales(Tablero Filtrado) 
-    //{
-    //    foreach (Ficha Fichita in ListaPosicionadas)
-    //    {
-    //        Fichita.Atacar(Filtrado, Buscar(Fichita));
-    //    }
-
-    //    return (Filtrado.VerificarSolucion()) ? true : false; //si es una solución fatal, devulve true y sino devuelve false
-    //}
 
     /// <summary>
     /// Limpia el Tablero this: Las Casillas no están atacadas, ni ocupadas, y las Fichas son null.
@@ -220,9 +181,7 @@ public class Tablero
             }
         }
 
-        
         //Ocupamos la casilla con la fichita
-        
         Matriz[i, j].SetFicha(Fichita);
 
         //Condiciones para poder superponer:
@@ -237,7 +196,6 @@ public class Tablero
             if (ListaPosicionadas[6].Fila == i && ListaPosicionadas[6].Columna == j)
                 Matriz[i, j].SetSuperpuesta(Fichita); //La unica que se puede superponer es Caballo2
         }
-
 
         //ListaPosicionadas.Add(Fichita); //agrego a la lista la ficha que posicioné
         Agregar(Fichita, ListaPosicionadas);
@@ -285,6 +243,31 @@ public class Tablero
             Debug.Write("\n");
         }
         Debug.Write("\n\n");
+
+    }
+
+    /// <summary>
+    /// Retorna una nueva Ficha del tipo de la Fichita que le llega por parámetro.
+    /// </summary>
+    /// <param name="Fichita"></param>
+    /// <returns></returns>
+    public Ficha newFicha(Ficha Fichita)
+    {
+        if (Fichita is Reina)
+            return new Reina((Reina)Fichita);
+        else if (Fichita is Rey)
+            return new Rey((Rey)Fichita);
+        else if (Fichita is Alfil)
+        {
+            Alfil A = (Alfil)Fichita;
+            return new Alfil((Alfil)Fichita);
+        }
+        else if (Fichita is Caballo)
+            return new Caballo((Caballo)Fichita);
+        else if (Fichita is Torre)
+            return new Torre((Torre)Fichita);
+        else
+            return null; //Just in case
 
     }
 
@@ -509,16 +492,10 @@ public class Tablero
     #endregion
      
     #region SETTERS & GETTES
+
     public TipoSolucion Type { get => type; set => type = value; }
     public SortedList<uint, Ficha> ListaPosicionadas_ { get => ListaPosicionadas; set => ListaPosicionadas = value; }
 
-    //private void SetLista(Tablero T)
-    //{
-    //    for (int i = 0; i < Global.N_; ++i)
-    //        for (int k = 0; k < Global.N_; ++k)
-    //            if (Matriz[i, k].Fichita != null)
-    //                T.ListaPosicionadas.Add(Matriz[i, k].Fichita);
-    //}
     #endregion
 
     #region METODOS PARA LA LISTA DE FICHAS

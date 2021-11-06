@@ -10,38 +10,27 @@ using System.Diagnostics;
 
 namespace LP2_TP2021___Guarnieri___Velloso
 {
-    public class Solucion
-    {
-        SortedList<uint, Ficha> Posiciones;
-        TipoSolucion Tipo;
-        //  int ID;
-
-        public SortedList<uint, Ficha> Posiciones_ { get => Posiciones; set => Posiciones = value; }
-        public TipoSolucion Tipo_ { get => Tipo; set => Tipo = value; }
-
-        //public int ID_ { get => ID; set => ID = value; }
-
-        public Solucion(SortedList<uint, Ficha> Lista, TipoSolucion type_ /*int ID_*/)
-        {
-            Posiciones = Lista;
-            Tipo = type_;
-            // ID = ID_;
-        }
-    }
-
     public partial class Carátula : Form
     {
+        #region CONSTRUCTOR & DESTRUCTOR
+
+        /// <summary>
+        /// Constructor de la clase <see cref="Carátula"/>.
+        /// </summary>
         public Carátula()
         {
             InitializeComponent();
-            this.Icon = new Icon("Icono.ico");
-            //This.Icon = tuAplicacion.Propiedades.Recursos.ElNombreDelIcono;
         }
 
-        private void Carátula_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Destructor de la clase <see cref="Carátula"/>.
+        /// </summary>
+        ~Carátula()
         {
 
         }
+
+        #endregion
 
         #region BOTON
 
@@ -71,10 +60,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <returns></returns>
         static List<Solucion> Programa()
         {
+            #region VARIABLES
+
             int ID = -1;
-            Tablero Juego = new Tablero(ID);
+            Tablero Juego = new Tablero(ID); //Generamos un Tablero
             Random rnd = new Random(); //Es un random que usamos para luego elegir qué cuadrado darle a la Torre2
-            List<Solucion> Solutions = new List<Solucion>();
+            List<Solucion> Solutions = new List<Solucion>(); //Creamos una lista de Soluciones, inicialmente está vacía
+
+            #endregion
 
             #region FICHAS
 
@@ -90,6 +83,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             #endregion
 
+            #region CUADRADOS DE POSICIONAMIENTO
+
             List<Casilla> Cuadrado1 = new List<Casilla>(4); //5e, 5d, 4e, 4d ROJO
             List<Casilla> Cuadrado2 = new List<Casilla>(12); //6c, 3c, 3f, 6f VIOLETA
             List<Casilla> Cuadrado3 = new List<Casilla>(20); //7b, 2b, 7g, 2g AZUL
@@ -97,7 +92,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             //ROJO, VIOLETA, AZUL, VERDE -> según las regiones del tablero que marcamos en nuestro pseudocódigo
 
-            while (Solutions.Count < 11)
+            #endregion
+
+            while (Solutions.Count < 11) //TODO: modificar cuando este el selector
             {
                 #region LISTAS
                 //----------------------------------------------------
@@ -106,13 +103,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     for (int j = 3; j <= 4; j++)
                         Cuadrado1.Add(new Casilla(i, j));
                 }
-
-                //for(int k=0; k < Cuadrado1.Count; ++k)
-                //{
-                //    if (Cuadrado1[k].GetFila() - Cuadrado1[k].GetColumna() % 2 == 0)
-                //        Cuadrado1[k].Colour = eColor.NEGRO;
-                //}
-
                 //----------------------------------------------------
                 for (int j = 2; j <= 5; j++)
                 {
@@ -120,18 +110,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Cuadrado2.Add(new Casilla(5, j));
                 }
 
-
                 for (int i = 3; i < 5; i++)
                 {
                     Cuadrado2.Add(new Casilla(i, 2));
                     Cuadrado2.Add(new Casilla(i, 5));
                 }
-
-                //for (int k = 0; k < Cuadrado2.Count; ++k)
-                //{
-                //    if (Cuadrado2[k].GetFila() - Cuadrado2[k].GetColumna() % 2 == 0)
-                //        Cuadrado2[k].Colour = eColor.NEGRO;
-                //}
                 //----------------------------------------------------
                 for (int i = 1; i <= 6; i++)
                 {
@@ -144,12 +127,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Cuadrado3.Add(new Casilla(i, 1));
                     Cuadrado3.Add(new Casilla(i, 6));
                 }
-
-                //for (int k = 0; k < Cuadrado3.Count; ++k)
-                //{
-                //    if (Cuadrado3[k].GetFila() - Cuadrado3[k].GetColumna() % 2 == 0)
-                //        Cuadrado3[k].Colour = eColor.NEGRO;
-                //}
                 //----------------------------------------------------
                 for (int i = 0; i < Global.N_; i++)
                 {
@@ -162,12 +139,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Cuadrado4.Add(new Casilla(i, 0));
                     Cuadrado4.Add(new Casilla(i, 7));
                 }
-
-                //for (int k = 0; k < Cuadrado4.Count; ++k)
-                //{
-                //    if (Cuadrado4[k].GetFila() - Cuadrado4[k].GetColumna() % 2 == 0)
-                //        Cuadrado4[k].Colour = eColor.NEGRO;
-                //}
                 //----------------------------------------------------
 
                 #endregion
@@ -196,91 +167,92 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 #endregion
 
-                #region LAS FICHAS ATACAN
+                #region ATAQUE
 
-                for(uint i =0; i < Global.N_; ++i)
+                for (uint i = 0; i < Global.N_; ++i)
                 {
                     Juego.ListaPosicionadas_[i].Atacar(Juego, Juego.Matriz[Juego.ListaPosicionadas_[i].Fila, Juego.ListaPosicionadas_[i].Columna]);
                 }
 
                 #endregion
 
-
                 #region GENERACIÓN DE SOLUCIONES
 
                 if (Juego.VerificarSolucion())
                 {
-                    //ListaSoluciones.Add(CopiaLista(Juego.ListaPosicionadas_)); //#1 -> me copia (con objetos nuevos) la lista que tiene las fichas de la solución
+                    #region ORIGINAL
+
+                    //TABLERO PRIMERO
                     Solucion Table = new Solucion(Juego.CopiaLista(Juego.ListaPosicionadas_), Juego.Type);
                     if (!Solutions.Contains(Table))
-                        Solutions.Add(Table);
-                    Juego.ImprimirOutput();
+                        Solutions.Add(Table); //#1
+
+                    #endregion
 
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°) 
-                    Tablero Rotado1 = new Tablero(Juego, ++ID); //#2
+                    Tablero Rotado1 = new Tablero(Juego, ++ID);
                     Rotado1.Rotar90();
                     Solucion SolRotado1 = new Solucion(Rotado1.CopiaLista(Rotado1.ListaPosicionadas_), Rotado1.Type);
                     if (!Solutions.Contains(SolRotado1))
-                        Solutions.Add(SolRotado1);
-                    Rotado1.ImprimirOutput();
+                        Solutions.Add(SolRotado1); //#2
 
                     //TABLERO ROTADO 2 (180°)
-                    Tablero Rotado2 = new Tablero(Rotado1, ++ID); //#3
+                    Tablero Rotado2 = new Tablero(Rotado1, ++ID);
                     Rotado2.Rotar90();
                     Solucion SolRotado2 = new Solucion(Rotado2.CopiaLista(Rotado2.ListaPosicionadas_), Rotado2.Type);
                     if (!Solutions.Contains(SolRotado2))
-                        Solutions.Add(SolRotado2);
+                        Solutions.Add(SolRotado2); //#3
 
                     //TABLERO ROTADO 3 (270°)
-                    Tablero Rotado3 = new Tablero(Rotado2, ++ID); //#4
+                    Tablero Rotado3 = new Tablero(Rotado2, ++ID);
                     Rotado3.Rotar90();
                     Solucion SolRotado3 = new Solucion(Rotado3.CopiaLista(Rotado3.ListaPosicionadas_), Rotado3.Type);
                     if (!Solutions.Contains(SolRotado3))
-                        Solutions.Add(SolRotado3);
+                        Solutions.Add(SolRotado3); //#4
 
                     #endregion
 
                     #region ESPEJADO ORIGINAL
                     //ESPEJADO 1
-                    Tablero Espejado = new Tablero(++ID); //#5
+                    Tablero Espejado = new Tablero(++ID);
                     Juego.Espejar(Espejado);
                     Solucion SolEspejado = new Solucion(Espejado.CopiaLista(Espejado.ListaPosicionadas_), Espejado.Type);
                     if (!Solutions.Contains(SolEspejado))
-                        Solutions.Add(SolEspejado);
+                        Solutions.Add(SolEspejado); //#5
 
                     //ESPEJADO ROTADO 1 (90)
-                    Tablero EspejadoRotado1 = new Tablero(Espejado, ++ID); //#6
+                    Tablero EspejadoRotado1 = new Tablero(Espejado, ++ID);
                     EspejadoRotado1.Rotar90();
                     Solucion SolEspejadoRotado1 = new Solucion(EspejadoRotado1.CopiaLista(EspejadoRotado1.ListaPosicionadas_), EspejadoRotado1.Type);
                     if (!Solutions.Contains(SolEspejadoRotado1))
-                        Solutions.Add(SolEspejadoRotado1);
+                        Solutions.Add(SolEspejadoRotado1); //#6
 
                     //ESPEJADO ROTADO 2 (180)
-                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1, ++ID); //#7
+                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1, ++ID);
                     EspejadoRotado2.Rotar90();
                     Solucion SolEspejadoRotado2 = new Solucion(EspejadoRotado2.CopiaLista(EspejadoRotado2.ListaPosicionadas_), EspejadoRotado2.Type);
                     if (!Solutions.Contains(SolEspejadoRotado2))
-                        Solutions.Add(SolEspejadoRotado2);
+                        Solutions.Add(SolEspejadoRotado2); //#7
 
                     //ESPEJADO ROTADO 3 (270)
-                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2, ++ID); //#8
+                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2, ++ID);
                     EspejadoRotado3.Rotar90();
                     Solucion SolEspejadoRotado3 = new Solucion(EspejadoRotado3.CopiaLista(EspejadoRotado3.ListaPosicionadas_), EspejadoRotado3.Type);
                     if (!Solutions.Contains(SolEspejadoRotado3))
-                        Solutions.Add(SolEspejadoRotado3);
+                        Solutions.Add(SolEspejadoRotado3); //#8
 
                     #endregion
 
                     #region INTERCAMBIO TORRES
+
                     ////INTERCAMBIO
-                    Tablero Intercambiado = new Tablero(++ID);  //#9
+                    Tablero Intercambiado = new Tablero(++ID);
                     Juego.IntercambiarTorres(Intercambiado);
-                    //Intercambiado.IntercambiarTorres();
                     Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
                     if (!Solutions.Contains(SolIntercambiado))
-                        Solutions.Add(SolIntercambiado);
+                        Solutions.Add(SolIntercambiado); //#9
 
                     #endregion
 
@@ -302,8 +274,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 #endregion
             }
-            return Solutions;
+            return Solutions; //Retornamos la lista de soluciones
         }
+        #endregion
     }
 }
-#endregion

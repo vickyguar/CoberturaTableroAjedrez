@@ -23,6 +23,10 @@ public class Alfil : Ficha
     {
     }
 
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Alfil"/>.
+    /// </summary>
+    /// <param name="newFichita"></param>
     public Alfil(Alfil newFichita) : base(newFichita)
     {
     }

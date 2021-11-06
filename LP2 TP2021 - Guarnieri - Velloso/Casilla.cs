@@ -15,7 +15,6 @@ public class Casilla
 {
     #region ATRIBUTOS
 
-    //PUBLICOS:
     /// <summary>
     /// <see cref="Color"/> de la <see cref="Casilla"/>.
     /// </summary>
@@ -25,6 +24,7 @@ public class Casilla
     /// <see cref="Ficha"/> que tiene la <see cref="Casilla"/>.
     /// </summary>
     public Ficha Fichita;
+
     /// <summary>
     /// Ficha que se puede superponer (Caballo-Torre)
     /// </summary>
@@ -34,14 +34,17 @@ public class Casilla
     /// Columna de la <see cref="Casilla"/>.
     /// </summary>
     private int Columna;
+
     /// <summary>
     /// Fila de la <see cref="Casilla"/>
     /// </summary>
     private int Fila;
 
+    //ATRIBUTOS BOOLEANOS ---------
     private bool Ocupada;
     private bool Atacada;
     private bool AtacadaFatalmente;
+    //-----------------------------
 
     #endregion
 
@@ -64,6 +67,12 @@ public class Casilla
         Colour = eColor.NEGRO; //Inicializo en Negro
     }
 
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Casilla"/>.
+    /// </summary>
+    /// <param name="newCasilla"></param>
+    /// <param name="Fichita_"></param>
+    /// <param name="Sup_"></param>
     public Casilla(Casilla newCasilla, Ficha Fichita_, Ficha Sup_ = null)
     {
         Columna = newCasilla.Columna;
@@ -75,6 +84,7 @@ public class Casilla
         Superpuesta = Sup_;
         Colour = newCasilla.Colour;
     }
+
     /// <summary>
     /// Destructor de la clase <see cref="Casilla"/>.
     /// </summary>

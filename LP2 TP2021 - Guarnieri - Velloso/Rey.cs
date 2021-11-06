@@ -25,6 +25,10 @@ public class Rey : Ficha
 
     }
 
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Rey"/>.
+    /// </summary>
+    /// <param name="newFichita"></param>
     public Rey(Rey newFichita) : base(newFichita)
     {
     }

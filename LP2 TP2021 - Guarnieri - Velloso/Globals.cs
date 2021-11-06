@@ -5,7 +5,21 @@ using System.Diagnostics;
 
 static class Global
 {
+    #region ATRIBUTOS
+
+    /// <summary>
+    /// Constante útil para definir límites.
+    /// </summary>
     private static int N = 8;
+
+    /// <summary>
+    /// Objeto del tipo Stopwatch para medir el tiempo.
+    /// </summary>
+    public static Stopwatch timeMeasure = new Stopwatch();
+
+    #endregion
+
+    #region GETTER & SETTER
 
     public static int N_
     {
@@ -13,6 +27,5 @@ static class Global
         set { N = value; }
     }
 
-    public static Stopwatch timeMeasure = new Stopwatch();
-
+    #endregion
 }
