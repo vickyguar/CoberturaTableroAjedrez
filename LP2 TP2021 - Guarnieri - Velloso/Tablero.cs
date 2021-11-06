@@ -227,7 +227,7 @@ public class Tablero
             
             //Matriz[i, j].SetFicha(Fichita);
 
-            while (Matriz[i, j].Colour == Matriz[Fichita.Fila, Fichita.Columna].Colour) //Mientras los dos alfiles sean del mismo color
+            while (Matriz[i, j].Colour == Matriz[FichaAux.Fila, FichaAux.Columna].Colour) //Mientras los dos alfiles sean del mismo color
             {
                 index = r.Next(SubLista.Count); //Elegimos un índice random de la SubLista 
 
@@ -505,13 +505,6 @@ public class Tablero
     public bool VerificarSolucion()
     {
         TipoSolucion Type_ = TipoSolucion.FATAL;
-        //if (Matriz[ListaPosicionadas[1].Fila, ListaPosicionadas[1].Columna].GetColor() == Matriz[ListaPosicionadas[2].Fila, ListaPosicionadas[2].Columna].GetColor())
-        //    return false;
-        Alfil A1 = (Alfil)ListaPosicionadas[1];
-        Alfil A2 = (Alfil)ListaPosicionadas[2];
-
-        //if (A1.AlfilColor_ == A2.AlfilColor_)
-        //    return false;
 
         for (int i = 0; i < Global.N_; i++)
         {
