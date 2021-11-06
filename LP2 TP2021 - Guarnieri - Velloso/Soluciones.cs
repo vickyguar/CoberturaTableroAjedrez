@@ -68,12 +68,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     else
                         ImprimirSiguiente(ListaFiltrada);
                 }
-                else
-                {
-                    rbtn_fatales.Checked = false;
-                    rbtn_leves.Checked = true;
-                    ImprimirSiguiente(ListaSoluciones);
-                }
+            }
+            else
+            {
+                rbtn_fatales.Checked = false;
+                rbtn_leves.Checked = true;
+                ImprimirSiguiente(ListaSoluciones);
             }
         }
 
