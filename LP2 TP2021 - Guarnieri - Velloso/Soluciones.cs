@@ -256,6 +256,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 "Tiempo de ejecución", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
