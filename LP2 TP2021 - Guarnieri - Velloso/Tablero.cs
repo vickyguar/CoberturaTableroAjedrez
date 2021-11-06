@@ -195,6 +195,7 @@ public class Tablero
                 Matriz[i, j].SetOcupada(false);
             }
         }
+        LeerArchivo();
         ListaPosicionadas.Clear();
     }
 
@@ -219,6 +220,8 @@ public class Tablero
         if (Fichita.GetName() == "Alfil2") //si estamos posicionando el segundo alfil
         {
             Ficha FichaAux = ListaPosicionadas[1]; //el ultimo (antes de posicionar el alfil 2) simpre es Alfil1
+            
+            //Matriz[i, j].SetFicha(Fichita);
 
             while (Matriz[i, j].GetColor() == Matriz[FichaAux.Fila, FichaAux.Columna].GetColor()) //Mientras los dos alfiles sean del mismo color
             {
@@ -499,7 +502,9 @@ public class Tablero
     public bool VerificarSolucion()
     {
         TipoSolucion Type_ = TipoSolucion.FATAL;
-
+        //if (Matriz[ListaPosicionadas[1].Fila, ListaPosicionadas[1].Columna].GetColor() == Matriz[ListaPosicionadas[2].Fila, ListaPosicionadas[2].Columna].GetColor())
+        //    return false;
+        
         for (int i = 0; i < Global.N_; i++)
         {
             for (int j = 0; j < Global.N_; j++)

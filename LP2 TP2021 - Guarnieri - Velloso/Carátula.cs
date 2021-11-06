@@ -207,8 +207,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     if (!Solutions.Contains(SolRotado3))
                         Solutions.Add(SolRotado3);
 
-
-
                     //ListaSoluciones.Add(CopiaLista(Rotado3.ListaPosicionadas_));
                     #endregion
 
@@ -252,12 +250,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     #region INTERCAMBIO TORRES
                     ////INTERCAMBIO
-                    //Tablero Intercambiado = new Tablero(++ID);  //#9
-                    //Juego.IntercambiarTorres(Intercambiado);
-                    ////Intercambiado.IntercambiarTorres();
-                    //Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
-                    //if (!Solutions.Contains(SolIntercambiado))
-                    //    Solutions.Add(SolIntercambiado);
+                    Tablero Intercambiado = new Tablero(++ID);  //#9
+                    Juego.IntercambiarTorres(Intercambiado);
+                    //Intercambiado.IntercambiarTorres();
+                    Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
+                    if (!Solutions.Contains(SolIntercambiado))
+                        Solutions.Add(SolIntercambiado);
 
                     ////ListaSoluciones.Add(CopiaLista(Intercambiado.ListaPosicionadas_));
                     //#region ROTADO TORRE
