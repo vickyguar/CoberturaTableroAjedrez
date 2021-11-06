@@ -130,15 +130,6 @@ public class Tablero
 
     }
 
-    //public void newListaPosicionadas(List<Ficha> newListita)
-    //{
-
-    //    for (int i = 0; i < newListita.Count; ++i)
-    //    {
-    //        ListaPosicionadas.Add(newFicha(newListita[i]));
-    //    }
-    //}
-
     /// <summary>
     /// Destructor de la clase <see cref="Tablero"/>..
     /// </summary>
@@ -523,24 +514,6 @@ public class Tablero
         return true;
     }
 
-    ///// <summary>
-    ///// Retorna true si el Tablero que le llega por parámetro es distinto a this, en otro caso retorna false
-    ///// </summary>
-    ///// <param name="T"></param>
-    ///// <returns></returns>
-    //public bool VerificarSolucionesDistintas(Tablero T)
-    //{
-    //    if (ID != T.ID) //Para no compararme conmigo mismo
-    //    {
-    //        for (int i = 0; i < ListaPosicionadas.Count; ++i)
-    //        {
-    //            if (ListaPosicionadas[i].Columna != T.ListaPosicionadas[i].Columna && ListaPosicionadas[i].Fila != T.ListaPosicionadas[i].Fila)
-    //                return true;
-    //        }
-    //    }
-
-    //    return false; //Si no entra a ningun return previo, quiere decir que son iguales
-    //}
     #endregion
      
     #region SETTERS & GETTES
