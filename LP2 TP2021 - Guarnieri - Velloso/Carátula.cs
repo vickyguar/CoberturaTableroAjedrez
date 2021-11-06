@@ -12,9 +12,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
     {
         SortedList<uint, Ficha> Posiciones;
         TipoSolucion Tipo;
-      //  int ID;
+        //  int ID;
 
-        public SortedList<uint,Ficha> Posiciones_ { get => Posiciones; set => Posiciones = value; }
+        public SortedList<uint, Ficha> Posiciones_ { get => Posiciones; set => Posiciones = value; }
         public TipoSolucion Tipo_ { get => Tipo; set => Tipo = value; }
 
         //public int ID_ { get => ID; set => ID = value; }
@@ -23,7 +23,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         {
             Posiciones = Lista;
             Tipo = type_;
-           // ID = ID_;
+            // ID = ID_;
         }
     }
 
@@ -33,10 +33,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Carátula()
         {
             InitializeComponent();
-            this.Show();
-            List<Solucion> ListaSoluciones = Programa();
-            FormSoluciones = new Soluciones(ListaSoluciones, this);
-
         }
 
         private void Carátula_Load(object sender, EventArgs e)
@@ -53,6 +49,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
+            List<Solucion> ListaSoluciones = Programa();
+            Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
+
             FormSoluciones.Show(); //Abrimos el form de soluciones
             this.Hide(); //Cerramos el Form de Carátula
         }
@@ -179,6 +178,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                     if (!Solutions.Contains(Table))
                         Solutions.Add(Table);
+
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°) 
@@ -188,17 +188,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     if (!Solutions.Contains(SolRotado1))
                         Solutions.Add(SolRotado1);
 
-                    //ListaSoluciones.Add());
-
                     //TABLERO ROTADO 2 (180°)
                     Tablero Rotado2 = new Tablero(Rotado1, ++ID); //#3
                     Rotado2.Rotar90();
                     Solucion SolRotado2 = new Solucion(Rotado2.CopiaLista(Rotado2.ListaPosicionadas_), Rotado2.Type);
                     if (!Solutions.Contains(SolRotado2))
                         Solutions.Add(SolRotado2);
-
-                    //ListaSoluciones.Add(CopiaLista(Rotado2.ListaPosicionadas_));
-
 
                     //TABLERO ROTADO 3 (270°)
                     Tablero Rotado3 = new Tablero(Rotado2, ++ID); //#4
@@ -207,7 +202,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     if (!Solutions.Contains(SolRotado3))
                         Solutions.Add(SolRotado3);
 
-                    //ListaSoluciones.Add(CopiaLista(Rotado3.ListaPosicionadas_));
                     #endregion
 
                     #region ESPEJADO ORIGINAL
@@ -217,7 +211,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Solucion SolEspejado = new Solucion(Espejado.CopiaLista(Espejado.ListaPosicionadas_), Espejado.Type);
                     if (!Solutions.Contains(SolEspejado))
                         Solutions.Add(SolEspejado);
-                    //ListaSoluciones.Add(CopiaLista(Espejado.ListaPosicionadas_));
 
                     //ESPEJADO ROTADO 1 (90)
                     Tablero EspejadoRotado1 = new Tablero(Espejado, ++ID); //#6
@@ -226,8 +219,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     if (!Solutions.Contains(SolEspejadoRotado1))
                         Solutions.Add(SolEspejadoRotado1);
 
-                    //ListaSoluciones.Add(CopiaLista(EspejadoRotado1.ListaPosicionadas_));
-
                     //ESPEJADO ROTADO 2 (180)
                     Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1, ++ID); //#7
                     EspejadoRotado2.Rotar90();
@@ -235,16 +226,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     if (!Solutions.Contains(SolEspejadoRotado2))
                         Solutions.Add(SolEspejadoRotado2);
 
-                    //ListaSoluciones.Add(CopiaLista(EspejadoRotado2.ListaPosicionadas_));
-
                     //ESPEJADO ROTADO 3 (270)
                     Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2, ++ID); //#8
                     EspejadoRotado3.Rotar90();
                     Solucion SolEspejadoRotado3 = new Solucion(EspejadoRotado3.CopiaLista(EspejadoRotado3.ListaPosicionadas_), EspejadoRotado3.Type);
                     if (!Solutions.Contains(SolEspejadoRotado3))
                         Solutions.Add(SolEspejadoRotado3);
-
-                    //ListaSoluciones.Add(CopiaLista(EspejadoRotado3.ListaPosicionadas_));
 
                     #endregion
 
@@ -257,39 +244,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     if (!Solutions.Contains(SolIntercambiado))
                         Solutions.Add(SolIntercambiado);
 
-                    ////ListaSoluciones.Add(CopiaLista(Intercambiado.ListaPosicionadas_));
-                    //#region ROTADO TORRE
-                    ////INTERCAMBIO ROTADO 1 (90)
-                    //Tablero IntercambioRotado1 = new Tablero(Intercambiado, ++ID); //#10
-                    //IntercambioRotado1.Rotar90();
-                    //Solucion SolIntercambiadoRotado1 = new Solucion(IntercambioRotado1.CopiaLista(IntercambioRotado1.ListaPosicionadas_), IntercambioRotado1.Type);
-                    //if (!Solutions.Contains(SolIntercambiadoRotado1))
-                    //    Solutions.Add(SolIntercambiadoRotado1);
-
-                    ////ListaSoluciones.Add(CopiaLista(IntercambioRotado1.ListaPosicionadas_));
-
-                    ////INTERCAMBIO ROTADO (180)
-                    //Tablero IntercambioRotado2 = new Tablero(IntercambioRotado1, ++ID); //#11
-                    //IntercambioRotado2.Rotar90();
-                    //Solucion SolIntercambiadoRotado2 = new Solucion(IntercambioRotado2.CopiaLista(IntercambioRotado2.ListaPosicionadas_), IntercambioRotado2.Type);
-                    //if (!Solutions.Contains(SolIntercambiadoRotado2))
-                    //    Solutions.Add(SolIntercambiadoRotado2);
-
-                    ////ListaSoluciones.Add(CopiaLista(IntercambioRotado2.ListaPosicionadas_));
-
-                    ////INTERCAMBIO ROTADO (270)
-                    //Tablero IntercambioRotado3 = new Tablero(IntercambioRotado2, ++ID); //#12
-                    //IntercambioRotado3.Rotar90();
-                    //Solucion SolIntercambiadoRotado3 = new Solucion(IntercambioRotado3.CopiaLista(IntercambioRotado3.ListaPosicionadas_), IntercambioRotado3.Type);
-                    //if (!Solutions.Contains(SolIntercambiadoRotado3))
-                    //    Solutions.Add(SolIntercambiadoRotado3);
-                    #endregion
-
-                    #endregion
-
                     #endregion
 
                 }
+                #endregion
 
                 #region LIMPIAMOS LOS TABLEROS
 
@@ -306,24 +264,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 #endregion
             }
-
-            //for (int i = 0; i < ListaSoluciones.Count; ++i)
-            //{
-            //    ListaSoluciones[i].ImprimirOutput();
-            //}
-
             return Solutions;
-
         }
-
-        /*
-         * Steps para el Form:
-         * Main() -> Cartula
-         * Cuando se precione le boton generar, hay que correr el programa
-         * Se tiene que abrir un form con un boton de next con las soluciones
-         */
-
-      
-
     }
 }
+#endregion
