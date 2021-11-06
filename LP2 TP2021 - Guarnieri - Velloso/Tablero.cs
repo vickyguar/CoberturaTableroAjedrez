@@ -8,10 +8,10 @@
 
 using System;
 using System.Collections.Generic;
-//using System.Text;
-//using System.IO;
+using System.Text;
+using System.IO;
 using System.Diagnostics;
-//using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;
 
 /// <summary>
 /// Enum para definir el Color de las Casillas.
@@ -46,10 +46,6 @@ public class Tablero
     private SortedList<uint,Ficha> ListaPosicionadas = new SortedList<uint, Ficha>(Global.N_);
 
     /// <summary>
-    /// ID de <see cref="Tablero"/>
-    /// </summary>
-    private int ID;
-    /// <summary>
     /// Tipo de solucion que sea (Leve, Fatal, No Solution)
     /// </summary>
     private TipoSolucion type;
@@ -72,7 +68,6 @@ public class Tablero
             }
         }
 
-        ID = _ID;
         Type = TipoSolucion.NO_SOLUCION;
         LeerArchivo(); //Inicializamos los colores del Tablero
     }
@@ -96,7 +91,6 @@ public class Tablero
         }
 
         this.Type = newTablero.Type;
-        ID = _ID;
     }
 
     /// <summary>
@@ -258,8 +252,6 @@ public class Tablero
     /// </summary>
     public void ImprimirOutput()
     {
-        Debug.Write("-----------------------------------------------------------------   ");
-        Debug.Write(ID);
         Debug.Write("\n\n");
 
         for (uint i = 0; i < Global.N_; ++i)

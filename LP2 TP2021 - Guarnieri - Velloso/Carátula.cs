@@ -210,9 +210,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         Solutions.Add(Table);
                     Juego.ImprimirOutput();
 
-                   // Juego.ListaPosicionadas_[0].Atacar(Juego, Juego.Matriz[1, 4]); //No me deja hacer esto :( 
-                   //Quería probar porque quiero ver cuándo es que se pone todo fatal.
-
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°) 
