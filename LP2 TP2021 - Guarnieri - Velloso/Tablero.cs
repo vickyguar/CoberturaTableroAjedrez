@@ -57,7 +57,7 @@ public class Tablero
     /// <summary>
     /// Constructor de la clase <see cref="Tablero"/>.: inicializa la Matriz de Casillas.
     /// </summary>
-    public Tablero(int _ID)
+    public Tablero()
     {
         //Creamos la matriz de Casillas (tiempo n^2, fors anidados)
         for (int i = 0; i < Global.N_; ++i)
@@ -76,7 +76,7 @@ public class Tablero
     /// Constructor por copia de la clase <see cref="Tablero"/>..
     /// </summary>
     /// <param name="newTablero"></param>
-    public Tablero(Tablero newTablero, int _ID)
+    public Tablero(Tablero newTablero)
     {
         //Variable auxiliar
 

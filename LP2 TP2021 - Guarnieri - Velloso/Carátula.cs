@@ -12,6 +12,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 {
     public partial class Carátula : Form
     {
+        int cant;
         #region CONSTRUCTOR & DESTRUCTOR
 
         /// <summary>
@@ -20,6 +21,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Carátula()
         {
             InitializeComponent();
+            cant = (int)num_cant.Value;
         }
 
         /// <summary>
@@ -58,12 +60,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// Algoritmo
         /// </summary>
         /// <returns></returns>
-        static List<Solucion> Programa()
+        private List<Solucion> Programa()
         {
             #region VARIABLES
 
-            int ID = -1;
-            Tablero Juego = new Tablero(ID); //Generamos un Tablero
+            //int cant = Carátula.ud_cant.SelectedIndex;
+            Tablero Juego = new Tablero(); //Generamos un Tablero
             Random rnd = new Random(); //Es un random que usamos para luego elegir qué cuadrado darle a la Torre2
             List<Solucion> Solutions = new List<Solucion>(); //Creamos una lista de Soluciones, inicialmente está vacía
 
@@ -94,7 +96,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             #endregion
 
-            while (Solutions.Count < 11) //TODO: modificar cuando este el selector
+            while (Solutions.Count < (cant+1))
             {
                 #region LISTAS
                 //----------------------------------------------------
@@ -187,72 +189,90 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     if (!Solutions.Contains(Table))
                         Solutions.Add(Table); //#1
 
+                    if (Solutions.Count == cant)
+                        break;
                     #endregion
 
                     #region ROTADO DE ORIGINAL
 
                     //TABLERO ROTADO 1 (90°) 
-                    Tablero Rotado1 = new Tablero(Juego, ++ID);
+                    Tablero Rotado1 = new Tablero(Juego);
                     Rotado1.Rotar90();
                     Solucion SolRotado1 = new Solucion(Rotado1.CopiaLista(Rotado1.ListaPosicionadas_), Rotado1.Type);
                     if (!Solutions.Contains(SolRotado1))
                         Solutions.Add(SolRotado1); //#2
+                    if (Solutions.Count == cant)
+                        break;
 
                     //TABLERO ROTADO 2 (180°)
-                    Tablero Rotado2 = new Tablero(Rotado1, ++ID);
+                    Tablero Rotado2 = new Tablero(Rotado1);
                     Rotado2.Rotar90();
                     Solucion SolRotado2 = new Solucion(Rotado2.CopiaLista(Rotado2.ListaPosicionadas_), Rotado2.Type);
                     if (!Solutions.Contains(SolRotado2))
                         Solutions.Add(SolRotado2); //#3
+                    if (Solutions.Count == cant)
+                        break;
 
                     //TABLERO ROTADO 3 (270°)
-                    Tablero Rotado3 = new Tablero(Rotado2, ++ID);
+                    Tablero Rotado3 = new Tablero(Rotado2);
                     Rotado3.Rotar90();
                     Solucion SolRotado3 = new Solucion(Rotado3.CopiaLista(Rotado3.ListaPosicionadas_), Rotado3.Type);
                     if (!Solutions.Contains(SolRotado3))
                         Solutions.Add(SolRotado3); //#4
+                    if (Solutions.Count == cant)
+                        break;
 
                     #endregion
 
                     #region ESPEJADO ORIGINAL
                     //ESPEJADO 1
-                    Tablero Espejado = new Tablero(++ID);
+                    Tablero Espejado = new Tablero();
                     Juego.Espejar(Espejado);
                     Solucion SolEspejado = new Solucion(Espejado.CopiaLista(Espejado.ListaPosicionadas_), Espejado.Type);
                     if (!Solutions.Contains(SolEspejado))
                         Solutions.Add(SolEspejado); //#5
+                    if (Solutions.Count == cant)
+                        break;
 
                     //ESPEJADO ROTADO 1 (90)
-                    Tablero EspejadoRotado1 = new Tablero(Espejado, ++ID);
+                    Tablero EspejadoRotado1 = new Tablero(Espejado);
                     EspejadoRotado1.Rotar90();
                     Solucion SolEspejadoRotado1 = new Solucion(EspejadoRotado1.CopiaLista(EspejadoRotado1.ListaPosicionadas_), EspejadoRotado1.Type);
                     if (!Solutions.Contains(SolEspejadoRotado1))
                         Solutions.Add(SolEspejadoRotado1); //#6
+                    if (Solutions.Count == cant)
+                        break;
 
                     //ESPEJADO ROTADO 2 (180)
-                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1, ++ID);
+                    Tablero EspejadoRotado2 = new Tablero(EspejadoRotado1);
                     EspejadoRotado2.Rotar90();
                     Solucion SolEspejadoRotado2 = new Solucion(EspejadoRotado2.CopiaLista(EspejadoRotado2.ListaPosicionadas_), EspejadoRotado2.Type);
                     if (!Solutions.Contains(SolEspejadoRotado2))
                         Solutions.Add(SolEspejadoRotado2); //#7
+                    if (Solutions.Count == cant)
+                        break;
 
                     //ESPEJADO ROTADO 3 (270)
-                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2, ++ID);
+                    Tablero EspejadoRotado3 = new Tablero(EspejadoRotado2);
                     EspejadoRotado3.Rotar90();
                     Solucion SolEspejadoRotado3 = new Solucion(EspejadoRotado3.CopiaLista(EspejadoRotado3.ListaPosicionadas_), EspejadoRotado3.Type);
                     if (!Solutions.Contains(SolEspejadoRotado3))
                         Solutions.Add(SolEspejadoRotado3); //#8
+                    if (Solutions.Count == cant)
+                        break;
 
                     #endregion
 
                     #region INTERCAMBIO TORRES
 
                     ////INTERCAMBIO
-                    Tablero Intercambiado = new Tablero(++ID);
+                    Tablero Intercambiado = new Tablero();
                     Juego.IntercambiarTorres(Intercambiado);
                     Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
                     if (!Solutions.Contains(SolIntercambiado))
                         Solutions.Add(SolIntercambiado); //#9
+                    if (Solutions.Count == cant)
+                        break;
 
                     #endregion
 
@@ -277,5 +297,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return Solutions; //Retornamos la lista de soluciones
         }
         #endregion
+
     }
 }

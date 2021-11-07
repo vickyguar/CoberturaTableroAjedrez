@@ -47,14 +47,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Soluciones(List<Solucion> ListaSoluciones_, Carátula _Llamado)
         {
             InitializeComponent();
-            this.Icon = new Icon("Icono.ico");
+            //this.Icon = new Icon("Icono.ico");
 
             Global.timeMeasure.Stop();
 
             ListaSoluciones = ListaSoluciones_;
             Llamado = _Llamado;
             ListaFiltrada = Fatales(ListaSoluciones); //filtramos las soluciones obtenidas
-            Plantilla = new Tablero(0);
+            Plantilla = new Tablero();
 
             //visibilidad de los botones
             btn_next.Visible = true;
