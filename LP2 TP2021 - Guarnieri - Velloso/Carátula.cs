@@ -44,6 +44,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
+            Cursor = System.Windows.Forms.Cursors.WaitCursor;
 
             Global.timeMeasure = Stopwatch.StartNew();
             cant = Convert.ToInt32(Math.Round(num_cant.Value, 0));

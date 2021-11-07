@@ -51,6 +51,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             Global.timeMeasure.Stop();
 
+            Cursor = System.Windows.Forms.Cursors.Default;
+
             ListaSoluciones = ListaSoluciones_;
             Llamado = _Llamado;
             ListaFiltrada = Fatales(ListaSoluciones); //filtramos las soluciones obtenidas
