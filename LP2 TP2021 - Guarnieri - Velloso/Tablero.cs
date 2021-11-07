@@ -454,7 +454,6 @@ public class Tablero
                 Intercambio.ListaPosicionadas[T2].Columna = y2;
                 Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]); //Asignamos fichita
                 Intercambio.Matriz[x1, y2].SetSuperpuesta(aux2); //primero setteo la superpuesta (el caballo)
-                //TODO: arreglar
             }
 
             return;
