@@ -21,7 +21,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Carátula()
         {
             InitializeComponent();
-            cant = (int)num_cant.Value;
+            num_cant.ReadOnly = true;
+            btn_generar.Enabled = true;
         }
 
         /// <summary>
@@ -43,8 +44,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// <param name="e"></param>
         private void btn_generar_Click(object sender, EventArgs e)
         {
-            Global.timeMeasure = Stopwatch.StartNew();
 
+            Global.timeMeasure = Stopwatch.StartNew();
+            cant = Convert.ToInt32(Math.Round(num_cant.Value, 0));
+            num_cant.Enabled = false;
+            btn_generar.Enabled = false;
             List<Solucion> ListaSoluciones = Programa();
             Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
 

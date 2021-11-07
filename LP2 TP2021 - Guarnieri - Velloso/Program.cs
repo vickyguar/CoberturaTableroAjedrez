@@ -4,10 +4,8 @@ using System.Collections.Generic;
 //using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Media;
 
-/* ¡¡¡ATENCIÓN!!!
- * Para ver los Tableros que son solución, abrir la ventanda de Output.
- */
 
 namespace LP2_TP2021___Guarnieri___Velloso
 {
@@ -22,6 +20,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            SoundPlayer player = new SoundPlayer();
+            player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "musikita.wav";
+            player.Play();
+
             Application.Run(new Carátula()); 
         }
     }

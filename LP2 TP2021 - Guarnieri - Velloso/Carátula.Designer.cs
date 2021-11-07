@@ -77,8 +77,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
             0,
             0});
             this.num_cant.Name = "num_cant";
+            this.num_cant.ReadOnly = true;
             this.num_cant.Size = new System.Drawing.Size(91, 23);
             this.num_cant.TabIndex = 16;
+            this.num_cant.TabStop = false;
             this.num_cant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.num_cant.Value = new decimal(new int[] {
             1,

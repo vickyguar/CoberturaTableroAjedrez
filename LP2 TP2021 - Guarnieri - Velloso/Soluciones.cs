@@ -47,7 +47,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         public Soluciones(List<Solucion> ListaSoluciones_, Carátula _Llamado)
         {
             InitializeComponent();
-            //this.Icon = new Icon("Icono.ico");
+            this.Icon = new Icon("Icono.ico");
 
             Global.timeMeasure.Stop();
 
@@ -57,7 +57,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Plantilla = new Tablero();
 
             //visibilidad de los botones
-            btn_next.Visible = true;
+            if(ListaSoluciones_.Count > 1)
+                btn_next.Visible = true;
+            else
+                btn_next.Visible = false;
+
             btn_back.Visible = false;
             btn_exit.Visible = true;
             btn_time.Visible = true;
@@ -155,7 +159,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 "como de algunas caracteristicas de la entrada, como por ejemplo si el tablero queda completamente atacado. Esto se debe a que el posicionamiento de las fichas en el tablero" +
                 "se hace de forma aleatoria en, con lo cual dependemos de esta aleatoriedad para definir si es solución o no. Al mismo tiempo, con un tablero que encuentre, visto que lo espejamos, " +
                 "lo rotamos e intercambiamos las torres, obtenemos 9 soluciones distintas. Con lo cual, si se quieren generar 18 soluciones, el algorimo solo tendra que encontrar 2 soluciones y luego aplicarle las trasnformaciones." +
-                "Es por esto que la cota inferior de nuestro algoritmo es Ω(n) = n, dejando de lado las constantes a (gradiente) y b (ordenada al origen) si n toma valores muy grandes";
+                "Es por esto que la cota inferior de nuestro algoritmo es Ω(n) = n, dejando de lado las constantes a (gradiente) y b (ordenada al origen) si n toma valores muy grandes\n\n";
 
             string output = "\nDescripción cualitativa O(n):\n" +
                 "• Resulta dificil determinar la cota superior del tiempo de ejecución de nuestro programa, ya que tiene muchas instancias donde se juega con la aleatoriedad.\n" +
