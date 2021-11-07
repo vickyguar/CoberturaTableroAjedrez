@@ -47,9 +47,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.rbtn_fatales = new System.Windows.Forms.RadioButton();
             this.rbtn_leves = new System.Windows.Forms.RadioButton();
             this.btn_time = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Dtg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Dtg
@@ -228,6 +226,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.rbtn_fatales.AutoSize = true;
             this.rbtn_fatales.BackColor = System.Drawing.Color.Transparent;
             this.rbtn_fatales.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rbtn_fatales.ForeColor = System.Drawing.Color.White;
             this.rbtn_fatales.Location = new System.Drawing.Point(649, 390);
             this.rbtn_fatales.Name = "rbtn_fatales";
             this.rbtn_fatales.Size = new System.Drawing.Size(63, 19);
@@ -242,6 +241,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.rbtn_leves.AutoSize = true;
             this.rbtn_leves.BackColor = System.Drawing.Color.Transparent;
             this.rbtn_leves.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.rbtn_leves.ForeColor = System.Drawing.Color.White;
             this.rbtn_leves.Location = new System.Drawing.Point(649, 415);
             this.rbtn_leves.Name = "rbtn_leves";
             this.rbtn_leves.Size = new System.Drawing.Size(57, 19);
@@ -264,20 +264,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.btn_time.Visible = false;
             this.btn_time.Click += new System.EventHandler(this.btn_time_Click);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Cobertura;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 119);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 580);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
-            // 
             // Soluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
+            this.BackgroundImage = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Cobertura;
             this.ClientSize = new System.Drawing.Size(800, 580);
             this.Controls.Add(this.btn_time);
             this.Controls.Add(this.rbtn_leves);
@@ -287,13 +279,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Controls.Add(this.Barra);
             this.Controls.Add(this.btn_next);
             this.Controls.Add(this.Dtg);
-            this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Soluciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Soluciones";
+            this.Load += new System.EventHandler(this.Soluciones_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dtg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -317,7 +308,6 @@ namespace LP2_TP2021___Guarnieri___Velloso
         private System.Windows.Forms.RadioButton rbtn_fatales;
         private System.Windows.Forms.RadioButton rbtn_leves;
         private System.Windows.Forms.Button btn_time;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
