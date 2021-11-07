@@ -266,9 +266,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Cobertura;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 119);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(800, 580);
             this.pictureBox1.TabIndex = 10;
