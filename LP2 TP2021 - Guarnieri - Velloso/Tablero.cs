@@ -23,6 +23,9 @@ public enum eColor : int
 
 } //end eColor
 
+/// <summary>
+/// Enum para definir el tipo de Solucion que es un <see cref="Tablero"/>.
+/// </summary>
 public enum TipoSolucion : int
 {
     NO_SOLUCION = 0,
@@ -451,7 +454,6 @@ public class Tablero
                 Intercambio.ListaPosicionadas[T2].Columna = y2;
                 Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]); //Asignamos fichita
                 Intercambio.Matriz[x1, y2].SetSuperpuesta(aux2); //primero setteo la superpuesta (el caballo)
-                //TODO: arreglar
             }
 
             return;

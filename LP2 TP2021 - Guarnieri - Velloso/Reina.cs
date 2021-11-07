@@ -26,6 +26,10 @@ public class Reina : Ficha
 
     }
 
+    /// <summary>
+    /// Constructor por copia de la clase <see cref="Reina"/>.
+    /// </summary>
+    /// <param name="newFichita"></param>
     public Reina(Reina newFichita) : base(newFichita)
     {
     }
