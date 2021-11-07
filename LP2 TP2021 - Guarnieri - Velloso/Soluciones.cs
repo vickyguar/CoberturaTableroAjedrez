@@ -340,6 +340,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
 
         #endregion
+
+        private void Soluciones_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
