@@ -329,8 +329,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 #endregion
             }
-            for (int i = 0; i < 8; i++)
-                Tableros[i].ImprimirOutput();
+            //for (int i = 0; i < 8; i++)
+            //    Tableros[i].ImprimirOutput();
 
             return Solutions; //Retornamos la lista de soluciones
         }

@@ -367,7 +367,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         else
                             iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 
-                        Dtg[i, j] = iCell;
+                        Dtg[j, i] = iCell;
 
                         if (Plantilla.Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
                             Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
@@ -482,9 +482,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
             {
                 for (int j = 0; j < Global.N_; ++j)
                 {
-                    if (ListaTablero[Barra.Value].Matriz[i, j].GetAtacadaFatalmente())
+                    if (ListaTablero[Barra.Value-1].Matriz[i, j].GetAtacadaFatalmente())
                     {
-                        Dtg.Rows[j].Cells[i].Style.BackColor = Color.IndianRed; //Colorsito
+                        Dtg.Rows[i].Cells[j].Style.BackColor = Color.IndianRed; //Colorsito
                     }
                 }
 
@@ -533,7 +533,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         {
             if (checkbox_fatales.Checked)
             {
-                Posicionar();
+                
                 //for(uint i =0; i < Global.N_; ++i)
                 //{
 
