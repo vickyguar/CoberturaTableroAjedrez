@@ -104,7 +104,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             #endregion
 
-            while (Solutions.Count < (cant+1))
+            while (Solutions.Count < (cant + 1))
             {
                 #region LISTAS
                 //----------------------------------------------------
@@ -168,8 +168,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         Juego.Posicionar(Torre2, Cuadrado4, false); break;
                     case 2:
                         Juego.Posicionar(Torre2, Cuadrado3, false); break;
-                    //case 3:
-                    //    Juego.Posicionar(Torre2, Cuadrado4, false); break;
+                        //case 3:
+                        //    Juego.Posicionar(Torre2, Cuadrado4, false); break;
                 }
 
                 Juego.Posicionar(Caballo2, Cuadrado2, false);
@@ -329,6 +329,9 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                 #endregion
             }
+            for (int i = 0; i < 8; i++)
+                Tableros[i].ImprimirOutput();
+
             return Solutions; //Retornamos la lista de soluciones
         }
         #endregion
