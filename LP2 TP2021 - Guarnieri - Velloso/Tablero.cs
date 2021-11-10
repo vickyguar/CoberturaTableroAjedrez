@@ -322,16 +322,12 @@ public class Tablero
                         Matriz[i, k].Superpuesta.Columna = k;
                         //ListaPosicionadas.Add(Matriz[i, k].Superpuesta);
                         Agregar(Matriz[i, k].Superpuesta, ListaPosicionadas);
-
-
                     }
                     //##########################################################################
 
                     //ListaPosicionadas.Add(Matriz[i, k].Fichita);
                     //Agregar(Espejar.Matriz[i, j].Superpuesta, Espejar.ListaPosicionadas);
                     Agregar(Matriz[i, k].Fichita, ListaPosicionadas);
-
-
                 }
             }
         }

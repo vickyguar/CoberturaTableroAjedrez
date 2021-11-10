@@ -47,6 +47,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.rbtn_fatales = new System.Windows.Forms.RadioButton();
             this.rbtn_leves = new System.Windows.Forms.RadioButton();
             this.btn_time = new System.Windows.Forms.Button();
+            this.checkbox_fatales = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.Dtg)).BeginInit();
             this.SuspendLayout();
             // 
@@ -264,6 +265,20 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.btn_time.Visible = false;
             this.btn_time.Click += new System.EventHandler(this.btn_time_Click);
             // 
+            // checkbox_fatales
+            // 
+            this.checkbox_fatales.AutoSize = true;
+            this.checkbox_fatales.BackColor = System.Drawing.Color.Transparent;
+            this.checkbox_fatales.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.checkbox_fatales.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.checkbox_fatales.Location = new System.Drawing.Point(649, 365);
+            this.checkbox_fatales.Name = "checkbox_fatales";
+            this.checkbox_fatales.Size = new System.Drawing.Size(99, 19);
+            this.checkbox_fatales.TabIndex = 10;
+            this.checkbox_fatales.Text = "Filtrar fatales";
+            this.checkbox_fatales.UseVisualStyleBackColor = false;
+            this.checkbox_fatales.CheckedChanged += new System.EventHandler(this.checkbox_fatales_CheckedChanged);
+            // 
             // Soluciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -271,6 +286,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.BackColor = System.Drawing.Color.LightGray;
             this.BackgroundImage = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Cobertura;
             this.ClientSize = new System.Drawing.Size(800, 580);
+            this.Controls.Add(this.checkbox_fatales);
             this.Controls.Add(this.btn_time);
             this.Controls.Add(this.rbtn_leves);
             this.Controls.Add(this.rbtn_fatales);
@@ -308,6 +324,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         private System.Windows.Forms.RadioButton rbtn_fatales;
         private System.Windows.Forms.RadioButton rbtn_leves;
         private System.Windows.Forms.Button btn_time;
+        private System.Windows.Forms.CheckBox checkbox_fatales;
     }
 }
 

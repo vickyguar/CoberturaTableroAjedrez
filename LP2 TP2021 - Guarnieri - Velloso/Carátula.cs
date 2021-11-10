@@ -13,6 +13,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
     public partial class Carátula : Form
     {
         int cant;
+        List<Tablero> Tableros = new List<Tablero>();
+
         #region CONSTRUCTOR & DESTRUCTOR
 
         /// <summary>
@@ -23,6 +25,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             InitializeComponent();
             num_cant.ReadOnly = true;
             btn_generar.Enabled = true;
+
         }
 
         /// <summary>
@@ -51,7 +54,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             num_cant.Enabled = false;
             btn_generar.Enabled = false;
             List<Solucion> ListaSoluciones = Programa();
-            Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this);
+            Soluciones FormSoluciones = new Soluciones(ListaSoluciones, this, Tableros);
 
             FormSoluciones.Show(); //Abrimos el form de soluciones
             this.Hide(); //Cerramos el Form de Carátula
@@ -159,14 +162,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 Juego.Posicionar(Rey, Cuadrado3);
                 Juego.Posicionar(Torre1, Cuadrado4);
 
-                switch (Convert.ToInt32(rnd.Next(1, 4))) //A la torre 2 le paso eliminar
+                switch (Convert.ToInt32(rnd.Next(1, 3))) //A la torre 2 le paso eliminar
                 {
                     case 1:
-                        Juego.Posicionar(Torre2, Cuadrado2, false); break;
+                        Juego.Posicionar(Torre2, Cuadrado4, false); break;
                     case 2:
                         Juego.Posicionar(Torre2, Cuadrado3, false); break;
-                    case 3:
-                        Juego.Posicionar(Torre2, Cuadrado4, false); break;
+                    //case 3:
+                    //    Juego.Posicionar(Torre2, Cuadrado4, false); break;
                 }
 
                 Juego.Posicionar(Caballo2, Cuadrado2, false);
@@ -192,7 +195,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     //TABLERO PRIMERO
                     Solucion Table = new Solucion(Juego.CopiaLista(Juego.ListaPosicionadas_), Juego.Type);
                     if (!Solutions.Contains(Table))
+                    {
                         Solutions.Add(Table); //#1
+                        Tableros.Add(Juego);
+                    }
 
                     if (Solutions.Count == cant)
                         break;
@@ -205,7 +211,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Rotado1.Rotar90();
                     Solucion SolRotado1 = new Solucion(Rotado1.CopiaLista(Rotado1.ListaPosicionadas_), Rotado1.Type);
                     if (!Solutions.Contains(SolRotado1))
+                    {
                         Solutions.Add(SolRotado1); //#2
+                        Tableros.Add(Rotado1);
+                    }
                     if (Solutions.Count == cant)
                         break;
 
@@ -214,7 +223,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Rotado2.Rotar90();
                     Solucion SolRotado2 = new Solucion(Rotado2.CopiaLista(Rotado2.ListaPosicionadas_), Rotado2.Type);
                     if (!Solutions.Contains(SolRotado2))
+                    {
                         Solutions.Add(SolRotado2); //#3
+                        Tableros.Add(Rotado2);
+                    }
                     if (Solutions.Count == cant)
                         break;
 
@@ -223,7 +235,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Rotado3.Rotar90();
                     Solucion SolRotado3 = new Solucion(Rotado3.CopiaLista(Rotado3.ListaPosicionadas_), Rotado3.Type);
                     if (!Solutions.Contains(SolRotado3))
+                    {
                         Solutions.Add(SolRotado3); //#4
+                        Tableros.Add(Rotado3);
+                    }
                     if (Solutions.Count == cant)
                         break;
 
@@ -235,7 +250,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Juego.Espejar(Espejado);
                     Solucion SolEspejado = new Solucion(Espejado.CopiaLista(Espejado.ListaPosicionadas_), Espejado.Type);
                     if (!Solutions.Contains(SolEspejado))
+                    {
                         Solutions.Add(SolEspejado); //#5
+                        Tableros.Add(Espejado);
+                    }
                     if (Solutions.Count == cant)
                         break;
 
@@ -244,7 +262,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     EspejadoRotado1.Rotar90();
                     Solucion SolEspejadoRotado1 = new Solucion(EspejadoRotado1.CopiaLista(EspejadoRotado1.ListaPosicionadas_), EspejadoRotado1.Type);
                     if (!Solutions.Contains(SolEspejadoRotado1))
+                    {
                         Solutions.Add(SolEspejadoRotado1); //#6
+                        Tableros.Add(EspejadoRotado1);
+                    }
                     if (Solutions.Count == cant)
                         break;
 
@@ -253,7 +274,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     EspejadoRotado2.Rotar90();
                     Solucion SolEspejadoRotado2 = new Solucion(EspejadoRotado2.CopiaLista(EspejadoRotado2.ListaPosicionadas_), EspejadoRotado2.Type);
                     if (!Solutions.Contains(SolEspejadoRotado2))
+                    {
                         Solutions.Add(SolEspejadoRotado2); //#7
+                        Tableros.Add(EspejadoRotado2);
+                    }
                     if (Solutions.Count == cant)
                         break;
 
@@ -262,7 +286,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     EspejadoRotado3.Rotar90();
                     Solucion SolEspejadoRotado3 = new Solucion(EspejadoRotado3.CopiaLista(EspejadoRotado3.ListaPosicionadas_), EspejadoRotado3.Type);
                     if (!Solutions.Contains(SolEspejadoRotado3))
+                    {
                         Solutions.Add(SolEspejadoRotado3); //#8
+                        Tableros.Add(EspejadoRotado3);
+                    }
                     if (Solutions.Count == cant)
                         break;
 
@@ -275,7 +302,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     Juego.IntercambiarTorres(Intercambiado);
                     Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
                     if (!Solutions.Contains(SolIntercambiado))
+                    {
                         Solutions.Add(SolIntercambiado); //#9
+                        Tableros.Add(Intercambiado);
+                    }
                     if (Solutions.Count == cant)
                         break;
 

@@ -35,6 +35,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         Carátula Llamado;
 
+        /// <summary>
+        /// La lista de Tableros.
+        /// </summary>
+        List<Tablero> ListaTablero;
+
         #endregion
 
         #region CONSTRUCTOR & DESTRUCTOR
@@ -44,7 +49,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         /// <param name="ListaSoluciones_"></param>
         /// <param name="_Llamado"></param>
-        public Soluciones(List<Solucion> ListaSoluciones_, Carátula _Llamado)
+        public Soluciones(List<Solucion> ListaSoluciones_, Carátula _Llamado, List<Tablero> _ListaTablero)
         {
             InitializeComponent();
             this.Icon = new Icon("Icono.ico");
@@ -72,6 +77,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
             rbtn_leves.Checked = true;
             Barra.Maximum = ListaSoluciones.Count;
             Dtg.ClearSelection();
+
+            ListaTablero = _ListaTablero; //Inicializo la lista con la que llega por parámetro
 
             ImprimirSiguiente(ListaSoluciones); //se imprime la primera solución
         }
@@ -341,11 +348,62 @@ namespace LP2_TP2021___Guarnieri___Velloso
             return ListaFatales;
         }
 
+        /// <summary>
+        /// Filtra/ pinta las casillas que están siendo atacadas de forma fatal
+        /// </summary>
+        private void Pintar()
+        {
+            for(int i =0; i < Global.N_; ++i)
+            {
+                for (int j = 0; j < Global.N_; ++j)
+                {
+                    if (ListaTablero[Barra.Value].Matriz[i, j].GetAtacadaFatalmente())
+                    {
+                        Dtg.Rows[j].Cells[i].Style.BackColor = Color.IndianRed; //Colorsito
+                    }
+                }
+
+            }
+        }
+
+
+        private void DesPintar()
+        {
+            for (int i = 0; i < Global.N_; ++i)
+            {
+                for (int j = 0; j < Global.N_; ++j)
+                {
+                    if (ListaTablero[Barra.Value].Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                        Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
+                    else
+                        Dtg.Rows[i].Cells[j].Style.BackColor = Color.White; //Le cambio el color al Dtg usando "Style.BackColor"
+                }
+
+            }
+        }
         #endregion
+
+
 
         private void Soluciones_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkbox_fatales_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkbox_fatales.Checked)
+            {
+                for(uint i =0; i < Global.N_; ++i)
+                {
+                    ListaTablero[Barra.Value].ListaPosicionadas_[i].Atacar(ListaTablero[Barra.Value], 
+                        ListaTablero[Barra.Value].Matriz[ListaTablero[Barra.Value].ListaPosicionadas_[i].Fila, ListaTablero[Barra.Value].ListaPosicionadas_[i].Columna]);
+                }
+
+                Pintar();
+            }
+            else
+                DesPintar();
         }
     }
 }
