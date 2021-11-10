@@ -80,6 +80,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
             ListaTablero = _ListaTablero; //Inicializo la lista con la que llega por parámetro
 
+            //for (int i = 0; i < 8; ++i)
+            //    for (int j = 0; j < 8; ++j)
+            //        if (i - j % 2 == 0)
+            //            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray;
+
             ImprimirSiguiente(); //se imprime la primera solución
         }
 
@@ -145,6 +150,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
                 rbtn_leves.Checked = false;
                 ImprimirAnterior();
             }
+            checkbox_fatales.Checked = false;
+
         }
 
         /// <summary>
@@ -335,6 +342,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
         private void ImprimirSiguiente()
         {
+
             if (Barra.Value < ListaTablero.Count) // Barra.Value esta funcionando como iterador
             {
                 btn_next.Visible = true;
@@ -369,11 +377,18 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
                         Dtg[j, i] = iCell;
 
-                        if (Plantilla.Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
-                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
+                        //if (i - j % 2 == 0)
+                        //    Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray;
+
+                        //if (Plantilla.Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
+                        //    Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
                     }
                 }
 
+                for (int i = 0; i < 8; ++i)
+                    for (int j = 0; j < 8; ++j)
+                        if ((i - j )% 2 == 0)
+                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray;
 
                 //SortedList<uint, Ficha> Piezas = ListaSoluciones[Barra.Value].Posiciones_;
                 //for (uint i = 0; i < Global.N_; i++)
@@ -405,6 +420,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void ImprimirAnterior()
         {
+
+
             if (Barra.Value > 1)
             {
                 Barra.Value = Barra.Value - 2;
@@ -430,14 +447,17 @@ namespace LP2_TP2021___Guarnieri___Velloso
                         else
                             iCell.Value = (Bitmap)Image.FromFile("Transparente.png");
 
-                        Dtg[i, j] = iCell;
+                        Dtg[j, i] = iCell;
 
-                        if (Plantilla.Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
-                            Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
+                       
                     }
                 }
 
             }
+            for (int i = 0; i < 8; ++i)
+                for (int j = 0; j < 8; ++j)
+                    if ((i - j) % 2 == 0)
+                        Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray;
 
             //SortedList<uint, Ficha> Piezas = Lista[Barra.Value].Posiciones_;
             //for (uint i = 0; i < Piezas.Count; i++)
@@ -478,33 +498,36 @@ namespace LP2_TP2021___Guarnieri___Velloso
         /// </summary>
         private void Pintar()
         {
-            for(int i =0; i < Global.N_; ++i)
+
+            for (int i = 0; i < Global.N_; ++i)
             {
                 for (int j = 0; j < Global.N_; ++j)
                 {
-                    if (ListaTablero[Barra.Value-1].Matriz[i, j].GetAtacadaFatalmente())
+                    if (ListaTablero[Barra.Value - 1].Matriz[i, j].GetAtacadaFatalmente())
                     {
-                        Dtg.Rows[i].Cells[j].Style.BackColor = Color.IndianRed; //Colorsito
+                        if ((i - j) % 2 == 0)
+                        {
+                            Dtg.Rows[i].Cells[j].Style.BackColor = Color.IndianRed; //Colorsito
+                        }
+                        else
+                            Dtg.Rows[i].Cells[j].Style.BackColor = Color.LightCoral; //Colorsito
                     }
                 }
-
             }
         }
 
 
         private void DesPintar()
         {
-            for (int i = 0; i < Global.N_; ++i)
-            {
-                for (int j = 0; j < Global.N_; ++j)
-                {
-                    if (ListaTablero[Barra.Value].Matriz[i, j].Colour == eColor.NEGRO) //Si la casilla deberia ser negra
-                        Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray; //Le cambio el color al Dtg usando "Style.BackColor"
-                    else
-                        Dtg.Rows[i].Cells[j].Style.BackColor = Color.White; //Le cambio el color al Dtg usando "Style.BackColor"
-                }
 
-            }
+            for (int i = 0; i < 8; ++i)
+                for (int j = 0; j < 8; ++j)
+                {
+                    if ((i - j) % 2 == 0)
+                        Dtg.Rows[j].Cells[i].Style.BackColor = Color.Gray;
+                    else
+                        Dtg.Rows[j].Cells[i].Style.BackColor = Color.White;
+                }
         }
         #endregion
 
@@ -531,6 +554,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
 
         private void checkbox_fatales_CheckedChanged(object sender, EventArgs e)
         {
+
             if (checkbox_fatales.Checked)
             {
                 
@@ -545,6 +569,11 @@ namespace LP2_TP2021___Guarnieri___Velloso
             }
             else
                 DesPintar();
+        }
+
+        private void Dtg_SelectionChanged(object sender, EventArgs e)
+        {
+            Dtg.ClearSelection();
         }
     }
 }

@@ -92,11 +92,14 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SeaShell;
             this.BackgroundImage = global::LP2_TP2021___Guarnieri___Velloso.Properties.Resources.Caratula;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(784, 541);
             this.Controls.Add(this.lbl_soluciones);
             this.Controls.Add(this.num_cant);
             this.Controls.Add(this.btn_generar);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Carátula";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Carátula";
@@ -107,8 +110,8 @@ namespace LP2_TP2021___Guarnieri___Velloso
         }
 
         #endregion
-        private System.Windows.Forms.Button btn_generar;
         private System.Windows.Forms.NumericUpDown num_cant;
         private System.Windows.Forms.Label lbl_soluciones;
+        private System.Windows.Forms.Button btn_generar;
     }
 }

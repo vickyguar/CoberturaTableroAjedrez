@@ -104,6 +104,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             this.Dtg.Size = new System.Drawing.Size(400, 400);
             this.Dtg.TabIndex = 0;
             this.Dtg.TabStop = false;
+            this.Dtg.SelectionChanged += new System.EventHandler(this.Dtg_SelectionChanged);
             // 
             // Column1
             // 
