@@ -193,11 +193,12 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     #region ORIGINAL
 
                     //TABLERO PRIMERO
-                    Solucion Table = new Solucion(Juego.CopiaLista(Juego.ListaPosicionadas_), Juego.Type);
+                    Tablero Original = new Tablero(Juego);
+                    Solucion Table = new Solucion(Original.CopiaLista(Original.ListaPosicionadas_), Original.Type);
                     if (!Solutions.Contains(Table))
                     {
                         Solutions.Add(Table); //#1
-                        Tableros.Add(Juego);
+                        Tableros.Add(Original);
                     }
 
                     if (Solutions.Count == cant)
