@@ -76,6 +76,7 @@ namespace LP2_TP2021___Guarnieri___Velloso
             Tablero Juego = new Tablero(); //Generamos un Tablero
             Random rnd = new Random(); //Es un random que usamos para luego elegir qué cuadrado darle a la Torre2
             List<Solucion> Solutions = new List<Solucion>(); //Creamos una lista de Soluciones, inicialmente está vacía
+            //Solucion Table;
 
             #endregion
 
@@ -298,9 +299,10 @@ namespace LP2_TP2021___Guarnieri___Velloso
                     #region INTERCAMBIO TORRES
 
                     ////INTERCAMBIO
-                    Tablero Intercambiado = new Tablero();
+                    Tablero Intercambiado = new Tablero(Juego);
                     Juego.IntercambiarTorres(Intercambiado);
                     Solucion SolIntercambiado = new Solucion(Intercambiado.CopiaLista(Intercambiado.ListaPosicionadas_), Intercambiado.Type);
+
                     if (!Solutions.Contains(SolIntercambiado))
                     {
                         Solutions.Add(SolIntercambiado); //#9

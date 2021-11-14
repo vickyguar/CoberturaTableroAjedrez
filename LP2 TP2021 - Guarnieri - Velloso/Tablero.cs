@@ -340,11 +340,12 @@ public class Tablero
     public void Espejar(Tablero Espejar)
     {
         Ficha aux, auxSup;
-
+        
         for (int i = 0; i < Global.N_; ++i) //recorro fila
         {
             for (int j = 0; j < Global.N_; ++j) //recorro columna
             {
+                
                 if (Matriz[i, j].Fichita != null) //si hay una ficha en la casilla i,j
                 {
                     aux = Matriz[i, j].Fichita; //ficha auxiliar
@@ -381,7 +382,36 @@ public class Tablero
 
                     //Espejar.ListaPosicionadas.Add(Espejar.Matriz[i, 7 - j].Fichita); //me guardo la ficha posicionada en la lista
                 }
+
+                //if (Matriz[i, j].GetAtacadaFatalmente())
+                //{
+                //    if (Matriz[i, 7 - j].GetAtacadaFatalmente())
+                //    {
+                //        Espejar.Matriz[i, j].SetAtacadaFatalmente(true);
+                //    }
+                //    else
+                //    {
+                //        Espejar.Matriz[i, j].SetAtacadaFatalmente(false);
+                //        Espejar.Matriz[i, 7 - j].SetAtacadaFatalmente(true);
+                //    }
+                //}
+                //else
+                //{
+                //    if (Matriz[i, 7 - j].GetAtacadaFatalmente())
+                //    {
+                //        Espejar.Matriz[i, j].SetAtacadaFatalmente(true);
+                //        Espejar.Matriz[i, 7 - j].SetAtacadaFatalmente(false);
+                //    }
+                //    else
+                //        Espejar.Matriz[i, j].SetAtacadaFatalmente(false);
+                //}
             }
+           
+            
+        }
+        for (uint i = 0; i < Global.N_; ++i)
+        {
+            Espejar.ListaPosicionadas_[i].Atacar(Espejar, Espejar.Matriz[Espejar.ListaPosicionadas_[i].Fila, Espejar.ListaPosicionadas_[i].Columna]);
         }
     }
 
@@ -392,20 +422,8 @@ public class Tablero
     public void IntercambiarTorres(Tablero Intercambio)
     {
         uint T1=5, T2=6, C2=7;
-        //SetLista();
         Intercambio.ListaPosicionadas = CopiaLista(this.ListaPosicionadas);
-        
-        try
-        {
-            //T1 = Buscar(Intercambio.ListaPosicionadas, "Torre1"); //buscamos las torres en la lista
-            //T2 = Buscar(Intercambio.ListaPosicionadas, "Torre2");
-            //C2 = Buscar(Intercambio.ListaPosicionadas, "Caballo2");
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-
+       
         int x1 = Intercambio.ListaPosicionadas[T1].Fila;
         int y1 = Intercambio.ListaPosicionadas[T1].Columna;
 
@@ -418,14 +436,14 @@ public class Tablero
 
             if (Matriz[x2, y1].Fichita == null) //Muevo a T2
             {
-                //Intercambio.Matriz[x1, y1].SetFicha(null);
                 Intercambio.ListaPosicionadas[T2].Columna = y1;
-                //Intercambio.Matriz[x2, y1].SetFicha(ListaPosicionadas[T1]);
+                Intercambio.Matriz[x2, y2].SetFicha(null);
             }
 
             if (Matriz[x1, y2].Fichita == null) //Muevo a T1
             {
                 Intercambio.ListaPosicionadas[T1].Columna = y2;
+                Intercambio.Matriz[x1, y1].SetFicha(null);
 
                 if (aux.Superpuesta != null)
                 {
@@ -434,22 +452,23 @@ public class Tablero
                     Intercambio.ListaPosicionadas[C2].Fila = x2;
                     Intercambio.ListaPosicionadas[C2].Columna = y2;
 
-                    //Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
                 }
-                //else
-                //{
-                //    //Intercambio.Matriz[x2, y2].SetFicha(null);
-                //    Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]);
-                //    Intercambio.ListaPosicionadas[T1].Columna = y2;
-                //}
+               
             }
             else if (Matriz[x1, y2].Fichita.GetName() == "Caballo2")
             {
-                //Intercambio.Matriz[x2, y2].SetFicha(null); //pongo la ficha en null
                 Ficha aux2 = Matriz[x1, y2].Fichita;
                 Intercambio.ListaPosicionadas[T2].Columna = y2;
                 Intercambio.Matriz[x1, y2].SetFicha(ListaPosicionadas[T2]); //Asignamos fichita
                 Intercambio.Matriz[x1, y2].SetSuperpuesta(aux2); //primero setteo la superpuesta (el caballo)
+            }
+
+            for (uint i = 0; i < Global.N_; i++)
+            {
+                int fila = Intercambio.ListaPosicionadas[i].Fila;
+                int columna = Intercambio.ListaPosicionadas[i].Columna;
+
+                Intercambio.Matriz[fila, columna].SetFicha(Intercambio.ListaPosicionadas[i]);
             }
 
             return;
