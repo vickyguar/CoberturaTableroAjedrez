@@ -471,6 +471,10 @@ public class Tablero
                 Intercambio.Matriz[fila, columna].SetFicha(Intercambio.ListaPosicionadas[i]);
             }
 
+            for (uint i = 0; i < Global.N_; ++i)
+            {
+                Intercambio.ListaPosicionadas_[i].Atacar(Intercambio, Intercambio.Matriz[Intercambio.ListaPosicionadas_[i].Fila, Intercambio.ListaPosicionadas_[i].Columna]);
+            }
             return;
         }
     }
